@@ -43,27 +43,38 @@ trait RichChartingCollections {
 
   class RichTuple2s[A,B](it: Iterable[(A,B)]) {
 
-    def toTimeSeries(implicit eva: A ⇒ RegularTimePeriod, evb: B ⇒ Number): TimeSeries = {
-      val series = new TimeSeries("")
+    def toXYSeries(name: String = "")(implicit eva: A ⇒ Number, evb: B ⇒ Number): XYSeries = {
+      val series = new XYSeries(name)
+      it foreach {
+        case (x,y) ⇒ series.add(x,y)
+      }
+      series
+    }
+
+    def toXYSeriesCollection(name: String = "")(implicit eva: A ⇒ Number, evb: B ⇒ Number): XYSeriesCollection =
+      new XYSeriesCollection(toXYSeries(name))
+
+    def toTimeSeries(name: String = "")(implicit eva: A ⇒ RegularTimePeriod, evb: B ⇒ Number): TimeSeries = {
+      val series = new TimeSeries(name)
       it foreach {
         case (time,value) ⇒ series.add(time,value)
       }
       series
     }
 
-    def toTimeSeriesCollection(implicit eva: A ⇒ RegularTimePeriod, evb: B ⇒ Number): TimeSeriesCollection =
-      new TimeSeriesCollection(toTimeSeries)
+    def toTimeSeriesCollection(name: String = "")(implicit eva: A ⇒ RegularTimePeriod, evb: B ⇒ Number): TimeSeriesCollection =
+      new TimeSeriesCollection(toTimeSeries(name))
 
-    def toTimePeriodValues(implicit eva: A ⇒ TimePeriod, evb: B ⇒ Number): TimePeriodValues = {
-      val series = new TimePeriodValues("")
+    def toTimePeriodValues(name: String = "")(implicit eva: A ⇒ TimePeriod, evb: B ⇒ Number): TimePeriodValues = {
+      val series = new TimePeriodValues(name)
       it foreach {
         case (t,v) ⇒ series.add(t,v)
       }
       series
     }
 
-    def toTimePeriodValuesCollection(implicit eva: A ⇒ TimePeriod, evb: B ⇒ Number): TimePeriodValuesCollection =
-      new TimePeriodValuesCollection(toTimePeriodValues)
+    def toTimePeriodValuesCollection(name: String = "")(implicit eva: A ⇒ TimePeriod, evb: B ⇒ Number): TimePeriodValuesCollection =
+      new TimePeriodValuesCollection(toTimePeriodValues(name))
 
     def toCategoryDataset(implicit eva: A ⇒ Comparable[A], evb: B ⇒ Number): CategoryDataset = {
       val dataset = new DefaultCategoryDataset
@@ -123,4 +134,33 @@ trait RichChartingCollections {
 
   }
 */
+
+  // -----------------------------------------------------------------------------------------------
+  // convert a collection of *Series to a *Collection / *Dataset
+  // -----------------------------------------------------------------------------------------------
+
+  implicit def toRichTimeSeries(it: Iterable[TimeSeries]) = new {
+    def toTimeSeriesCollection: TimeSeriesCollection = {
+      val coll = new TimeSeriesCollection
+      it foreach coll.addSeries
+      coll
+    }
+  }
+
+  implicit def toRichXYSeries(it: Iterable[XYSeries]) = new {
+    def toXYSeriesCollection: XYSeriesCollection = {
+      val coll = new XYSeriesCollection
+      it foreach coll.addSeries
+      coll
+    }
+  }
+
+  implicit def toRichTimePeriodValues(it: Iterable[TimePeriodValues]) = new {
+    def toTimePeriodValuesCollection: TimePeriodValuesCollection = {
+      val coll = new TimePeriodValuesCollection
+      it foreach coll.addSeries
+      coll
+    }
+  }
+
 }
