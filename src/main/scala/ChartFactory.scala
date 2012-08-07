@@ -87,20 +87,24 @@ trait ChartFactory {
     chart
   }
 
-  def createLabelledBarChart(dataset: CategoryDataset,
-                             title: String = "",
-                             xAxisLabel: String = "",
-                             yAxisLabel: String = "",
-                             orientation: PlotOrientation = VERTICAL,
-                             legend: Boolean = true,
-                             tooltips: Boolean = false,
-                             urls: Boolean = false) = {
+  def createBarChart(dataset: CategoryDataset,
+                     title: String = "",
+                     xAxisLabel: String = "",
+                     yAxisLabel: String = "",
+                     orientation: PlotOrientation = VERTICAL,
+                     legend: Boolean = true,
+                     tooltips: Boolean = false,
+                     urls: Boolean = false,
+                     labels: Boolean = false) = {
     val chart = JChartFactory.createBarChart(title, xAxisLabel, yAxisLabel, dataset, orientation, legend, tooltips, urls)
-    val renderer = chart.getPlot.asInstanceOf[CategoryPlot].getRenderer
-    val labelgen = new StandardCategoryItemLabelGenerator
 
-    renderer.setBaseItemLabelsVisible(true)
-    renderer.setBaseItemLabelGenerator(labelgen)
+    if (labels) {
+      val renderer = chart.getPlot.asInstanceOf[CategoryPlot].getRenderer
+      val labelgen = new StandardCategoryItemLabelGenerator
+
+      renderer.setBaseItemLabelsVisible(true)
+      renderer.setBaseItemLabelGenerator(labelgen)
+    }
 
     chart
   }
