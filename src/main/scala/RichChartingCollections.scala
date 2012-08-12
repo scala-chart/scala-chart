@@ -109,31 +109,28 @@ trait RichChartingCollections {
     }
 
   }
-/*
-  implicit def toRichTuple4s[A,B,C,D](it: Iterable[(A,B,C,D)]) = new RichTuple4s(it)
 
-  class RichTuple4s[A,B,C,D](it: Iterable[(A,B,C,D)]) {
+  implicit def toRichTuple4s[A,B,C,D](it: Iterable[(A,Iterable[(B,Iterable[(C,D)])])]) = new RichTuple4s(it)
 
-    def toCombinedDomainCategoryChart(implicit eva: A ⇒ Comparable[A],
-                                               evb: B ⇒ Comparable[B],
-                                               evc: C ⇒ Comparable[C],
-                                               evd: D ⇒ Number): JFreeChart = {
+  class RichTuple4s[A,B,C,D](it: Iterable[(A,Iterable[(B,Iterable[(C,D)])])]) {
+
+    def toCombinedDomainBarChart(implicit eva: A ⇒ Comparable[A],
+                                          evb: B ⇒ Comparable[B],
+                                          evc: C ⇒ Comparable[C],
+                                          evd: D ⇒ Number): JFreeChart = {
       val plot = new CombinedDomainCategoryPlot
 
-      it groupBy { _._1 } mapValues {
-        _ map {
-          case (_,upper,lower,value) ⇒ (upper,(lower,value))
-        } toCategoryDataset
-      } foreach { x ⇒
-        val (cat,dataset) = x
-        plot.add(createLabelledBarChart(dataset,cat.toString).getPlot.asInstanceOf[CategoryPlot])
-      }
+      for {
+        (outer,miv) ← it
+        dataset     = miv.toCategoryDataset
+        chart       = Charting.createBarChart(dataset, outer.toString)
+        subplot     = chart.getPlot.asInstanceOf[CategoryPlot]
+      } plot.add(subplot)
 
       new JFreeChart(plot)
     }
 
   }
-*/
 
   // -----------------------------------------------------------------------------------------------
   // convert a collection of *Series to a *Collection / *Dataset
