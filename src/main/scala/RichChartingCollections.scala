@@ -123,7 +123,7 @@ trait RichChartingCollections {
       for {
         (outer,miv) ← it
         dataset     = miv.toCategoryDataset
-        chart       = Charting.createBarChart(dataset, outer.toString)
+        chart       = ChartFactory.BarChart(dataset, outer.toString)
         subplot     = chart.getPlot.asInstanceOf[CategoryPlot]
       } plot.add(subplot)
 
