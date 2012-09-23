@@ -2,6 +2,8 @@ package org.sfree.chart
 
 import org.specs2._
 
+import BeViewableAs._
+
 import org.jfree.data.category._
 import org.jfree.data.time._
 import org.jfree.data.xy._
@@ -36,12 +38,6 @@ class DatasetViewsSpec extends Specification { def is =
   // -----------------------------------------------------------------------------------------------
   // tests
   // -----------------------------------------------------------------------------------------------
-
-  implicit def anyWrapper[A](a: A) = new AnyWrapper(a)
-  class AnyWrapper[A](a: A) {
-    def beViewableAs[B](implicit cm: ClassManifest[B], ev: A ⇒ B) = implicitly[B](a) must beAnInstanceOf[B]
-    def =>=[B](implicit cm: ClassManifest[B], ev: A ⇒ B) = implicitly[B](a) must beAnInstanceOf[B]
-  }
 
   def d = new java.util.Date(42)
   implicit def jdate2jfree(d: java.util.Date): RegularTimePeriod = new Minute(d)

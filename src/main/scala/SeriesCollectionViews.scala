@@ -24,19 +24,38 @@
 
 package org.sfree.chart
 
-/** $ChartingInfo */
-object Charting extends Charting
+import Charting._
 
-/** $ChartingInfo
+import org.jfree.data.category._
+import org.jfree.data.time._
+import org.jfree.data.xy._
+
+/** $SeriesCollectionViewsInfo */
+object SeriesCollectionViews extends SeriesCollectionViews
+
+/** $SeriesCollectionViewsInfo
   *
-  * @define ChartingInfo Contains all enrichments. This import is the recommended starting point for
-  * working with sfreechart:
-  *
-  * {{{
-  * import org.sfree.chart.Charting._
-  * val data = Seq((0,0),(1,1),(2,2)).toXYSeriesCollection("some data")
-  * val chart = LineChart(data)
-  * }}}
-  *
+  * @define SeriesCollectionViewsInfo Contains implicit views that convert the simpler series like
+  * object to datasets that can be used by chart factories.
   */
-trait Charting extends RichChartingCollections with ChartFactory with RichChart
+trait SeriesCollectionViews {
+
+  implicit def asTimePeriodValuesCollection(tpvs: TimePeriodValues): TimePeriodValuesCollection =
+    new TimePeriodValuesCollection(tpvs)
+
+  implicit def asTimePeriodValuesCollection(it: Iterable[TimePeriodValues]): TimePeriodValuesCollection =
+    it.toTimePeriodValuesCollection
+
+  implicit def asTimeSeriesCollection(ts: TimeSeries): TimeSeriesCollection =
+    new TimeSeriesCollection(ts)
+
+  implicit def asTimeSeriesCollection(it: Iterable[TimeSeries]): TimeSeriesCollection =
+    it.toTimeSeriesCollection
+
+  implicit def asXYSeriesCollection(xys: XYSeries): XYSeriesCollection =
+    new XYSeriesCollection(xys)
+
+  implicit def asXYSeriesCollection(it: Iterable[XYSeries]): XYSeriesCollection =
+    it.toXYSeriesCollection
+
+}

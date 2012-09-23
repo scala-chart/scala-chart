@@ -25,7 +25,7 @@ libraryDependencies <+= scalaVersion { sv ⇒
 
 scalacOptions <<= (scalaVersion, scalacOptions) map { (sv, opts) ⇒
   if (sv.startsWith("2.10"))
-    opts ++ Seq("-language:implicitConversions")
+    opts ++ Seq("-language:implicitConversions", "-language:reflectiveCalls")
   else
     opts
 }

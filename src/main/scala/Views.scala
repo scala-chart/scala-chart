@@ -29,6 +29,14 @@ object Views extends Views
 
 /** $ViewsInfo
   *
-  * @define ViewsInfo Contains all implicit views.
+  * @define ViewsInfo Contains all implicit views / conversions. Use this import with care, because
+  * of ambiguous implicit conversions. It is better to just import the specific conversion you need:
+  *
+  * {{{
+  * import org.sfree.chart.Charting._
+  * import org.sfree.chart.Views.asXYSeriesCollection
+  * val data = Seq((0,0),(1,1),(2,2))
+  * val chart = LineChart(data)
+  * }}}
   */
-trait Views extends DatasetViews
+trait Views extends DatasetViews with SeriesCollectionViews
