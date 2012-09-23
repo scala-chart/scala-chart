@@ -24,6 +24,11 @@
 
 package org.sfree.chart
 
+/** $ChartingInfo */
 object Charting extends Charting
 
+/** $ChartingInfo
+  *
+  * @define ChartingInfo Contains all enrichments.
+  */
 trait Charting extends RichChartingCollections with ChartFactory with RichChart

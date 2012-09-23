@@ -22,48 +22,33 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 
-package org.sfree.chart
+package org.sfree
 
-import org.jfree.data.category._
-import org.jfree.data.time._
-import org.jfree.data.xy._
-
-import RichChartingCollections._
-
-/** $DatasetViewsInfo */
-object DatasetViews extends DatasetViews
-
-/** $DatasetViewsInfo
+/** This package contains wrappers for the [[http://www.jfree.org/jfreechart/ JFreeChart]] library.
   *
-  * @define DatasetViewsInfo Contains implicit views that convert collections to datasets.
+  * == Imports ==
+  *
+  * Imports are provided in groups:
+  *
+  * [[org.sfree.chart.Charting]] contains all enrichments. This import is the recommended starting
+  * point for working with sfreechart:
+  *
+  * {{{
+  * import org.sfree.chart.Charting._
+  * val data = Seq((0,0),(1,1),(2,2)).toXYSeriesCollection("some data")
+  * val chart = LineChart(data)
+  * }}}
+  *
+  * [[org.sfree.chart.Views]] contains all implicit views / conversions. Use this import with care,
+  * because of ambiguous implicit conversions. It is better to just import the specific conversion
+  * you need:
+  *
+  * {{{
+  * import org.sfree.chart.Charting._
+  * import org.sfree.chart.Views.asXYSeriesCollection
+  * val data = Seq((0,0),(1,1),(2,2))
+  * val chart = LineChart(data)
+  * }}}
   */
-trait DatasetViews {
-
-  implicit def asXYSeries[A <% Number, B <% Number](it: Iterable[(A,B)]): XYSeries =
-    it.toXYSeries()
-
-  implicit def asXYSeriesCollection[A <% Number, B <% Number](it: Iterable[(A,B)]): XYSeriesCollection =
-    it.toXYSeriesCollection()
-
-  implicit def asTimeSeries[A <% RegularTimePeriod, B <% Number](it: Iterable[(A,B)]): TimeSeries =
-    it.toTimeSeries()
-
-  implicit def asTimeSeriesCollection[A <% RegularTimePeriod, B <% Number](it: Iterable[(A,B)]): TimeSeriesCollection =
-    it.toTimeSeriesCollection()
-
-  implicit def asTimePeriodValues[A <% TimePeriod, B <% Number](it: Iterable[(A,B)]): TimePeriodValues =
-    it.toTimePeriodValues()
-
-  implicit def asTimePeriodValuesCollection[A <% TimePeriod, B <% Number](it: Iterable[(A,B)]): TimePeriodValuesCollection =
-    it.toTimePeriodValuesCollection()
-
-  implicit def asTimeTable[A <% Comparable[A], B <% TimePeriod, C <% Number](it: Iterable[(A,Iterable[(B,C)])]): TimeTableXYDataset =
-    it.toTimeTable
-
-  implicit def asCategoryDataset2[A <% Comparable[A], B <% Number](it: Iterable[(A,B)]): CategoryDataset =
-    it.toCategoryDataset
-
-  implicit def asCategoryDataset3[A <% Comparable[A], B <% Comparable[B], C <% Number](it: Iterable[(A,Iterable[(B,C)])]): CategoryDataset =
-    it.toCategoryDataset
-
+package object chart {
 }
