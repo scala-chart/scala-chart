@@ -40,6 +40,13 @@ trait RichChart {
   class RichChart(chart: JFreeChart) {
 
     /** Shows the chart in a window. */
+    def show { show() }
+
+    /** Shows the chart in a window.
+      *
+      * @param title the title of the enclosing frame
+      * @param scrollable whether the enclosing panel is scrollable
+      */
     def show(title: String = "", scrollable: Boolean = true) = Swing.onEDT {
       new ChartFrame(title, chart, scrollable) setVisible true
     }
