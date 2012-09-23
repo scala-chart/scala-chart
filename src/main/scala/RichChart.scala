@@ -30,8 +30,19 @@ import scala.swing.Swing
 
 import org.jfree.chart._
 
+/** $RichChartInfo */
 object RichChart extends RichChart
 
+/** $RichChartInfo
+  *
+  * @define RichChartInfo Contains an enriched `JFreeChart` that provides convenient access to
+  * e.g. save and show the chart. To read the documentation for these methods, see
+  * [[org.sfree.chart.RichChart.RichChart]].
+  *
+  * @define output     the output file
+  * @define dim        dimension / geometry / width x height of the output
+  * @define fontMapper handles mappings between Java AWT Fonts and PDF fonts
+  */
 trait RichChart {
 
   implicit def richChart(chart: JFreeChart) = new RichChart(chart)
@@ -54,8 +65,8 @@ trait RichChart {
     /** Saves the chart.
       *
       * @param ext extension of the file / output type, currently supported are PNG, JPEG and PDF
-      * @param output file to where will be written
-      * @param dim dimension / geometry / width x height of the output
+      * @param output $output
+      * @param dim $dim
       */
     def save(ext: String, output: File, dim: (Int,Int)): Unit = ext.toLowerCase match {
       case "pdf"          ⇒ saveAsPDF(output, dim)
@@ -66,8 +77,8 @@ trait RichChart {
 
     /** Saves the chart as a PNG image.
       *
-      * @param output file to where will be written
-      * @param dim dimension / geometry / width x height of the output
+      * @param output $output
+      * @param dim $dim
       */
     def saveAsPNG(output: File, dim: (Int,Int)) {
       val (width,height) = dim
@@ -76,8 +87,8 @@ trait RichChart {
 
     /** Saves the chart as a JPEG image.
       *
-      * @param output file to where will be written
-      * @param dim dimension / geometry / width x height of the output
+      * @param output $output
+      * @param dim $dim
       */
     def saveAsJPEG(output: File, dim: (Int,Int)) {
       val (width,height) = dim
@@ -90,9 +101,9 @@ trait RichChart {
 
     /** Saves the chart as a PDF.
       *
-      * @param output file to where will be written
-      * @param dim dimension / geometry / width x height of the output
-      * @param fontMapper handles mappings between Java AWT Fonts and PDF fonts
+      * @param output $output
+      * @param dim $dim
+      * @param fontMapper $fontMapper
       */
     def saveAsPDF(output: File, dim: (Int,Int), fontMapper: FontMapper = new DefaultFontMapper) {
       implicit val os = new BufferedOutputStream(new FileOutputStream(output))
@@ -107,8 +118,8 @@ trait RichChart {
     /** Writes the chart as a PDF.
       *
       * @param os stream to where will be written
-      * @param dim dimension / geometry / width x height of the output
-      * @param fontMapper handles mappings between Java AWT Fonts and PDF fonts
+      * @param dim $dim
+      * @param fontMapper $fontMapper
       */
     def writeAsPDF(os: OutputStream, dim: (Int,Int), fontMapper: FontMapper = new DefaultFontMapper) {
       val (width,height) = dim
