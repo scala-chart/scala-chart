@@ -37,14 +37,14 @@ object ChartFactory extends ChartFactory
 
 trait ChartFactory {
 
-  def createAreaChart(dataset: XYDataset,
-                      title: String = "",
-                      xAxisLabel: String = "",
-                      yAxisLabel: String = "",
-                      orientation: PlotOrientation = VERTICAL,
-                      legend: Boolean = true,
-                      tooltips: Boolean = false,
-                      urls: Boolean = false) = {
+  def AreaChart(dataset: XYDataset,
+                title: String = "",
+                xAxisLabel: String = "",
+                yAxisLabel: String = "",
+                orientation: PlotOrientation = VERTICAL,
+                legend: Boolean = true,
+                tooltips: Boolean = false,
+                urls: Boolean = false) = {
     val chart = JChartFactory.createXYAreaChart(title, xAxisLabel, yAxisLabel, dataset, orientation, legend, tooltips, urls)
 
     if (dataset.isInstanceOf[TimePeriodValuesCollection] ||
@@ -54,48 +54,15 @@ trait ChartFactory {
     chart
   }
 
-  def createStackedAreaChart(dataset: TableXYDataset,
-                             title: String = "",
-                             xAxisLabel: String = "",
-                             yAxisLabel: String = "",
-                             orientation: PlotOrientation = VERTICAL,
-                             legend: Boolean = true,
-                             tooltips: Boolean = false,
-                             urls: Boolean = false) = {
-    val chart = JChartFactory.createStackedXYAreaChart(title, xAxisLabel, yAxisLabel, dataset, orientation, legend, tooltips, urls)
-
-    if (dataset.isInstanceOf[TimeTableXYDataset])
-      chart.getXYPlot.setDomainAxis(new DateAxis)
-
-    chart
-  }
-
-  def createLineChart(dataset: XYDataset,
-                      title: String = "",
-                      xAxisLabel: String = "",
-                      yAxisLabel: String = "",
-                      orientation: PlotOrientation = VERTICAL,
-                      legend: Boolean = true,
-                      tooltips: Boolean = false,
-                      urls: Boolean = false) = {
-    val chart = JChartFactory.createXYLineChart(title, xAxisLabel, yAxisLabel, dataset, orientation, legend, tooltips, urls)
-
-    if (dataset.isInstanceOf[TimePeriodValuesCollection] ||
-        dataset.isInstanceOf[TimeSeriesCollection])
-      chart.getXYPlot.setDomainAxis(new DateAxis)
-
-    chart
-  }
-
-  def createBarChart(dataset: CategoryDataset,
-                     title: String = "",
-                     xAxisLabel: String = "",
-                     yAxisLabel: String = "",
-                     orientation: PlotOrientation = VERTICAL,
-                     legend: Boolean = true,
-                     tooltips: Boolean = false,
-                     urls: Boolean = false,
-                     labels: Boolean = false) = {
+  def BarChart(dataset: CategoryDataset,
+               title: String = "",
+               xAxisLabel: String = "",
+               yAxisLabel: String = "",
+               orientation: PlotOrientation = VERTICAL,
+               legend: Boolean = true,
+               tooltips: Boolean = false,
+               urls: Boolean = false,
+               labels: Boolean = false) = {
     val chart = JChartFactory.createBarChart(title, xAxisLabel, yAxisLabel, dataset, orientation, legend, tooltips, urls)
 
     if (labels) {
@@ -105,6 +72,39 @@ trait ChartFactory {
       renderer.setBaseItemLabelsVisible(true)
       renderer.setBaseItemLabelGenerator(labelgen)
     }
+
+    chart
+  }
+
+  def LineChart(dataset: XYDataset,
+                title: String = "",
+                xAxisLabel: String = "",
+                yAxisLabel: String = "",
+                orientation: PlotOrientation = VERTICAL,
+                legend: Boolean = true,
+                tooltips: Boolean = false,
+                urls: Boolean = false) = {
+    val chart = JChartFactory.createXYLineChart(title, xAxisLabel, yAxisLabel, dataset, orientation, legend, tooltips, urls)
+
+    if (dataset.isInstanceOf[TimePeriodValuesCollection] ||
+        dataset.isInstanceOf[TimeSeriesCollection])
+      chart.getXYPlot.setDomainAxis(new DateAxis)
+
+    chart
+  }
+
+  def StackedAreaChart(dataset: TableXYDataset,
+                       title: String = "",
+                       xAxisLabel: String = "",
+                       yAxisLabel: String = "",
+                       orientation: PlotOrientation = VERTICAL,
+                       legend: Boolean = true,
+                       tooltips: Boolean = false,
+                       urls: Boolean = false) = {
+    val chart = JChartFactory.createStackedXYAreaChart(title, xAxisLabel, yAxisLabel, dataset, orientation, legend, tooltips, urls)
+
+    if (dataset.isInstanceOf[TimeTableXYDataset])
+      chart.getXYPlot.setDomainAxis(new DateAxis)
 
     chart
   }
