@@ -33,10 +33,49 @@ import org.jfree.chart.labels._
 import org.jfree.chart.plot._
 import org.jfree.chart.plot.PlotOrientation._
 
+/** $ChartFactoryInfo */
 object ChartFactory extends ChartFactory
 
+/** $ChartFactoryInfo
+  *
+  * @define ChartFactoryInfo Contains factory methods to conveniently create charts.
+  *
+  * The only argument needed to create a chart is the dataset:
+  *
+  * {{{
+  * val data = Seq((0,0),(1,1),(2,2)).toXYSeriesCollection("some data")
+  * val chart = LineChart(data)
+  * }}}
+  *
+  * The other arguments have defaults and can be conveniently overridden with named arguments:
+  *
+  * {{{
+  * val data = Seq((0,0),(1,1),(2,2)).toXYSeriesCollection("some data")
+  * val chart = LineChart(data, legend = false, xAxisLabel = "some description")
+  * }}}
+  *
+  * @define dataset     the data the chart will visualize
+  * @define title       the title of the chart
+  * @define xAxisLabel  the label for the x-axis
+  * @define yAxisLabel  the label for the y-axis
+  * @define orientation the orientation of the chart
+  * @define legend      whether or not the chart will contain a legend
+  * @define tooltips    whether or not tooltips will be generated
+  * @define urls        whether or not URLs will be generated
+  */
 trait ChartFactory {
 
+  /** Creates a new chart that represents numeric `x` and `y` values with an area.
+    *
+    * @param dataset     $dataset
+    * @param title       $title
+    * @param xAxisLabel  $xAxisLabel
+    * @param yAxisLabel  $yAxisLabel
+    * @param orientation $orientation
+    * @param legend      $legend
+    * @param tooltips    $tooltips
+    * @param urls        $urls
+    */
   def AreaChart(dataset: XYDataset,
                 title: String = "",
                 xAxisLabel: String = "",
@@ -54,6 +93,18 @@ trait ChartFactory {
     chart
   }
 
+  /** Creates a new chart that represents categorized numeric data with bars.
+    *
+    * @param dataset     $dataset
+    * @param title       $title
+    * @param xAxisLabel  $xAxisLabel
+    * @param yAxisLabel  $yAxisLabel
+    * @param orientation $orientation
+    * @param legend      $legend
+    * @param tooltips    $tooltips
+    * @param urls        $urls
+    * @param labels      whether the top of the bars show the label showing its numeric value
+    */
   def BarChart(dataset: CategoryDataset,
                title: String = "",
                xAxisLabel: String = "",
@@ -76,6 +127,17 @@ trait ChartFactory {
     chart
   }
 
+  /** Creates a new chart that represents numeric `x` and `y` values with a line.
+    *
+    * @param dataset     $dataset
+    * @param title       $title
+    * @param xAxisLabel  $xAxisLabel
+    * @param yAxisLabel  $yAxisLabel
+    * @param orientation $orientation
+    * @param legend      $legend
+    * @param tooltips    $tooltips
+    * @param urls        $urls
+    */
   def LineChart(dataset: XYDataset,
                 title: String = "",
                 xAxisLabel: String = "",
@@ -93,6 +155,20 @@ trait ChartFactory {
     chart
   }
 
+  /** Creates a new chart that represents multiple numeric `x` and `y` values with stacked areas.
+    *
+    * If the input dataset is an instance of a `TimeTableXYDataset` the domain axis will correctly
+    * be set to a `DateAxis`.
+    *
+    * @param dataset     $dataset
+    * @param title       $title
+    * @param xAxisLabel  $xAxisLabel
+    * @param yAxisLabel  $yAxisLabel
+    * @param orientation $orientation
+    * @param legend      $legend
+    * @param tooltips    $tooltips
+    * @param urls        $urls
+    */
   def StackedAreaChart(dataset: TableXYDataset,
                        title: String = "",
                        xAxisLabel: String = "",
