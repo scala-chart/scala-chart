@@ -12,3 +12,8 @@ fully license-compatible.
 [scala]: http://www.scala-lang.org/
 [jfreechart]: http://jfree.org/jfreechart/
 
+
+---
+
+[![endorse](http://api.coderwall.com/wookietreiber/endorsecount.png)](http://coderwall.com/wookietreiber)
+
