@@ -10,6 +10,10 @@ libraryDependencies ++= Seq (
   "org.specs2" %% "specs2"     % "1.12.2" % "test" cross CrossVersion.full
 )
 
+initialCommands += """
+  import org.sfree.chart.Charting._
+"""
+
 // -------------------------------------------------------------------------------------------------
 // supplementary project information
 // -------------------------------------------------------------------------------------------------
