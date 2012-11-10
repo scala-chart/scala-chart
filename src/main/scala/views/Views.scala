@@ -39,4 +39,4 @@ object Views extends Views
   * val chart = LineChart(data)
   * }}}
   */
-trait Views extends DatasetViews with SeriesCollectionViews
+trait Views extends DatasetViews with SeriesViews with CollectionOfSeriesViews

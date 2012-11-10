@@ -27,13 +27,6 @@ package org.sfree.chart
 import org.jfree.data.category._
 import org.jfree.data.time._
 import org.jfree.data.xy._
-import org.jfree.chart._
-import org.jfree.chart.ChartFactory._
-import org.jfree.chart.ChartUtilities._
-import org.jfree.chart.axis._
-import org.jfree.chart.labels._
-import org.jfree.chart.plot._
-import org.jfree.chart.plot.PlotOrientation._
 
 /** $RichChartingCollectionsInfo */
 object RichChartingCollections extends RichChartingCollections
@@ -47,10 +40,8 @@ object RichChartingCollections extends RichChartingCollections
   */
 trait RichChartingCollections {
 
-  implicit def toRichTuple2s[A,B](it: Iterable[(A,B)]) = new RichTuple2s(it)
-
   /** Enriches a collection of data pairs. */
-  class RichTuple2s[A,B](it: Iterable[(A,B)]) {
+  implicit class RichTuple2s[A,B](it: Iterable[(A,B)]) {
 
     /** Converts this collection to an `XYSeries`.
       *
@@ -112,11 +103,8 @@ trait RichChartingCollections {
 
   }
 
-  implicit def toRichCategorizedTuple2s[A,B,C](it: Iterable[(A,Iterable[(B,C)])]) =
-    new RichTuple3s(it)
-
   /** Enriches a collection of data `Tuple3s`. */
-  class RichTuple3s[A,B,C](it: Iterable[(A,Iterable[(B,C)])]) {
+  implicit class RichTuple3s[A,B,C](it: Iterable[(A,Iterable[(B,C)])]) {
 
     /** Converts this collection to a `TimePeriodValuesCollection`. */
     def toTimeTable(implicit eva: A ⇒ Comparable[A], evb: B ⇒ TimePeriod, evc: C ⇒ Number): TimeTableXYDataset = {
@@ -140,10 +128,11 @@ trait RichChartingCollections {
 
   }
 
-  implicit def toRichTuple4s[A,B,C,D](it: Iterable[(A,Iterable[(B,Iterable[(C,D)])])]) = new RichTuple4s(it)
-
   /** Enriches a collection of data `Tuple4s`. */
-  class RichTuple4s[A,B,C,D](it: Iterable[(A,Iterable[(B,Iterable[(C,D)])])]) {
+  implicit class RichTuple4s[A,B,C,D](it: Iterable[(A,Iterable[(B,Iterable[(C,D)])])]) {
+
+    import org.jfree.chart.{ ChartFactory ⇒ _, _ }
+    import org.jfree.chart.plot._
 
     /** Converts this collection to a bar chart with a `CombinedDomainCategoryPlot`. */
     def toCombinedDomainBarChart(implicit eva: A ⇒ Comparable[A],
@@ -168,7 +157,8 @@ trait RichChartingCollections {
   // convert a collection of *Series to a *Collection / *Dataset
   // -----------------------------------------------------------------------------------------------
 
-  implicit def toRichTimeSeries(it: Iterable[TimeSeries]) = new {
+  /** Enriches a collection of `TimeSeries`. */
+  implicit class RichTimeSeriesCollection(it: Iterable[TimeSeries]) {
     /** Converts this collection of `TimeSeries` to a `TimeSeriesCollection`. */
     def toTimeSeriesCollection: TimeSeriesCollection = {
       val coll = new TimeSeriesCollection
@@ -177,7 +167,8 @@ trait RichChartingCollections {
     }
   }
 
-  implicit def toRichXYSeries(it: Iterable[XYSeries]) = new {
+  /** Enriches a collection of `XYSeries`. */
+  implicit class RichXYSeriesCollection(it: Iterable[XYSeries]) {
     /** Converts this collection of `XYSeries` to a `XYSeriesCollection`. */
     def toXYSeriesCollection: XYSeriesCollection = {
       val coll = new XYSeriesCollection
@@ -186,7 +177,8 @@ trait RichChartingCollections {
     }
   }
 
-  implicit def toRichTimePeriodValues(it: Iterable[TimePeriodValues]) = new {
+  /** Enriches a collection of `TimePeriodValues`. */
+  implicit class RichTimePeriodValuesCollection(it: Iterable[TimePeriodValues]) {
     /** Converts this collection of `TimePeriodValues` to a `TimePeriodValuesCollection`. */
     def toTimePeriodValuesCollection: TimePeriodValuesCollection = {
       val coll = new TimePeriodValuesCollection

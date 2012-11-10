@@ -22,34 +22,30 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 
-package org.sfree
+package org.sfree.chart
 
-/** This package contains wrappers for the [[http://www.jfree.org/jfreechart/ JFreeChart]] library.
+import language.implicitConversions
+
+import org.jfree.data.time._
+import org.jfree.data.xy._
+
+/** $SeriesViewsInfo */
+object SeriesViews extends SeriesViews
+
+/** $SeriesViewsInfo
   *
-  * == Imports ==
-  *
-  * Imports are provided in groups:
-  *
-  * [[org.sfree.chart.Charting]] contains all enrichments. This import is the recommended starting
-  * point for working with sfreechart:
-  *
-  * {{{
-  * import org.sfree.chart.Charting._
-  * val data = Seq((0,0),(1,1),(2,2)).toXYSeriesCollection("some data")
-  * val chart = LineChart(data)
-  * }}}
-  *
-  * [[org.sfree.chart.Views]] contains all implicit views / conversions. None of these are available
-  * by importing [[org.sfree.chart.Charting]], because implicit views should generally be handled
-  * with care, because of possible ambiguous implicit conversions. Instead of importing all views it
-  * will most likely be better to just import the specific needed conversions or conversion groups:
-  *
-  * {{{
-  * import org.sfree.chart.Charting._
-  * import org.sfree.chart.Views.asXYSeriesCollection
-  * val data = Seq((0,0),(1,1),(2,2))
-  * val chart = LineChart(data)
-  * }}}
+  * @define SeriesViewsInfo Contains implicit views that convert the simpler `*Series` datasets to
+  * their `*SeriesCollection` counterparts so they can be used by chart factories.
   */
-package object chart {
+trait SeriesViews {
+
+  implicit def asTimePeriodValuesCollection(tpvs: TimePeriodValues): TimePeriodValuesCollection =
+    new TimePeriodValuesCollection(tpvs)
+
+  implicit def asTimeSeriesCollection(ts: TimeSeries): TimeSeriesCollection =
+    new TimeSeriesCollection(ts)
+
+  implicit def asXYSeriesCollection(xys: XYSeries): XYSeriesCollection =
+    new XYSeriesCollection(xys)
+
 }

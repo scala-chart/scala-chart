@@ -27,6 +27,7 @@ package org.sfree.chart
 import org.jfree.data.category._
 import org.jfree.data.time._
 import org.jfree.data.xy._
+
 import org.jfree.chart.{ ChartFactory ⇒ JChartFactory }
 import org.jfree.chart.axis._
 import org.jfree.chart.labels._

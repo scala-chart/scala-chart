@@ -1,16 +1,14 @@
 # Scala Wrappers for JFreeChart
 
-Import the following line and profit from nice [Scala][scala] wrappers for [JFreeChart][jfreechart].
+Import the following line and profit from nice [Scala][] wrappers for [JFreeChart][].
 
-```scala
-import org.sfree.chart.Charting._
-```
+    import org.sfree.chart.Charting._
 
-This project is released under the same license as [JFreeChart][jfreechart] to make the projects
-fully license-compatible.
+This project is released under the same license as [JFreeChart][] to make the projects fully
+license-compatible.
 
-[scala]: http://www.scala-lang.org/
-[jfreechart]: http://jfree.org/jfreechart/
+[Scala]: http://www.scala-lang.org/
+[JFreeChart]: http://jfree.org/jfreechart/
 
 
 ---

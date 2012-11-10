@@ -24,6 +24,8 @@
 
 package org.sfree.chart
 
+import language.implicitConversions
+
 import org.jfree.data.category._
 import org.jfree.data.time._
 import org.jfree.data.xy._

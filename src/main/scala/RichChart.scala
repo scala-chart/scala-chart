@@ -44,10 +44,8 @@ object RichChart extends RichChart
   */
 trait RichChart {
 
-  implicit def richChart(chart: JFreeChart) = new RichChart(chart)
-
   /** Enriched JFreeChart. */
-  class RichChart(chart: JFreeChart) {
+  implicit class RichChart(chart: JFreeChart) {
 
     /** Shows the chart in a window. */
     def show { show() }

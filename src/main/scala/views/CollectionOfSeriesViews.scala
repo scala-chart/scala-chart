@@ -24,36 +24,29 @@
 
 package org.sfree.chart
 
-import Charting._
+import language.implicitConversions
 
-import org.jfree.data.category._
+import RichChartingCollections._
+
 import org.jfree.data.time._
 import org.jfree.data.xy._
 
-/** $SeriesCollectionViewsInfo */
-object SeriesCollectionViews extends SeriesCollectionViews
+/** $CollectionOfSeriesViewsInfo */
+object CollectionOfSeriesViews extends CollectionOfSeriesViews
 
-/** $SeriesCollectionViewsInfo
+/** $CollectionOfSeriesViewsInfo
   *
-  * @define SeriesCollectionViewsInfo Contains implicit views that convert the simpler series like
-  * object to datasets that can be used by chart factories.
+  * @define CollectionOfSeriesViewsInfo Contains implicit views that convert collections of the
+  * simpler `*Series` datasets to their `*SeriesCollection` counterparts so they can be used by
+  * chart factories.
   */
-trait SeriesCollectionViews {
-
-  implicit def asTimePeriodValuesCollection(tpvs: TimePeriodValues): TimePeriodValuesCollection =
-    new TimePeriodValuesCollection(tpvs)
+trait CollectionOfSeriesViews {
 
   implicit def asTimePeriodValuesCollection(it: Iterable[TimePeriodValues]): TimePeriodValuesCollection =
     it.toTimePeriodValuesCollection
 
-  implicit def asTimeSeriesCollection(ts: TimeSeries): TimeSeriesCollection =
-    new TimeSeriesCollection(ts)
-
   implicit def asTimeSeriesCollection(it: Iterable[TimeSeries]): TimeSeriesCollection =
     it.toTimeSeriesCollection
-
-  implicit def asXYSeriesCollection(xys: XYSeries): XYSeriesCollection =
-    new XYSeriesCollection(xys)
 
   implicit def asXYSeriesCollection(it: Iterable[XYSeries]): XYSeriesCollection =
     it.toXYSeriesCollection
