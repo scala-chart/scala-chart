@@ -20,7 +20,7 @@ initialCommands in Compile in console += """
 // supplementary project information
 // -------------------------------------------------------------------------------------------------
 
-organization := "org.sfree"
+organization := "com.github.wookietreiber.sfreechart"
 
 description := "Scala Wrappers for JFreeChart"
 
