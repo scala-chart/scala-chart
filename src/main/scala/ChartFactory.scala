@@ -63,6 +63,7 @@ object ChartFactory extends ChartFactory
   * @define legend      whether or not the chart will contain a legend
   * @define tooltips    whether or not tooltips will be generated
   * @define urls        whether or not URLs will be generated
+  * @define labels      whether or not the chart will contain labels
   */
 trait ChartFactory {
 
@@ -87,9 +88,11 @@ trait ChartFactory {
                 urls: Boolean = false): JFreeChart = {
     val chart = JChartFactory.createXYAreaChart(title, xAxisLabel, yAxisLabel, dataset, orientation, legend, tooltips, urls)
 
-    if (dataset.isInstanceOf[TimePeriodValuesCollection] ||
-        dataset.isInstanceOf[TimeSeriesCollection])
-      chart.getXYPlot.setDomainAxis(new DateAxis)
+    dataset match {
+      case _: TimePeriodValuesCollection ⇒ chart.getXYPlot.setDomainAxis(new DateAxis)
+      case _: TimeSeriesCollection       ⇒ chart.getXYPlot.setDomainAxis(new DateAxis)
+      case _ ⇒
+    }
 
     chart
   }
@@ -104,7 +107,7 @@ trait ChartFactory {
     * @param legend      $legend
     * @param tooltips    $tooltips
     * @param urls        $urls
-    * @param labels      whether the top of the bars show the label showing its numeric value
+    * @param labels      $labels
     */
   def BarChart(dataset: CategoryDataset,
                title: String = "",
@@ -117,12 +120,13 @@ trait ChartFactory {
                labels: Boolean = false): JFreeChart = {
     val chart = JChartFactory.createBarChart(title, xAxisLabel, yAxisLabel, dataset, orientation, legend, tooltips, urls)
 
-    if (labels) {
-      val renderer = chart.getPlot.asInstanceOf[CategoryPlot].getRenderer
-      val labelgen = new StandardCategoryItemLabelGenerator
+    chart.getPlot match {
+      case plot: CategoryPlot if labels ⇒
+        val renderer = plot.getRenderer
+        renderer.setBaseItemLabelsVisible(true)
+        renderer.setBaseItemLabelGenerator(new StandardCategoryItemLabelGenerator)
 
-      renderer.setBaseItemLabelsVisible(true)
-      renderer.setBaseItemLabelGenerator(labelgen)
+      case _ ⇒
     }
 
     chart
@@ -149,9 +153,11 @@ trait ChartFactory {
                 urls: Boolean = false): JFreeChart = {
     val chart = JChartFactory.createXYLineChart(title, xAxisLabel, yAxisLabel, dataset, orientation, legend, tooltips, urls)
 
-    if (dataset.isInstanceOf[TimePeriodValuesCollection] ||
-        dataset.isInstanceOf[TimeSeriesCollection])
-      chart.getXYPlot.setDomainAxis(new DateAxis)
+    dataset match {
+      case _: TimePeriodValuesCollection ⇒ chart.getXYPlot.setDomainAxis(new DateAxis)
+      case _: TimeSeriesCollection       ⇒ chart.getXYPlot.setDomainAxis(new DateAxis)
+      case _ ⇒
+    }
 
     chart
   }
@@ -180,8 +186,10 @@ trait ChartFactory {
                        urls: Boolean = false): JFreeChart = {
     val chart = JChartFactory.createStackedXYAreaChart(title, xAxisLabel, yAxisLabel, dataset, orientation, legend, tooltips, urls)
 
-    if (dataset.isInstanceOf[TimeTableXYDataset])
-      chart.getXYPlot.setDomainAxis(new DateAxis)
+    dataset match {
+      case _: TimeTableXYDataset ⇒ chart.getXYPlot.setDomainAxis(new DateAxis)
+      case _ ⇒
+    }
 
     chart
   }
