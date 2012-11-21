@@ -25,13 +25,25 @@
 package org.sfree.chart
 package views
 
-/** $CollectionViewsInfo */
-object CollectionViews extends CollectionViews
+import language.implicitConversions
 
-/** $CollectionViewsInfo
-  *
-  * @define CollectionViewsInfo Contains implicit views that convert collections to datasets.
-  */
-trait CollectionViews extends CollectionToCategoryDatasetViews with CollectionToTimeSeriesViews
-  with CollectionToTimePeriodValuesViews with CollectionToTimeTableViews
-  with CollectionToXYSeriesViews with CollectionToPieDatasetViews
+import org.jfree.data.general._
+
+import RichChartingCollections._
+
+// -------------------------------------------------------------------------------------------------
+// conversion from scala.collection to datasets
+// -------------------------------------------------------------------------------------------------
+
+object CollectionToPieDatasetViews extends CollectionToPieDatasetViews
+trait CollectionToPieDatasetViews {
+  implicit def asPieDataset[A <% Comparable[A], B <% Number](it: Iterable[(A,B)]): PieDataset =
+    it.toPieDataset
+}
+
+// -------------------------------------------------------------------------------------------------
+// import containing all of the above
+// -------------------------------------------------------------------------------------------------
+
+object PieDatasetViews extends PieDatasetViews
+trait PieDatasetViews extends CollectionToPieDatasetViews

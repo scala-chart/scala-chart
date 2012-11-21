@@ -4,6 +4,7 @@ package views
 import org.specs2._
 
 import org.jfree.data.category._
+import org.jfree.data.general._
 import org.jfree.data.time._
 import org.jfree.data.xy._
 
@@ -33,6 +34,9 @@ class CollectionViewsSpec extends Specification with BeViewableAs with Implicits
                                                                                                   p^
   "TimeTableXYDataset"                                                                             ^
     "Seq[(String,Seq[(Date,Int)])] to TimeTableXYDataset"                       ! e8               ^
+                                                                                                  p^
+  "PieDataset"                                                                                     ^
+    "Seq[(String,Int)] to PieDataset"                                           ! e10              ^
                                                                                                  end
   // -----------------------------------------------------------------------------------------------
   // tests
@@ -49,5 +53,6 @@ class CollectionViewsSpec extends Specification with BeViewableAs with Implicits
   def e7 = Seq(("",2)).=>=[CategoryDataset]
   def e8 = Seq(("",Seq((d,2)))).=>=[TimeTableXYDataset]
   def e9 = Seq(("",Seq(("",2)))).=>=[CategoryDataset]
+  def e10 = Seq(("",2)).=>=[PieDataset]
 
 }

@@ -25,6 +25,7 @@
 package org.sfree.chart
 
 import org.jfree.data.category._
+import org.jfree.data.general._
 import org.jfree.data.time._
 import org.jfree.data.xy._
 
@@ -43,39 +44,19 @@ trait RichChartingCollections {
   /** Enriches a collection of data pairs. */
   implicit class RichTuple2s[A,B](it: Iterable[(A,B)]) {
 
-    /** Converts this collection to an `XYSeries`.
-      *
-      * @param name $name
-      */
-    def toXYSeries(name: String = "")(implicit eva: A ⇒ Number, evb: B ⇒ Number): XYSeries = {
-      val series = new XYSeries(name)
-      it foreach { case (x,y) ⇒ series.add(x,y) }
-      series
+    /** Converts this collection to a `CategoryDataset`. */
+    def toCategoryDataset(implicit eva: A ⇒ Comparable[A], evb: B ⇒ Number): CategoryDataset = {
+      val dataset = new DefaultCategoryDataset
+      it foreach { case (category,value) ⇒ dataset.addValue(value, category, "") }
+      dataset
     }
 
-    /** Converts this collection to an `XYSeriesCollection`.
-      *
-      * @param name $name
-      */
-    def toXYSeriesCollection(name: String = "")(implicit eva: A ⇒ Number, evb: B ⇒ Number): XYSeriesCollection =
-      new XYSeriesCollection(toXYSeries(name))
-
-    /** Converts this collection to a `TimeSeries`.
-      *
-      * @param name $name
-      */
-    def toTimeSeries(name: String = "")(implicit eva: A ⇒ RegularTimePeriod, evb: B ⇒ Number): TimeSeries = {
-      val series = new TimeSeries(name)
-      it foreach { case (time,value) ⇒ series.add(time,value) }
-      series
+    /** Converts this collection to a `PieDataset`. */
+    def toPieDataset(implicit eva: A ⇒ Comparable[A], evb: B ⇒ Number): PieDataset = {
+      val dataset = new DefaultPieDataset
+      it foreach { case (category,value) ⇒ dataset.setValue(category, value) }
+      dataset
     }
-
-    /** Converts this collection to a `TimeSeriesCollection`.
-      *
-      * @param name $name
-      */
-    def toTimeSeriesCollection(name: String = "")(implicit eva: A ⇒ RegularTimePeriod, evb: B ⇒ Number): TimeSeriesCollection =
-      new TimeSeriesCollection(toTimeSeries(name))
 
     /** Converts this collection to `TimePeriodValues`.
       *
@@ -94,27 +75,44 @@ trait RichChartingCollections {
     def toTimePeriodValuesCollection(name: String = "")(implicit eva: A ⇒ TimePeriod, evb: B ⇒ Number): TimePeriodValuesCollection =
       new TimePeriodValuesCollection(toTimePeriodValues(name))
 
-    /** Converts this collection to a `CategoryDataset`. */
-    def toCategoryDataset(implicit eva: A ⇒ Comparable[A], evb: B ⇒ Number): CategoryDataset = {
-      val dataset = new DefaultCategoryDataset
-      it foreach { case (category,value) ⇒ dataset.addValue(value, category, "") }
-      dataset
+    /** Converts this collection to a `TimeSeries`.
+      *
+      * @param name $name
+      */
+    def toTimeSeries(name: String = "")(implicit eva: A ⇒ RegularTimePeriod, evb: B ⇒ Number): TimeSeries = {
+      val series = new TimeSeries(name)
+      it foreach { case (time,value) ⇒ series.add(time,value) }
+      series
     }
+
+    /** Converts this collection to a `TimeSeriesCollection`.
+      *
+      * @param name $name
+      */
+    def toTimeSeriesCollection(name: String = "")(implicit eva: A ⇒ RegularTimePeriod, evb: B ⇒ Number): TimeSeriesCollection =
+      new TimeSeriesCollection(toTimeSeries(name))
+
+    /** Converts this collection to an `XYSeries`.
+      *
+      * @param name $name
+      */
+    def toXYSeries(name: String = "")(implicit eva: A ⇒ Number, evb: B ⇒ Number): XYSeries = {
+      val series = new XYSeries(name)
+      it foreach { case (x,y) ⇒ series.add(x,y) }
+      series
+    }
+
+    /** Converts this collection to an `XYSeriesCollection`.
+      *
+      * @param name $name
+      */
+    def toXYSeriesCollection(name: String = "")(implicit eva: A ⇒ Number, evb: B ⇒ Number): XYSeriesCollection =
+      new XYSeriesCollection(toXYSeries(name))
 
   }
 
   /** Enriches a collection of data `Tuple3s`. */
   implicit class RichTuple3s[A,B,C](it: Iterable[(A,Iterable[(B,C)])]) {
-
-    /** Converts this collection to a `TimePeriodValuesCollection`. */
-    def toTimeTable(implicit eva: A ⇒ Comparable[A], evb: B ⇒ TimePeriod, evc: C ⇒ Number): TimeTableXYDataset = {
-      val dataset = new TimeTableXYDataset
-      for {
-        (category,tvs) ← it
-        (time,value) ← tvs
-      } dataset.add(time,value,category,false)
-      dataset
-    }
 
     /** Converts this collection to a `CategoryDataset`. */
     def toCategoryDataset(implicit eva: A ⇒ Comparable[A], evb: B ⇒ Comparable[B], evc: C ⇒ Number): CategoryDataset = {
@@ -123,6 +121,16 @@ trait RichChartingCollections {
         (upper,lvs) ← it
         (lower,value) ← lvs
       } dataset.addValue(value, lower, upper)
+      dataset
+    }
+
+    /** Converts this collection to a `TimePeriodValuesCollection`. */
+    def toTimeTable(implicit eva: A ⇒ Comparable[A], evb: B ⇒ TimePeriod, evc: C ⇒ Number): TimeTableXYDataset = {
+      val dataset = new TimeTableXYDataset
+      for {
+        (category,tvs) ← it
+        (time,value) ← tvs
+      } dataset.add(time,value,category,false)
       dataset
     }
 
