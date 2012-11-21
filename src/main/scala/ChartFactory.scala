@@ -87,7 +87,8 @@ trait ChartFactory {
                 legend: Boolean = true,
                 tooltips: Boolean = false,
                 urls: Boolean = false): JFreeChart = {
-    val chart = JChartFactory.createXYAreaChart(title, xAxisLabel, yAxisLabel, dataset, orientation, legend, tooltips, urls)
+    val chart = JChartFactory.createXYAreaChart(title, xAxisLabel, yAxisLabel, dataset, orientation,
+      legend, tooltips, urls)
 
     dataset match {
       case _: TimePeriodValuesCollection ⇒ chart.getXYPlot.setDomainAxis(new DateAxis)
@@ -119,7 +120,8 @@ trait ChartFactory {
                tooltips: Boolean = false,
                urls: Boolean = false,
                labels: Boolean = false): JFreeChart = {
-    val chart = JChartFactory.createBarChart(title, xAxisLabel, yAxisLabel, dataset, orientation, legend, tooltips, urls)
+    val chart = JChartFactory.createBarChart(title, xAxisLabel, yAxisLabel, dataset, orientation,
+      legend, tooltips, urls)
 
     chart.getPlot match {
       case plot: CategoryPlot if labels ⇒
@@ -152,7 +154,8 @@ trait ChartFactory {
                 legend: Boolean = true,
                 tooltips: Boolean = false,
                 urls: Boolean = false): JFreeChart = {
-    val chart = JChartFactory.createXYLineChart(title, xAxisLabel, yAxisLabel, dataset, orientation, legend, tooltips, urls)
+    val chart = JChartFactory.createXYLineChart(title, xAxisLabel, yAxisLabel, dataset, orientation,
+      legend, tooltips, urls)
 
     dataset match {
       case _: TimePeriodValuesCollection ⇒ chart.getXYPlot.setDomainAxis(new DateAxis)
@@ -241,7 +244,8 @@ trait ChartFactory {
                        legend: Boolean = true,
                        tooltips: Boolean = false,
                        urls: Boolean = false): JFreeChart = {
-    val chart = JChartFactory.createStackedXYAreaChart(title, xAxisLabel, yAxisLabel, dataset, orientation, legend, tooltips, urls)
+    val chart = JChartFactory.createStackedXYAreaChart(title, xAxisLabel, yAxisLabel, dataset,
+      orientation, legend, tooltips, urls)
 
     dataset match {
       case _: TimeTableXYDataset ⇒ chart.getXYPlot.setDomainAxis(new DateAxis)
