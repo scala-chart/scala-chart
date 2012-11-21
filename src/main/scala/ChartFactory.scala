@@ -193,6 +193,32 @@ trait ChartFactory {
     chart
   }
 
+  /** Creates a new chart that represents categorized numeric data in a ring.
+    *
+    * @param dataset          $dataset
+    * @param title            $title
+    * @param legend           $legend
+    * @param tooltips         $tooltips
+    * @param urls             $urls
+    * @param labels           $labels
+    * @param threeDimensional whether or not to generate a 3D pie
+    */
+  def RingChart(dataset: PieDataset,
+                title: String = "",
+                legend: Boolean = true,
+                tooltips: Boolean = true,
+                urls: Boolean = false,
+                labels: Boolean = true): JFreeChart = {
+    val chart = JChartFactory.createRingChart(title, dataset, legend, tooltips, urls)
+
+    chart.getPlot match {
+      case plot: PiePlot if ! labels ⇒ plot.setLabelGenerator(null)
+      case _ ⇒
+    }
+
+    chart
+  }
+
   /** Creates a new chart that represents multiple numeric `x` and `y` values with stacked areas.
     *
     * If the input dataset is an instance of a `TimeTableXYDataset` the domain axis will correctly
