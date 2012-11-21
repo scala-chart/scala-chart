@@ -23,20 +23,15 @@
 
 
 package org.sfree.chart
+package views
 
-/** $ViewsInfo */
-object Views extends Views
+/** $CollectionViewsInfo */
+object CollectionViews extends CollectionViews
 
-/** $ViewsInfo
+/** $CollectionViewsInfo
   *
-  * @define ViewsInfo Contains all implicit views / conversions. Use this import with care, because
-  * of ambiguous implicit conversions. It is better to just import the specific conversion you need:
-  *
-  * {{{
-  * import org.sfree.chart.Charting._
-  * import org.sfree.chart.Views.asXYSeriesCollection
-  * val data = Seq((0,0),(1,1),(2,2))
-  * val chart = LineChart(data)
-  * }}}
+  * @define CollectionViewsInfo Contains implicit views that convert collections to datasets.
   */
-trait Views extends DatasetViews with SeriesViews with CollectionOfSeriesViews
+trait CollectionViews extends CollectionToCategoryDatasetViews with CollectionToTimeSeriesViews
+  with CollectionToTimePeriodValuesViews with CollectionToTimeTableViews
+  with CollectionToXYSeriesViews

@@ -25,12 +25,27 @@
 package org.sfree.chart
 package views
 
-/** $SeriesViewsInfo */
-object SeriesViews extends SeriesViews
+import language.implicitConversions
 
-/** $SeriesViewsInfo
-  *
-  * @define SeriesViewsInfo Contains implicit views that convert the simpler `*Series` datasets to
-  * their `*SeriesCollection` counterparts so they can be used by chart factories.
-  */
-trait SeriesViews extends TimePeriodValuesViews with TimeSeriesViews with XYSeriesViews
+import org.jfree.data.category._
+
+import RichChartingCollections._
+
+// -------------------------------------------------------------------------------------------------
+// conversion from scala.collection to datasets
+// -------------------------------------------------------------------------------------------------
+
+object CollectionToCategoryDatasetViews extends CollectionToCategoryDatasetViews
+trait CollectionToCategoryDatasetViews {
+  implicit def asCategoryDataset2[A <% Comparable[A], B <% Number](it: Iterable[(A,B)]): CategoryDataset =
+    it.toCategoryDataset
+  implicit def asCategoryDataset3[A <% Comparable[A], B <% Comparable[B], C <% Number](it: Iterable[(A,Iterable[(B,C)])]): CategoryDataset =
+    it.toCategoryDataset
+}
+
+// -------------------------------------------------------------------------------------------------
+// import containing all of the above
+// -------------------------------------------------------------------------------------------------
+
+object CategoryDatasetViews extends CategoryDatasetViews
+trait CategoryDatasetViews extends CollectionToCategoryDatasetViews

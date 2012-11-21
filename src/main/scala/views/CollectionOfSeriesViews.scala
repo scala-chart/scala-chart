@@ -23,13 +23,7 @@
 
 
 package org.sfree.chart
-
-import language.implicitConversions
-
-import RichChartingCollections._
-
-import org.jfree.data.time._
-import org.jfree.data.xy._
+package views
 
 /** $CollectionOfSeriesViewsInfo */
 object CollectionOfSeriesViews extends CollectionOfSeriesViews
@@ -40,15 +34,5 @@ object CollectionOfSeriesViews extends CollectionOfSeriesViews
   * simpler `*Series` datasets to their `*SeriesCollection` counterparts so they can be used by
   * chart factories.
   */
-trait CollectionOfSeriesViews {
-
-  implicit def asTimePeriodValuesCollection(it: Iterable[TimePeriodValues]): TimePeriodValuesCollection =
-    it.toTimePeriodValuesCollection
-
-  implicit def asTimeSeriesCollection(it: Iterable[TimeSeries]): TimeSeriesCollection =
-    it.toTimeSeriesCollection
-
-  implicit def asXYSeriesCollection(it: Iterable[XYSeries]): XYSeriesCollection =
-    it.toXYSeriesCollection
-
-}
+trait CollectionOfSeriesViews extends CollectionOfTimeSeriesViews
+  with CollectionOfTimePeriodValuesViews with CollectionOfXYSeriesViews

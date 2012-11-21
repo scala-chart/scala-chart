@@ -25,31 +25,24 @@
 package org.sfree
 
 /** This package contains wrappers for the [[http://www.jfree.org/jfreechart/ JFreeChart]] library.
-  *
-  * == Imports ==
-  *
-  * Imports are provided in groups:
-  *
-  * [[org.sfree.chart.Charting]] contains all enrichments. This import is the recommended starting
-  * point for working with sfreechart:
+  * The basic starting point is to import the [[org.sfree.chart.Charting]] object:
   *
   * {{{
   * import org.sfree.chart.Charting._
-  * val data = Seq((0,0),(1,1),(2,2)).toXYSeriesCollection("some data")
-  * val chart = LineChart(data)
   * }}}
   *
-  * [[org.sfree.chart.Views]] contains all implicit views / conversions. None of these are available
-  * by importing [[org.sfree.chart.Charting]], because implicit views should generally be handled
-  * with care, because of possible ambiguous implicit conversions. Instead of importing all views it
-  * will most likely be better to just import the specific needed conversions or conversion groups:
+  * With this import you can convert Scala collections to JFreeChart datasets and use chart
+  * factories:
   *
   * {{{
-  * import org.sfree.chart.Charting._
-  * import org.sfree.chart.Views.asXYSeriesCollection
-  * val data = Seq((0,0),(1,1),(2,2))
-  * val chart = LineChart(data)
+  * val data = Seq((1,2),(2,4),(3,6),(4,8))
+  * val dataset = data.toXYSeriesCollection("some points")
+  * val chart = LineChart(dataset, title = "My Chart of Some Points")
   * }}}
+  *
+  * There are also implicit conversions / views available in the [[org.sfree.chart.views]] package,
+  * but they are not contained by [[org.sfree.chart.Charting]], because of ambiguity issues with
+  * implicit conversions.
   */
 package object chart {
 }

@@ -1,4 +1,5 @@
 package org.sfree.chart
+package views
 
 import org.specs2._
 

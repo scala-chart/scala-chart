@@ -23,14 +23,62 @@
 
 
 package org.sfree.chart
-package views
 
-/** $SeriesViewsInfo */
-object SeriesViews extends SeriesViews
-
-/** $SeriesViewsInfo
+/** This package contains implicit views / implicit conversions for SFreeChart. There are different
+  * groups of imports available for specific purposes to avoid ambiguous implicit conversions.
   *
-  * @define SeriesViewsInfo Contains implicit views that convert the simpler `*Series` datasets to
-  * their `*SeriesCollection` counterparts so they can be used by chart factories.
+  * == CollectionTo*Views ==
+  *
+  * These contain views that convert ordinary Scala collections to datasets.
+  *
+  * {{{
+  * import org.sfree.chart.Charting._
+  * import org.sfree.chart.views.CollectionToXYSeriesViews._
+  *
+  * val data = Seq((1,2),(2,4),(3,6),(4,8))
+  * val chart = LineChart(data, title = "My Chart of Some Points")
+  * }}}
+  *
+  * == SeriesViews ==
+  *
+  * [[org.sfree.chart.views.SeriesViews]] contains views that convert the simpler `*Series` datasets
+  * to their `*SeriesCollection` counterparts so they can be used by chart factories:
+  *
+  * {{{
+  * import org.sfree.chart.Charting._
+  * import org.sfree.chart.views.SeriesViews._
+  *
+  * val dataset = Seq((1,2),(2,4),(3,6),(4,8)).toXYSeries("some points")
+  * val chart = LineChart(dataset, title = "My Chart of Some Points")
+  * }}}
+  *
+  * == CollectionOfSeriesViews ==
+  *
+  * [[org.sfree.chart.views.CollectionOfSeriesViews]] contains views that convert Scala collections
+  * of the simpler `*Series` datasets to their `*SeriesCollection` counterparts so they can be used
+  * by chart factories:
+  *
+  * {{{
+  * import org.sfree.chart.Charting._
+  * import org.sfree.chart.views.CollectionOfSeriesViews._
+  *
+  * val dataset1 = Seq((1,2),(2,4),(3,6),(4,8)).toXYSeries("some points")
+  * val dataset2 = Seq((1,3),(2,6),(3,9),(4,12)).toXYSeries("some other points")
+  * val datasets = Seq(dataset1, dataset2)
+  * val chart = LineChart(datasets, title = "My Chart of Some Points")
+  * }}}
+  *
+  * == *DatasetViews ==
+  *
+  * These contain all views concerning a specific type of dataset.
+  *
+  * {{{
+  * import org.sfree.chart.Charting._
+  * import org.sfree.chart.views.XYDatasetViews._
+  *
+  * val data = Seq((1,2),(2,4),(3,6),(4,8))
+  * val chart = LineChart(data, title = "My Chart of Some Points")
+  * }}}
   */
-trait SeriesViews extends TimePeriodValuesViews with TimeSeriesViews with XYSeriesViews
+package object views {
+}

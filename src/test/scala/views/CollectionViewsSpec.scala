@@ -1,4 +1,5 @@
 package org.sfree.chart
+package views
 
 import org.specs2._
 
@@ -6,9 +7,9 @@ import org.jfree.data.category._
 import org.jfree.data.time._
 import org.jfree.data.xy._
 
-import DatasetViews._
+import CollectionViews._
 
-class DatasetViewsSpec extends Specification with BeViewableAs with Implicits { def is =
+class CollectionViewsSpec extends Specification with BeViewableAs with Implicits { def is =
 
   // -----------------------------------------------------------------------------------------------
   // fragments

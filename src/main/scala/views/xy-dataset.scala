@@ -25,12 +25,48 @@
 package org.sfree.chart
 package views
 
-/** $SeriesViewsInfo */
-object SeriesViews extends SeriesViews
+import language.implicitConversions
 
-/** $SeriesViewsInfo
-  *
-  * @define SeriesViewsInfo Contains implicit views that convert the simpler `*Series` datasets to
-  * their `*SeriesCollection` counterparts so they can be used by chart factories.
-  */
-trait SeriesViews extends TimePeriodValuesViews with TimeSeriesViews with XYSeriesViews
+import org.jfree.data.xy._
+
+import RichChartingCollections._
+
+// -------------------------------------------------------------------------------------------------
+// conversion from *Series to *SeriesCollection
+// -------------------------------------------------------------------------------------------------
+
+object XYSeriesViews extends XYSeriesViews
+trait XYSeriesViews {
+  implicit def asXYSeriesCollection(xys: XYSeries): XYSeriesCollection =
+    new XYSeriesCollection(xys)
+}
+
+// -------------------------------------------------------------------------------------------------
+// conversion from collection of *Series to *SeriesCollection
+// -------------------------------------------------------------------------------------------------
+
+object CollectionOfXYSeriesViews extends CollectionOfXYSeriesViews
+trait CollectionOfXYSeriesViews {
+  implicit def asXYSeriesCollection(it: Iterable[XYSeries]): XYSeriesCollection =
+    it.toXYSeriesCollection
+}
+
+// -------------------------------------------------------------------------------------------------
+// conversion from scala.collection to datasets
+// -------------------------------------------------------------------------------------------------
+
+object CollectionToXYSeriesViews extends CollectionToXYSeriesViews
+trait CollectionToXYSeriesViews {
+  implicit def asXYSeries[A <% Number, B <% Number](it: Iterable[(A,B)]): XYSeries =
+    it.toXYSeries()
+  implicit def asXYSeriesCollection[A <% Number, B <% Number](it: Iterable[(A,B)]): XYSeriesCollection =
+    it.toXYSeriesCollection()
+}
+
+// -------------------------------------------------------------------------------------------------
+// import containing all of the above
+// -------------------------------------------------------------------------------------------------
+
+object XYDatasetViews extends XYDatasetViews
+trait XYDatasetViews extends CollectionToXYSeriesViews with XYSeriesViews
+  with CollectionOfXYSeriesViews

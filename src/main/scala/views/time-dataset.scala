@@ -23,49 +23,83 @@
 
 
 package org.sfree.chart
+package views
 
 import language.implicitConversions
 
-import org.jfree.data.category._
 import org.jfree.data.time._
-import org.jfree.data.xy._
 
 import RichChartingCollections._
 
-/** $DatasetViewsInfo */
-object DatasetViews extends DatasetViews
+// -------------------------------------------------------------------------------------------------
+// conversion from *Series to *SeriesCollection
+// -------------------------------------------------------------------------------------------------
 
-/** $DatasetViewsInfo
-  *
-  * @define DatasetViewsInfo Contains implicit views that convert collections to datasets.
-  */
-trait DatasetViews {
+object TimeSeriesViews extends TimeSeriesViews
+trait TimeSeriesViews {
+  implicit def asTimeSeriesCollection(ts: TimeSeries): TimeSeriesCollection =
+    new TimeSeriesCollection(ts)
+}
 
-  implicit def asXYSeries[A <% Number, B <% Number](it: Iterable[(A,B)]): XYSeries =
-    it.toXYSeries()
+object TimePeriodValuesViews extends TimePeriodValuesViews
+trait TimePeriodValuesViews {
+  implicit def asTimePeriodValuesCollection(tpvs: TimePeriodValues): TimePeriodValuesCollection =
+    new TimePeriodValuesCollection(tpvs)
+}
 
-  implicit def asXYSeriesCollection[A <% Number, B <% Number](it: Iterable[(A,B)]): XYSeriesCollection =
-    it.toXYSeriesCollection()
+// -------------------------------------------------------------------------------------------------
+// conversion from collection of *Series to *SeriesCollection
+// -------------------------------------------------------------------------------------------------
 
+object CollectionOfTimeSeriesViews extends CollectionOfTimeSeriesViews
+trait CollectionOfTimeSeriesViews {
+  implicit def asTimeSeriesCollection(it: Iterable[TimeSeries]): TimeSeriesCollection =
+    it.toTimeSeriesCollection
+}
+
+object CollectionOfTimePeriodValuesViews extends CollectionOfTimePeriodValuesViews
+trait CollectionOfTimePeriodValuesViews {
+  implicit def asTimePeriodValuesCollection(it: Iterable[TimePeriodValues]): TimePeriodValuesCollection =
+    it.toTimePeriodValuesCollection
+}
+
+// -------------------------------------------------------------------------------------------------
+// conversion from scala.collection to datasets
+// -------------------------------------------------------------------------------------------------
+
+object CollectionToTimeSeriesViews extends CollectionToTimeSeriesViews
+trait CollectionToTimeSeriesViews {
   implicit def asTimeSeries[A <% RegularTimePeriod, B <% Number](it: Iterable[(A,B)]): TimeSeries =
     it.toTimeSeries()
-
   implicit def asTimeSeriesCollection[A <% RegularTimePeriod, B <% Number](it: Iterable[(A,B)]): TimeSeriesCollection =
     it.toTimeSeriesCollection()
+}
 
+object CollectionToTimePeriodValuesViews extends CollectionToTimePeriodValuesViews
+trait CollectionToTimePeriodValuesViews {
   implicit def asTimePeriodValues[A <% TimePeriod, B <% Number](it: Iterable[(A,B)]): TimePeriodValues =
     it.toTimePeriodValues()
-
   implicit def asTimePeriodValuesCollection[A <% TimePeriod, B <% Number](it: Iterable[(A,B)]): TimePeriodValuesCollection =
     it.toTimePeriodValuesCollection()
+}
 
+object CollectionToTimeTableViews extends CollectionToTimeTableViews
+trait CollectionToTimeTableViews {
   implicit def asTimeTable[A <% Comparable[A], B <% TimePeriod, C <% Number](it: Iterable[(A,Iterable[(B,C)])]): TimeTableXYDataset =
     it.toTimeTable
-
-  implicit def asCategoryDataset2[A <% Comparable[A], B <% Number](it: Iterable[(A,B)]): CategoryDataset =
-    it.toCategoryDataset
-
-  implicit def asCategoryDataset3[A <% Comparable[A], B <% Comparable[B], C <% Number](it: Iterable[(A,Iterable[(B,C)])]): CategoryDataset =
-    it.toCategoryDataset
-
 }
+
+// -------------------------------------------------------------------------------------------------
+// imports containing the specific groups of the above
+// -------------------------------------------------------------------------------------------------
+
+object TimeDatasetViews extends TimeDatasetViews
+trait TimeDatasetViews extends CollectionToTimeSeriesViews with TimeSeriesViews
+  with CollectionOfTimeSeriesViews
+
+object TimePeriodDatasetViews extends TimePeriodDatasetViews
+trait TimePeriodDatasetViews extends CollectionToTimePeriodValuesViews with TimePeriodValuesViews
+  with CollectionOfTimePeriodValuesViews
+
+object TimeTableDatasetViews extends TimeTableDatasetViews
+trait TimeTableDatasetViews extends CollectionToTimeTableViews
