@@ -28,7 +28,7 @@ import org.jfree.data.category._
 import org.jfree.data.time._
 import org.jfree.data.xy._
 
-import org.jfree.chart.{ ChartFactory ⇒ JChartFactory }
+import org.jfree.chart.{ JFreeChart, ChartFactory ⇒ JChartFactory }
 import org.jfree.chart.axis._
 import org.jfree.chart.labels._
 import org.jfree.chart.plot._
@@ -84,7 +84,7 @@ trait ChartFactory {
                 orientation: PlotOrientation = VERTICAL,
                 legend: Boolean = true,
                 tooltips: Boolean = false,
-                urls: Boolean = false) = {
+                urls: Boolean = false): JFreeChart = {
     val chart = JChartFactory.createXYAreaChart(title, xAxisLabel, yAxisLabel, dataset, orientation, legend, tooltips, urls)
 
     if (dataset.isInstanceOf[TimePeriodValuesCollection] ||
@@ -114,7 +114,7 @@ trait ChartFactory {
                legend: Boolean = true,
                tooltips: Boolean = false,
                urls: Boolean = false,
-               labels: Boolean = false) = {
+               labels: Boolean = false): JFreeChart = {
     val chart = JChartFactory.createBarChart(title, xAxisLabel, yAxisLabel, dataset, orientation, legend, tooltips, urls)
 
     if (labels) {
@@ -146,7 +146,7 @@ trait ChartFactory {
                 orientation: PlotOrientation = VERTICAL,
                 legend: Boolean = true,
                 tooltips: Boolean = false,
-                urls: Boolean = false) = {
+                urls: Boolean = false): JFreeChart = {
     val chart = JChartFactory.createXYLineChart(title, xAxisLabel, yAxisLabel, dataset, orientation, legend, tooltips, urls)
 
     if (dataset.isInstanceOf[TimePeriodValuesCollection] ||
@@ -177,7 +177,7 @@ trait ChartFactory {
                        orientation: PlotOrientation = VERTICAL,
                        legend: Boolean = true,
                        tooltips: Boolean = false,
-                       urls: Boolean = false) = {
+                       urls: Boolean = false): JFreeChart = {
     val chart = JChartFactory.createStackedXYAreaChart(title, xAxisLabel, yAxisLabel, dataset, orientation, legend, tooltips, urls)
 
     if (dataset.isInstanceOf[TimeTableXYDataset])
