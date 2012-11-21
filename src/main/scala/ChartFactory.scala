@@ -35,6 +35,8 @@ import org.jfree.chart.labels._
 import org.jfree.chart.plot._
 import org.jfree.chart.plot.PlotOrientation._
 
+import org.jfree.util.TableOrder
+
 /** $ChartFactoryInfo */
 object ChartFactory extends ChartFactory
 
@@ -160,6 +162,35 @@ trait ChartFactory {
     dataset match {
       case _: TimePeriodValuesCollection ⇒ chart.getXYPlot.setDomainAxis(new DateAxis)
       case _: TimeSeriesCollection       ⇒ chart.getXYPlot.setDomainAxis(new DateAxis)
+      case _ ⇒
+    }
+
+    chart
+  }
+
+  /** Creates a new chart that represents categorized numeric data with a multiple pie.
+    *
+    * @param dataset  $dataset
+    * @param title    $title
+    * @param legend   $legend
+    * @param tooltips $tooltips
+    * @param urls     $urls
+    * @param labels   $labels
+    */
+  def MultiplePieChart(dataset: CategoryDataset,
+                       title: String = "",
+                       legend: Boolean = true,
+                       tooltips: Boolean = true,
+                       urls: Boolean = false,
+                       labels: Boolean = true): JFreeChart = {
+    val chart = JChartFactory.createMultiplePieChart(title, dataset, TableOrder.BY_COLUMN, legend,
+      tooltips, urls)
+
+    chart.getPlot match {
+      case plot: MultiplePiePlot ⇒ plot.getPieChart.getPlot match {
+        case plot: PiePlot if ! labels ⇒ plot.setLabelGenerator(null)
+        case _ ⇒
+      }
       case _ ⇒
     }
 
