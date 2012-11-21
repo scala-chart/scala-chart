@@ -25,6 +25,7 @@
 package org.sfree.chart
 
 import org.jfree.data.category._
+import org.jfree.data.general._
 import org.jfree.data.time._
 import org.jfree.data.xy._
 
@@ -156,6 +157,36 @@ trait ChartFactory {
     dataset match {
       case _: TimePeriodValuesCollection ⇒ chart.getXYPlot.setDomainAxis(new DateAxis)
       case _: TimeSeriesCollection       ⇒ chart.getXYPlot.setDomainAxis(new DateAxis)
+      case _ ⇒
+    }
+
+    chart
+  }
+
+  /** Creates a new chart that represents categorized numeric data with a pie.
+    *
+    * @param dataset          $dataset
+    * @param title            $title
+    * @param legend           $legend
+    * @param tooltips         $tooltips
+    * @param urls             $urls
+    * @param labels           $labels
+    * @param threeDimensional whether or not to generate a 3D pie
+    */
+  def PieChart(dataset: PieDataset,
+               title: String = "",
+               legend: Boolean = true,
+               tooltips: Boolean = true,
+               urls: Boolean = false,
+               labels: Boolean = true,
+               threeDimensional: Boolean = false): JFreeChart = {
+    val chart = if (threeDimensional)
+      JChartFactory.createPieChart3D(title, dataset, legend, tooltips, urls)
+    else
+      JChartFactory.createPieChart(title, dataset, legend, tooltips, urls)
+
+    chart.getPlot match {
+      case plot: PiePlot if ! labels ⇒ plot.setLabelGenerator(null)
       case _ ⇒
     }
 
