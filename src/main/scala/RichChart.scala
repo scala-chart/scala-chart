@@ -105,7 +105,7 @@ trait RichChart {
       * @param fontMapper $fontMapper
       */
     def saveAsPDF(output: File, dim: (Int,Int), fontMapper: FontMapper = new DefaultFontMapper) {
-      implicit val os = new BufferedOutputStream(new FileOutputStream(output))
+      val os = new BufferedOutputStream(new FileOutputStream(output))
 
       try {
         writeAsPDF(os, dim, fontMapper)
