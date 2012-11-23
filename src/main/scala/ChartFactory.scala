@@ -294,4 +294,39 @@ trait ChartFactory {
     chart
   }
 
+  /** Creates a new chart that represents multiple numeric `x` and `y` values with a stepped area.
+    *
+    * If the input dataset is an instance of a `TimePeriodValuesCollection`, `TimeSeriesCollection`
+    * or `TimeTableXYDataset` the domain axis will correctly be set to a `DateAxis`.
+    *
+    * @param dataset     $dataset
+    * @param title       $title
+    * @param xAxisLabel  $xAxisLabel
+    * @param yAxisLabel  $yAxisLabel
+    * @param orientation $orientation
+    * @param legend      $legend
+    * @param tooltips    $tooltips
+    * @param urls        $urls
+    */
+  def StepAreaChart(dataset: XYDataset,
+                    title: String = "",
+                    xAxisLabel: String = "",
+                    yAxisLabel: String = "",
+                    orientation: PlotOrientation = VERTICAL,
+                    legend: Boolean = true,
+                    tooltips: Boolean = false,
+                    urls: Boolean = false): JFreeChart = {
+    val chart = JChartFactory.createXYStepAreaChart(title, xAxisLabel, yAxisLabel, dataset,
+      orientation, legend, tooltips, urls)
+
+    dataset match {
+      case _: TimePeriodValuesCollection ⇒ chart.getXYPlot.setDomainAxis(new DateAxis)
+      case _: TimeSeriesCollection       ⇒ chart.getXYPlot.setDomainAxis(new DateAxis)
+      case _: TimeTableXYDataset         ⇒ chart.getXYPlot.setDomainAxis(new DateAxis)
+      case _ ⇒
+    }
+
+    chart
+  }
+
 }
