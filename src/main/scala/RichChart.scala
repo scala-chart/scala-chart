@@ -38,7 +38,7 @@ object RichChart extends RichChart
   *
   * @define RichChartInfo Contains an enriched `JFreeChart` that provides convenient access to
   * e.g. save and show the chart. To read the documentation for these methods, see
-  * [[org.sfree.chart.RichChart.SFreeChart]].
+  * [[org.sfree.chart.RichChart.Chart]].
   *
   * @define output     the output file
   * @define dim        dimension / geometry / width x height of the output
@@ -47,7 +47,7 @@ object RichChart extends RichChart
 trait RichChart {
 
   /** Enriched JFreeChart. */
-  implicit class SFreeChart(self: JFreeChart) {
+  implicit class Chart(self: JFreeChart) {
 
     // ---------------------------------------------------------------------------------------------
     // accessors / mutators
