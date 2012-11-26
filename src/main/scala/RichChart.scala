@@ -95,6 +95,12 @@ trait RichChart {
         throw new UnsupportedOperationException("Labels are not supported for this type of plot.")
     }
 
+    /** Returns the title of this chart. */
+    def title: String = self.getTitle.getText
+
+    /** Sets the title of this chart. */
+    def title_=(title: String): Unit = self.setTitle(title)
+
     // ---------------------------------------------------------------------------------------------
     // showing the chart
     // ---------------------------------------------------------------------------------------------
