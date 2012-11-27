@@ -55,6 +55,26 @@ trait RichChart {
     // accessors / mutators
     // ---------------------------------------------------------------------------------------------
 
+    /** Optionally returns the domain axis label of the underlying plot. */
+    def domainAxisLabel: Option[String] = self.getPlot match {
+      case plot: CategoryPlot    ⇒ Option(plot.getDomainAxis.getLabel)
+      case plot: ContourPlot     ⇒ Option(plot.getDomainAxis.getLabel)
+      case plot: FastScatterPlot ⇒ Option(plot.getDomainAxis.getLabel)
+      case plot: XYPlot          ⇒ Option(plot.getDomainAxis.getLabel)
+      case _                     ⇒ None
+    }
+
+    /** Labels the domain axis of the underlying plot. */
+    def domainAxisLabel_=(label: String): Unit = self.getPlot match {
+      case plot: CategoryPlot    ⇒ plot.getDomainAxis.setLabel(label)
+      case plot: ContourPlot     ⇒ plot.getDomainAxis.setLabel(label)
+      case plot: FastScatterPlot ⇒ plot.getDomainAxis.setLabel(label)
+      case plot: XYPlot          ⇒ plot.getDomainAxis.setLabel(label)
+      case _ ⇒ throw new UnsupportedOperationException (
+        "Domain axis labels are not supported for the underlying type of plot."
+      )
+    }
+
     /** Returns true if this chart displays labels. */
     def labels: Boolean = self.getPlot match {
       case plot: CategoryPlot    ⇒ plot.getRenderer.getBaseItemLabelsVisible
@@ -142,6 +162,26 @@ trait RichChart {
       case plot: XYPlot       ⇒ plot.setOrientation(orientation)
       case _ ⇒ throw new UnsupportedOperationException (
         "Orienting the underlying type of plot is not supported."
+      )
+    }
+
+    /** Optionally returns the range axis label of the underlying plot. */
+    def rangeAxisLabel: Option[String] = self.getPlot match {
+      case plot: CategoryPlot    ⇒ Option(plot.getRangeAxis.getLabel)
+      case plot: ContourPlot     ⇒ Option(plot.getRangeAxis.getLabel)
+      case plot: FastScatterPlot ⇒ Option(plot.getRangeAxis.getLabel)
+      case plot: XYPlot          ⇒ Option(plot.getRangeAxis.getLabel)
+      case _                     ⇒ None
+    }
+
+    /** Labels the range axis of the underlying plot. */
+    def rangeAxisLabel_=(label: String): Unit = self.getPlot match {
+      case plot: CategoryPlot    ⇒ plot.getRangeAxis.setLabel(label)
+      case plot: ContourPlot     ⇒ plot.getRangeAxis.setLabel(label)
+      case plot: FastScatterPlot ⇒ plot.getRangeAxis.setLabel(label)
+      case plot: XYPlot          ⇒ plot.getRangeAxis.setLabel(label)
+      case _ ⇒ throw new UnsupportedOperationException (
+        "Range axis labels are not supported for the underlying type of plot."
       )
     }
 
