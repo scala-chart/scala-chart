@@ -5,6 +5,12 @@ version := "0.1.0-SNAPSHOT"
 
 scalaVersion := "2.10.0-RC3"
 
+crossVersion := CrossVersion.full
+
+libraryDependencies <+= scalaVersion { sv ⇒
+  "org.scala-lang" % "scala-swing" % sv
+}
+
 libraryDependencies ++= Seq (
   "org.jfree"  %  "jfreechart" % "1.0.14",
   "org.specs2" %% "specs2"     % "1.12.3" % "test" cross CrossVersion.full

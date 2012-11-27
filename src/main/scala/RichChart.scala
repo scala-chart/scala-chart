@@ -25,7 +25,8 @@
 package org.sfree.chart
 
 import java.io._
-import javax.swing.SwingUtilities
+
+import scala.swing._
 
 import org.jfree.chart._
 import org.jfree.chart.labels._
@@ -113,10 +114,8 @@ trait RichChart {
       * @param title      the title of the enclosing frame
       * @param scrollable whether the enclosing panel is scrollable
       */
-    def show(title: String = "", scrollable: Boolean = true): Unit = SwingUtilities invokeLater {
-      new Runnable {
-        def run: Unit = new ChartFrame(title, self, scrollable) setVisible true
-      }
+    def show(title: String = "", scrollable: Boolean = true): Unit = Swing onEDT {
+      new ChartFrame(title, self, scrollable) setVisible true
     }
 
     // ---------------------------------------------------------------------------------------------
