@@ -31,6 +31,7 @@ import scala.swing._
 import org.jfree.chart._
 import org.jfree.chart.labels._
 import org.jfree.chart.plot._
+import org.jfree.chart.title._
 
 /** $RichChartInfo */
 object RichChart extends RichChart
@@ -63,7 +64,7 @@ trait RichChart {
       case _                     ⇒ false
     }
 
-    /** Sets whether or not this chart will display labels. */
+    /** Labels the discrete data points of this chart. */
     def labels_=(labels: Boolean): Unit = self.getPlot match {
       case plot: CategoryPlot if labels ⇒
         val renderer = plot.getRenderer
@@ -97,7 +98,35 @@ trait RichChart {
       )
     }
 
-    /** Optionally returns the orientation of this plot. */
+    /** Optionally returns the legend of this chart. */
+    def legend: Option[LegendTitle] = self.getLegend match {
+      case legend: LegendTitle ⇒ Some(legend)
+      case _                   ⇒ None
+    }
+
+    /** Adds a default legend if there is none. */
+    def legend_=(legend: Boolean): Unit = if (legend) {
+      if (this.legend.isEmpty) {
+        val legend = new LegendTitle(self.getPlot)
+        legend.setMargin(new org.jfree.ui.RectangleInsets(1.0, 1.0, 1.0, 1.0))
+        legend.setFrame(new org.jfree.chart.block.LineBorder)
+        legend.setBackgroundPaint(java.awt.Color.white)
+        legend.setPosition(org.jfree.ui.RectangleEdge.BOTTOM)
+        self.addSubtitle(legend)
+        legend.addChangeListener(self)
+      }
+    } else {
+      self.removeLegend()
+    }
+
+    /** Adds a single legend. */
+    def legend_=(legend: LegendTitle) {
+      if (this.legend.nonEmpty) self.removeLegend()
+      self.addSubtitle(legend)
+      legend.addChangeListener(self)
+    }
+
+    /** Optionally returns the orientation of the underlying plot. */
     def orientation: Option[PlotOrientation] = self.getPlot match {
       case plot: CategoryPlot    ⇒ Some(plot.getOrientation)
       case plot: FastScatterPlot ⇒ Some(plot.getOrientation)
@@ -107,7 +136,7 @@ trait RichChart {
       case _                     ⇒ None
     }
 
-    /** Orients this chart. */
+    /** Orients the underlying plot. */
     def orientation_=(orientation: PlotOrientation): Unit = self.getPlot match {
       case plot: CategoryPlot ⇒ plot.setOrientation(orientation)
       case plot: XYPlot       ⇒ plot.setOrientation(orientation)
