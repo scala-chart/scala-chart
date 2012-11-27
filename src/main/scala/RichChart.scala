@@ -92,8 +92,28 @@ trait RichChart {
         val renderer = plot.getRenderer
         renderer.setBaseItemLabelsVisible(false)
 
-      case _ ⇒
-        throw new UnsupportedOperationException("Labels are not supported for this type of plot.")
+      case _ ⇒ throw new UnsupportedOperationException (
+        "Labels are not supported for the underlying type of plot."
+      )
+    }
+
+    /** Optionally returns the orientation of this plot. */
+    def orientation: Option[PlotOrientation] = self.getPlot match {
+      case plot: CategoryPlot    ⇒ Some(plot.getOrientation)
+      case plot: FastScatterPlot ⇒ Some(plot.getOrientation)
+      case plot: PolarPlot       ⇒ Some(plot.getOrientation)
+      case plot: ThermometerPlot ⇒ Some(plot.getOrientation)
+      case plot: XYPlot          ⇒ Some(plot.getOrientation)
+      case _                     ⇒ None
+    }
+
+    /** Orients this chart. */
+    def orientation_=(orientation: PlotOrientation): Unit = self.getPlot match {
+      case plot: CategoryPlot ⇒ plot.setOrientation(orientation)
+      case plot: XYPlot       ⇒ plot.setOrientation(orientation)
+      case _ ⇒ throw new UnsupportedOperationException (
+        "Orienting the underlying type of plot is not supported."
+      )
     }
 
     /** Returns the title of this chart. */
