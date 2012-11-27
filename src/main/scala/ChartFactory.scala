@@ -53,16 +53,16 @@ object ChartFactory extends ChartFactory
   *
   * {{{
   * val data = Seq((0,0),(1,1),(2,2)).toXYSeriesCollection("some data")
-  * val chart = LineChart(data, legend = false, xAxisLabel = "some description")
+  * val chart = LineChart(data, legend = false, domainAxisLabel = "some description")
   * }}}
   *
-  * @define dataset     the data the chart will visualize
-  * @define title       the title of the chart
-  * @define xAxisLabel  the label for the x-axis
-  * @define yAxisLabel  the label for the y-axis
-  * @define orientation the orientation of the chart
-  * @define legend      whether or not the chart will contain a legend
-  * @define tooltips    whether or not tooltips will be generated
+  * @define dataset         the data the chart will visualize
+  * @define title           the title of the chart
+  * @define domainAxisLabel the label for the domain axis
+  * @define rangeAxisLabel  the label for the range axis
+  * @define orientation     the orientation of the chart
+  * @define legend          whether or not the chart will contain a legend
+  * @define tooltips        whether or not tooltips will be generated
   */
 trait ChartFactory {
 
@@ -74,23 +74,23 @@ trait ChartFactory {
       * If the input dataset is an instance of a `TimePeriodValuesCollection`, `TimeSeriesCollection`
       * or `TimeTableXYDataset` the domain axis will correctly be set to a `DateAxis`.
       *
-      * @param dataset     $dataset
-      * @param title       $title
-      * @param xAxisLabel  $xAxisLabel
-      * @param yAxisLabel  $yAxisLabel
-      * @param orientation $orientation
-      * @param legend      $legend
-      * @param tooltips    $tooltips
+      * @param dataset         $dataset
+      * @param title           $title
+      * @param domainAxisLabel $domainAxisLabel
+      * @param rangeAxisLabel  $rangeAxisLabel
+      * @param orientation     $orientation
+      * @param legend          $legend
+      * @param tooltips        $tooltips
       */
     def apply(dataset: XYDataset,
               title: String = "",
-              xAxisLabel: String = "",
-              yAxisLabel: String = "",
+              domainAxisLabel: String = "",
+              rangeAxisLabel: String = "",
               orientation: PlotOrientation = PlotOrientation.VERTICAL,
               legend: Boolean = true,
               tooltips: Boolean = false): JFreeChart = {
 
-      val chart = JChartFactory.createXYAreaChart(title, xAxisLabel, yAxisLabel, dataset,
+      val chart = JChartFactory.createXYAreaChart(title, domainAxisLabel, rangeAxisLabel, dataset,
         orientation, legend, tooltips, false)
 
       dataset match {
@@ -108,24 +108,24 @@ trait ChartFactory {
       * If the input dataset is an instance of a `TimeTableXYDataset` the domain axis will correctly
       * be set to a `DateAxis`.
       *
-      * @param dataset     $dataset
-      * @param title       $title
-      * @param xAxisLabel  $xAxisLabel
-      * @param yAxisLabel  $yAxisLabel
-      * @param orientation $orientation
-      * @param legend      $legend
-      * @param tooltips    $tooltips
+      * @param dataset         $dataset
+      * @param title           $title
+      * @param domainAxisLabel $domainAxisLabel
+      * @param rangeAxisLabel  $rangeAxisLabel
+      * @param orientation     $orientation
+      * @param legend          $legend
+      * @param tooltips        $tooltips
       */
     def stacked(dataset: TableXYDataset,
                 title: String = "",
-                xAxisLabel: String = "",
-                yAxisLabel: String = "",
+                domainAxisLabel: String = "",
+                rangeAxisLabel: String = "",
                 orientation: PlotOrientation = PlotOrientation.VERTICAL,
                 legend: Boolean = true,
                 tooltips: Boolean = false): JFreeChart = {
 
-      val chart = JChartFactory.createStackedXYAreaChart(title, xAxisLabel, yAxisLabel, dataset,
-        orientation, legend, tooltips, false)
+      val chart = JChartFactory.createStackedXYAreaChart(title, domainAxisLabel, rangeAxisLabel,
+        dataset, orientation, legend, tooltips, false)
 
       dataset match {
         case _: TimeTableXYDataset ⇒ chart.getXYPlot.setDomainAxis(new DateAxis)
@@ -140,24 +140,24 @@ trait ChartFactory {
       * If the input dataset is an instance of a `TimePeriodValuesCollection`, `TimeSeriesCollection`
       * or `TimeTableXYDataset` the domain axis will correctly be set to a `DateAxis`.
       *
-      * @param dataset     $dataset
-      * @param title       $title
-      * @param xAxisLabel  $xAxisLabel
-      * @param yAxisLabel  $yAxisLabel
-      * @param orientation $orientation
-      * @param legend      $legend
-      * @param tooltips    $tooltips
+      * @param dataset         $dataset
+      * @param title           $title
+      * @param domainAxisLabel $domainAxisLabel
+      * @param rangeAxisLabel  $rangeAxisLabel
+      * @param orientation     $orientation
+      * @param legend          $legend
+      * @param tooltips        $tooltips
       */
     def stepped(dataset: XYDataset,
                 title: String = "",
-                xAxisLabel: String = "",
-                yAxisLabel: String = "",
+                domainAxisLabel: String = "",
+                rangeAxisLabel: String = "",
                 orientation: PlotOrientation = PlotOrientation.VERTICAL,
                 legend: Boolean = true,
                 tooltips: Boolean = false): JFreeChart = {
 
-      val chart = JChartFactory.createXYStepAreaChart(title, xAxisLabel, yAxisLabel, dataset,
-        orientation, legend, tooltips, false)
+      val chart = JChartFactory.createXYStepAreaChart(title, domainAxisLabel, rangeAxisLabel,
+        dataset, orientation, legend, tooltips, false)
 
       dataset match {
         case _: TimePeriodValuesCollection ⇒ chart.getXYPlot.setDomainAxis(new DateAxis)
@@ -176,23 +176,23 @@ trait ChartFactory {
 
     /** Creates a new chart that represents categorized numeric data with bars.
       *
-      * @param dataset     $dataset
-      * @param title       $title
-      * @param xAxisLabel  $xAxisLabel
-      * @param yAxisLabel  $yAxisLabel
-      * @param orientation $orientation
-      * @param legend      $legend
-      * @param tooltips    $tooltips
+      * @param dataset         $dataset
+      * @param title           $title
+      * @param domainAxisLabel $domainAxisLabel
+      * @param rangeAxisLabel  $rangeAxisLabel
+      * @param orientation     $orientation
+      * @param legend          $legend
+      * @param tooltips        $tooltips
       */
     def apply(dataset: CategoryDataset,
               title: String = "",
-              xAxisLabel: String = "",
-              yAxisLabel: String = "",
+              domainAxisLabel: String = "",
+              rangeAxisLabel: String = "",
               orientation: PlotOrientation = PlotOrientation.VERTICAL,
               legend: Boolean = true,
               tooltips: Boolean = false): JFreeChart =
-      JChartFactory.createBarChart(title, xAxisLabel, yAxisLabel, dataset, orientation, legend,
-        tooltips, false)
+      JChartFactory.createBarChart(title, domainAxisLabel, rangeAxisLabel, dataset, orientation,
+        legend, tooltips, false)
 
   }
 
@@ -204,23 +204,23 @@ trait ChartFactory {
       * If the input dataset is an instance of a `TimePeriodValuesCollection`, `TimeSeriesCollection`
       * or `TimeTableXYDataset` the domain axis will correctly be set to a `DateAxis`.
       *
-      * @param dataset     $dataset
-      * @param title       $title
-      * @param xAxisLabel  $xAxisLabel
-      * @param yAxisLabel  $yAxisLabel
-      * @param orientation $orientation
-      * @param legend      $legend
-      * @param tooltips    $tooltips
+      * @param dataset         $dataset
+      * @param title           $title
+      * @param domainAxisLabel $domainAxisLabel
+      * @param rangeAxisLabel  $rangeAxisLabel
+      * @param orientation     $orientation
+      * @param legend          $legend
+      * @param tooltips        $tooltips
       */
     def apply(dataset: XYDataset,
               title: String = "",
-              xAxisLabel: String = "",
-              yAxisLabel: String = "",
+              domainAxisLabel: String = "",
+              rangeAxisLabel: String = "",
               orientation: PlotOrientation = PlotOrientation.VERTICAL,
               legend: Boolean = true,
               tooltips: Boolean = false): JFreeChart = {
 
-      val chart = JChartFactory.createXYLineChart(title, xAxisLabel, yAxisLabel, dataset,
+      val chart = JChartFactory.createXYLineChart(title, domainAxisLabel, rangeAxisLabel, dataset,
         orientation, legend, tooltips, false)
 
       dataset match {
