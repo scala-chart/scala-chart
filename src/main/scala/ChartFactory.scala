@@ -214,6 +214,26 @@ trait ChartFactory {
       JChartFactory.createStackedBarChart(title, domainAxisLabel, rangeAxisLabel, dataset,
         orientation, legend, tooltips, false)
 
+    /** Creates a new chart that represents categorized numeric data with three dimensional bars.
+      *
+      * @param dataset         $dataset
+      * @param title           $title
+      * @param domainAxisLabel $domainAxisLabel
+      * @param rangeAxisLabel  $rangeAxisLabel
+      * @param orientation     $orientation
+      * @param legend          $legend
+      * @param tooltips        $tooltips
+      */
+    def threeDimensional(dataset: CategoryDataset,
+                         title: String = "",
+                         domainAxisLabel: String = "",
+                         rangeAxisLabel: String = "",
+                         orientation: PlotOrientation = PlotOrientation.VERTICAL,
+                         legend: Boolean = true,
+                         tooltips: Boolean = false): JFreeChart =
+      JChartFactory.createBarChart3D(title, domainAxisLabel, rangeAxisLabel, dataset, orientation,
+        legend, tooltips, false)
+
   }
 
   /** Factory methods for line charts. */
