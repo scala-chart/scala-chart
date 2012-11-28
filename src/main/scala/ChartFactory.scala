@@ -194,6 +194,26 @@ trait ChartFactory {
       JChartFactory.createBarChart(title, domainAxisLabel, rangeAxisLabel, dataset, orientation,
         legend, tooltips, false)
 
+    /** Creates a new chart that represents categorized numeric data with stacked bars.
+      *
+      * @param dataset         $dataset
+      * @param title           $title
+      * @param domainAxisLabel $domainAxisLabel
+      * @param rangeAxisLabel  $rangeAxisLabel
+      * @param orientation     $orientation
+      * @param legend          $legend
+      * @param tooltips        $tooltips
+      */
+    def stacked(dataset: CategoryDataset,
+                title: String = "",
+                domainAxisLabel: String = "",
+                rangeAxisLabel: String = "",
+                orientation: PlotOrientation = PlotOrientation.VERTICAL,
+                legend: Boolean = true,
+                tooltips: Boolean = false): JFreeChart =
+      JChartFactory.createStackedBarChart(title, domainAxisLabel, rangeAxisLabel, dataset,
+        orientation, legend, tooltips, false)
+
   }
 
   /** Factory methods for line charts. */
