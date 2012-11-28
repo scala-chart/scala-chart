@@ -36,7 +36,7 @@ package org.sfree.chart
   * import org.sfree.chart.views.CollectionToXYSeriesViews._
   *
   * val data = Seq((1,2),(2,4),(3,6),(4,8))
-  * val chart = LineChart(data, title = "My Chart of Some Points")
+  * val chart = XYLineChart(data, title = "My Chart of Some Points")
   * }}}
   *
   * == SeriesViews ==
@@ -49,7 +49,7 @@ package org.sfree.chart
   * import org.sfree.chart.views.SeriesViews._
   *
   * val dataset = Seq((1,2),(2,4),(3,6),(4,8)).toXYSeries("some points")
-  * val chart = LineChart(dataset, title = "My Chart of Some Points")
+  * val chart = XYLineChart(dataset, title = "My Chart of Some Points")
   * }}}
   *
   * == CollectionOfSeriesViews ==
@@ -65,7 +65,7 @@ package org.sfree.chart
   * val dataset1 = Seq((1,2),(2,4),(3,6),(4,8)).toXYSeries("some points")
   * val dataset2 = Seq((1,3),(2,6),(3,9),(4,12)).toXYSeries("some other points")
   * val datasets = Seq(dataset1, dataset2)
-  * val chart = LineChart(datasets, title = "My Chart of Some Points")
+  * val chart = XYLineChart(datasets, title = "My Chart of Some Points")
   * }}}
   *
   * == *DatasetViews ==
@@ -77,7 +77,7 @@ package org.sfree.chart
   * import org.sfree.chart.views.XYDatasetViews._
   *
   * val data = Seq((1,2),(2,4),(3,6),(4,8))
-  * val chart = LineChart(data, title = "My Chart of Some Points")
+  * val chart = XYLineChart(data, title = "My Chart of Some Points")
   * }}}
   */
 package object views {

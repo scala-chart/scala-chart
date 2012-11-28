@@ -37,7 +37,7 @@ package org.sfree
   * {{{
   * val data = Seq((1,2),(2,4),(3,6),(4,8))
   * val dataset = data.toXYSeriesCollection("some points")
-  * val chart = LineChart(dataset, title = "My Chart of Some Points")
+  * val chart = XYLineChart(dataset, title = "My Chart of Some Points")
   * }}}
   *
   * There are also implicit conversions / views available in the [[org.sfree.chart.views]] package,

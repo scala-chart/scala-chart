@@ -35,7 +35,7 @@ object Charting extends Charting
   * {{{
   * import org.sfree.chart.Charting._
   * val data = Seq((0,0),(1,1),(2,2)).toXYSeriesCollection("some data")
-  * val chart = LineChart(data)
+  * val chart = XYLineChart(data)
   * }}}
   *
   */

@@ -36,7 +36,7 @@ These datasets can be used by the chart factory methods, which differ from the [
 in the aspect, that they make heavy use of default arguments, so you have to type as less as
 possible:
 
-    val chart = LineChart(dataset, title = "My Chart of Some Points")
+    val chart = XYLineChart(dataset, title = "My Chart of Some Points")
 
 There are also some enrichments for the charts themselves to display them in a window or save them
 to disk:
@@ -52,7 +52,7 @@ kinds of views, e.g.:
 
     import org.sfree.chart.views.XYDatasetViews._
     val data = Seq((1,2),(2,4),(3,6),(4,8))
-    val chart = LineChart(data, title = "My Chart of Some Points")
+    val chart = XYLineChart(data, title = "My Chart of Some Points")
 
 Import these with care, it's most likely better to use the explicit conversions as shown above.
 

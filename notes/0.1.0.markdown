@@ -8,7 +8,7 @@ Scala Collections to JFreeChart datasets:
 
 Chart Factories:
 
-    val chart = LineChart(dataset, title = "My Chart of Some Points")
+    val chart = XYLineChart(dataset, title = "My Chart of Some Points")
 
 Rich Charts:
 
@@ -21,5 +21,5 @@ Implicit Views:
 
     import org.sfree.chart.views.XYDatasetViews._
     val data = Seq((1,2),(2,4),(3,6),(4,8))
-    val chart = LineChart(data, title = "My Chart of Some Points")
+    val chart = XYLineChart(data, title = "My Chart of Some Points")
 

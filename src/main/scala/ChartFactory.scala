@@ -46,14 +46,14 @@ object ChartFactory extends ChartFactory
   *
   * {{{
   * val data = Seq((0,0),(1,1),(2,2)).toXYSeriesCollection("some data")
-  * val chart = LineChart(data)
+  * val chart = XYLineChart(data)
   * }}}
   *
   * The other arguments have defaults and can be conveniently overridden with named arguments:
   *
   * {{{
   * val data = Seq((0,0),(1,1),(2,2)).toXYSeriesCollection("some data")
-  * val chart = LineChart(data, legend = false, domainAxisLabel = "some description")
+  * val chart = XYLineChart(data, legend = false, domainAxisLabel = "some description")
   * }}}
   *
   * @define dataset         the data the chart will visualize
