@@ -69,11 +69,7 @@ trait ChartFactory {
   /** Factory methods for area charts. */
   object AreaChart {
 
-    /** Creates a new chart that represents numeric `x` and `y` values with an area.
-      *
-      * If the input dataset is an instance of a `TimePeriodValuesCollection`,
-      * `TimeSeriesCollection` or `TimeTableXYDataset` the domain axis will correctly be set to a
-      * `DateAxis`.
+    /** Creates a new chart that represents categorized numeric data with an area.
       *
       * @param dataset         $dataset
       * @param title           $title
@@ -83,93 +79,35 @@ trait ChartFactory {
       * @param legend          $legend
       * @param tooltips        $tooltips
       */
-    def apply(dataset: XYDataset,
+    def apply(dataset: CategoryDataset,
               title: String = "",
               domainAxisLabel: String = "",
               rangeAxisLabel: String = "",
               orientation: PlotOrientation = PlotOrientation.VERTICAL,
               legend: Boolean = true,
-              tooltips: Boolean = false): JFreeChart = {
+              tooltips: Boolean = false): JFreeChart =
+      JChartFactory.createAreaChart(title, domainAxisLabel, rangeAxisLabel, dataset, orientation,
+        legend, tooltips, false)
 
-      val chart = JChartFactory.createXYAreaChart(title, domainAxisLabel, rangeAxisLabel, dataset,
+    /** Creates a new chart that represents categorized numeric data with stacked areas.
+      *
+      * @param dataset         $dataset
+      * @param title           $title
+      * @param domainAxisLabel $domainAxisLabel
+      * @param rangeAxisLabel  $rangeAxisLabel
+      * @param orientation     $orientation
+      * @param legend          $legend
+      * @param tooltips        $tooltips
+      */
+    def stacked(dataset: CategoryDataset,
+                title: String = "",
+                domainAxisLabel: String = "",
+                rangeAxisLabel: String = "",
+                orientation: PlotOrientation = PlotOrientation.VERTICAL,
+                legend: Boolean = true,
+                tooltips: Boolean = false): JFreeChart =
+      JChartFactory.createStackedAreaChart(title, domainAxisLabel, rangeAxisLabel, dataset,
         orientation, legend, tooltips, false)
-
-      dataset match {
-        case _: TimePeriodValuesCollection ⇒ chart.getXYPlot.setDomainAxis(new DateAxis)
-        case _: TimeSeriesCollection       ⇒ chart.getXYPlot.setDomainAxis(new DateAxis)
-        case _: TimeTableXYDataset         ⇒ chart.getXYPlot.setDomainAxis(new DateAxis)
-        case _ ⇒
-      }
-
-      chart
-    }
-
-    /** Creates a new chart that represents multiple numeric `x` and `y` values with stacked areas.
-      *
-      * If the input dataset is an instance of a `TimeTableXYDataset` the domain axis will correctly
-      * be set to a `DateAxis`.
-      *
-      * @param dataset         $dataset
-      * @param title           $title
-      * @param domainAxisLabel $domainAxisLabel
-      * @param rangeAxisLabel  $rangeAxisLabel
-      * @param orientation     $orientation
-      * @param legend          $legend
-      * @param tooltips        $tooltips
-      */
-    def stacked(dataset: TableXYDataset,
-                title: String = "",
-                domainAxisLabel: String = "",
-                rangeAxisLabel: String = "",
-                orientation: PlotOrientation = PlotOrientation.VERTICAL,
-                legend: Boolean = true,
-                tooltips: Boolean = false): JFreeChart = {
-
-      val chart = JChartFactory.createStackedXYAreaChart(title, domainAxisLabel, rangeAxisLabel,
-        dataset, orientation, legend, tooltips, false)
-
-      dataset match {
-        case _: TimeTableXYDataset ⇒ chart.getXYPlot.setDomainAxis(new DateAxis)
-        case _ ⇒
-      }
-
-      chart
-    }
-
-    /** Creates a new chart that represents multiple numeric `x` and `y` values with a stepped area.
-      *
-      * If the input dataset is an instance of a `TimePeriodValuesCollection`,
-      * `TimeSeriesCollection` or `TimeTableXYDataset` the domain axis will correctly be set to a
-      * `DateAxis`.
-      *
-      * @param dataset         $dataset
-      * @param title           $title
-      * @param domainAxisLabel $domainAxisLabel
-      * @param rangeAxisLabel  $rangeAxisLabel
-      * @param orientation     $orientation
-      * @param legend          $legend
-      * @param tooltips        $tooltips
-      */
-    def stepped(dataset: XYDataset,
-                title: String = "",
-                domainAxisLabel: String = "",
-                rangeAxisLabel: String = "",
-                orientation: PlotOrientation = PlotOrientation.VERTICAL,
-                legend: Boolean = true,
-                tooltips: Boolean = false): JFreeChart = {
-
-      val chart = JChartFactory.createXYStepAreaChart(title, domainAxisLabel, rangeAxisLabel,
-        dataset, orientation, legend, tooltips, false)
-
-      dataset match {
-        case _: TimePeriodValuesCollection ⇒ chart.getXYPlot.setDomainAxis(new DateAxis)
-        case _: TimeSeriesCollection       ⇒ chart.getXYPlot.setDomainAxis(new DateAxis)
-        case _: TimeTableXYDataset         ⇒ chart.getXYPlot.setDomainAxis(new DateAxis)
-        case _ ⇒
-      }
-
-      chart
-    }
 
   }
 
@@ -381,6 +319,113 @@ trait ChartFactory {
               legend: Boolean = true,
               tooltips: Boolean = true): JFreeChart =
       JChartFactory.createRingChart(title, dataset, legend, tooltips, false)
+
+  }
+
+  /** Factory methods for area charts. */
+  object XYAreaChart {
+
+    /** Creates a new chart that represents numeric `x` and `y` values with an area.
+      *
+      * If the input dataset is an instance of a `TimePeriodValuesCollection`,
+      * `TimeSeriesCollection` or `TimeTableXYDataset` the domain axis will correctly be set to a
+      * `DateAxis`.
+      *
+      * @param dataset         $dataset
+      * @param title           $title
+      * @param domainAxisLabel $domainAxisLabel
+      * @param rangeAxisLabel  $rangeAxisLabel
+      * @param orientation     $orientation
+      * @param legend          $legend
+      * @param tooltips        $tooltips
+      */
+    def apply(dataset: XYDataset,
+              title: String = "",
+              domainAxisLabel: String = "",
+              rangeAxisLabel: String = "",
+              orientation: PlotOrientation = PlotOrientation.VERTICAL,
+              legend: Boolean = true,
+              tooltips: Boolean = false): JFreeChart = {
+
+      val chart = JChartFactory.createXYAreaChart(title, domainAxisLabel, rangeAxisLabel, dataset,
+        orientation, legend, tooltips, false)
+
+      dataset match {
+        case _: TimePeriodValuesCollection ⇒ chart.getXYPlot.setDomainAxis(new DateAxis)
+        case _: TimeSeriesCollection       ⇒ chart.getXYPlot.setDomainAxis(new DateAxis)
+        case _: TimeTableXYDataset         ⇒ chart.getXYPlot.setDomainAxis(new DateAxis)
+        case _ ⇒
+      }
+
+      chart
+    }
+
+    /** Creates a new chart that represents multiple numeric `x` and `y` values with stacked areas.
+      *
+      * If the input dataset is an instance of a `TimeTableXYDataset` the domain axis will correctly
+      * be set to a `DateAxis`.
+      *
+      * @param dataset         $dataset
+      * @param title           $title
+      * @param domainAxisLabel $domainAxisLabel
+      * @param rangeAxisLabel  $rangeAxisLabel
+      * @param orientation     $orientation
+      * @param legend          $legend
+      * @param tooltips        $tooltips
+      */
+    def stacked(dataset: TableXYDataset,
+                title: String = "",
+                domainAxisLabel: String = "",
+                rangeAxisLabel: String = "",
+                orientation: PlotOrientation = PlotOrientation.VERTICAL,
+                legend: Boolean = true,
+                tooltips: Boolean = false): JFreeChart = {
+
+      val chart = JChartFactory.createStackedXYAreaChart(title, domainAxisLabel, rangeAxisLabel,
+        dataset, orientation, legend, tooltips, false)
+
+      dataset match {
+        case _: TimeTableXYDataset ⇒ chart.getXYPlot.setDomainAxis(new DateAxis)
+        case _ ⇒
+      }
+
+      chart
+    }
+
+    /** Creates a new chart that represents multiple numeric `x` and `y` values with a stepped area.
+      *
+      * If the input dataset is an instance of a `TimePeriodValuesCollection`,
+      * `TimeSeriesCollection` or `TimeTableXYDataset` the domain axis will correctly be set to a
+      * `DateAxis`.
+      *
+      * @param dataset         $dataset
+      * @param title           $title
+      * @param domainAxisLabel $domainAxisLabel
+      * @param rangeAxisLabel  $rangeAxisLabel
+      * @param orientation     $orientation
+      * @param legend          $legend
+      * @param tooltips        $tooltips
+      */
+    def stepped(dataset: XYDataset,
+                title: String = "",
+                domainAxisLabel: String = "",
+                rangeAxisLabel: String = "",
+                orientation: PlotOrientation = PlotOrientation.VERTICAL,
+                legend: Boolean = true,
+                tooltips: Boolean = false): JFreeChart = {
+
+      val chart = JChartFactory.createXYStepAreaChart(title, domainAxisLabel, rangeAxisLabel,
+        dataset, orientation, legend, tooltips, false)
+
+      dataset match {
+        case _: TimePeriodValuesCollection ⇒ chart.getXYPlot.setDomainAxis(new DateAxis)
+        case _: TimeSeriesCollection       ⇒ chart.getXYPlot.setDomainAxis(new DateAxis)
+        case _: TimeTableXYDataset         ⇒ chart.getXYPlot.setDomainAxis(new DateAxis)
+        case _ ⇒
+      }
+
+      chart
+    }
 
   }
 
