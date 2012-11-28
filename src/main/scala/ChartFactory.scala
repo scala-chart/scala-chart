@@ -71,8 +71,9 @@ trait ChartFactory {
 
     /** Creates a new chart that represents numeric `x` and `y` values with an area.
       *
-      * If the input dataset is an instance of a `TimePeriodValuesCollection`, `TimeSeriesCollection`
-      * or `TimeTableXYDataset` the domain axis will correctly be set to a `DateAxis`.
+      * If the input dataset is an instance of a `TimePeriodValuesCollection`,
+      * `TimeSeriesCollection` or `TimeTableXYDataset` the domain axis will correctly be set to a
+      * `DateAxis`.
       *
       * @param dataset         $dataset
       * @param title           $title
@@ -137,8 +138,9 @@ trait ChartFactory {
 
     /** Creates a new chart that represents multiple numeric `x` and `y` values with a stepped area.
       *
-      * If the input dataset is an instance of a `TimePeriodValuesCollection`, `TimeSeriesCollection`
-      * or `TimeTableXYDataset` the domain axis will correctly be set to a `DateAxis`.
+      * If the input dataset is an instance of a `TimePeriodValuesCollection`,
+      * `TimeSeriesCollection` or `TimeTableXYDataset` the domain axis will correctly be set to a
+      * `DateAxis`.
       *
       * @param dataset         $dataset
       * @param title           $title
@@ -259,10 +261,7 @@ trait ChartFactory {
   /** Factory methods for line charts. */
   object LineChart {
 
-    /** Creates a new chart that represents numeric `x` and `y` values with a line.
-      *
-      * If the input dataset is an instance of a `TimePeriodValuesCollection`, `TimeSeriesCollection`
-      * or `TimeTableXYDataset` the domain axis will correctly be set to a `DateAxis`.
+    /** Creates a new chart that represents categorized numeric values with a line.
       *
       * @param dataset         $dataset
       * @param title           $title
@@ -272,26 +271,36 @@ trait ChartFactory {
       * @param legend          $legend
       * @param tooltips        $tooltips
       */
-    def apply(dataset: XYDataset,
+    def apply(dataset: CategoryDataset,
               title: String = "",
               domainAxisLabel: String = "",
               rangeAxisLabel: String = "",
               orientation: PlotOrientation = PlotOrientation.VERTICAL,
               legend: Boolean = true,
-              tooltips: Boolean = false): JFreeChart = {
+              tooltips: Boolean = false): JFreeChart =
+      JChartFactory.createLineChart(title, domainAxisLabel, rangeAxisLabel, dataset, orientation,
+        legend, tooltips, false)
 
-      val chart = JChartFactory.createXYLineChart(title, domainAxisLabel, rangeAxisLabel, dataset,
-        orientation, legend, tooltips, false)
-
-      dataset match {
-        case _: TimePeriodValuesCollection ⇒ chart.getXYPlot.setDomainAxis(new DateAxis)
-        case _: TimeSeriesCollection       ⇒ chart.getXYPlot.setDomainAxis(new DateAxis)
-        case _: TimeTableXYDataset         ⇒ chart.getXYPlot.setDomainAxis(new DateAxis)
-        case _ ⇒
-      }
-
-      chart
-    }
+    /** Creates a new chart that represents categorized numeric values with three dimensional a
+      * line.
+      *
+      * @param dataset         $dataset
+      * @param title           $title
+      * @param domainAxisLabel $domainAxisLabel
+      * @param rangeAxisLabel  $rangeAxisLabel
+      * @param orientation     $orientation
+      * @param legend          $legend
+      * @param tooltips        $tooltips
+      */
+    def threeDimensional(dataset: CategoryDataset,
+                         title: String = "",
+                         domainAxisLabel: String = "",
+                         rangeAxisLabel: String = "",
+                         orientation: PlotOrientation = PlotOrientation.VERTICAL,
+                         legend: Boolean = true,
+                         tooltips: Boolean = false): JFreeChart =
+      JChartFactory.createLineChart3D(title, domainAxisLabel, rangeAxisLabel, dataset, orientation,
+        legend, tooltips, false)
 
   }
 
@@ -375,4 +384,44 @@ trait ChartFactory {
 
   }
 
-}
+  /** Factory methods for line charts. */
+  object XYLineChart {
+
+    /** Creates a new chart that represents numeric `x` and `y` values with a line.
+      *
+      * If the input dataset is an instance of a `TimePeriodValuesCollection`,
+      * `TimeSeriesCollection` or `TimeTableXYDataset` the domain axis will correctly be set to a
+      * `DateAxis`.
+      *
+      * @param dataset         $dataset
+      * @param title           $title
+      * @param domainAxisLabel $domainAxisLabel
+      * @param rangeAxisLabel  $rangeAxisLabel
+      * @param orientation     $orientation
+      * @param legend          $legend
+      * @param tooltips        $tooltips
+      */
+    def apply(dataset: XYDataset,
+              title: String = "",
+              domainAxisLabel: String = "",
+              rangeAxisLabel: String = "",
+              orientation: PlotOrientation = PlotOrientation.VERTICAL,
+              legend: Boolean = true,
+              tooltips: Boolean = false): JFreeChart = {
+
+      val chart = JChartFactory.createXYLineChart(title, domainAxisLabel, rangeAxisLabel, dataset,
+        orientation, legend, tooltips, false)
+
+      dataset match {
+        case _: TimePeriodValuesCollection ⇒ chart.getXYPlot.setDomainAxis(new DateAxis)
+        case _: TimeSeriesCollection       ⇒ chart.getXYPlot.setDomainAxis(new DateAxis)
+        case _: TimeTableXYDataset         ⇒ chart.getXYPlot.setDomainAxis(new DateAxis)
+        case _ ⇒
+      }
+
+      chart
+    }
+
+  }
+
+ }
