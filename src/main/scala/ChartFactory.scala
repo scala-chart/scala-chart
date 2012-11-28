@@ -295,6 +295,37 @@ trait ChartFactory {
 
   }
 
+  /** Factory methods for multiple pie charts. */
+  object MultiplePieChart {
+
+    /** Creates a new chart that represents categorized numeric data with a multiple pie.
+      *
+      * @param dataset  $dataset
+      * @param title    $title
+      * @param legend   $legend
+      * @param tooltips $tooltips
+      */
+    def apply(dataset: CategoryDataset,
+              title: String = "",
+              legend: Boolean = true,
+              tooltips: Boolean = true): JFreeChart =
+      JChartFactory.createMultiplePieChart(title, dataset, TableOrder.BY_COLUMN, legend, tooltips, false)
+
+    /** Creates a new chart that represents categorized numeric data with a three dimensional pie.
+      *
+      * @param dataset  $dataset
+      * @param title    $title
+      * @param legend   $legend
+      * @param tooltips $tooltips
+      */
+    def threeDimensional(dataset: CategoryDataset,
+                         title: String = "",
+                         legend: Boolean = true,
+                         tooltips: Boolean = true): JFreeChart =
+      JChartFactory.createMultiplePieChart3D(title, dataset, TableOrder.BY_COLUMN, legend, tooltips, false)
+
+  }
+
   /** Factory methods for pie charts. */
   object PieChart {
 
@@ -310,19 +341,6 @@ trait ChartFactory {
               legend: Boolean = true,
               tooltips: Boolean = true): JFreeChart =
       JChartFactory.createPieChart(title, dataset, legend, tooltips, false)
-
-    /** Creates a new chart that represents categorized numeric data with a multiple pie.
-      *
-      * @param dataset  $dataset
-      * @param title    $title
-      * @param legend   $legend
-      * @param tooltips $tooltips
-      */
-    def multiple(dataset: CategoryDataset,
-                 title: String = "",
-                 legend: Boolean = true,
-                 tooltips: Boolean = true): JFreeChart =
-      JChartFactory.createMultiplePieChart(title, dataset, TableOrder.BY_COLUMN, legend, tooltips, false)
 
     /** Creates a new chart that represents categorized numeric data with a three dimensional pie.
       *
