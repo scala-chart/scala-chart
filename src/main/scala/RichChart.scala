@@ -29,6 +29,7 @@ import java.io._
 import scala.swing._
 
 import org.jfree.chart._
+import org.jfree.chart.axis._
 import org.jfree.chart.labels._
 import org.jfree.chart.plot._
 import org.jfree.chart.title._
@@ -102,7 +103,7 @@ trait RichChart {
         plot.setLabelGenerator(null)
 
       case plot: MultiplePiePlot ⇒
-        plot.getPieChart.labels_=(labels)
+        plot.getPieChart.labels = labels
 
       case plot: XYPlot if labels ⇒
         val renderer = plot.getRenderer
@@ -190,6 +191,49 @@ trait RichChart {
 
     /** Sets the title of this chart. */
     def title_=(title: String): Unit = self.setTitle(title)
+
+    /** Returns true if the underlying plot displays tooltips. */
+    def tooltips: Boolean = self.getPlot match {
+      case plot: CategoryPlot    ⇒ plot.getRenderer.getBaseToolTipGenerator != null
+      case plot: MultiplePiePlot ⇒ plot.getPieChart.tooltips
+      case plot: PiePlot         ⇒ plot.getToolTipGenerator != null
+      case plot: XYPlot          ⇒ plot.getRenderer.getBaseToolTipGenerator != null
+      case _                     ⇒ false
+    }
+
+    /** Displays tooltips on mouse over events. */
+    def tooltips_=(tooltips: Boolean): Unit = self.getPlot match {
+      case plot: CategoryPlot if tooltips ⇒
+        plot.getRenderer.setBaseToolTipGenerator(new StandardCategoryToolTipGenerator)
+
+      case plot: CategoryPlot if ! tooltips ⇒
+        plot.getRenderer.setBaseToolTipGenerator(null)
+
+      case plot: MultiplePiePlot ⇒
+        plot.getPieChart.tooltips = tooltips
+
+      case plot: PiePlot if tooltips ⇒
+        plot.setToolTipGenerator(new StandardPieToolTipGenerator)
+
+      case plot: PiePlot if ! tooltips ⇒
+        plot.setToolTipGenerator(null)
+
+      case plot: XYPlot if labels ⇒
+        val renderer = plot.getRenderer
+        plot.getDomainAxis match {
+          case _: DateAxis ⇒
+            renderer.setBaseToolTipGenerator(StandardXYToolTipGenerator.getTimeSeriesInstance)
+          case _ ⇒
+            renderer.setBaseToolTipGenerator(new StandardXYToolTipGenerator)
+        }
+
+      case plot: XYPlot if ! labels ⇒
+        plot.getRenderer.setBaseToolTipGenerator(null)
+
+      case _ ⇒ throw new UnsupportedOperationException (
+        "Tool tips are not supported for the underlying type of plot."
+      )
+    }
 
     // ---------------------------------------------------------------------------------------------
     // showing the chart
