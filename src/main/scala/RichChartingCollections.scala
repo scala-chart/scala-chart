@@ -124,7 +124,7 @@ trait RichChartingCollections {
       dataset
     }
 
-    /** Converts this collection to a `TimePeriodValuesCollection`. */
+    /** Converts this collection to a time table. */
     def toTimeTable(implicit eva: A ⇒ Comparable[A], evb: B ⇒ TimePeriod, evc: C ⇒ Number): TimeTableXYDataset = {
       val dataset = new TimeTableXYDataset
       for {
