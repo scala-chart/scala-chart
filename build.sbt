@@ -3,7 +3,7 @@ name := "sfreechart"
 
 version := "0.1.0"
 
-scalaVersion := "2.10.0-RC3"
+scalaVersion := "2.10.0-RC5"
 
 crossVersion := CrossVersion.full
 
