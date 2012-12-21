@@ -9,7 +9,7 @@ Usage
 
 ### [sbt][]
 
-    libraryDependencies += "com.github.wookietreiber.sfreechart" % "sfreechart" % "latest.integration" cross CrossVersion.full
+    libraryDependencies += "com.github.wookietreiber.sfreechart" %% "sfreechart" % "latest.integration"
 
 ### [maven][]
 

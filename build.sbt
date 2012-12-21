@@ -3,9 +3,7 @@ name := "sfreechart"
 
 version := "0.1.0"
 
-scalaVersion := "2.10.0-RC5"
-
-crossVersion := CrossVersion.full
+scalaVersion := "2.10.0"
 
 libraryDependencies <+= scalaVersion { sv ⇒
   "org.scala-lang" % "scala-swing" % sv
@@ -13,7 +11,7 @@ libraryDependencies <+= scalaVersion { sv ⇒
 
 libraryDependencies ++= Seq (
   "org.jfree"  %  "jfreechart" % "1.0.14",
-  "org.specs2" %% "specs2"     % "1.12.3" % "test" cross CrossVersion.full
+  "org.specs2" %% "specs2"     % "1.13" % "test"
 )
 
 initialCommands in (Compile, consoleQuick) <<= initialCommands in Compile
