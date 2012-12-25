@@ -44,7 +44,7 @@ trait RichChart {
   /** Enriched JFreeChart. */
   implicit class GenericRichChart(val peer: JFreeChart) extends Chart[Plot] {
 
-    override def plot = peer.getPlot
+    override def plot: Plot = peer.getPlot
 
     // ---------------------------------------------------------------------------------------------
     // accessors / mutators
