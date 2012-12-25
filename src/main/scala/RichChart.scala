@@ -24,10 +24,6 @@
 
 package org.sfree.chart
 
-import java.io._
-
-import scala.swing._
-
 import org.jfree.chart._
 import org.jfree.chart.axis._
 import org.jfree.chart.labels._
@@ -41,23 +37,21 @@ object RichChart extends RichChart
   *
   * @define RichChartInfo Contains an enriched `JFreeChart` that provides convenient access to
   * e.g. save and show the chart. To read the documentation for these methods, see
-  * [[org.sfree.chart.RichChart.Chart]].
-  *
-  * @define output     the output file
-  * @define dim        dimension / geometry / width x height of the output
-  * @define fontMapper handles mappings between Java AWT Fonts and PDF fonts
+  * [[org.sfree.chart.RichChart.GenericRichChart]].
   */
 trait RichChart {
 
   /** Enriched JFreeChart. */
-  implicit class Chart(self: JFreeChart) {
+  implicit class GenericRichChart(val peer: JFreeChart) extends Chart[Plot] {
+
+    override def plot = peer.getPlot
 
     // ---------------------------------------------------------------------------------------------
     // accessors / mutators
     // ---------------------------------------------------------------------------------------------
 
     /** Optionally returns the domain axis label of the underlying plot. */
-    def domainAxisLabel: Option[String] = self.getPlot match {
+    def domainAxisLabel: Option[String] = plot match {
       case plot: CategoryPlot    ⇒ Option(plot.getDomainAxis.getLabel)
       case plot: ContourPlot     ⇒ Option(plot.getDomainAxis.getLabel)
       case plot: FastScatterPlot ⇒ Option(plot.getDomainAxis.getLabel)
@@ -66,7 +60,7 @@ trait RichChart {
     }
 
     /** Labels the domain axis of the underlying plot. */
-    def domainAxisLabel_=(label: String): Unit = self.getPlot match {
+    def domainAxisLabel_=(label: String): Unit = plot match {
       case plot: CategoryPlot    ⇒ plot.getDomainAxis.setLabel(label)
       case plot: ContourPlot     ⇒ plot.getDomainAxis.setLabel(label)
       case plot: FastScatterPlot ⇒ plot.getDomainAxis.setLabel(label)
@@ -77,7 +71,7 @@ trait RichChart {
     }
 
     /** Returns true if this chart displays labels. */
-    def labels: Boolean = self.getPlot match {
+    def labels: Boolean = plot match {
       case plot: CategoryPlot    ⇒ plot.getRenderer.getBaseItemLabelsVisible
       case plot: PiePlot         ⇒ plot.getLabelGenerator != null
       case plot: MultiplePiePlot ⇒ plot.getPieChart.labels
@@ -86,7 +80,7 @@ trait RichChart {
     }
 
     /** Labels the discrete data points of this chart. */
-    def labels_=(labels: Boolean): Unit = self.getPlot match {
+    def labels_=(labels: Boolean): Unit = plot match {
       case plot: CategoryPlot if labels ⇒
         val renderer = plot.getRenderer
         renderer.setBaseItemLabelsVisible(true)
@@ -120,7 +114,7 @@ trait RichChart {
     }
 
     /** Optionally returns the legend of this chart. */
-    def legend: Option[LegendTitle] = self.getLegend match {
+    def legend: Option[LegendTitle] = peer.getLegend match {
       case legend: LegendTitle ⇒ Some(legend)
       case _                   ⇒ None
     }
@@ -128,27 +122,27 @@ trait RichChart {
     /** Adds a default legend if there is none. */
     def legend_=(legend: Boolean): Unit = if (legend) {
       if (this.legend.isEmpty) {
-        val legend = new LegendTitle(self.getPlot)
+        val legend = new LegendTitle(plot)
         legend.setMargin(new org.jfree.ui.RectangleInsets(1.0, 1.0, 1.0, 1.0))
         legend.setFrame(new org.jfree.chart.block.LineBorder)
         legend.setBackgroundPaint(java.awt.Color.white)
         legend.setPosition(org.jfree.ui.RectangleEdge.BOTTOM)
-        self.addSubtitle(legend)
-        legend.addChangeListener(self)
+        peer.addSubtitle(legend)
+        legend.addChangeListener(peer)
       }
     } else {
-      self.removeLegend()
+      peer.removeLegend()
     }
 
     /** Adds a single legend. */
     def legend_=(legend: LegendTitle) {
-      if (this.legend.nonEmpty) self.removeLegend()
-      self.addSubtitle(legend)
-      legend.addChangeListener(self)
+      if (this.legend.nonEmpty) peer.removeLegend()
+      peer.addSubtitle(legend)
+      legend.addChangeListener(peer)
     }
 
     /** Optionally returns the orientation of the underlying plot. */
-    def orientation: Option[PlotOrientation] = self.getPlot match {
+    def orientation: Option[PlotOrientation] = plot match {
       case plot: CategoryPlot    ⇒ Some(plot.getOrientation)
       case plot: FastScatterPlot ⇒ Some(plot.getOrientation)
       case plot: PolarPlot       ⇒ Some(plot.getOrientation)
@@ -158,7 +152,7 @@ trait RichChart {
     }
 
     /** Orients the underlying plot. */
-    def orientation_=(orientation: PlotOrientation): Unit = self.getPlot match {
+    def orientation_=(orientation: PlotOrientation): Unit = plot match {
       case plot: CategoryPlot ⇒ plot.setOrientation(orientation)
       case plot: XYPlot       ⇒ plot.setOrientation(orientation)
       case _ ⇒ throw new UnsupportedOperationException (
@@ -167,7 +161,7 @@ trait RichChart {
     }
 
     /** Optionally returns the range axis label of the underlying plot. */
-    def rangeAxisLabel: Option[String] = self.getPlot match {
+    def rangeAxisLabel: Option[String] = plot match {
       case plot: CategoryPlot    ⇒ Option(plot.getRangeAxis.getLabel)
       case plot: ContourPlot     ⇒ Option(plot.getRangeAxis.getLabel)
       case plot: FastScatterPlot ⇒ Option(plot.getRangeAxis.getLabel)
@@ -176,7 +170,7 @@ trait RichChart {
     }
 
     /** Labels the range axis of the underlying plot. */
-    def rangeAxisLabel_=(label: String): Unit = self.getPlot match {
+    def rangeAxisLabel_=(label: String): Unit = plot match {
       case plot: CategoryPlot    ⇒ plot.getRangeAxis.setLabel(label)
       case plot: ContourPlot     ⇒ plot.getRangeAxis.setLabel(label)
       case plot: FastScatterPlot ⇒ plot.getRangeAxis.setLabel(label)
@@ -186,14 +180,8 @@ trait RichChart {
       )
     }
 
-    /** Returns the title of this chart. */
-    def title: String = self.getTitle.getText
-
-    /** Sets the title of this chart. */
-    def title_=(title: String): Unit = self.setTitle(title)
-
     /** Returns true if the underlying plot displays tooltips. */
-    def tooltips: Boolean = self.getPlot match {
+    def tooltips: Boolean = plot match {
       case plot: CategoryPlot    ⇒ plot.getRenderer.getBaseToolTipGenerator != null
       case plot: MultiplePiePlot ⇒ plot.getPieChart.tooltips
       case plot: PiePlot         ⇒ plot.getToolTipGenerator != null
@@ -202,7 +190,7 @@ trait RichChart {
     }
 
     /** Displays tooltips on mouse over events. */
-    def tooltips_=(tooltips: Boolean): Unit = self.getPlot match {
+    def tooltips_=(tooltips: Boolean): Unit = plot match {
       case plot: CategoryPlot if tooltips ⇒
         plot.getRenderer.setBaseToolTipGenerator(new StandardCategoryToolTipGenerator)
 
@@ -233,107 +221,6 @@ trait RichChart {
       case _ ⇒ throw new UnsupportedOperationException (
         "Tool tips are not supported for the underlying type of plot."
       )
-    }
-
-    // ---------------------------------------------------------------------------------------------
-    // showing the chart
-    // ---------------------------------------------------------------------------------------------
-
-    /** Shows the chart in a window. */
-    def show: Unit = show()
-
-    /** Shows the chart in a window.
-      *
-      * @param title      the title of the enclosing frame
-      * @param scrollable whether the enclosing panel is scrollable
-      */
-    def show(title: String = "", scrollable: Boolean = true): Unit = Swing onEDT {
-      new ChartFrame(title, self, scrollable) setVisible true
-    }
-
-    // ---------------------------------------------------------------------------------------------
-    // saving the chart
-    // ---------------------------------------------------------------------------------------------
-
-    /** Saves the chart.
-      *
-      * @param ext    extension of the file / output type, currently supported are PNG, JPEG and PDF
-      * @param output $output
-      * @param dim    $dim
-      */
-    def save(ext: String, output: File, dim: (Int,Int)): Unit = ext.toLowerCase match {
-      case "pdf"          ⇒ saveAsPDF(output, dim)
-      case "png"          ⇒ saveAsPNG(output, dim)
-      case "jpg" | "jpeg" ⇒ saveAsJPEG(output, dim)
-      case _              ⇒ throw new RuntimeException("""Extension "%s" is not supported.""".format(ext))
-    }
-
-    /** Saves the chart as a PNG image.
-      *
-      * @param output $output
-      * @param dim    $dim
-      */
-    def saveAsPNG(output: File, dim: (Int,Int)) {
-      val (width,height) = dim
-      ChartUtilities.saveChartAsPNG(output, self, width, height)
-    }
-
-    /** Saves the chart as a JPEG image.
-      *
-      * @param output $output
-      * @param dim    $dim
-      */
-    def saveAsJPEG(output: File, dim: (Int,Int)) {
-      val (width,height) = dim
-      ChartUtilities.saveChartAsJPEG(output, self, width, height)
-    }
-
-    import com.lowagie.text._
-    import com.lowagie.text.pdf._
-
-    /** Saves the chart as a PDF.
-      *
-      * @param output     $output
-      * @param dim        $dim
-      * @param fontMapper $fontMapper
-      */
-    def saveAsPDF(output: File, dim: (Int,Int), fontMapper: FontMapper = new DefaultFontMapper) {
-      val os = new BufferedOutputStream(new FileOutputStream(output))
-
-      try {
-        writeAsPDF(os, dim, fontMapper)
-      } finally {
-        os.close()
-      }
-    }
-
-    /** Writes the chart as a PDF.
-      *
-      * @param os         stream to where will be written
-      * @param dim        $dim
-      * @param fontMapper $fontMapper
-      */
-    private[this] def writeAsPDF(os: OutputStream, dim: (Int,Int), fontMapper: FontMapper) {
-      val (width,height) = dim
-
-      val pagesize = new Rectangle(width, height)
-      val document = new Document(pagesize)
-
-      try {
-        val writer = PdfWriter.getInstance(document, os)
-        document.open()
-
-        val cb = writer.getDirectContent
-        val tp = cb.createTemplate(width, height)
-        val g2 = tp.createGraphics(width, height, fontMapper)
-        val r2D = new java.awt.geom.Rectangle2D.Double(0, 0, width, height)
-
-        self.draw(g2, r2D)
-        g2.dispose()
-        cb.addTemplate(tp, 0, 0)
-      } finally {
-        document.close()
-      }
     }
 
   }
