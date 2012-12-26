@@ -30,17 +30,8 @@ import org.jfree.chart.plot.PlotOrientation
 import org.jfree.data.time._
 import org.jfree.data.xy.IntervalXYDataset
 
-/** Factory for numeric bar charts.
-  *
-  * @define dataset         the data the chart will visualize
-  * @define title           the title of the chart
-  * @define domainAxisLabel the label for the domain axis
-  * @define rangeAxisLabel  the label for the range axis
-  * @define orientation     the orientation of the chart
-  * @define legend          whether or not the chart will contain a legend
-  * @define tooltips        whether or not tooltips will be generated
-  */
-object XYBarChart {
+/** Factory for numeric bar charts. */
+object XYBarChart extends ChartFactory {
 
   /** Creates a new chart that represents numeric `x` (intervals) and `y` values with a line.
     *

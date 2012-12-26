@@ -28,14 +28,8 @@ import org.jfree.chart.ChartFactory.createRingChart
 import org.jfree.chart.plot.RingPlot
 import org.jfree.data.general.PieDataset
 
-/** Factory for ring charts.
-  *
-  * @define dataset  the data the chart will visualize
-  * @define title    the title of the chart
-  * @define legend   whether or not the chart will contain a legend
-  * @define tooltips whether or not tooltips will be generated
-  */
-object RingChart {
+/** Factory for ring charts. */
+object RingChart extends ChartFactory {
 
   /** Creates a new ring chart.
     *

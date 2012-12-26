@@ -28,17 +28,8 @@ import org.jfree.chart.ChartFactory._
 import org.jfree.chart.plot.PlotOrientation
 import org.jfree.data.category.CategoryDataset
 
-/** Factory for bar charts.
-  *
-  * @define dataset         the data the chart will visualize
-  * @define title           the title of the chart
-  * @define domainAxisLabel the label for the domain axis
-  * @define rangeAxisLabel  the label for the range axis
-  * @define orientation     the orientation of the chart
-  * @define legend          whether or not the chart will contain a legend
-  * @define tooltips        whether or not tooltips will be generated
-  */
-object BarChart {
+/** Factory for bar charts. */
+object BarChart extends ChartFactory {
 
   /** Creates a new chart that represents categorized numeric data with bars.
     *

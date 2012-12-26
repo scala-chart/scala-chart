@@ -28,14 +28,8 @@ import org.jfree.chart.ChartFactory._
 import org.jfree.chart.plot.PiePlot
 import org.jfree.data.general.PieDataset
 
-/** Factory for pie charts.
-  *
-  * @define dataset  the data the chart will visualize
-  * @define title    the title of the chart
-  * @define legend   whether or not the chart will contain a legend
-  * @define tooltips whether or not tooltips will be generated
-  */
-object PieChart {
+/** Factory for pie charts. */
+object PieChart extends ChartFactory {
 
   /** Creates a new pie chart.
     *

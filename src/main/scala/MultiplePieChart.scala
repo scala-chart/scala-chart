@@ -29,14 +29,8 @@ import org.jfree.chart.plot.MultiplePiePlot
 import org.jfree.data.category.CategoryDataset
 import org.jfree.util.TableOrder
 
-/** Factory for multiple pie charts.
-  *
-  * @define dataset  the data the chart will visualize
-  * @define title    the title of the chart
-  * @define legend   whether or not the chart will contain a legend
-  * @define tooltips whether or not tooltips will be generated
-  */
-object MultiplePieChart {
+/** Factory for multiple pie charts. */
+object MultiplePieChart extends ChartFactory {
 
   /** Creates a new multiple pie chart.
     *

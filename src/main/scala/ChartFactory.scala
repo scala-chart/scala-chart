@@ -24,61 +24,14 @@
 
 package org.sfree.chart
 
-import org.jfree.chart.ChartFactory._
-import org.jfree.chart.plot.PlotOrientation
-import org.jfree.data.category.CategoryDataset
-
-/** Factory for area charts. */
-object AreaChart extends ChartFactory {
-
-  /** Creates a new chart that represents categorized numeric data with an area.
-    *
-    * @param dataset         $dataset
-    * @param title           $title
-    * @param domainAxisLabel $domainAxisLabel
-    * @param rangeAxisLabel  $rangeAxisLabel
-    * @param orientation     $orientation
-    * @param legend          $legend
-    * @param tooltips        $tooltips
-    */
-  def apply(dataset: CategoryDataset,
-            title: String = "",
-            domainAxisLabel: String = "",
-            rangeAxisLabel: String = "",
-            orientation: PlotOrientation = PlotOrientation.VERTICAL,
-            legend: Boolean = true,
-            tooltips: Boolean = false): CategoryChart = {
-    val chart = createAreaChart(title, domainAxisLabel, rangeAxisLabel, dataset, orientation,
-      legend, tooltips, false)
-
-    new CategoryChart {
-      override val peer = chart
-    }
-  }
-
-  /** Creates a new chart that represents categorized numeric data with stacked areas.
-    *
-    * @param dataset         $dataset
-    * @param title           $title
-    * @param domainAxisLabel $domainAxisLabel
-    * @param rangeAxisLabel  $rangeAxisLabel
-    * @param orientation     $orientation
-    * @param legend          $legend
-    * @param tooltips        $tooltips
-    */
-  def stacked(dataset: CategoryDataset,
-              title: String = "",
-              domainAxisLabel: String = "",
-              rangeAxisLabel: String = "",
-              orientation: PlotOrientation = PlotOrientation.VERTICAL,
-              legend: Boolean = true,
-              tooltips: Boolean = false): CategoryChart = {
-    val chart = createStackedAreaChart(title, domainAxisLabel, rangeAxisLabel, dataset, orientation,
-      legend, tooltips, false)
-
-    new CategoryChart {
-      override val peer = chart
-    }
-  }
-
-}
+/** Base mixin for chart factories.
+  *
+  * @define dataset         the data the chart will visualize
+  * @define title           the title of the chart
+  * @define domainAxisLabel the label for the domain axis
+  * @define rangeAxisLabel  the label for the range axis
+  * @define orientation     the orientation of the chart
+  * @define legend          whether or not the chart will contain a legend
+  * @define tooltips        whether or not tooltips will be generated
+  */
+trait ChartFactory
