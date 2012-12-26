@@ -13,9 +13,11 @@ class ChartSpec extends Specification { def is =
 
   "MultiplePieChart"                                                                               ^
     "must have a MultiplePiePlot"                                               ! mpc1             ^
+    "3D must have a MultiplePiePlot"                                            ! mpc2             ^
                                                                                                   p^
   "PieChart"                                                                                       ^
     "must have a PiePlot"                                                       ! pc1              ^
+    "3D must have a PiePlot"                                                    ! pc2              ^
                                                                                                   p^
   "RingChart"                                                                                      ^
     "must have a RingPlot"                                                      ! rc1              ^
@@ -34,10 +36,24 @@ class ChartSpec extends Specification { def is =
     (chart.plot must not (throwA[ClassCastException])) and (chart.plot must beAnInstanceOf[MultiplePiePlot])
   }
 
+  def mpc2 = {
+    val data = for { i ← 1 to 5 } yield (i,i)
+    val dataset = data.toCategoryDataset
+    val chart = MultiplePieChart.threeDimensional(dataset)
+    (chart.plot must not (throwA[ClassCastException])) and (chart.plot must beAnInstanceOf[MultiplePiePlot])
+  }
+
   def pc1 = {
     val data = for { i ← 1 to 5 } yield (i,i)
     val dataset = data.toPieDataset
     val chart = PieChart(dataset)
+    (chart.plot must not (throwA[ClassCastException])) and (chart.plot must beAnInstanceOf[PiePlot])
+  }
+
+  def pc2 = {
+    val data = for { i ← 1 to 5 } yield (i,i)
+    val dataset = data.toPieDataset
+    val chart = PieChart.threeDimensional(dataset)
     (chart.plot must not (throwA[ClassCastException])) and (chart.plot must beAnInstanceOf[PiePlot])
   }
 
