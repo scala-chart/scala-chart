@@ -124,6 +124,16 @@ trait RichChartingCollections {
       dataset
     }
 
+    /** Converts this collection to a `CategoryTableXYDataset`. */
+    def toCategoryTableXYDataset(implicit eva: A ⇒ String, evb: B ⇒ Number, evc: C ⇒ Number): CategoryTableXYDataset = {
+      val dataset = new CategoryTableXYDataset
+      for {
+        (category,xys) ← it
+        (x,y) ← xys
+      } dataset.add(x, y, category, false)
+      dataset
+    }
+
     /** Converts this collection to a time table. */
     def toTimeTable(implicit eva: A ⇒ Comparable[A], evb: B ⇒ TimePeriod, evc: C ⇒ Number): TimeTableXYDataset = {
       val dataset = new TimeTableXYDataset
