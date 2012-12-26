@@ -15,6 +15,12 @@ class ChartSpec extends Specification { def is =
     "must have a CategoryPlot"                                                  ! ac1              ^
     "stacked must have a CategoryPlot"                                          ! ac2              ^
                                                                                                   p^
+  "BarChart"                                                                                       ^
+    "must have a CategoryPlot"                                                  ! bc1              ^
+    "stacked must have a CategoryPlot"                                          ! bc2              ^
+    "3D must have a CategoryPlot"                                               ! bc3              ^
+    "3D stacked must have a CategoryPlot"                                       ! bc4              ^
+                                                                                                  p^
   "MultiplePieChart"                                                                               ^
     "must have a MultiplePiePlot"                                               ! mpc1             ^
     "3D must have a MultiplePiePlot"                                            ! mpc2             ^
@@ -52,6 +58,34 @@ class ChartSpec extends Specification { def is =
     val data = for { i ← 1 to 5 } yield (i,i)
     val dataset = data.toCategoryDataset
     val chart = AreaChart.stacked(dataset)
+    (chart.plot must not (throwA[ClassCastException])) and (chart.plot must beAnInstanceOf[CategoryPlot])
+  }
+
+  def bc1 = {
+    val data = for { i ← 1 to 5 } yield (i,i)
+    val dataset = data.toCategoryDataset
+    val chart = BarChart(dataset)
+    (chart.plot must not (throwA[ClassCastException])) and (chart.plot must beAnInstanceOf[CategoryPlot])
+  }
+
+  def bc2 = {
+    val data = for { i ← 1 to 5 } yield (i,i)
+    val dataset = data.toCategoryDataset
+    val chart = BarChart.stacked(dataset)
+    (chart.plot must not (throwA[ClassCastException])) and (chart.plot must beAnInstanceOf[CategoryPlot])
+  }
+
+  def bc3 = {
+    val data = for { i ← 1 to 5 } yield (i,i)
+    val dataset = data.toCategoryDataset
+    val chart = BarChart.threeDimensional(dataset)
+    (chart.plot must not (throwA[ClassCastException])) and (chart.plot must beAnInstanceOf[CategoryPlot])
+  }
+
+  def bc4 = {
+    val data = for { i ← 1 to 5 } yield (i,i)
+    val dataset = data.toCategoryDataset
+    val chart = BarChart.threeDimensionalStacked(dataset)
     (chart.plot must not (throwA[ClassCastException])) and (chart.plot must beAnInstanceOf[CategoryPlot])
   }
 

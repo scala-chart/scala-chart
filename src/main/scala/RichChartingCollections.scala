@@ -157,24 +157,27 @@ trait RichChartingCollections {
   /** Enriches a collection of data `Tuple4s`. */
   implicit class RichTuple4s[A,B,C,D](it: Iterable[(A,Iterable[(B,Iterable[(C,D)])])]) {
 
-    import org.jfree.chart.{ ChartFactory ⇒ _, _ }
+    import org.jfree.chart.JFreeChart
     import org.jfree.chart.plot._
 
     /** Converts this collection to a bar chart with a `CombinedDomainCategoryPlot`. */
     def toCombinedDomainBarChart(implicit eva: A ⇒ Comparable[A],
                                           evb: B ⇒ Comparable[B],
                                           evc: C ⇒ Comparable[C],
-                                          evd: D ⇒ Number): JFreeChart = {
+                                          evd: D ⇒ Number): CategoryChart = {
       val plot = new CombinedDomainCategoryPlot
 
       for {
         (outer,miv) ← it
         dataset     = miv.toCategoryDataset
-        chart       = ChartFactory.BarChart(dataset, outer.toString)
-        subplot     = chart.getPlot.asInstanceOf[CategoryPlot]
-      } plot.add(subplot)
+        chart       = BarChart(dataset, outer.toString)
+      } plot.add(chart.plot)
 
-      new JFreeChart(plot)
+      val chart = new JFreeChart(plot)
+
+      new CategoryChart {
+        override val peer = chart
+      }
     }
 
   }
