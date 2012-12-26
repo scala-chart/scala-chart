@@ -22,6 +22,11 @@ class ChartSpec extends Specification { def is =
   "RingChart"                                                                                      ^
     "must have a RingPlot"                                                      ! rc1              ^
                                                                                                   p^
+  "XYAreaChart"                                                                                    ^
+    "must have an XYPlot"                                                       ! xyac1            ^
+    "stacked must have an XYPlot"                                               ! xyac2            ^
+    "stepped must have an XYPlot"                                               ! xyac3            ^
+                                                                                                  p^
   "XYBarChart"                                                                                     ^
     "must have an XYPlot"                                                       ! xybc1            ^
                                                                                                  end
@@ -62,6 +67,36 @@ class ChartSpec extends Specification { def is =
     val dataset = data.toPieDataset
     val chart = RingChart(dataset)
     (chart.plot must not (throwA[ClassCastException])) and (chart.plot must beAnInstanceOf[RingPlot])
+  }
+
+  def xyac1 = {
+    val data = for {
+      category ← 'a' to 'b'
+      xys = for { i ← 1 to 5 } yield (i,i)
+    } yield category → xys
+    val dataset = data.toXYSeriesCollection
+    val chart = XYAreaChart(dataset)
+    (chart.plot must not (throwA[ClassCastException])) and (chart.plot must beAnInstanceOf[XYPlot])
+  }
+
+  def xyac2 = {
+    val data = for {
+      category ← 'a' to 'b'
+      xys = for { i ← 1 to 5 } yield (i,i)
+    } yield category.toString → xys
+    val dataset = data.toCategoryTableXYDataset
+    val chart = XYAreaChart.stacked(dataset)
+    (chart.plot must not (throwA[ClassCastException])) and (chart.plot must beAnInstanceOf[XYPlot])
+  }
+
+  def xyac3 = {
+    val data = for {
+      category ← 'a' to 'b'
+      xys = for { i ← 1 to 5 } yield (i,i)
+    } yield category → xys
+    val dataset = data.toXYSeriesCollection
+    val chart = XYAreaChart.stepped(dataset)
+    (chart.plot must not (throwA[ClassCastException])) and (chart.plot must beAnInstanceOf[XYPlot])
   }
 
   def xybc1 = {
