@@ -29,6 +29,9 @@ class ChartSpec extends Specification { def is =
                                                                                                   p^
   "XYBarChart"                                                                                     ^
     "must have an XYPlot"                                                       ! xybc1            ^
+                                                                                                  p^
+  "XYLineChart"                                                                                    ^
+    "must have an XYPlot"                                                       ! xylc1            ^
                                                                                                  end
   // -----------------------------------------------------------------------------------------------
   // tests
@@ -106,6 +109,16 @@ class ChartSpec extends Specification { def is =
     } yield category → xys
     val dataset = data.toXYSeriesCollection
     val chart = XYBarChart(dataset)
+    (chart.plot must not (throwA[ClassCastException])) and (chart.plot must beAnInstanceOf[XYPlot])
+  }
+
+  def xylc1 = {
+    val data = for {
+      category ← 'a' to 'b'
+      xys = for { i ← 1 to 5 } yield (i,i)
+    } yield category → xys
+    val dataset = data.toXYSeriesCollection
+    val chart = XYLineChart(dataset)
     (chart.plot must not (throwA[ClassCastException])) and (chart.plot must beAnInstanceOf[XYPlot])
   }
 
