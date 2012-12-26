@@ -66,51 +66,6 @@ object ChartFactory extends ChartFactory
   */
 trait ChartFactory {
 
-  /** Factory methods for area charts. */
-  object AreaChart {
-
-    /** Creates a new chart that represents categorized numeric data with an area.
-      *
-      * @param dataset         $dataset
-      * @param title           $title
-      * @param domainAxisLabel $domainAxisLabel
-      * @param rangeAxisLabel  $rangeAxisLabel
-      * @param orientation     $orientation
-      * @param legend          $legend
-      * @param tooltips        $tooltips
-      */
-    def apply(dataset: CategoryDataset,
-              title: String = "",
-              domainAxisLabel: String = "",
-              rangeAxisLabel: String = "",
-              orientation: PlotOrientation = PlotOrientation.VERTICAL,
-              legend: Boolean = true,
-              tooltips: Boolean = false): JFreeChart =
-      JChartFactory.createAreaChart(title, domainAxisLabel, rangeAxisLabel, dataset, orientation,
-        legend, tooltips, false)
-
-    /** Creates a new chart that represents categorized numeric data with stacked areas.
-      *
-      * @param dataset         $dataset
-      * @param title           $title
-      * @param domainAxisLabel $domainAxisLabel
-      * @param rangeAxisLabel  $rangeAxisLabel
-      * @param orientation     $orientation
-      * @param legend          $legend
-      * @param tooltips        $tooltips
-      */
-    def stacked(dataset: CategoryDataset,
-                title: String = "",
-                domainAxisLabel: String = "",
-                rangeAxisLabel: String = "",
-                orientation: PlotOrientation = PlotOrientation.VERTICAL,
-                legend: Boolean = true,
-                tooltips: Boolean = false): JFreeChart =
-      JChartFactory.createStackedAreaChart(title, domainAxisLabel, rangeAxisLabel, dataset,
-        orientation, legend, tooltips, false)
-
-  }
-
   /** Factory methods for bar charts. */
   object BarChart {
 

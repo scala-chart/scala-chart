@@ -11,6 +11,10 @@ class ChartSpec extends Specification { def is =
   // fragments
   // -----------------------------------------------------------------------------------------------
 
+  "AreaChart"                                                                                      ^
+    "must have a CategoryPlot"                                                  ! ac1              ^
+    "stacked must have a CategoryPlot"                                          ! ac2              ^
+                                                                                                  p^
   "MultiplePieChart"                                                                               ^
     "must have a MultiplePiePlot"                                               ! mpc1             ^
     "3D must have a MultiplePiePlot"                                            ! mpc2             ^
@@ -36,6 +40,20 @@ class ChartSpec extends Specification { def is =
   // -----------------------------------------------------------------------------------------------
   // tests
   // -----------------------------------------------------------------------------------------------
+
+  def ac1 = {
+    val data = for { i ← 1 to 5 } yield (i,i)
+    val dataset = data.toCategoryDataset
+    val chart = AreaChart(dataset)
+    (chart.plot must not (throwA[ClassCastException])) and (chart.plot must beAnInstanceOf[CategoryPlot])
+  }
+
+  def ac2 = {
+    val data = for { i ← 1 to 5 } yield (i,i)
+    val dataset = data.toCategoryDataset
+    val chart = AreaChart.stacked(dataset)
+    (chart.plot must not (throwA[ClassCastException])) and (chart.plot must beAnInstanceOf[CategoryPlot])
+  }
 
   def mpc1 = {
     val data = for { i ← 1 to 5 } yield (i,i)
