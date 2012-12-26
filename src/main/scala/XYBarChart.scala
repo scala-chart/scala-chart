@@ -30,7 +30,7 @@ import org.jfree.chart.plot.PlotOrientation
 import org.jfree.data.time._
 import org.jfree.data.xy.IntervalXYDataset
 
-/** Factory for numerical bar charts.
+/** Factory for numeric bar charts.
   *
   * @define dataset         the data the chart will visualize
   * @define title           the title of the chart
