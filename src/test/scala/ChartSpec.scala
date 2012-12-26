@@ -19,6 +19,9 @@ class ChartSpec extends Specification { def is =
                                                                                                   p^
   "RingChart"                                                                                      ^
     "must have a RingPlot"                                                      ! rc1              ^
+                                                                                                  p^
+  "XYBarChart"                                                                                     ^
+    "must have an XYPlot"                                                       ! xybc1            ^
                                                                                                  end
   // -----------------------------------------------------------------------------------------------
   // tests
@@ -43,6 +46,16 @@ class ChartSpec extends Specification { def is =
     val dataset = data.toPieDataset
     val chart = RingChart(dataset)
     (chart.plot must not (throwA[ClassCastException])) and (chart.plot must beAnInstanceOf[RingPlot])
+  }
+
+  def xybc1 = {
+    val data = for {
+      category ← 'a' to 'b'
+      xys = for { i ← 1 to 5 } yield (i,i)
+    } yield category → xys
+    val dataset = data.toXYSeriesCollection
+    val chart = XYBarChart(dataset)
+    (chart.plot must not (throwA[ClassCastException])) and (chart.plot must beAnInstanceOf[XYPlot])
   }
 
 }

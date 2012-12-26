@@ -349,46 +349,6 @@ trait ChartFactory {
 
   }
 
-  /** Factory methods for bar charts. */
-  object XYBarChart {
-
-    /** Creates a new chart that represents numeric `x` (intervals) and `y` values with a line.
-      *
-      * If the input dataset is an instance of a `TimePeriodValuesCollection`,
-      * `TimeSeriesCollection` or `TimeTableXYDataset` the domain axis will correctly be set to a
-      * `DateAxis`.
-      *
-      * @param dataset         $dataset
-      * @param title           $title
-      * @param domainAxisLabel $domainAxisLabel
-      * @param rangeAxisLabel  $rangeAxisLabel
-      * @param orientation     $orientation
-      * @param legend          $legend
-      * @param tooltips        $tooltips
-      */
-    def apply(dataset: IntervalXYDataset,
-              title: String = "",
-              domainAxisLabel: String = "",
-              rangeAxisLabel: String = "",
-              orientation: PlotOrientation = PlotOrientation.VERTICAL,
-              legend: Boolean = true,
-              tooltips: Boolean = false): JFreeChart = {
-
-      val dateAxis = dataset match {
-        case _: TimePeriodValuesCollection ⇒ true
-        case _: TimeSeriesCollection       ⇒ true
-        case _: TimeTableXYDataset         ⇒ true
-        case _                             ⇒ false
-      }
-
-      val chart = JChartFactory.createXYBarChart(title, domainAxisLabel, dateAxis, rangeAxisLabel,
-        dataset, orientation, legend, tooltips, false)
-
-      chart
-    }
-
-  }
-
   /** Factory methods for line charts. */
   object XYLineChart {
 
