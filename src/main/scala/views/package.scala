@@ -32,6 +32,7 @@ package org.sfree.chart
   * These contain views that convert ordinary Scala collections to datasets.
   *
   * {{{
+  * import org.sfree.chart._
   * import org.sfree.chart.Charting._
   * import org.sfree.chart.views.CollectionToXYSeriesViews._
   *
@@ -45,6 +46,7 @@ package org.sfree.chart
   * to their `*SeriesCollection` counterparts so they can be used by chart factories:
   *
   * {{{
+  * import org.sfree.chart._
   * import org.sfree.chart.Charting._
   * import org.sfree.chart.views.SeriesViews._
   *
@@ -59,6 +61,7 @@ package org.sfree.chart
   * by chart factories:
   *
   * {{{
+  * import org.sfree.chart._
   * import org.sfree.chart.Charting._
   * import org.sfree.chart.views.CollectionOfSeriesViews._
   *
@@ -73,6 +76,7 @@ package org.sfree.chart
   * These contain all views concerning a specific type of dataset.
   *
   * {{{
+  * import org.sfree.chart._
   * import org.sfree.chart.Charting._
   * import org.sfree.chart.views.XYDatasetViews._
   *

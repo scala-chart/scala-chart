@@ -17,6 +17,7 @@ libraryDependencies ++= Seq (
 initialCommands in (Compile, consoleQuick) <<= initialCommands in Compile
 
 initialCommands in Compile in console += """
+  import org.sfree.chart._
   import org.sfree.chart.Charting._
 """
 

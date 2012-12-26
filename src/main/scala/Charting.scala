@@ -33,10 +33,11 @@ object Charting extends Charting
   * working with sfreechart:
   *
   * {{{
+  * import org.sfree.chart._
   * import org.sfree.chart.Charting._
   * val data = Seq((0,0),(1,1),(2,2)).toXYSeriesCollection("some data")
   * val chart = XYLineChart(data)
   * }}}
   *
   */
-trait Charting extends RichChartingCollections with ChartFactory with RichChart
+trait Charting extends RichChartingCollections with RichChart

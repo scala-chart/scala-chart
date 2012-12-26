@@ -28,6 +28,7 @@ package org.sfree
   * The basic starting point is to import the [[org.sfree.chart.Charting]] object:
   *
   * {{{
+  * import org.sfree.chart._
   * import org.sfree.chart.Charting._
   * }}}
   *

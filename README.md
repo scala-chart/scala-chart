@@ -23,8 +23,9 @@ Examples
 --------
 
 You can import nearly all of SFreeChart functionality (except the views, see below) with the
-following line:
+following lines:
 
+    import org.sfree.chart._
     import org.sfree.chart.Charting._
 
 You can use the conversions to convert from ordinary Scala collections to the datasets used by

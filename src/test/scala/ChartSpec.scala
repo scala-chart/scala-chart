@@ -21,6 +21,10 @@ class ChartSpec extends Specification { def is =
     "3D must have a CategoryPlot"                                               ! bc3              ^
     "3D stacked must have a CategoryPlot"                                       ! bc4              ^
                                                                                                   p^
+  "LineChart"                                                                                      ^
+    "must have a CategoryPlot"                                                  ! lc1              ^
+    "3D must have a CategoryPlot"                                               ! lc2              ^
+                                                                                                  p^
   "MultiplePieChart"                                                                               ^
     "must have a MultiplePiePlot"                                               ! mpc1             ^
     "3D must have a MultiplePiePlot"                                            ! mpc2             ^
@@ -86,6 +90,20 @@ class ChartSpec extends Specification { def is =
     val data = for { i ← 1 to 5 } yield (i,i)
     val dataset = data.toCategoryDataset
     val chart = BarChart.threeDimensionalStacked(dataset)
+    (chart.plot must not (throwA[ClassCastException])) and (chart.plot must beAnInstanceOf[CategoryPlot])
+  }
+
+  def lc1 = {
+    val data = for { i ← 1 to 5 } yield (i,i)
+    val dataset = data.toCategoryDataset
+    val chart = LineChart(dataset)
+    (chart.plot must not (throwA[ClassCastException])) and (chart.plot must beAnInstanceOf[CategoryPlot])
+  }
+
+  def lc2 = {
+    val data = for { i ← 1 to 5 } yield (i,i)
+    val dataset = data.toCategoryDataset
+    val chart = LineChart.threeDimensional(dataset)
     (chart.plot must not (throwA[ClassCastException])) and (chart.plot must beAnInstanceOf[CategoryPlot])
   }
 
