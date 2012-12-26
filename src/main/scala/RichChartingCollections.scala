@@ -79,7 +79,7 @@ trait RichChartingCollections {
       *
       * @param name $name
       */
-    def toTimeSeries(name: String = "")(implicit eva: A ⇒ RegularTimePeriod, evb: B ⇒ Number): TimeSeries = {
+    def toTimeSeries(name: Comparable[_] = "")(implicit eva: A ⇒ RegularTimePeriod, evb: B ⇒ Number): TimeSeries = {
       val series = new TimeSeries(name)
       it foreach { case (time,value) ⇒ series.add(time,value) }
       series
@@ -89,14 +89,14 @@ trait RichChartingCollections {
       *
       * @param name $name
       */
-    def toTimeSeriesCollection(name: String = "")(implicit eva: A ⇒ RegularTimePeriod, evb: B ⇒ Number): TimeSeriesCollection =
+    def toTimeSeriesCollection(name: Comparable[_] = "")(implicit eva: A ⇒ RegularTimePeriod, evb: B ⇒ Number): TimeSeriesCollection =
       new TimeSeriesCollection(toTimeSeries(name))
 
     /** Converts this collection to an `XYSeries`.
       *
       * @param name $name
       */
-    def toXYSeries(name: String = "")(implicit eva: A ⇒ Number, evb: B ⇒ Number): XYSeries = {
+    def toXYSeries(name: Comparable[_] = "")(implicit eva: A ⇒ Number, evb: B ⇒ Number): XYSeries = {
       val series = new XYSeries(name)
       it foreach { case (x,y) ⇒ series.add(x,y) }
       series
@@ -106,7 +106,7 @@ trait RichChartingCollections {
       *
       * @param name $name
       */
-    def toXYSeriesCollection(name: String = "")(implicit eva: A ⇒ Number, evb: B ⇒ Number): XYSeriesCollection =
+    def toXYSeriesCollection(name: Comparable[_] = "")(implicit eva: A ⇒ Number, evb: B ⇒ Number): XYSeriesCollection =
       new XYSeriesCollection(toXYSeries(name))
 
   }
@@ -132,6 +132,14 @@ trait RichChartingCollections {
         (time,value) ← tvs
       } dataset.add(time,value,category,false)
       dataset
+    }
+
+    /** Converts this collection to an `XYSeriesCollection`. */
+    def toXYSeriesCollection(implicit eva: A ⇒ Comparable[A], evb: B ⇒ Number, evc: C ⇒ Number): XYSeriesCollection = {
+      val seriess = for {
+        (category,xys) ← it
+      } yield xys.toXYSeries(category)
+      seriess.toXYSeriesCollection
     }
 
   }
