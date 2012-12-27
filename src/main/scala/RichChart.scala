@@ -145,7 +145,7 @@ trait RichChart {
       case plot: CategoryPlot ⇒ plot.getOrientation
       case plot: XYPlot       ⇒ plot.getOrientation
       case plot ⇒ throw new UnsupportedOperationException (
-        "The underlying plot (%s) is not orientable.".format(plot.getClass.getSimpleName)
+        "The underlying plot (%s) is not orientable.".format(plot.getPlotType)
       )
     }
 
@@ -153,7 +153,7 @@ trait RichChart {
       case plot: CategoryPlot ⇒ plot.setOrientation(orientation)
       case plot: XYPlot       ⇒ plot.setOrientation(orientation)
       case plot ⇒ throw new UnsupportedOperationException (
-        "The underlying plot (%s) is not orientable.".format(plot.getClass.getSimpleName)
+        "The underlying plot (%s) is not orientable.".format(plot.getPlotType)
       )
     }
 
