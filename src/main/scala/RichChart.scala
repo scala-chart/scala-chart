@@ -42,7 +42,7 @@ object RichChart extends RichChart
 trait RichChart {
 
   /** Enriched JFreeChart. */
-  implicit class GenericRichChart(val peer: JFreeChart) extends Chart[Plot] {
+  implicit class GenericRichChart(val peer: JFreeChart) extends Chart[Plot] with Orientable {
 
     override def plot: Plot = peer.getPlot
 
@@ -141,22 +141,19 @@ trait RichChart {
       legend.addChangeListener(peer)
     }
 
-    /** Optionally returns the orientation of the underlying plot. */
-    def orientation: Option[PlotOrientation] = plot match {
-      case plot: CategoryPlot    ⇒ Some(plot.getOrientation)
-      case plot: FastScatterPlot ⇒ Some(plot.getOrientation)
-      case plot: PolarPlot       ⇒ Some(plot.getOrientation)
-      case plot: ThermometerPlot ⇒ Some(plot.getOrientation)
-      case plot: XYPlot          ⇒ Some(plot.getOrientation)
-      case _                     ⇒ None
+    override def orientation: PlotOrientation = plot match {
+      case plot: CategoryPlot ⇒ plot.getOrientation
+      case plot: XYPlot       ⇒ plot.getOrientation
+      case plot ⇒ throw new UnsupportedOperationException (
+        "The underlying plot (%s) is not orientable.".format(plot.getClass.getSimpleName)
+      )
     }
 
-    /** Orients the underlying plot. */
-    def orientation_=(orientation: PlotOrientation): Unit = plot match {
+    override def orientation_=(orientation: PlotOrientation): Unit = plot match {
       case plot: CategoryPlot ⇒ plot.setOrientation(orientation)
       case plot: XYPlot       ⇒ plot.setOrientation(orientation)
-      case _ ⇒ throw new UnsupportedOperationException (
-        "Orienting the underlying type of plot is not supported."
+      case plot ⇒ throw new UnsupportedOperationException (
+        "The underlying plot (%s) is not orientable.".format(plot.getClass.getSimpleName)
       )
     }
 

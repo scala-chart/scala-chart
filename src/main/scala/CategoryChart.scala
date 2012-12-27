@@ -24,9 +24,14 @@
 
 package org.sfree.chart
 
-import org.jfree.chart.plot.CategoryPlot
+import org.jfree.chart.plot._
 
 /** Represents categorized numeric data. */
-trait CategoryChart extends Chart[CategoryPlot] {
+trait CategoryChart extends Chart[CategoryPlot] with Orientable {
   override def plot: CategoryPlot = peer.getCategoryPlot
+
+  override def orientation: PlotOrientation = plot.getOrientation
+  override def orientation_=(orientation: PlotOrientation) {
+    plot.setOrientation(orientation)
+  }
 }

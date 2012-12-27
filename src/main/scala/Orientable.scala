@@ -24,14 +24,15 @@
 
 package org.sfree.chart
 
-import org.jfree.chart.plot._
+import org.jfree.chart.plot.PlotOrientation
 
-/** Represents numeric data. */
-trait XYChart extends Chart[XYPlot] with Orientable {
-  override def plot: XYPlot = peer.getXYPlot
+/** Mixin for horizontal/vertical orientation state. */
+trait Orientable {
 
-  override def orientation: PlotOrientation = plot.getOrientation
-  override def orientation_=(orientation: PlotOrientation) {
-    plot.setOrientation(orientation)
-  }
+  /** Returns the orientation of this chart. */
+  def orientation: PlotOrientation
+
+  /** Orients this chart. */
+  def orientation_=(orientation: PlotOrientation): Unit
+
 }
