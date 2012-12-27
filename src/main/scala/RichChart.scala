@@ -28,7 +28,6 @@ import org.jfree.chart._
 import org.jfree.chart.axis._
 import org.jfree.chart.labels._
 import org.jfree.chart.plot._
-import org.jfree.chart.title._
 
 /** $RichChartInfo */
 object RichChart extends RichChart
@@ -111,34 +110,6 @@ trait RichChart {
       case _ ⇒ throw new UnsupportedOperationException (
         "Labels are not supported for the underlying type of plot."
       )
-    }
-
-    /** Optionally returns the legend of this chart. */
-    def legend: Option[LegendTitle] = peer.getLegend match {
-      case legend: LegendTitle ⇒ Some(legend)
-      case _                   ⇒ None
-    }
-
-    /** Adds a default legend if there is none. */
-    def legend_=(legend: Boolean): Unit = if (legend) {
-      if (this.legend.isEmpty) {
-        val legend = new LegendTitle(plot)
-        legend.setMargin(new org.jfree.ui.RectangleInsets(1.0, 1.0, 1.0, 1.0))
-        legend.setFrame(new org.jfree.chart.block.LineBorder)
-        legend.setBackgroundPaint(java.awt.Color.white)
-        legend.setPosition(org.jfree.ui.RectangleEdge.BOTTOM)
-        peer.addSubtitle(legend)
-        legend.addChangeListener(peer)
-      }
-    } else {
-      peer.removeLegend()
-    }
-
-    /** Adds a single legend. */
-    def legend_=(legend: LegendTitle) {
-      if (this.legend.nonEmpty) peer.removeLegend()
-      peer.addSubtitle(legend)
-      legend.addChangeListener(peer)
     }
 
     override def orientation: PlotOrientation = plot match {

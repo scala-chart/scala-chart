@@ -1,7 +1,10 @@
 package org.sfree.chart
 
+import language.existentials
+
 import Charting._
 import org.jfree.chart.plot._
+import org.jfree.chart.title.TextTitle
 
 import org.specs2._
 
@@ -11,6 +14,18 @@ class ChartSpec extends Specification { def is =
   // fragments
   // -----------------------------------------------------------------------------------------------
 
+  "Chart"                                                                                          ^
+    "subtitles is a Buffer[Title]"                                                                 ^
+      "append value"                                                            ! cst1             ^
+      "prepend value"                                                           ! cst2             ^
+      "select value by index"                                                   ! cst3             ^
+      "clear all values"                                                        ! cst4             ^
+      "insert collection of values"                                             ! cst5             ^
+      "provide an iterator"                                                     ! cst6             ^
+      "buffer length"                                                           ! cst7             ^
+      "remove value"                                                            ! cst8             ^
+      "update a value by index"                                                 ! cst9          ^bt^
+                                                                                                  p^
   "AreaChart"                                                                                      ^
     "must have a CategoryPlot"                                                  ! ac1              ^
     "stacked must have a CategoryPlot"                                          ! ac2              ^
@@ -50,6 +65,98 @@ class ChartSpec extends Specification { def is =
   // -----------------------------------------------------------------------------------------------
   // tests
   // -----------------------------------------------------------------------------------------------
+
+  def cstchart: Chart[_] = {
+    val data = for { i ← 1 to 5 } yield (i,i)
+    val dataset = data.toCategoryDataset
+    val chart = AreaChart(dataset)
+    chart.peer.clearSubtitles()
+    chart
+  }
+
+  def cst1 = {
+    val chart = cstchart
+    val t1 = new TextTitle("t1")
+    val t2 = new TextTitle("t2")
+    chart.peer.addSubtitle(t1)
+    chart.subtitles += t2
+    chart.peer.getSubtitle(1) === t2
+  }
+
+  def cst2 = {
+    val chart = cstchart
+    val t1 = new TextTitle("t1")
+    val t2 = new TextTitle("t2")
+    chart.peer.addSubtitle(t1)
+    t2 +=: chart.subtitles
+    chart.peer.getSubtitle(0) === t2
+  }
+
+  def cst3 = {
+    val chart = cstchart
+    val t1 = new TextTitle("t1")
+    val t2 = new TextTitle("t2")
+    chart.peer.addSubtitle(t1)
+    chart.peer.addSubtitle(t2)
+    chart.subtitles(1) === t2
+  }
+
+  def cst4 = {
+    val chart = cstchart
+    val t1 = new TextTitle("t1")
+    val t2 = new TextTitle("t2")
+    chart.peer.addSubtitle(t1)
+    chart.peer.addSubtitle(t2)
+    chart.subtitles.clear()
+    chart.peer.getSubtitleCount === 0
+  }
+
+  def cst5 = {
+    val chart = cstchart
+    val t1 = new TextTitle("t1")
+    val t2 = new TextTitle("t2")
+    val ts = Seq(t1, t2)
+    chart.subtitles.insertAll(0, ts)
+    (chart.peer.getSubtitleCount === 2) and
+    (chart.peer.getSubtitle(0) === t1) and
+    (chart.peer.getSubtitle(1) === t2)
+  }
+
+  def cst6 = {
+    val chart = cstchart
+    val t1 = new TextTitle("t1")
+    val t2 = new TextTitle("t2")
+    chart.peer.addSubtitle(t1)
+    chart.peer.addSubtitle(t2)
+    val it = chart.subtitles.iterator
+    (it.next === t1) and (it.next === t2) and (it.hasNext === false)
+  }
+
+  def cst7 = {
+    val chart = cstchart
+    val t1 = new TextTitle("t1")
+    chart.peer.addSubtitle(t1)
+    chart.subtitles.length === 1
+  }
+
+  def cst8 = {
+    val chart = cstchart
+    val t1 = new TextTitle("t1")
+    chart.peer.addSubtitle(t1)
+    chart.subtitles -= t1
+    chart.peer.getSubtitleCount === 0
+  }
+
+  def cst9 = {
+    val chart = cstchart
+    val t1 = new TextTitle("t1")
+    val t2 = new TextTitle("t2")
+    val t3 = new TextTitle("t3")
+    chart.peer.addSubtitle(t1)
+    chart.peer.addSubtitle(t2)
+    chart.subtitles(1) = t3
+    chart.peer.getSubtitle(1) === t3
+  }
 
   def ac1 = {
     val data = for { i ← 1 to 5 } yield (i,i)
