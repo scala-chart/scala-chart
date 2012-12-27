@@ -27,11 +27,21 @@ package org.sfree.chart
 import org.jfree.chart.plot._
 
 /** Represents categorized numeric data. */
-trait CategoryChart extends Chart[CategoryPlot] with Orientable {
+trait CategoryChart extends Chart[CategoryPlot] with Orientable with DomainAxis with RangeAxis {
   override def plot: CategoryPlot = peer.getCategoryPlot
+
+  override def domainAxisLabel: String = plot.getDomainAxis.getLabel
+  override def domainAxisLabel_=(label: String) {
+    plot.getDomainAxis.setLabel(label)
+  }
 
   override def orientation: PlotOrientation = plot.getOrientation
   override def orientation_=(orientation: PlotOrientation) {
     plot.setOrientation(orientation)
+  }
+
+  override def rangeAxisLabel: String = plot.getRangeAxis.getLabel
+  override def rangeAxisLabel_=(label: String) {
+    plot.getRangeAxis.setLabel(label)
   }
 }

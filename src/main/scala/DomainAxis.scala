@@ -24,24 +24,13 @@
 
 package org.sfree.chart
 
-import org.jfree.chart.plot._
+/** Mixin for charts with a domain axis. */
+trait DomainAxis {
 
-/** Represents numeric data. */
-trait XYChart extends Chart[XYPlot] with Orientable with DomainAxis with RangeAxis {
-  override def plot: XYPlot = peer.getXYPlot
+  /** Returns the domain axis label. */
+  def domainAxisLabel: String
 
-  override def domainAxisLabel: String = plot.getDomainAxis.getLabel
-  override def domainAxisLabel_=(label: String) {
-    plot.getDomainAxis.setLabel(label)
-  }
+  /** Labels the domain axis. */
+  def domainAxisLabel_=(label: String): Unit
 
-  override def orientation: PlotOrientation = plot.getOrientation
-  override def orientation_=(orientation: PlotOrientation) {
-    plot.setOrientation(orientation)
-  }
-
-  override def rangeAxisLabel: String = plot.getRangeAxis.getLabel
-  override def rangeAxisLabel_=(label: String) {
-    plot.getRangeAxis.setLabel(label)
-  }
 }

@@ -41,7 +41,7 @@ object RichChart extends RichChart
 trait RichChart {
 
   /** Enriched JFreeChart. */
-  implicit class GenericRichChart(val peer: JFreeChart) extends Chart[Plot] with Orientable {
+  implicit class GenericRichChart(val peer: JFreeChart) extends Chart[Plot] with Orientable with DomainAxis with RangeAxis {
 
     override def plot: Plot = peer.getPlot
 
@@ -49,23 +49,23 @@ trait RichChart {
     // accessors / mutators
     // ---------------------------------------------------------------------------------------------
 
-    /** Optionally returns the domain axis label of the underlying plot. */
-    def domainAxisLabel: Option[String] = plot match {
-      case plot: CategoryPlot    ⇒ Option(plot.getDomainAxis.getLabel)
-      case plot: ContourPlot     ⇒ Option(plot.getDomainAxis.getLabel)
-      case plot: FastScatterPlot ⇒ Option(plot.getDomainAxis.getLabel)
-      case plot: XYPlot          ⇒ Option(plot.getDomainAxis.getLabel)
-      case _                     ⇒ None
+    override def domainAxisLabel: String = plot match {
+      case plot: CategoryPlot    ⇒ plot.getDomainAxis.getLabel
+      case plot: ContourPlot     ⇒ plot.getDomainAxis.getLabel
+      case plot: FastScatterPlot ⇒ plot.getDomainAxis.getLabel
+      case plot: XYPlot          ⇒ plot.getDomainAxis.getLabel
+      case plot ⇒ throw new UnsupportedOperationException (
+        "The underlying plot (%s) has no domain axis.".format(plot.getPlotType)
+      )
     }
 
-    /** Labels the domain axis of the underlying plot. */
-    def domainAxisLabel_=(label: String): Unit = plot match {
+    override def domainAxisLabel_=(label: String): Unit = plot match {
       case plot: CategoryPlot    ⇒ plot.getDomainAxis.setLabel(label)
       case plot: ContourPlot     ⇒ plot.getDomainAxis.setLabel(label)
       case plot: FastScatterPlot ⇒ plot.getDomainAxis.setLabel(label)
       case plot: XYPlot          ⇒ plot.getDomainAxis.setLabel(label)
-      case _ ⇒ throw new UnsupportedOperationException (
-        "Domain axis labels are not supported for the underlying type of plot."
+      case plot ⇒ throw new UnsupportedOperationException (
+        "The underlying plot (%s) has no domain axis.".format(plot.getPlotType)
       )
     }
 
@@ -128,23 +128,25 @@ trait RichChart {
       )
     }
 
-    /** Optionally returns the range axis label of the underlying plot. */
-    def rangeAxisLabel: Option[String] = plot match {
-      case plot: CategoryPlot    ⇒ Option(plot.getRangeAxis.getLabel)
-      case plot: ContourPlot     ⇒ Option(plot.getRangeAxis.getLabel)
-      case plot: FastScatterPlot ⇒ Option(plot.getRangeAxis.getLabel)
-      case plot: XYPlot          ⇒ Option(plot.getRangeAxis.getLabel)
-      case _                     ⇒ None
+    override def rangeAxisLabel: String = plot match {
+      case plot: CategoryPlot    ⇒ plot.getRangeAxis.getLabel
+      case plot: ContourPlot     ⇒ plot.getRangeAxis.getLabel
+      case plot: FastScatterPlot ⇒ plot.getRangeAxis.getLabel
+      case plot: ThermometerPlot ⇒ plot.getRangeAxis.getLabel
+      case plot: XYPlot          ⇒ plot.getRangeAxis.getLabel
+      case plot ⇒ throw new UnsupportedOperationException (
+        "The underlying plot (%s) has no range axis.".format(plot.getPlotType)
+      )
     }
 
-    /** Labels the range axis of the underlying plot. */
-    def rangeAxisLabel_=(label: String): Unit = plot match {
+    override def rangeAxisLabel_=(label: String): Unit = plot match {
       case plot: CategoryPlot    ⇒ plot.getRangeAxis.setLabel(label)
       case plot: ContourPlot     ⇒ plot.getRangeAxis.setLabel(label)
       case plot: FastScatterPlot ⇒ plot.getRangeAxis.setLabel(label)
+      case plot: ThermometerPlot ⇒ plot.getRangeAxis.setLabel(label)
       case plot: XYPlot          ⇒ plot.getRangeAxis.setLabel(label)
-      case _ ⇒ throw new UnsupportedOperationException (
-        "Range axis labels are not supported for the underlying type of plot."
+      case plot ⇒ throw new UnsupportedOperationException (
+        "The underlying plot (%s) has no range axis.".format(plot.getPlotType)
       )
     }
 
