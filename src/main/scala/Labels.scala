@@ -24,33 +24,21 @@
 
 package org.sfree.chart
 
-import org.jfree.chart.ChartFactory.createRingChart
-import org.jfree.chart.plot.RingPlot
-import org.jfree.data.general.PieDataset
+/** Mixin for charts which may display labels.
+  *
+  * @tparam G type of label generator
+  */
+trait Labels[G] {
 
-/** Factory for ring charts. */
-object RingChart extends ChartFactory {
+  /** Optionally returns this charts label generator. */
+  def labelGenerator: Option[G]
 
-  /** Creates a new ring chart.
-    *
-    * @param dataset  $dataset
-    * @param title    $title
-    * @param legend   $legend
-    * @param tooltips $tooltips
-    */
-  def apply(dataset: PieDataset,
-            title: String = "",
-            legend: Boolean = true,
-            tooltips: Boolean = true): RingChart = {
-    val chart = createRingChart(title, dataset, legend, tooltips, false)
-    new RingChart {
-      override val peer = chart
-    }
+  /** Optionally sets this charts label generator. */
+  def labelGenerator_=(generator: Option[G]): Unit
+
+  /** Sets this charts label generator. */
+  final def labelGenerator_=(generator: G) {
+    labelGenerator = Some(generator)
   }
 
-}
-
-/** Represents categorized numeric data with a ring. */
-trait RingChart extends Chart[RingPlot] with PieChartLike[RingPlot] {
-  override def plot: RingPlot = peer.getPlot.asInstanceOf[RingPlot]
 }

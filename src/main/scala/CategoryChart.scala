@@ -24,15 +24,25 @@
 
 package org.sfree.chart
 
+import org.jfree.chart.labels.CategoryItemLabelGenerator
 import org.jfree.chart.plot._
 
 /** Represents categorized numeric data. */
-trait CategoryChart extends Chart[CategoryPlot] with Orientable with DomainAxis with RangeAxis {
+trait CategoryChart extends Chart[CategoryPlot] with Orientable with DomainAxis with RangeAxis
+    with Labels[CategoryItemLabelGenerator] {
+
   override def plot: CategoryPlot = peer.getCategoryPlot
 
   override def domainAxisLabel: String = plot.getDomainAxis.getLabel
   override def domainAxisLabel_=(label: String) {
     plot.getDomainAxis.setLabel(label)
+  }
+
+  override def labelGenerator: Option[CategoryItemLabelGenerator] = Option(plot.getRenderer.getBaseItemLabelGenerator)
+  override def labelGenerator_=(generator: Option[CategoryItemLabelGenerator]) {
+    val renderer = plot.getRenderer
+    renderer.setBaseItemLabelsVisible(generator.isDefined)
+    renderer.setBaseItemLabelGenerator(generator.orNull)
   }
 
   override def orientation: PlotOrientation = plot.getOrientation

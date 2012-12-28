@@ -24,15 +24,25 @@
 
 package org.sfree.chart
 
+import org.jfree.chart.labels.XYItemLabelGenerator
 import org.jfree.chart.plot._
 
 /** Represents numeric data. */
-trait XYChart extends Chart[XYPlot] with Orientable with DomainAxis with RangeAxis {
+trait XYChart extends Chart[XYPlot] with Orientable with DomainAxis with RangeAxis
+    with Labels[XYItemLabelGenerator] {
+
   override def plot: XYPlot = peer.getXYPlot
 
   override def domainAxisLabel: String = plot.getDomainAxis.getLabel
   override def domainAxisLabel_=(label: String) {
     plot.getDomainAxis.setLabel(label)
+  }
+
+  def labelGenerator: Option[XYItemLabelGenerator] = Option(plot.getRenderer.getBaseItemLabelGenerator)
+  def labelGenerator_=(generator: Option[XYItemLabelGenerator]) {
+    val renderer = plot.getRenderer
+    renderer.setBaseItemLabelsVisible(generator.isDefined)
+    renderer.setBaseItemLabelGenerator(generator.orNull)
   }
 
   override def orientation: PlotOrientation = plot.getOrientation

@@ -69,49 +69,6 @@ trait RichChart {
       )
     }
 
-    /** Returns true if this chart displays labels. */
-    def labels: Boolean = plot match {
-      case plot: CategoryPlot    ⇒ plot.getRenderer.getBaseItemLabelsVisible
-      case plot: PiePlot         ⇒ plot.getLabelGenerator != null
-      case plot: MultiplePiePlot ⇒ plot.getPieChart.labels
-      case plot: XYPlot          ⇒ plot.getRenderer.getBaseItemLabelsVisible
-      case _                     ⇒ false
-    }
-
-    /** Labels the discrete data points of this chart. */
-    def labels_=(labels: Boolean): Unit = plot match {
-      case plot: CategoryPlot if labels ⇒
-        val renderer = plot.getRenderer
-        renderer.setBaseItemLabelsVisible(true)
-        renderer.setBaseItemLabelGenerator(new StandardCategoryItemLabelGenerator)
-
-      case plot: CategoryPlot if ! labels ⇒
-        val renderer = plot.getRenderer
-        renderer.setBaseItemLabelsVisible(false)
-
-      case plot: PiePlot if labels ⇒
-        plot.setLabelGenerator(new StandardPieSectionLabelGenerator)
-
-      case plot: PiePlot if ! labels ⇒
-        plot.setLabelGenerator(null)
-
-      case plot: MultiplePiePlot ⇒
-        plot.getPieChart.labels = labels
-
-      case plot: XYPlot if labels ⇒
-        val renderer = plot.getRenderer
-        renderer.setBaseItemLabelsVisible(true)
-        renderer.setBaseItemLabelGenerator(new StandardXYItemLabelGenerator)
-
-      case plot: XYPlot if ! labels ⇒
-        val renderer = plot.getRenderer
-        renderer.setBaseItemLabelsVisible(false)
-
-      case _ ⇒ throw new UnsupportedOperationException (
-        "Labels are not supported for the underlying type of plot."
-      )
-    }
-
     override def orientation: PlotOrientation = plot match {
       case plot: CategoryPlot ⇒ plot.getOrientation
       case plot: XYPlot       ⇒ plot.getOrientation
@@ -176,7 +133,7 @@ trait RichChart {
       case plot: PiePlot if ! tooltips ⇒
         plot.setToolTipGenerator(null)
 
-      case plot: XYPlot if labels ⇒
+      case plot: XYPlot if tooltips ⇒
         val renderer = plot.getRenderer
         plot.getDomainAxis match {
           case _: DateAxis ⇒
@@ -185,7 +142,7 @@ trait RichChart {
             renderer.setBaseToolTipGenerator(new StandardXYToolTipGenerator)
         }
 
-      case plot: XYPlot if ! labels ⇒
+      case plot: XYPlot if ! tooltips ⇒
         plot.getRenderer.setBaseToolTipGenerator(null)
 
       case _ ⇒ throw new UnsupportedOperationException (

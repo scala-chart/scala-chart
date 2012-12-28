@@ -68,6 +68,6 @@ object PieChart extends ChartFactory {
 }
 
 /** Represents categorized numeric data with a pie. */
-trait PieChart extends Chart[PiePlot] {
+trait PieChart extends Chart[PiePlot] with PieChartLike[PiePlot] {
   override def plot: PiePlot = peer.getPlot.asInstanceOf[PiePlot]
 }
