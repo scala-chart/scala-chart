@@ -24,15 +24,23 @@
 
 package org.sfree.chart
 
-import org.jfree.chart.labels.PieSectionLabelGenerator
+import org.jfree.chart.labels._
 import org.jfree.chart.plot.PiePlot
 
 /** Template trait for pie charts. */
-trait PieChartLike[P <: PiePlot] extends Labels[PieSectionLabelGenerator] {
+trait PieChartLike[P <: PiePlot]
+    extends Labels[PieSectionLabelGenerator]
+    with Tooltips[PieToolTipGenerator] {
+
   self: Chart[P] ⇒
 
   override def labelGenerator: Option[PieSectionLabelGenerator] = Option(plot.getLabelGenerator)
   override def labelGenerator_=(generator: Option[PieSectionLabelGenerator]) {
     plot.setLabelGenerator(generator.orNull)
+  }
+
+  override def tooltipGenerator: Option[PieToolTipGenerator] = Option(plot.getToolTipGenerator)
+  override def tooltipGenerator_=(generator: Option[PieToolTipGenerator]) {
+    plot.setToolTipGenerator(generator.orNull)
   }
 }

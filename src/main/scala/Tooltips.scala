@@ -24,41 +24,21 @@
 
 package org.sfree.chart
 
-import org.jfree.chart.labels._
-import org.jfree.chart.plot._
+/** Mixin for charts which may display tooltips.
+  *
+  * @tparam G type of tooltip generator
+  */
+trait Tooltips[G] {
 
-/** Represents categorized numeric data. */
-trait CategoryChart extends Chart[CategoryPlot] with Orientable with DomainAxis with RangeAxis
-    with Labels[CategoryItemLabelGenerator]
-    with Tooltips[CategoryToolTipGenerator] {
+  /** Optionally returns the tooltip generator. */
+  def tooltipGenerator: Option[G]
 
-  override def plot: CategoryPlot = peer.getCategoryPlot
+  /** Optionally sets the tooltip generator. */
+  def tooltipGenerator_=(generator: Option[G]): Unit
 
-  override def domainAxisLabel: String = plot.getDomainAxis.getLabel
-  override def domainAxisLabel_=(label: String) {
-    plot.getDomainAxis.setLabel(label)
-  }
-
-  override def labelGenerator: Option[CategoryItemLabelGenerator] = Option(plot.getRenderer.getBaseItemLabelGenerator)
-  override def labelGenerator_=(generator: Option[CategoryItemLabelGenerator]) {
-    val renderer = plot.getRenderer
-    renderer.setBaseItemLabelsVisible(generator.isDefined)
-    renderer.setBaseItemLabelGenerator(generator.orNull)
-  }
-
-  override def orientation: PlotOrientation = plot.getOrientation
-  override def orientation_=(orientation: PlotOrientation) {
-    plot.setOrientation(orientation)
-  }
-
-  override def rangeAxisLabel: String = plot.getRangeAxis.getLabel
-  override def rangeAxisLabel_=(label: String) {
-    plot.getRangeAxis.setLabel(label)
-  }
-
-  override def tooltipGenerator: Option[CategoryToolTipGenerator] = Option(plot.getRenderer.getBaseToolTipGenerator)
-  override def tooltipGenerator_=(generator: Option[CategoryToolTipGenerator]) {
-    plot.getRenderer.setBaseToolTipGenerator(generator.orNull)
+  /** Sets the tooltip generator. */
+  final def tooltipGenerator_=(generator: G) {
+    tooltipGenerator = Some(generator)
   }
 
 }

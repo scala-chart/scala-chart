@@ -45,10 +45,6 @@ trait RichChart {
 
     override def plot: Plot = peer.getPlot
 
-    // ---------------------------------------------------------------------------------------------
-    // accessors / mutators
-    // ---------------------------------------------------------------------------------------------
-
     override def domainAxisLabel: String = plot match {
       case plot: CategoryPlot    ⇒ plot.getDomainAxis.getLabel
       case plot: ContourPlot     ⇒ plot.getDomainAxis.getLabel
@@ -104,49 +100,6 @@ trait RichChart {
       case plot: XYPlot          ⇒ plot.getRangeAxis.setLabel(label)
       case plot ⇒ throw new UnsupportedOperationException (
         "The underlying plot (%s) has no range axis.".format(plot.getPlotType)
-      )
-    }
-
-    /** Returns true if the underlying plot displays tooltips. */
-    def tooltips: Boolean = plot match {
-      case plot: CategoryPlot    ⇒ plot.getRenderer.getBaseToolTipGenerator != null
-      case plot: MultiplePiePlot ⇒ plot.getPieChart.tooltips
-      case plot: PiePlot         ⇒ plot.getToolTipGenerator != null
-      case plot: XYPlot          ⇒ plot.getRenderer.getBaseToolTipGenerator != null
-      case _                     ⇒ false
-    }
-
-    /** Displays tooltips on mouse over events. */
-    def tooltips_=(tooltips: Boolean): Unit = plot match {
-      case plot: CategoryPlot if tooltips ⇒
-        plot.getRenderer.setBaseToolTipGenerator(new StandardCategoryToolTipGenerator)
-
-      case plot: CategoryPlot if ! tooltips ⇒
-        plot.getRenderer.setBaseToolTipGenerator(null)
-
-      case plot: MultiplePiePlot ⇒
-        plot.getPieChart.tooltips = tooltips
-
-      case plot: PiePlot if tooltips ⇒
-        plot.setToolTipGenerator(new StandardPieToolTipGenerator)
-
-      case plot: PiePlot if ! tooltips ⇒
-        plot.setToolTipGenerator(null)
-
-      case plot: XYPlot if tooltips ⇒
-        val renderer = plot.getRenderer
-        plot.getDomainAxis match {
-          case _: DateAxis ⇒
-            renderer.setBaseToolTipGenerator(StandardXYToolTipGenerator.getTimeSeriesInstance)
-          case _ ⇒
-            renderer.setBaseToolTipGenerator(new StandardXYToolTipGenerator)
-        }
-
-      case plot: XYPlot if ! tooltips ⇒
-        plot.getRenderer.setBaseToolTipGenerator(null)
-
-      case _ ⇒ throw new UnsupportedOperationException (
-        "Tool tips are not supported for the underlying type of plot."
       )
     }
 

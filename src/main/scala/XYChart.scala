@@ -24,12 +24,13 @@
 
 package org.sfree.chart
 
-import org.jfree.chart.labels.XYItemLabelGenerator
+import org.jfree.chart.labels._
 import org.jfree.chart.plot._
 
 /** Represents numeric data. */
 trait XYChart extends Chart[XYPlot] with Orientable with DomainAxis with RangeAxis
-    with Labels[XYItemLabelGenerator] {
+    with Labels[XYItemLabelGenerator]
+    with Tooltips[XYToolTipGenerator] {
 
   override def plot: XYPlot = peer.getXYPlot
 
@@ -38,8 +39,8 @@ trait XYChart extends Chart[XYPlot] with Orientable with DomainAxis with RangeAx
     plot.getDomainAxis.setLabel(label)
   }
 
-  def labelGenerator: Option[XYItemLabelGenerator] = Option(plot.getRenderer.getBaseItemLabelGenerator)
-  def labelGenerator_=(generator: Option[XYItemLabelGenerator]) {
+  override def labelGenerator: Option[XYItemLabelGenerator] = Option(plot.getRenderer.getBaseItemLabelGenerator)
+  override def labelGenerator_=(generator: Option[XYItemLabelGenerator]) {
     val renderer = plot.getRenderer
     renderer.setBaseItemLabelsVisible(generator.isDefined)
     renderer.setBaseItemLabelGenerator(generator.orNull)
@@ -54,4 +55,10 @@ trait XYChart extends Chart[XYPlot] with Orientable with DomainAxis with RangeAx
   override def rangeAxisLabel_=(label: String) {
     plot.getRangeAxis.setLabel(label)
   }
+
+  override def tooltipGenerator: Option[XYToolTipGenerator] = Option(plot.getRenderer.getBaseToolTipGenerator)
+  override def tooltipGenerator_=(generator: Option[XYToolTipGenerator]) {
+    plot.getRenderer.setBaseToolTipGenerator(generator.orNull)
+  }
+
 }
