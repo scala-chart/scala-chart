@@ -24,8 +24,9 @@
 
 package org.sfree.chart
 
+import scala.swing.Orientation
+
 import org.jfree.chart.ChartFactory._
-import org.jfree.chart.plot.PlotOrientation
 import org.jfree.data.category.CategoryDataset
 
 /** Factory for area charts. */
@@ -45,7 +46,7 @@ object AreaChart extends ChartFactory {
             title: String = "",
             domainAxisLabel: String = "",
             rangeAxisLabel: String = "",
-            orientation: PlotOrientation = PlotOrientation.VERTICAL,
+            orientation: Orientation.Value = Orientation.Vertical,
             legend: Boolean = true,
             tooltips: Boolean = false): CategoryChart = {
     val chart = createAreaChart(title, domainAxisLabel, rangeAxisLabel, dataset, orientation,
@@ -70,7 +71,7 @@ object AreaChart extends ChartFactory {
               title: String = "",
               domainAxisLabel: String = "",
               rangeAxisLabel: String = "",
-              orientation: PlotOrientation = PlotOrientation.VERTICAL,
+              orientation: Orientation.Value = Orientation.Vertical,
               legend: Boolean = true,
               tooltips: Boolean = false): CategoryChart = {
     val chart = createStackedAreaChart(title, domainAxisLabel, rangeAxisLabel, dataset, orientation,

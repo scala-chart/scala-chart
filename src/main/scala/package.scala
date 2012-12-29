@@ -24,6 +24,11 @@
 
 package org.sfree
 
+import language.implicitConversions
+
+import scala.swing.Orientation
+import org.jfree.chart.plot.PlotOrientation
+
 /** This package contains wrappers for the [[http://www.jfree.org/jfreechart/ JFreeChart]] library.
   * The basic starting point is to import the [[org.sfree.chart.Charting]] object:
   *
@@ -46,4 +51,15 @@ package org.sfree
   * implicit conversions.
   */
 package object chart {
+
+  private[chart] implicit def plotOrientation2orientation(o: PlotOrientation): Orientation.Value = o match {
+    case PlotOrientation.HORIZONTAL ⇒ Orientation.Horizontal
+    case PlotOrientation.VERTICAL   ⇒ Orientation.Vertical
+  }
+
+  private[chart] implicit def orientation2plotOrientation(o: Orientation.Value): PlotOrientation = o match {
+    case Orientation.Horizontal ⇒ PlotOrientation.HORIZONTAL
+    case Orientation.Vertical   ⇒ PlotOrientation.VERTICAL
+  }
+
 }

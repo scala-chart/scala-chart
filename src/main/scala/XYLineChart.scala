@@ -24,9 +24,10 @@
 
 package org.sfree.chart
 
+import scala.swing.Orientation
+
 import org.jfree.chart.ChartFactory.createXYLineChart
 import org.jfree.chart.axis.DateAxis
-import org.jfree.chart.plot.PlotOrientation
 import org.jfree.data.time._
 import org.jfree.data.xy.XYDataset
 
@@ -51,7 +52,7 @@ object XYLineChart extends ChartFactory {
             title: String = "",
             domainAxisLabel: String = "",
             rangeAxisLabel: String = "",
-            orientation: PlotOrientation = PlotOrientation.VERTICAL,
+            orientation: Orientation.Value = Orientation.Vertical,
             legend: Boolean = true,
             tooltips: Boolean = false): XYChart = {
 

@@ -24,6 +24,8 @@
 
 package org.sfree.chart
 
+import scala.swing.{ Orientable, Orientation }
+
 import org.jfree.chart.labels._
 import org.jfree.chart.plot._
 
@@ -46,8 +48,8 @@ trait CategoryChart extends Chart[CategoryPlot] with Orientable with DomainAxis 
     renderer.setBaseItemLabelGenerator(generator.orNull)
   }
 
-  override def orientation: PlotOrientation = plot.getOrientation
-  override def orientation_=(orientation: PlotOrientation) {
+  override def orientation: Orientation.Value = plot.getOrientation
+  override def orientation_=(orientation: Orientation.Value) {
     plot.setOrientation(orientation)
   }
 

@@ -24,6 +24,8 @@
 
 package org.sfree.chart
 
+import scala.swing.{ Orientable, Orientation }
+
 import org.jfree.chart._
 import org.jfree.chart.axis._
 import org.jfree.chart.labels._
@@ -100,7 +102,7 @@ trait RichChart {
       )
     }
 
-    override def orientation: PlotOrientation = plot match {
+    override def orientation: Orientation.Value = plot match {
       case plot: CategoryPlot ⇒ plot.getOrientation
       case plot: XYPlot       ⇒ plot.getOrientation
       case plot ⇒ throw new UnsupportedOperationException (
@@ -108,7 +110,7 @@ trait RichChart {
       )
     }
 
-    override def orientation_=(orientation: PlotOrientation): Unit = plot match {
+    override def orientation_=(orientation: Orientation.Value): Unit = plot match {
       case plot: CategoryPlot ⇒ plot.setOrientation(orientation)
       case plot: XYPlot       ⇒ plot.setOrientation(orientation)
       case plot ⇒ throw new UnsupportedOperationException (
