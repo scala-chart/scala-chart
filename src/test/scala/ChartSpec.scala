@@ -2,7 +2,7 @@ package org.sfree.chart
 
 import language.existentials
 
-import Charting._
+import org.sfree.chart.Charting._
 import org.jfree.chart.plot._
 import org.jfree.chart.title.TextTitle
 
@@ -29,16 +29,19 @@ class ChartSpec extends Specification { def is =
   "AreaChart"                                                                                      ^
     "must have a CategoryPlot"                                                  ! ac1              ^
     "stacked must have a CategoryPlot"                                          ! ac2              ^
+    "orienting works"                                                           ! ac3              ^
                                                                                                   p^
   "BarChart"                                                                                       ^
     "must have a CategoryPlot"                                                  ! bc1              ^
     "stacked must have a CategoryPlot"                                          ! bc2              ^
     "3D must have a CategoryPlot"                                               ! bc3              ^
     "3D stacked must have a CategoryPlot"                                       ! bc4              ^
+    "orienting works"                                                           ! bc5              ^
                                                                                                   p^
   "LineChart"                                                                                      ^
     "must have a CategoryPlot"                                                  ! lc1              ^
     "3D must have a CategoryPlot"                                               ! lc2              ^
+    "orienting works"                                                           ! lc3              ^
                                                                                                   p^
   "MultiplePieChart"                                                                               ^
     "must have a MultiplePiePlot"                                               ! mpc1             ^
@@ -55,21 +58,22 @@ class ChartSpec extends Specification { def is =
     "must have an XYPlot"                                                       ! xyac1            ^
     "stacked must have an XYPlot"                                               ! xyac2            ^
     "stepped must have an XYPlot"                                               ! xyac3            ^
+    "orienting works"                                                           ! xyac4            ^
                                                                                                   p^
   "XYBarChart"                                                                                     ^
     "must have an XYPlot"                                                       ! xybc1            ^
+    "orienting works"                                                           ! xybc2            ^
                                                                                                   p^
   "XYLineChart"                                                                                    ^
     "must have an XYPlot"                                                       ! xylc1            ^
+    "orienting works"                                                           ! xylc2            ^
                                                                                                  end
   // -----------------------------------------------------------------------------------------------
   // tests
   // -----------------------------------------------------------------------------------------------
 
   def cstchart: Chart[_] = {
-    val data = for { i ← 1 to 5 } yield (i,i)
-    val dataset = data.toCategoryDataset
-    val chart = AreaChart(dataset)
+    val chart = AreaChart(categorydataset)
     chart.peer.clearSubtitles()
     chart
   }
@@ -159,144 +163,140 @@ class ChartSpec extends Specification { def is =
   }
 
   def ac1 = {
-    val data = for { i ← 1 to 5 } yield (i,i)
-    val dataset = data.toCategoryDataset
-    val chart = AreaChart(dataset)
+    val chart = AreaChart(categorydataset)
     (chart.plot must not (throwA[ClassCastException])) and (chart.plot must beAnInstanceOf[CategoryPlot])
   }
 
   def ac2 = {
-    val data = for { i ← 1 to 5 } yield (i,i)
-    val dataset = data.toCategoryDataset
-    val chart = AreaChart.stacked(dataset)
+    val chart = AreaChart.stacked(categorydataset)
     (chart.plot must not (throwA[ClassCastException])) and (chart.plot must beAnInstanceOf[CategoryPlot])
   }
 
+  def ac3 = {
+    val chart = AreaChart(categorydataset, orientation = Orientation.Vertical)
+    chart.orientation = Orientation.Horizontal
+    chart.orientation === Orientation.Horizontal
+  }
+
   def bc1 = {
-    val data = for { i ← 1 to 5 } yield (i,i)
-    val dataset = data.toCategoryDataset
-    val chart = BarChart(dataset)
+    val chart = BarChart(categorydataset)
     (chart.plot must not (throwA[ClassCastException])) and (chart.plot must beAnInstanceOf[CategoryPlot])
   }
 
   def bc2 = {
-    val data = for { i ← 1 to 5 } yield (i,i)
-    val dataset = data.toCategoryDataset
-    val chart = BarChart.stacked(dataset)
+    val chart = BarChart.stacked(categorydataset)
     (chart.plot must not (throwA[ClassCastException])) and (chart.plot must beAnInstanceOf[CategoryPlot])
   }
 
   def bc3 = {
-    val data = for { i ← 1 to 5 } yield (i,i)
-    val dataset = data.toCategoryDataset
-    val chart = BarChart.threeDimensional(dataset)
+    val chart = BarChart.threeDimensional(categorydataset)
     (chart.plot must not (throwA[ClassCastException])) and (chart.plot must beAnInstanceOf[CategoryPlot])
   }
 
   def bc4 = {
-    val data = for { i ← 1 to 5 } yield (i,i)
-    val dataset = data.toCategoryDataset
-    val chart = BarChart.threeDimensionalStacked(dataset)
+    val chart = BarChart.threeDimensionalStacked(categorydataset)
     (chart.plot must not (throwA[ClassCastException])) and (chart.plot must beAnInstanceOf[CategoryPlot])
   }
 
+  def bc5 = {
+    val chart = BarChart(categorydataset, orientation = Orientation.Vertical)
+    chart.orientation = Orientation.Horizontal
+    chart.orientation === Orientation.Horizontal
+  }
+
   def lc1 = {
-    val data = for { i ← 1 to 5 } yield (i,i)
-    val dataset = data.toCategoryDataset
-    val chart = LineChart(dataset)
+    val chart = LineChart(categorydataset)
     (chart.plot must not (throwA[ClassCastException])) and (chart.plot must beAnInstanceOf[CategoryPlot])
   }
 
   def lc2 = {
-    val data = for { i ← 1 to 5 } yield (i,i)
-    val dataset = data.toCategoryDataset
-    val chart = LineChart.threeDimensional(dataset)
+    val chart = LineChart.threeDimensional(categorydataset)
     (chart.plot must not (throwA[ClassCastException])) and (chart.plot must beAnInstanceOf[CategoryPlot])
   }
 
+  def lc3 = {
+    val chart = LineChart(categorydataset, orientation = Orientation.Vertical)
+    chart.orientation = Orientation.Horizontal
+    chart.orientation === Orientation.Horizontal
+  }
+
   def mpc1 = {
-    val data = for { i ← 1 to 5 } yield (i,i)
-    val dataset = data.toCategoryDataset
-    val chart = MultiplePieChart(dataset)
+    val chart = MultiplePieChart(categorydataset)
     (chart.plot must not (throwA[ClassCastException])) and (chart.plot must beAnInstanceOf[MultiplePiePlot])
   }
 
   def mpc2 = {
-    val data = for { i ← 1 to 5 } yield (i,i)
-    val dataset = data.toCategoryDataset
-    val chart = MultiplePieChart.threeDimensional(dataset)
+    val chart = MultiplePieChart.threeDimensional(categorydataset)
     (chart.plot must not (throwA[ClassCastException])) and (chart.plot must beAnInstanceOf[MultiplePiePlot])
   }
 
   def pc1 = {
-    val data = for { i ← 1 to 5 } yield (i,i)
-    val dataset = data.toPieDataset
-    val chart = PieChart(dataset)
+    val chart = PieChart(piedataset)
     (chart.plot must not (throwA[ClassCastException])) and (chart.plot must beAnInstanceOf[PiePlot])
   }
 
   def pc2 = {
-    val data = for { i ← 1 to 5 } yield (i,i)
-    val dataset = data.toPieDataset
-    val chart = PieChart.threeDimensional(dataset)
+    val chart = PieChart.threeDimensional(piedataset)
     (chart.plot must not (throwA[ClassCastException])) and (chart.plot must beAnInstanceOf[PiePlot])
   }
 
   def rc1 = {
-    val data = for { i ← 1 to 5 } yield (i,i)
-    val dataset = data.toPieDataset
-    val chart = RingChart(dataset)
+    val chart = RingChart(piedataset)
     (chart.plot must not (throwA[ClassCastException])) and (chart.plot must beAnInstanceOf[RingPlot])
   }
 
   def xyac1 = {
-    val data = for {
-      category ← 'a' to 'b'
-      xys = for { i ← 1 to 5 } yield (i,i)
-    } yield category → xys
-    val dataset = data.toXYSeriesCollection
-    val chart = XYAreaChart(dataset)
+    val chart = XYAreaChart(xydataset)
     (chart.plot must not (throwA[ClassCastException])) and (chart.plot must beAnInstanceOf[XYPlot])
   }
 
   def xyac2 = {
-    val data = for {
-      category ← 'a' to 'b'
-      xys = for { i ← 1 to 5 } yield (i,i)
-    } yield category.toString → xys
-    val dataset = data.toCategoryTableXYDataset
-    val chart = XYAreaChart.stacked(dataset)
+    val chart = XYAreaChart.stacked(tablexydataset)
     (chart.plot must not (throwA[ClassCastException])) and (chart.plot must beAnInstanceOf[XYPlot])
   }
 
   def xyac3 = {
-    val data = for {
-      category ← 'a' to 'b'
-      xys = for { i ← 1 to 5 } yield (i,i)
-    } yield category → xys
-    val dataset = data.toXYSeriesCollection
-    val chart = XYAreaChart.stepped(dataset)
+    val chart = XYAreaChart.stepped(xydataset)
     (chart.plot must not (throwA[ClassCastException])) and (chart.plot must beAnInstanceOf[XYPlot])
+  }
+
+  def xyac4 = {
+    val chart = XYAreaChart(xydataset, orientation = Orientation.Vertical)
+    chart.orientation = Orientation.Horizontal
+    chart.orientation === Orientation.Horizontal
   }
 
   def xybc1 = {
-    val data = for {
-      category ← 'a' to 'b'
-      xys = for { i ← 1 to 5 } yield (i,i)
-    } yield category → xys
-    val dataset = data.toXYSeriesCollection
-    val chart = XYBarChart(dataset)
+    val chart = XYBarChart(xydataset)
     (chart.plot must not (throwA[ClassCastException])) and (chart.plot must beAnInstanceOf[XYPlot])
   }
 
+  def xybc2 = {
+    val chart = XYBarChart(xydataset, orientation = Orientation.Vertical)
+    chart.orientation = Orientation.Horizontal
+    chart.orientation === Orientation.Horizontal
+  }
+
   def xylc1 = {
-    val data = for {
-      category ← 'a' to 'b'
-      xys = for { i ← 1 to 5 } yield (i,i)
-    } yield category → xys
-    val dataset = data.toXYSeriesCollection
-    val chart = XYLineChart(dataset)
+    val chart = XYLineChart(xydataset)
     (chart.plot must not (throwA[ClassCastException])) and (chart.plot must beAnInstanceOf[XYPlot])
   }
+
+  def xylc2 = {
+    val chart = XYLineChart(xydataset, orientation = Orientation.Vertical)
+    chart.orientation = Orientation.Horizontal
+    chart.orientation === Orientation.Horizontal
+  }
+
+  // -----------------------------------------------------------------------------------------------
+  // datasets
+  // -----------------------------------------------------------------------------------------------
+
+  def points = for { i ← 1 to 2 } yield (i,i)
+
+  def categorydataset = points.toCategoryDataset
+  def piedataset = points.toPieDataset
+  def tablexydataset = (for { category ← 'a' to 'b' } yield category.toString → points).toCategoryTableXYDataset
+  def xydataset = points.toXYSeriesCollection()
 
 }
