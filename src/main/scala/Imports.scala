@@ -24,20 +24,15 @@
 
 package org.sfree.chart
 
-/** $ChartingInfo */
-object Charting extends Charting
+object Imports extends Imports
+object TypeImports extends TypeImports
+object StaticForwarderImports extends StaticForwarderImports
 
-/** $ChartingInfo
-  *
-  * @define ChartingInfo Contains all enrichments. This import is the recommended starting point for
-  * working with sfreechart:
-  *
-  * {{{
-  * import org.sfree.chart._
-  * import org.sfree.chart.Charting._
-  * val data = Seq((0,0),(1,1),(2,2)).toXYSeriesCollection("some data")
-  * val chart = XYLineChart(data)
-  * }}}
-  *
-  */
-trait Charting extends RichChartingCollections with RichChart with Imports
+trait Imports extends TypeImports with StaticForwarderImports
+
+trait TypeImports {
+}
+
+trait StaticForwarderImports {
+  val Orientation = scala.swing.Orientation
+}
