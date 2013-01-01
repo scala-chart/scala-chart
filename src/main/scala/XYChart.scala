@@ -36,9 +36,9 @@ trait XYChart extends Chart[XYPlot] with Orientable with DomainAxis with RangeAx
 
   override def plot: XYPlot = peer.getXYPlot
 
-  override def domainAxisLabel: String = plot.getDomainAxis.getLabel
-  override def domainAxisLabel_=(label: String) {
-    plot.getDomainAxis.setLabel(label)
+  override def domainAxisLabel: Option[String] = Option(plot.getDomainAxis.getLabel) filterNot { _ == "" }
+  override def domainAxisLabel_=(label: Option[String]) {
+    plot.getDomainAxis.setLabel(label.getOrElse(""))
   }
 
   override def labelGenerator: Option[XYItemLabelGenerator] = Option(plot.getRenderer.getBaseItemLabelGenerator)
@@ -53,9 +53,9 @@ trait XYChart extends Chart[XYPlot] with Orientable with DomainAxis with RangeAx
     plot.setOrientation(orientation)
   }
 
-  override def rangeAxisLabel: String = plot.getRangeAxis.getLabel
-  override def rangeAxisLabel_=(label: String) {
-    plot.getRangeAxis.setLabel(label)
+  override def rangeAxisLabel: Option[String] = Option(plot.getRangeAxis.getLabel) filterNot { _ == "" }
+  override def rangeAxisLabel_=(label: Option[String]) {
+    plot.getRangeAxis.setLabel(label.getOrElse(""))
   }
 
   override def tooltipGenerator: Option[XYToolTipGenerator] = Option(plot.getRenderer.getBaseToolTipGenerator)

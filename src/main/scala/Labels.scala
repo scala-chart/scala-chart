@@ -33,7 +33,7 @@ trait Labels[G] {
   /** Optionally returns this charts label generator. */
   def labelGenerator: Option[G]
 
-  /** Optionally sets this charts label generator. */
+  /** Sets this charts label generator. */
   def labelGenerator_=(generator: Option[G]): Unit
 
   /** Sets this charts label generator. */
