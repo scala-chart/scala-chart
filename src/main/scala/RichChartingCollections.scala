@@ -42,7 +42,7 @@ object RichChartingCollections extends RichChartingCollections
 trait RichChartingCollections {
 
   /** Enriches a collection of data pairs. */
-  implicit class RichTuple2s[A,B](it: Iterable[(A,B)]) {
+  implicit class RichTuples[A,B](it: Iterable[(A,B)]) {
 
     /** Converts this collection to a `CategoryDataset`. */
     def toCategoryDataset(implicit eva: A ⇒ Comparable[A], evb: B ⇒ Number): CategoryDataset = {
@@ -111,8 +111,8 @@ trait RichChartingCollections {
 
   }
 
-  /** Enriches a collection of data `Tuple3s`. */
-  implicit class RichTuple3s[A,B,C](it: Iterable[(A,Iterable[(B,C)])]) {
+  /** Enriches a collection of categorized data pairs. */
+  implicit class RichCategorizedTuples[A,B,C](it: Iterable[(A,Iterable[(B,C)])]) {
 
     /** Converts this collection to a `CategoryDataset`. */
     def toCategoryDataset(implicit eva: A ⇒ Comparable[A], evb: B ⇒ Comparable[B], evc: C ⇒ Number): CategoryDataset = {
@@ -154,8 +154,8 @@ trait RichChartingCollections {
 
   }
 
-  /** Enriches a collection of data `Tuple4s`. */
-  implicit class RichTuple4s[A,B,C,D](it: Iterable[(A,Iterable[(B,Iterable[(C,D)])])]) {
+  /** Enriches a collection of categorized categorized data pairs. */
+  implicit class RichCategorizedCategorizedTuples[A,B,C,D](it: Iterable[(A,Iterable[(B,Iterable[(C,D)])])]) {
 
     import org.jfree.chart.JFreeChart
     import org.jfree.chart.plot._
