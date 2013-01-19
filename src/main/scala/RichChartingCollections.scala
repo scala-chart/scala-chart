@@ -24,8 +24,12 @@
 
 package org.sfree.chart
 
+import java.util.Date
+import scala.collection.JavaConversions.seqAsJavaList
+
 import org.jfree.data.category._
 import org.jfree.data.general._
+import org.jfree.data.statistics._
 import org.jfree.data.time._
 import org.jfree.data.xy._
 
@@ -43,6 +47,24 @@ trait RichChartingCollections {
 
   /** Enriches a collection of data pairs. */
   implicit class RichTuples[A,B](it: Iterable[(A,B)]) {
+
+    /** Converts this collection to a `BoxAndWhiskerCategoryDataset`. */
+    def toBoxAndWhiskerCategoryDataset[C](implicit eva: A ⇒ Comparable[A], evc: B ⇒ Seq[C], evd: C ⇒ Number): BoxAndWhiskerCategoryDataset = {
+      val dataset = new DefaultBoxAndWhiskerCategoryDataset()
+      it foreach { case (category,values) ⇒
+        dataset.add(BoxAndWhiskerCalculator.calculateBoxAndWhiskerStatistics(seqAsJavaList(values)), category, "")
+      }
+      dataset
+    }
+
+    /** Converts this collection to a `BoxAndWhiskerXYDataset`. */
+    def toBoxAndWhiskerXYDataset[C](name: String = "")(implicit eva: A ⇒ Date, evb: B ⇒ Seq[C], evc: C ⇒ Number): BoxAndWhiskerXYDataset = {
+      val dataset = new DefaultBoxAndWhiskerXYDataset(name)
+      it foreach { case (date,ys) ⇒
+        dataset.add(date, BoxAndWhiskerCalculator.calculateBoxAndWhiskerStatistics(seqAsJavaList(ys)))
+      }
+      dataset
+    }
 
     /** Converts this collection to a `CategoryDataset`. */
     def toCategoryDataset(implicit eva: A ⇒ Comparable[A], evb: B ⇒ Number): CategoryDataset = {
@@ -113,6 +135,16 @@ trait RichChartingCollections {
 
   /** Enriches a collection of categorized data pairs. */
   implicit class RichCategorizedTuples[A,B,C](it: Iterable[(A,Iterable[(B,C)])]) {
+
+    /** Converts this collection to a `BoxAndWhiskerCategoryDataset`. */
+    def toBoxAndWhiskerCategoryDataset[D](implicit eva: A ⇒ Comparable[A], evb: B ⇒ Comparable[B], evc: C ⇒ Seq[D], evd: D ⇒ Number): BoxAndWhiskerCategoryDataset = {
+      val dataset = new DefaultBoxAndWhiskerCategoryDataset()
+      for {
+        (upper,lvs) ← it
+        (lower,values) ← lvs
+      } dataset.add(BoxAndWhiskerCalculator.calculateBoxAndWhiskerStatistics(seqAsJavaList(values)), lower, upper)
+      dataset
+    }
 
     /** Converts this collection to a `CategoryDataset`. */
     def toCategoryDataset(implicit eva: A ⇒ Comparable[A], evb: B ⇒ Comparable[B], evc: C ⇒ Number): CategoryDataset = {
