@@ -1,6 +1,6 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *                                                                                               *
- *  Copyright © 2012 Christian Krause                                                            *
+ *  Copyright © 2012-2013 Christian Krause                                                       *
  *                                                                                               *
  *  Christian Krause <kizkizzbangbang@googlemail.com>                                            *
  *                                                                                               *
