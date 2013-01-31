@@ -40,4 +40,4 @@ object Charting extends Charting
   * }}}
   *
   */
-trait Charting extends RichChartingCollections with RichChart with Imports
+trait Charting extends RichChartingCollections with ChartFactories with RichChart with Imports

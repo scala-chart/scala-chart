@@ -24,51 +24,8 @@
 
 package scalax.chart
 
-import org.jfree.chart.ChartFactory._
 import org.jfree.chart.labels._
-import org.jfree.chart.plot.PiePlot
 import org.jfree.chart.plot.MultiplePiePlot
-import org.jfree.data.category.CategoryDataset
-import org.jfree.util.TableOrder
-
-/** Factory for multiple pie charts. */
-object MultiplePieChart extends ChartFactory {
-
-  /** Creates a new multiple pie chart.
-    *
-    * @param dataset  $dataset
-    * @param title    $title
-    * @param legend   $legend
-    * @param tooltips $tooltips
-    */
-  def apply(dataset: CategoryDataset,
-            title: String = "",
-            legend: Boolean = true,
-            tooltips: Boolean = true): MultiplePieChart = {
-    val chart = createMultiplePieChart(title, dataset, TableOrder.BY_COLUMN, legend, tooltips, false)
-    new MultiplePieChart {
-      override val peer = chart
-    }
-  }
-
-  /** Creates a new multiple pie chart with three dimensional pies.
-    *
-    * @param dataset  $dataset
-    * @param title    $title
-    * @param legend   $legend
-    * @param tooltips $tooltips
-    */
-  def threeDimensional(dataset: CategoryDataset,
-                       title: String = "",
-                       legend: Boolean = true,
-                       tooltips: Boolean = true): MultiplePieChart = {
-    val chart = createMultiplePieChart3D(title, dataset, TableOrder.BY_COLUMN, legend, tooltips, false)
-    new MultiplePieChart {
-      override val peer = chart
-    }
-  }
-
-}
 
 /** Represents categorized numeric data with multiple pies. */
 trait MultiplePieChart extends Chart[MultiplePiePlot]

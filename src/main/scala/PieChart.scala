@@ -24,48 +24,7 @@
 
 package scalax.chart
 
-import org.jfree.chart.ChartFactory._
 import org.jfree.chart.plot.PiePlot
-import org.jfree.data.general.PieDataset
-
-/** Factory for pie charts. */
-object PieChart extends ChartFactory {
-
-  /** Creates a new pie chart.
-    *
-    * @param dataset  $dataset
-    * @param title    $title
-    * @param legend   $legend
-    * @param tooltips $tooltips
-    */
-  def apply(dataset: PieDataset,
-            title: String = "",
-            legend: Boolean = true,
-            tooltips: Boolean = true): PieChart = {
-    val chart = createPieChart(title, dataset, legend, tooltips, false)
-    new PieChart {
-      override val peer = chart
-    }
-  }
-
-  /** Creates a new pie chart with a three dimensional pie.
-    *
-    * @param dataset  $dataset
-    * @param title    $title
-    * @param legend   $legend
-    * @param tooltips $tooltips
-    */
-  def threeDimensional(dataset: PieDataset,
-                       title: String = "",
-                       legend: Boolean = true,
-                       tooltips: Boolean = true): PieChart = {
-    val chart = createPieChart3D(title, dataset, legend, tooltips, false)
-    new PieChart {
-      override val peer = chart
-    }
-  }
-
-}
 
 /** Represents categorized numeric data with a pie. */
 trait PieChart extends Chart[PiePlot] with PieChartLike[PiePlot] {

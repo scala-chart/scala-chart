@@ -24,31 +24,7 @@
 
 package scalax.chart
 
-import org.jfree.chart.ChartFactory.createRingChart
 import org.jfree.chart.plot.RingPlot
-import org.jfree.data.general.PieDataset
-
-/** Factory for ring charts. */
-object RingChart extends ChartFactory {
-
-  /** Creates a new ring chart.
-    *
-    * @param dataset  $dataset
-    * @param title    $title
-    * @param legend   $legend
-    * @param tooltips $tooltips
-    */
-  def apply(dataset: PieDataset,
-            title: String = "",
-            legend: Boolean = true,
-            tooltips: Boolean = true): RingChart = {
-    val chart = createRingChart(title, dataset, legend, tooltips, false)
-    new RingChart {
-      override val peer = chart
-    }
-  }
-
-}
 
 /** Represents categorized numeric data with a ring. */
 trait RingChart extends Chart[RingPlot] with PieChartLike[RingPlot] {

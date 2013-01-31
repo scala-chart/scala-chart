@@ -202,7 +202,7 @@ trait RichChartingCollections {
       for {
         (outer,miv) ← it
         dataset     = miv.toCategoryDataset
-        chart       = BarChart(dataset, outer.toString)
+        chart       = ChartFactories.BarChart(dataset, outer.toString)
       } plot.add(chart.plot)
 
       val chart = new JFreeChart(plot)
