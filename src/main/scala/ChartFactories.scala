@@ -39,6 +39,8 @@ import org.jfree.data.time._
 import org.jfree.data.xy._
 import org.jfree.util.TableOrder
 
+import Imports._
+
 /** $ChartFactoriesInfo */
 object ChartFactories extends ChartFactories
 
@@ -87,7 +89,7 @@ trait ChartFactories {
               title: String = "",
               domainAxisLabel: String = "",
               rangeAxisLabel: String = "",
-              orientation: Orientation.Value = Orientation.Vertical,
+              orientation: Orientation = Orientation.Vertical,
               legend: Boolean = true,
               tooltips: Boolean = false): CategoryChart = {
       val chart = createAreaChart(title, domainAxisLabel, rangeAxisLabel, dataset, orientation,
@@ -112,7 +114,7 @@ trait ChartFactories {
                 title: String = "",
                 domainAxisLabel: String = "",
                 rangeAxisLabel: String = "",
-                orientation: Orientation.Value = Orientation.Vertical,
+                orientation: Orientation = Orientation.Vertical,
                 legend: Boolean = true,
                 tooltips: Boolean = false): CategoryChart = {
       val chart = createStackedAreaChart(title, domainAxisLabel, rangeAxisLabel, dataset, orientation,
@@ -142,7 +144,7 @@ trait ChartFactories {
               title: String = "",
               domainAxisLabel: String = "",
               rangeAxisLabel: String = "",
-              orientation: Orientation.Value = Orientation.Vertical,
+              orientation: Orientation = Orientation.Vertical,
               legend: Boolean = true,
               tooltips: Boolean = false): CategoryChart = {
       val chart = createBarChart(title, domainAxisLabel, rangeAxisLabel, dataset, orientation, legend,
@@ -167,7 +169,7 @@ trait ChartFactories {
                 title: String = "",
                 domainAxisLabel: String = "",
                 rangeAxisLabel: String = "",
-                orientation: Orientation.Value = Orientation.Vertical,
+                orientation: Orientation = Orientation.Vertical,
                 legend: Boolean = true,
                 tooltips: Boolean = false): CategoryChart = {
       val chart = createStackedBarChart(title, domainAxisLabel, rangeAxisLabel, dataset, orientation,
@@ -192,7 +194,7 @@ trait ChartFactories {
                          title: String = "",
                          domainAxisLabel: String = "",
                          rangeAxisLabel: String = "",
-                         orientation: Orientation.Value = Orientation.Vertical,
+                         orientation: Orientation = Orientation.Vertical,
                          legend: Boolean = true,
                          tooltips: Boolean = false): CategoryChart = {
       val chart = createBarChart3D(title, domainAxisLabel, rangeAxisLabel, dataset, orientation,
@@ -217,7 +219,7 @@ trait ChartFactories {
                                 title: String = "",
                                 domainAxisLabel: String = "",
                                 rangeAxisLabel: String = "",
-                                orientation: Orientation.Value = Orientation.Vertical,
+                                orientation: Orientation = Orientation.Vertical,
                                 legend: Boolean = true,
                                 tooltips: Boolean = false): CategoryChart = {
       val chart = createStackedBarChart3D(title, domainAxisLabel, rangeAxisLabel, dataset,
@@ -272,7 +274,7 @@ trait ChartFactories {
               title: String = "",
               domainAxisLabel: String = "",
               rangeAxisLabel: String = "",
-              orientation: Orientation.Value = Orientation.Vertical,
+              orientation: Orientation = Orientation.Vertical,
               legend: Boolean = true,
               tooltips: Boolean = false): CategoryChart = {
       val chart = createLineChart(title, domainAxisLabel, rangeAxisLabel, dataset, orientation,
@@ -298,7 +300,7 @@ trait ChartFactories {
                          title: String = "",
                          domainAxisLabel: String = "",
                          rangeAxisLabel: String = "",
-                         orientation: Orientation.Value = Orientation.Vertical,
+                         orientation: Orientation = Orientation.Vertical,
                          legend: Boolean = true,
                          tooltips: Boolean = false): CategoryChart = {
       val chart = createLineChart3D(title, domainAxisLabel, rangeAxisLabel, dataset, orientation,
@@ -432,7 +434,7 @@ trait ChartFactories {
               title: String = "",
               domainAxisLabel: String = "",
               rangeAxisLabel: String = "",
-              orientation: Orientation.Value = Orientation.Vertical,
+              orientation: Orientation = Orientation.Vertical,
               legend: Boolean = true,
               tooltips: Boolean = false): XYChart = {
 
@@ -468,7 +470,7 @@ trait ChartFactories {
                 title: String = "",
                 domainAxisLabel: String = "",
                 rangeAxisLabel: String = "",
-                orientation: Orientation.Value = Orientation.Vertical,
+                orientation: Orientation = Orientation.Vertical,
                 legend: Boolean = true,
                 tooltips: Boolean = false): XYChart = {
 
@@ -503,7 +505,7 @@ trait ChartFactories {
                 title: String = "",
                 domainAxisLabel: String = "",
                 rangeAxisLabel: String = "",
-                orientation: Orientation.Value = Orientation.Vertical,
+                orientation: Orientation = Orientation.Vertical,
                 legend: Boolean = true,
                 tooltips: Boolean = false): XYChart = {
 
@@ -545,7 +547,7 @@ trait ChartFactories {
               title: String = "",
               domainAxisLabel: String = "",
               rangeAxisLabel: String = "",
-              orientation: Orientation.Value = Orientation.Vertical,
+              orientation: Orientation = Orientation.Vertical,
               legend: Boolean = true,
               tooltips: Boolean = false): XYChart = {
 
@@ -582,7 +584,7 @@ trait ChartFactories {
                 title: String = "",
                 domainAxisLabel: String = "",
                 rangeAxisLabel: String = "",
-                orientation: Orientation.Value = Orientation.Vertical,
+                orientation: Orientation = Orientation.Vertical,
                 legend: Boolean = true,
                 tooltips: Boolean = false): XYChart = {
 
@@ -670,7 +672,7 @@ trait ChartFactories {
               title: String = "",
               domainAxisLabel: String = "",
               rangeAxisLabel: String = "",
-              orientation: Orientation.Value = Orientation.Vertical,
+              orientation: Orientation = Orientation.Vertical,
               legend: Boolean = true,
               tooltips: Boolean = false): XYChart = {
 

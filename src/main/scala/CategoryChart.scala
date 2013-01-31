@@ -24,10 +24,12 @@
 
 package scalax.chart
 
-import scala.swing.{ Orientable, Orientation }
+import scala.swing.Orientable
 
 import org.jfree.chart.labels._
 import org.jfree.chart.plot._
+
+import Imports._
 
 /** Represents categorized numeric data. */
 trait CategoryChart extends Chart[CategoryPlot] with Orientable with DomainAxis with RangeAxis
@@ -48,8 +50,8 @@ trait CategoryChart extends Chart[CategoryPlot] with Orientable with DomainAxis 
     renderer.setBaseItemLabelGenerator(generator.orNull)
   }
 
-  override def orientation: Orientation.Value = plot.getOrientation
-  override def orientation_=(orientation: Orientation.Value) {
+  override def orientation: Orientation = plot.getOrientation
+  override def orientation_=(orientation: Orientation) {
     plot.setOrientation(orientation)
   }
 

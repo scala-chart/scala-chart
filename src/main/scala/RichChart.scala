@@ -24,12 +24,14 @@
 
 package scalax.chart
 
-import scala.swing.{ Orientable, Orientation }
+import scala.swing.Orientable
 
 import org.jfree.chart._
 import org.jfree.chart.axis._
 import org.jfree.chart.labels._
 import org.jfree.chart.plot._
+
+import Imports._
 
 /** $RichChartInfo */
 object RichChart extends RichChart
@@ -110,7 +112,7 @@ trait RichChart {
       )
     }
 
-    override def orientation: Orientation.Value = plot match {
+    override def orientation: Orientation = plot match {
       case plot: CategoryPlot ⇒ plot.getOrientation
       case plot: XYPlot       ⇒ plot.getOrientation
       case plot ⇒ throw new UnsupportedOperationException (
@@ -118,7 +120,7 @@ trait RichChart {
       )
     }
 
-    override def orientation_=(orientation: Orientation.Value): Unit = plot match {
+    override def orientation_=(orientation: Orientation): Unit = plot match {
       case plot: CategoryPlot ⇒ plot.setOrientation(orientation)
       case plot: XYPlot       ⇒ plot.setOrientation(orientation)
       case plot ⇒ throw new UnsupportedOperationException (

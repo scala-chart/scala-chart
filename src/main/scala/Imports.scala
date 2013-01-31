@@ -31,6 +31,7 @@ object StaticForwarderImports extends StaticForwarderImports
 trait Imports extends TypeImports with StaticForwarderImports
 
 trait TypeImports {
+  type Orientation = scala.swing.Orientation.Value
 }
 
 trait StaticForwarderImports {
