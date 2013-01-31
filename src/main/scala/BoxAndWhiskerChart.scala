@@ -6,7 +6,7 @@
  *                                                                                               *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *                                                                                               *
- *  This file is part of 'sfreechart'.                                                           *
+ *  This file is part of 'scala-chart'.                                                          *
  *                                                                                               *
  *  This project is free software: you can redistribute it and/or modify it under the terms      *
  *  of the GNU Lesser General Public License as published by the Free Software Foundation,       *
@@ -22,7 +22,7 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 
-package org.sfree.chart
+package scalax.chart
 
 import org.jfree.chart.ChartFactory.createBoxAndWhiskerChart
 import org.jfree.data.statistics.BoxAndWhiskerCategoryDataset

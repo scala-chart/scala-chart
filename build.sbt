@@ -1,5 +1,5 @@
 
-name := "sfreechart"
+name := "scala-chart"
 
 version := "0.2.0-SNAPSHOT"
 
@@ -17,17 +17,17 @@ libraryDependencies ++= Seq (
 initialCommands in (Compile, consoleQuick) <<= initialCommands in Compile
 
 initialCommands in Compile in console += """
-  import org.sfree.chart._
-  import org.sfree.chart.Charting._
+  import scalax.chart._
+  import scalax.chart.Charting._
 """
 
 // -------------------------------------------------------------------------------------------------
 // supplementary project information
 // -------------------------------------------------------------------------------------------------
 
-organization := "com.github.wookietreiber.sfreechart"
+organization := "com.github.wookietreiber"
 
-description := "Scala Wrappers for JFreeChart"
+description := "Scala Chart Library"
 
 homepage := Some(url("https://github.com/wookietreiber/scala-chart"))
 

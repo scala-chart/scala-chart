@@ -6,7 +6,7 @@
  *                                                                                               *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *                                                                                               *
- *  This file is part of 'sfreechart'.                                                           *
+ *  This file is part of 'scala-chart'.                                                          *
  *                                                                                               *
  *  This project is free software: you can redistribute it and/or modify it under the terms      *
  *  of the GNU Lesser General Public License as published by the Free Software Foundation,       *
@@ -22,7 +22,7 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 
-package org.sfree
+package scalax
 
 import language.implicitConversions
 
@@ -30,11 +30,11 @@ import scala.swing.Orientation
 import org.jfree.chart.plot.PlotOrientation
 
 /** This package contains wrappers for the [[http://www.jfree.org/jfreechart/ JFreeChart]] library.
-  * The basic starting point is to import the [[org.sfree.chart.Charting]] object:
+  * The basic starting point is to import the [[scalax.chart.Charting]] object:
   *
   * {{{
-  * import org.sfree.chart._
-  * import org.sfree.chart.Charting._
+  * import scalax.chart._
+  * import scalax.chart.Charting._
   * }}}
   *
   * With this import you can convert Scala collections to JFreeChart datasets and use chart
@@ -46,8 +46,8 @@ import org.jfree.chart.plot.PlotOrientation
   * val chart = XYLineChart(dataset, title = "My Chart of Some Points")
   * }}}
   *
-  * There are also implicit conversions / views available in the [[org.sfree.chart.views]] package,
-  * but they are not contained by [[org.sfree.chart.Charting]], because of ambiguity issues with
+  * There are also implicit conversions / views available in the [[scalax.chart.views]] package,
+  * but they are not contained by [[scalax.chart.Charting]], because of ambiguity issues with
   * implicit conversions.
   */
 package object chart {

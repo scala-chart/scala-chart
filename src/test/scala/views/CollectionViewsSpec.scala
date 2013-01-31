@@ -1,4 +1,4 @@
-package org.sfree.chart
+package scalax.chart
 package views
 
 import org.specs2._

@@ -6,7 +6,7 @@
  *                                                                                               *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *                                                                                               *
- *  This file is part of 'sfreechart'.                                                           *
+ *  This file is part of 'scala-chart'.                                                          *
  *                                                                                               *
  *  This project is free software: you can redistribute it and/or modify it under the terms      *
  *  of the GNU Lesser General Public License as published by the Free Software Foundation,       *
@@ -22,7 +22,7 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 
-package org.sfree.chart
+package scalax.chart
 
 import scala.swing.{ Orientable, Orientation }
 
@@ -38,7 +38,7 @@ object RichChart extends RichChart
   *
   * @define RichChartInfo Contains an enriched `JFreeChart` that provides convenient access to
   * e.g. save and show the chart. To read the documentation for these methods, see
-  * [[org.sfree.chart.RichChart.GenericRichChart]].
+  * [[scalax.chart.RichChart.GenericRichChart]].
   */
 trait RichChart {
 

@@ -6,7 +6,7 @@
  *                                                                                               *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *                                                                                               *
- *  This file is part of 'sfreechart'.                                                           *
+ *  This file is part of 'scala-chart'.                                                          *
  *                                                                                               *
  *  This project is free software: you can redistribute it and/or modify it under the terms      *
  *  of the GNU Lesser General Public License as published by the Free Software Foundation,       *
@@ -22,7 +22,7 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 
-package org.sfree.chart
+package scalax.chart
 
 /** $ChartingInfo */
 object Charting extends Charting
@@ -30,11 +30,11 @@ object Charting extends Charting
 /** $ChartingInfo
   *
   * @define ChartingInfo Contains all enrichments. This import is the recommended starting point for
-  * working with sfreechart:
+  * working with scala-chart:
   *
   * {{{
-  * import org.sfree.chart._
-  * import org.sfree.chart.Charting._
+  * import scalax.chart._
+  * import scalax.chart.Charting._
   * val data = Seq((0,0),(1,1),(2,2)).toXYSeriesCollection("some data")
   * val chart = XYLineChart(data)
   * }}}

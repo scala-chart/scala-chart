@@ -1,8 +1,8 @@
-package org.sfree.chart
+package scalax.chart
 
 import language.existentials
 
-import org.sfree.chart.Charting._
+import scalax.chart.Charting._
 import org.jfree.chart.plot._
 import org.jfree.chart.title.TextTitle
 
