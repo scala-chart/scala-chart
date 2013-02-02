@@ -26,9 +26,6 @@ package scalax.chart
 
 import scala.swing.Orientable
 
-import org.jfree.chart.labels._
-import org.jfree.chart.plot._
-
 import Imports._
 
 /** Represents numeric data. */
@@ -43,11 +40,19 @@ trait XYChart extends Chart[XYPlot] with Orientable with DomainAxis with RangeAx
     plot.getDomainAxis.setLabel(label.getOrElse(""))
   }
 
-  override def labelGenerator: Option[XYItemLabelGenerator] = Option(plot.getRenderer.getBaseItemLabelGenerator)
+  override def labelGenerator: Option[XYItemLabelGenerator] = Option (
+    plot.getRenderer.getBaseItemLabelGenerator
+  ) map { _.generateLabel _ }
+
   override def labelGenerator_=(generator: Option[XYItemLabelGenerator]) {
     val renderer = plot.getRenderer
     renderer.setBaseItemLabelsVisible(generator.isDefined)
-    renderer.setBaseItemLabelGenerator(generator.orNull)
+    renderer.setBaseItemLabelGenerator(generator.map( lg ⇒
+      new org.jfree.chart.labels.XYItemLabelGenerator {
+        override def generateLabel(dataset: XYDataset, series: Int, item: Int): String =
+          lg(dataset, series, item)
+      }
+    ).orNull)
   }
 
   override def orientation: Orientation = plot.getOrientation
@@ -60,9 +65,17 @@ trait XYChart extends Chart[XYPlot] with Orientable with DomainAxis with RangeAx
     plot.getRangeAxis.setLabel(label.getOrElse(""))
   }
 
-  override def tooltipGenerator: Option[XYToolTipGenerator] = Option(plot.getRenderer.getBaseToolTipGenerator)
+  override def tooltipGenerator: Option[XYToolTipGenerator] = Option (
+    plot.getRenderer.getBaseToolTipGenerator
+  ) map { _.generateToolTip _ }
+
   override def tooltipGenerator_=(generator: Option[XYToolTipGenerator]) {
-    plot.getRenderer.setBaseToolTipGenerator(generator.orNull)
+    plot.getRenderer.setBaseToolTipGenerator(generator.map( ttg ⇒
+      new org.jfree.chart.labels.XYToolTipGenerator {
+        override def generateToolTip(dataset: XYDataset, series: Int, item: Int): String =
+          ttg(dataset, series, item)
+      }
+    ).orNull)
   }
 
 }

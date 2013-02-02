@@ -31,7 +31,7 @@ import org.jfree.chart.axis._
 import org.jfree.chart.labels._
 import org.jfree.chart.plot._
 
-import Imports._
+import Imports.Orientation
 
 /** $RichChartInfo */
 object RichChart extends RichChart

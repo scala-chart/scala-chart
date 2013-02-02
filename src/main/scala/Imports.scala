@@ -32,6 +32,13 @@ trait Imports extends TypeImports with StaticForwarderImports
 
 trait TypeImports {
   type Orientation = scala.swing.Orientation.Value
+
+  type XYDataset = org.jfree.data.xy.XYDataset
+
+  type XYPlot = org.jfree.chart.plot.XYPlot
+
+  type XYItemLabelGenerator = (XYDataset,Int,Int) ⇒ String
+  type XYToolTipGenerator = (XYDataset,Int,Int) ⇒ String
 }
 
 trait StaticForwarderImports {
