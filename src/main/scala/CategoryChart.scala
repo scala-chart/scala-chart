@@ -26,9 +26,6 @@ package scalax.chart
 
 import scala.swing.Orientable
 
-import org.jfree.chart.labels._
-import org.jfree.chart.plot._
-
 import Imports._
 
 /** Represents categorized numeric data. */
@@ -43,11 +40,21 @@ trait CategoryChart extends Chart[CategoryPlot] with Orientable with DomainAxis 
     plot.getDomainAxis.setLabel(label.getOrElse(""))
   }
 
-  override def labelGenerator: Option[CategoryItemLabelGenerator] = Option(plot.getRenderer.getBaseItemLabelGenerator)
+  override def labelGenerator: Option[CategoryItemLabelGenerator] = Option (
+    plot.getRenderer.getBaseItemLabelGenerator
+  ) map { _.generateLabel _ }
+
   override def labelGenerator_=(generator: Option[CategoryItemLabelGenerator]) {
     val renderer = plot.getRenderer
     renderer.setBaseItemLabelsVisible(generator.isDefined)
-    renderer.setBaseItemLabelGenerator(generator.orNull)
+    renderer.setBaseItemLabelGenerator(generator.map( gen ⇒
+      new org.jfree.chart.labels.CategoryItemLabelGenerator {
+        override def generateColumnLabel(dataset: CategoryDataset, col: Int): String = ""
+        override def generateLabel(dataset: CategoryDataset, row: Int, col: Int): String =
+          gen(dataset, row, col)
+        override def generateRowLabel(dataset: CategoryDataset, row: Int): String = ""
+      }
+    ).orNull)
   }
 
   override def orientation: Orientation = plot.getOrientation
@@ -60,9 +67,17 @@ trait CategoryChart extends Chart[CategoryPlot] with Orientable with DomainAxis 
     plot.getRangeAxis.setLabel(label.getOrElse(""))
   }
 
-  override def tooltipGenerator: Option[CategoryToolTipGenerator] = Option(plot.getRenderer.getBaseToolTipGenerator)
+  override def tooltipGenerator: Option[CategoryToolTipGenerator] = Option (
+    plot.getRenderer.getBaseToolTipGenerator
+  ) map { _.generateToolTip _ }
+
   override def tooltipGenerator_=(generator: Option[CategoryToolTipGenerator]) {
-    plot.getRenderer.setBaseToolTipGenerator(generator.orNull)
+    plot.getRenderer.setBaseToolTipGenerator(generator.map( ttg ⇒
+      new org.jfree.chart.labels.CategoryToolTipGenerator {
+        override def generateToolTip(dataset: CategoryDataset, row: Int, col: Int): String =
+          ttg(dataset, row, col)
+      }
+    ).orNull)
   }
 
 }
