@@ -21,15 +21,22 @@
         import org.sfree.chart.Charting._
 
 -   the selfless trait `ChartFactory` has been renamed to `ChartFactories`
+
 -   own wrappers for charts with `peer` access to the original `JFreeChart`
     -   all factories return these chart types
     -   these include a `Buffer` for `subtitles` (includes the legends)
     -   most of the chart functionality has been modularized into separate traits
+
 -   orienting charts is now done via `scala.swing.Orientable`
+
 -   label and tooltip generation is now done via functions
+
 -   new stacked xy bar chart factory
+
 -   new converter to `CategoryTableXYDataset`
+
 -   support box and whisker charts / datasets
+
 -   most of the accessors / mutators use `Option` where applicable
 
 
