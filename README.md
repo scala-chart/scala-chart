@@ -3,7 +3,7 @@ Scala Chart Library
 
 `scala-chart` is a Scala library for creating and working with charts. It wraps [JFreeChart][], much
 like `scala-swing` does with the original `javax.swing` package. This project is released under the
-same license as [JFreeChart][] to make them fully license-compatible.
+same license as [JFreeChart][] to make them fully license-compatible. Checkout the [API][].
 
 Usage
 -----
@@ -59,6 +59,7 @@ Import these with care, it's most likely better to use the explicit conversions 
 
 
 [JFreeChart]: http://jfree.org/jfreechart/
+[API]: http://wookietreiber.github.com/scala-chart/latest/api/index.html
 [sbt]: http://www.scala-sbt.org/
 [maven]: http://maven.apache.org/
 

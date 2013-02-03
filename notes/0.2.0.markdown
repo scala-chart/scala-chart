@@ -1,0 +1,38 @@
+`scala-chart` (formerly `sfreechart`) version 0.2.0 includes the following changes:
+
+-   obviously the artifact name changed from `sfreechart` to `scala-chart`, also the `groupID` /
+    organization changed from `com.github.wookietreiber.sfreechart` to `com.github.wookietreiber`,
+    this changes the `sbt` usage to:
+
+        libraryDependencies += "com.github.wookietreiber" %% "scala-chart" % "0.2.0"
+
+    ... and the `maven` usage to:
+
+        <dependency>
+          <groupId>com.github.wookietreiber</groupId>
+          <artifactId>scala-chart_${scala.version}</artifactId>
+          <version>latest.integration</version>
+        </dependency>
+
+-   the base package changed from `org.sfree.chart` to `scalax.chart`, which changes the basic
+    imports to:
+
+        import org.sfree.chart._
+        import org.sfree.chart.Charting._
+
+-   the selfless trait `ChartFactory` has been renamed to `ChartFactories`
+-   own wrappers for charts with `peer` access to the original `JFreeChart`
+    -   all factories return these chart types
+    -   these include a `Buffer` for `subtitles` (includes the legends)
+    -   most of the chart functionality has been modularized into separate traits
+-   orienting charts is now done via `scala.swing.Orientable`
+-   label and tooltip generation is now done via functions
+-   new stacked xy bar chart factory
+-   new converter to `CategoryTableXYDataset`
+-   support box and whisker charts / datasets
+-   most of the accessors / mutators use `Option` where applicable
+
+
+For more information about `scala-chart` usage have a look at the
+[README](https://github.com/wookietreiber/scala-chart#readme) and at the
+[API](http://wookietreiber.github.com/scala-chart/latest/api/index.html).
