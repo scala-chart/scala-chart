@@ -24,7 +24,7 @@
 
 package scalax.chart
 
-import org.jfree.chart.plot.PiePlot
+import Imports._
 
 /** Represents categorized numeric data with a pie. */
 trait PieChart extends Chart[PiePlot] with PieChartLike[PiePlot] {

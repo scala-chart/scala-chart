@@ -24,8 +24,9 @@
 
 package scalax.chart
 
-import org.jfree.chart.labels._
 import org.jfree.chart.plot.MultiplePiePlot
+
+import Imports._
 
 /** Represents categorized numeric data with multiple pies. */
 trait MultiplePieChart extends Chart[MultiplePiePlot]

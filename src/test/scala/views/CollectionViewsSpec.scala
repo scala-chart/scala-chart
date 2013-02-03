@@ -4,10 +4,10 @@ package views
 import org.specs2._
 
 import org.jfree.data.category._
-import org.jfree.data.general._
 import org.jfree.data.time._
 import org.jfree.data.xy._
 
+import Imports._
 import CollectionViews._
 
 class CollectionViewsSpec extends Specification with BeViewableAs with Implicits { def is =

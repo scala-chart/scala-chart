@@ -33,10 +33,15 @@ trait Imports extends TypeImports with StaticForwarderImports
 trait TypeImports {
   type Orientation = scala.swing.Orientation.Value
 
+  type PieDataset = org.jfree.data.general.PieDataset
   type XYDataset = org.jfree.data.xy.XYDataset
 
+  type MultiplePiePlot = org.jfree.chart.plot.MultiplePiePlot
+  type PiePlot = org.jfree.chart.plot.PiePlot
   type XYPlot = org.jfree.chart.plot.XYPlot
 
+  type PieSectionLabelGenerator = (PieDataset,Comparable[_]) ⇒ String
+  type PieToolTipGenerator = (PieDataset,Comparable[_]) ⇒ String
   type XYItemLabelGenerator = (XYDataset,Int,Int) ⇒ String
   type XYToolTipGenerator = (XYDataset,Int,Int) ⇒ String
 }

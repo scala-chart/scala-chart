@@ -30,10 +30,8 @@ import org.jfree.chart.JFreeChart
 import org.jfree.chart.ChartFactory._
 import org.jfree.chart.axis._
 import org.jfree.chart.labels.StandardXYToolTipGenerator
-import org.jfree.chart.plot.XYPlot
 import org.jfree.chart.renderer.xy.StackedXYBarRenderer
 import org.jfree.data.category.CategoryDataset
-import org.jfree.data.general.PieDataset
 import org.jfree.data.statistics._
 import org.jfree.data.time._
 import org.jfree.data.xy._
