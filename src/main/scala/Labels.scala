@@ -23,27 +23,22 @@
 
 
 package scalax.chart
-package views
 
-import language.implicitConversions
+/** Mixin for charts which may display labels.
+  *
+  * @tparam G type of label generator
+  */
+trait Labels[G] {
 
-import org.jfree.data.general._
+  /** Optionally returns this charts label generator. */
+  def labelGenerator: Option[G]
 
-import RichChartingCollections._
+  /** Sets this charts label generator. */
+  def labelGenerator_=(generator: Option[G]): Unit
 
-// -------------------------------------------------------------------------------------------------
-// conversion from scala.collection to datasets
-// -------------------------------------------------------------------------------------------------
+  /** Sets this charts label generator. */
+  final def labelGenerator_=(generator: G) {
+    labelGenerator = Some(generator)
+  }
 
-object CollectionToPieDatasetViews extends CollectionToPieDatasetViews
-trait CollectionToPieDatasetViews {
-  implicit def asPieDataset[A <% Comparable[A], B <% Number](it: Iterable[(A,B)]): PieDataset =
-    it.toPieDataset
 }
-
-// -------------------------------------------------------------------------------------------------
-// import containing all of the above
-// -------------------------------------------------------------------------------------------------
-
-object PieDatasetViews extends PieDatasetViews
-trait PieDatasetViews extends CollectionToPieDatasetViews

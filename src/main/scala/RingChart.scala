@@ -23,27 +23,10 @@
 
 
 package scalax.chart
-package views
 
-import language.implicitConversions
+import org.jfree.chart.plot.RingPlot
 
-import org.jfree.data.general._
-
-import RichChartingCollections._
-
-// -------------------------------------------------------------------------------------------------
-// conversion from scala.collection to datasets
-// -------------------------------------------------------------------------------------------------
-
-object CollectionToPieDatasetViews extends CollectionToPieDatasetViews
-trait CollectionToPieDatasetViews {
-  implicit def asPieDataset[A <% Comparable[A], B <% Number](it: Iterable[(A,B)]): PieDataset =
-    it.toPieDataset
+/** Represents categorized numeric data with a ring. */
+trait RingChart extends Chart[RingPlot] with PieChartLike[RingPlot] {
+  override def plot: RingPlot = peer.getPlot.asInstanceOf[RingPlot]
 }
-
-// -------------------------------------------------------------------------------------------------
-// import containing all of the above
-// -------------------------------------------------------------------------------------------------
-
-object PieDatasetViews extends PieDatasetViews
-trait PieDatasetViews extends CollectionToPieDatasetViews

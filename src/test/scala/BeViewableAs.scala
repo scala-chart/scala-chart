@@ -1,4 +1,4 @@
-package org.sfree.chart
+package scalax.chart
 
 import language.implicitConversions
 

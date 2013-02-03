@@ -23,27 +23,43 @@
 
 
 package scalax.chart
-package views
 
-import language.implicitConversions
+/** $ImportsInfo */
+object Imports extends Imports
 
-import org.jfree.data.general._
+/** $TypeImportsInfo */
+object TypeImports extends TypeImports
 
-import RichChartingCollections._
+/** $StaticForwarderImportsInfo */
+object StaticForwarderImports extends StaticForwarderImports
 
-// -------------------------------------------------------------------------------------------------
-// conversion from scala.collection to datasets
-// -------------------------------------------------------------------------------------------------
+/** $ImportsInfo
+  *
+  * @define ImportsInfo Contains imports from foreign packages.
+  */
+trait Imports extends TypeImports with StaticForwarderImports
 
-object CollectionToPieDatasetViews extends CollectionToPieDatasetViews
-trait CollectionToPieDatasetViews {
-  implicit def asPieDataset[A <% Comparable[A], B <% Number](it: Iterable[(A,B)]): PieDataset =
-    it.toPieDataset
+/** $TypeImportsInfo
+  *
+  * @define TypeImportsInfo Contains only the type imports from foreign packages.
+  */
+trait TypeImports {
+  type Orientation = scala.swing.Orientation.Value
+
+  type CategoryDataset = org.jfree.data.category.CategoryDataset
+  type PieDataset = org.jfree.data.general.PieDataset
+  type XYDataset = org.jfree.data.xy.XYDataset
+
+  type CategoryPlot = org.jfree.chart.plot.CategoryPlot
+  type MultiplePiePlot = org.jfree.chart.plot.MultiplePiePlot
+  type PiePlot = org.jfree.chart.plot.PiePlot
+  type XYPlot = org.jfree.chart.plot.XYPlot
 }
 
-// -------------------------------------------------------------------------------------------------
-// import containing all of the above
-// -------------------------------------------------------------------------------------------------
-
-object PieDatasetViews extends PieDatasetViews
-trait PieDatasetViews extends CollectionToPieDatasetViews
+/** $StaticForwarderImportsInfo
+  *
+  * @define StaticForwarderImportsInfo Contains only the static forwarder imports from foreign packages.
+  */
+trait StaticForwarderImports {
+  val Orientation = scala.swing.Orientation
+}

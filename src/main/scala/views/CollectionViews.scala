@@ -1,12 +1,12 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *                                                                                               *
- *  Copyright © 2012 Christian Krause                                                            *
+ *  Copyright © 2012-2013 Christian Krause                                                       *
  *                                                                                               *
  *  Christian Krause <kizkizzbangbang@googlemail.com>                                            *
  *                                                                                               *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *                                                                                               *
- *  This file is part of 'sfreechart'.                                                           *
+ *  This file is part of 'scala-chart'.                                                          *
  *                                                                                               *
  *  This project is free software: you can redistribute it and/or modify it under the terms      *
  *  of the GNU Lesser General Public License as published by the Free Software Foundation,       *
@@ -22,7 +22,7 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 
-package org.sfree.chart
+package scalax.chart
 package views
 
 /** $CollectionViewsInfo */

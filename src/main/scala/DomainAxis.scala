@@ -23,27 +23,19 @@
 
 
 package scalax.chart
-package views
 
-import language.implicitConversions
+/** Mixin for charts with a domain axis. */
+trait DomainAxis {
 
-import org.jfree.data.general._
+  /** Optionally returns the domain axis label. */
+  def domainAxisLabel: Option[String]
 
-import RichChartingCollections._
+  /** Labels the domain axis. */
+  def domainAxisLabel_=(label: Option[String]): Unit
 
-// -------------------------------------------------------------------------------------------------
-// conversion from scala.collection to datasets
-// -------------------------------------------------------------------------------------------------
+  /** Labels the domain axis. */
+  final def domainAxisLabel_=(label: String) {
+    domainAxisLabel = Option(label)
+  }
 
-object CollectionToPieDatasetViews extends CollectionToPieDatasetViews
-trait CollectionToPieDatasetViews {
-  implicit def asPieDataset[A <% Comparable[A], B <% Number](it: Iterable[(A,B)]): PieDataset =
-    it.toPieDataset
 }
-
-// -------------------------------------------------------------------------------------------------
-// import containing all of the above
-// -------------------------------------------------------------------------------------------------
-
-object PieDatasetViews extends PieDatasetViews
-trait PieDatasetViews extends CollectionToPieDatasetViews

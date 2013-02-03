@@ -23,27 +23,32 @@
 
 
 package scalax.chart
-package views
 
-import language.implicitConversions
+import org.jfree.chart.plot.MultiplePiePlot
 
-import org.jfree.data.general._
+import Imports._
 
-import RichChartingCollections._
+/** Represents categorized numeric data with multiple pies. */
+trait MultiplePieChart extends Chart[MultiplePiePlot]
+    with Labels[PieSectionLabelGenerator]
+    with Tooltips[PieToolTipGenerator] {
 
-// -------------------------------------------------------------------------------------------------
-// conversion from scala.collection to datasets
-// -------------------------------------------------------------------------------------------------
+  def underlying: PieChart = {
+    val u = plot.getPieChart
+    new PieChart {
+      override val peer = u
+    }
+  }
 
-object CollectionToPieDatasetViews extends CollectionToPieDatasetViews
-trait CollectionToPieDatasetViews {
-  implicit def asPieDataset[A <% Comparable[A], B <% Number](it: Iterable[(A,B)]): PieDataset =
-    it.toPieDataset
+  override def plot: MultiplePiePlot = peer.getPlot.asInstanceOf[MultiplePiePlot]
+
+  override def labelGenerator: Option[PieSectionLabelGenerator] = underlying.labelGenerator
+  override def labelGenerator_=(generator: Option[PieSectionLabelGenerator]) {
+    underlying.labelGenerator = generator
+  }
+
+  override def tooltipGenerator: Option[PieToolTipGenerator] = underlying.tooltipGenerator
+  override def tooltipGenerator_=(generator: Option[PieToolTipGenerator]) {
+    underlying.tooltipGenerator = generator
+  }
 }
-
-// -------------------------------------------------------------------------------------------------
-// import containing all of the above
-// -------------------------------------------------------------------------------------------------
-
-object PieDatasetViews extends PieDatasetViews
-trait PieDatasetViews extends CollectionToPieDatasetViews

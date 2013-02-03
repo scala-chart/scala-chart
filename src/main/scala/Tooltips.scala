@@ -23,27 +23,22 @@
 
 
 package scalax.chart
-package views
 
-import language.implicitConversions
+/** Mixin for charts which may display tooltips.
+  *
+  * @tparam G type of tooltip generator
+  */
+trait Tooltips[G] {
 
-import org.jfree.data.general._
+  /** Optionally returns the tooltip generator. */
+  def tooltipGenerator: Option[G]
 
-import RichChartingCollections._
+  /** Optionally sets the tooltip generator. */
+  def tooltipGenerator_=(generator: Option[G]): Unit
 
-// -------------------------------------------------------------------------------------------------
-// conversion from scala.collection to datasets
-// -------------------------------------------------------------------------------------------------
+  /** Sets the tooltip generator. */
+  final def tooltipGenerator_=(generator: G) {
+    tooltipGenerator = Some(generator)
+  }
 
-object CollectionToPieDatasetViews extends CollectionToPieDatasetViews
-trait CollectionToPieDatasetViews {
-  implicit def asPieDataset[A <% Comparable[A], B <% Number](it: Iterable[(A,B)]): PieDataset =
-    it.toPieDataset
 }
-
-// -------------------------------------------------------------------------------------------------
-// import containing all of the above
-// -------------------------------------------------------------------------------------------------
-
-object PieDatasetViews extends PieDatasetViews
-trait PieDatasetViews extends CollectionToPieDatasetViews

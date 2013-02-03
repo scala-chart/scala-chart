@@ -1,12 +1,12 @@
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *                                                                                               *
- *  Copyright © 2012 Christian Krause                                                            *
+ *  Copyright © 2012-2013 Christian Krause                                                       *
  *                                                                                               *
  *  Christian Krause <kizkizzbangbang@googlemail.com>                                            *
  *                                                                                               *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *                                                                                               *
- *  This file is part of 'sfreechart'.                                                           *
+ *  This file is part of 'scala-chart'.                                                          *
  *                                                                                               *
  *  This project is free software: you can redistribute it and/or modify it under the terms      *
  *  of the GNU Lesser General Public License as published by the Free Software Foundation,       *
@@ -22,10 +22,14 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 
-package org.sfree.chart
+package scalax.chart
+
+import java.util.Date
+import scala.collection.JavaConversions.seqAsJavaList
 
 import org.jfree.data.category._
 import org.jfree.data.general._
+import org.jfree.data.statistics._
 import org.jfree.data.time._
 import org.jfree.data.xy._
 
@@ -42,7 +46,25 @@ object RichChartingCollections extends RichChartingCollections
 trait RichChartingCollections {
 
   /** Enriches a collection of data pairs. */
-  implicit class RichTuple2s[A,B](it: Iterable[(A,B)]) {
+  implicit class RichTuples[A,B](it: Iterable[(A,B)]) {
+
+    /** Converts this collection to a `BoxAndWhiskerCategoryDataset`. */
+    def toBoxAndWhiskerCategoryDataset[C](implicit eva: A ⇒ Comparable[A], evc: B ⇒ Seq[C], evd: C ⇒ Number): BoxAndWhiskerCategoryDataset = {
+      val dataset = new DefaultBoxAndWhiskerCategoryDataset()
+      it foreach { case (category,values) ⇒
+        dataset.add(BoxAndWhiskerCalculator.calculateBoxAndWhiskerStatistics(seqAsJavaList(values)), category, "")
+      }
+      dataset
+    }
+
+    /** Converts this collection to a `BoxAndWhiskerXYDataset`. */
+    def toBoxAndWhiskerXYDataset[C](name: String = "")(implicit eva: A ⇒ Date, evb: B ⇒ Seq[C], evc: C ⇒ Number): BoxAndWhiskerXYDataset = {
+      val dataset = new DefaultBoxAndWhiskerXYDataset(name)
+      it foreach { case (date,ys) ⇒
+        dataset.add(date, BoxAndWhiskerCalculator.calculateBoxAndWhiskerStatistics(seqAsJavaList(ys)))
+      }
+      dataset
+    }
 
     /** Converts this collection to a `CategoryDataset`. */
     def toCategoryDataset(implicit eva: A ⇒ Comparable[A], evb: B ⇒ Number): CategoryDataset = {
@@ -79,7 +101,7 @@ trait RichChartingCollections {
       *
       * @param name $name
       */
-    def toTimeSeries(name: String = "")(implicit eva: A ⇒ RegularTimePeriod, evb: B ⇒ Number): TimeSeries = {
+    def toTimeSeries(name: Comparable[_] = "")(implicit eva: A ⇒ RegularTimePeriod, evb: B ⇒ Number): TimeSeries = {
       val series = new TimeSeries(name)
       it foreach { case (time,value) ⇒ series.add(time,value) }
       series
@@ -89,14 +111,14 @@ trait RichChartingCollections {
       *
       * @param name $name
       */
-    def toTimeSeriesCollection(name: String = "")(implicit eva: A ⇒ RegularTimePeriod, evb: B ⇒ Number): TimeSeriesCollection =
+    def toTimeSeriesCollection(name: Comparable[_] = "")(implicit eva: A ⇒ RegularTimePeriod, evb: B ⇒ Number): TimeSeriesCollection =
       new TimeSeriesCollection(toTimeSeries(name))
 
     /** Converts this collection to an `XYSeries`.
       *
       * @param name $name
       */
-    def toXYSeries(name: String = "")(implicit eva: A ⇒ Number, evb: B ⇒ Number): XYSeries = {
+    def toXYSeries(name: Comparable[_] = "")(implicit eva: A ⇒ Number, evb: B ⇒ Number): XYSeries = {
       val series = new XYSeries(name)
       it foreach { case (x,y) ⇒ series.add(x,y) }
       series
@@ -106,13 +128,23 @@ trait RichChartingCollections {
       *
       * @param name $name
       */
-    def toXYSeriesCollection(name: String = "")(implicit eva: A ⇒ Number, evb: B ⇒ Number): XYSeriesCollection =
+    def toXYSeriesCollection(name: Comparable[_] = "")(implicit eva: A ⇒ Number, evb: B ⇒ Number): XYSeriesCollection =
       new XYSeriesCollection(toXYSeries(name))
 
   }
 
-  /** Enriches a collection of data `Tuple3s`. */
-  implicit class RichTuple3s[A,B,C](it: Iterable[(A,Iterable[(B,C)])]) {
+  /** Enriches a collection of categorized data pairs. */
+  implicit class RichCategorizedTuples[A,B,C](it: Iterable[(A,Iterable[(B,C)])]) {
+
+    /** Converts this collection to a `BoxAndWhiskerCategoryDataset`. */
+    def toBoxAndWhiskerCategoryDataset[D](implicit eva: A ⇒ Comparable[A], evb: B ⇒ Comparable[B], evc: C ⇒ Seq[D], evd: D ⇒ Number): BoxAndWhiskerCategoryDataset = {
+      val dataset = new DefaultBoxAndWhiskerCategoryDataset()
+      for {
+        (upper,lvs) ← it
+        (lower,values) ← lvs
+      } dataset.add(BoxAndWhiskerCalculator.calculateBoxAndWhiskerStatistics(seqAsJavaList(values)), lower, upper)
+      dataset
+    }
 
     /** Converts this collection to a `CategoryDataset`. */
     def toCategoryDataset(implicit eva: A ⇒ Comparable[A], evb: B ⇒ Comparable[B], evc: C ⇒ Number): CategoryDataset = {
@@ -124,7 +156,17 @@ trait RichChartingCollections {
       dataset
     }
 
-    /** Converts this collection to a `TimePeriodValuesCollection`. */
+    /** Converts this collection to a `CategoryTableXYDataset`. */
+    def toCategoryTableXYDataset(implicit eva: A ⇒ String, evb: B ⇒ Number, evc: C ⇒ Number): CategoryTableXYDataset = {
+      val dataset = new CategoryTableXYDataset
+      for {
+        (category,xys) ← it
+        (x,y) ← xys
+      } dataset.add(x, y, category, false)
+      dataset
+    }
+
+    /** Converts this collection to a time table. */
     def toTimeTable(implicit eva: A ⇒ Comparable[A], evb: B ⇒ TimePeriod, evc: C ⇒ Number): TimeTableXYDataset = {
       val dataset = new TimeTableXYDataset
       for {
@@ -134,29 +176,40 @@ trait RichChartingCollections {
       dataset
     }
 
+    /** Converts this collection to an `XYSeriesCollection`. */
+    def toXYSeriesCollection(implicit eva: A ⇒ Comparable[A], evb: B ⇒ Number, evc: C ⇒ Number): XYSeriesCollection = {
+      val seriess = for {
+        (category,xys) ← it
+      } yield xys.toXYSeries(category)
+      seriess.toXYSeriesCollection
+    }
+
   }
 
-  /** Enriches a collection of data `Tuple4s`. */
-  implicit class RichTuple4s[A,B,C,D](it: Iterable[(A,Iterable[(B,Iterable[(C,D)])])]) {
+  /** Enriches a collection of categorized categorized data pairs. */
+  implicit class RichCategorizedCategorizedTuples[A,B,C,D](it: Iterable[(A,Iterable[(B,Iterable[(C,D)])])]) {
 
-    import org.jfree.chart.{ ChartFactory ⇒ _, _ }
+    import org.jfree.chart.JFreeChart
     import org.jfree.chart.plot._
 
     /** Converts this collection to a bar chart with a `CombinedDomainCategoryPlot`. */
     def toCombinedDomainBarChart(implicit eva: A ⇒ Comparable[A],
                                           evb: B ⇒ Comparable[B],
                                           evc: C ⇒ Comparable[C],
-                                          evd: D ⇒ Number): JFreeChart = {
+                                          evd: D ⇒ Number): CategoryChart = {
       val plot = new CombinedDomainCategoryPlot
 
       for {
         (outer,miv) ← it
         dataset     = miv.toCategoryDataset
-        chart       = ChartFactory.BarChart(dataset, outer.toString)
-        subplot     = chart.getPlot.asInstanceOf[CategoryPlot]
-      } plot.add(subplot)
+        chart       = ChartFactories.BarChart(dataset, outer.toString)
+      } plot.add(chart.plot)
 
-      new JFreeChart(plot)
+      val chart = new JFreeChart(plot)
+
+      new CategoryChart {
+        override val peer = chart
+      }
     }
 
   }

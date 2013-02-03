@@ -23,27 +23,19 @@
 
 
 package scalax.chart
-package views
 
-import language.implicitConversions
+/** Mixin for charts with a range axis. */
+trait RangeAxis {
 
-import org.jfree.data.general._
+  /** Optionally returns the range axis label. */
+  def rangeAxisLabel: Option[String]
 
-import RichChartingCollections._
+  /** Labels the range axis. */
+  def rangeAxisLabel_=(label: Option[String]): Unit
 
-// -------------------------------------------------------------------------------------------------
-// conversion from scala.collection to datasets
-// -------------------------------------------------------------------------------------------------
+  /** Labels the range axis. */
+  final def rangeAxisLabel_=(label: String) {
+    rangeAxisLabel = Option(label)
+  }
 
-object CollectionToPieDatasetViews extends CollectionToPieDatasetViews
-trait CollectionToPieDatasetViews {
-  implicit def asPieDataset[A <% Comparable[A], B <% Number](it: Iterable[(A,B)]): PieDataset =
-    it.toPieDataset
 }
-
-// -------------------------------------------------------------------------------------------------
-// import containing all of the above
-// -------------------------------------------------------------------------------------------------
-
-object PieDatasetViews extends PieDatasetViews
-trait PieDatasetViews extends CollectionToPieDatasetViews

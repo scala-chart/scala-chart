@@ -23,27 +23,81 @@
 
 
 package scalax.chart
-package views
 
-import language.implicitConversions
+import scala.collection.Traversable
+import scala.collection.mutable.Buffer
 
-import org.jfree.data.general._
+import org.jfree.chart.JFreeChart
+import org.jfree.chart.plot.Plot
+import org.jfree.chart.title.Title
 
-import RichChartingCollections._
+/** Generic graphical representation of data.
+  *
+  * @tparam P used plot type
+  */
+trait Chart[P <: Plot] extends DisplayableChart with StorableChart {
 
-// -------------------------------------------------------------------------------------------------
-// conversion from scala.collection to datasets
-// -------------------------------------------------------------------------------------------------
+  /** Returns the underlying chart. */
+  def peer: JFreeChart
 
-object CollectionToPieDatasetViews extends CollectionToPieDatasetViews
-trait CollectionToPieDatasetViews {
-  implicit def asPieDataset[A <% Comparable[A], B <% Number](it: Iterable[(A,B)]): PieDataset =
-    it.toPieDataset
+  /** Returns the plot. */
+  def plot: P
+
+  /** Contains this charts subtitles and legends. */
+  object subtitles extends Buffer[Title] {
+    override def +=(title: Title): this.type = {
+      peer.addSubtitle(title)
+      this
+    }
+
+    override def +=:(title: Title): this.type = {
+      peer.addSubtitle(0, title)
+      this
+    }
+
+    override def apply(n: Int): Title = peer.getSubtitle(n)
+
+    override def clear() {
+      peer.clearSubtitles()
+    }
+
+    override def insertAll(n: Int, elems: Traversable[Title]) {
+      var i = n
+      elems. foreach { title ⇒
+        peer.addSubtitle(i, title)
+        i += 1
+      }
+    }
+
+    override def iterator: Iterator[Title] = new Iterator[Title] {
+      private var current = 0
+      override def hasNext: Boolean = subtitles.size > current
+      override def next: Title = {
+        val subtitle = subtitles(current)
+        current += 1
+        subtitle
+      }
+    }
+
+    override def length: Int = peer.getSubtitleCount
+
+    override def remove(n: Int): Title = {
+      val title = apply(n)
+      peer.removeSubtitle(title)
+      title
+    }
+
+    override def update(n: Int, newTitle: Title) {
+      val oldTitle = apply(n)
+      remove(n)
+      peer.addSubtitle(n, newTitle)
+    }
+  }
+
+  /** Returns the title of this chart. */
+  def title: String = peer.getTitle.getText
+
+  /** Sets the title of this chart. */
+  def title_=(title: String): Unit = peer.setTitle(title)
+
 }
-
-// -------------------------------------------------------------------------------------------------
-// import containing all of the above
-// -------------------------------------------------------------------------------------------------
-
-object PieDatasetViews extends PieDatasetViews
-trait PieDatasetViews extends CollectionToPieDatasetViews

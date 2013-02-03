@@ -23,27 +23,49 @@
 
 
 package scalax.chart
-package views
 
-import language.implicitConversions
+import scala.swing._
 
-import org.jfree.data.general._
+import org.jfree.chart._
 
-import RichChartingCollections._
+/** Provides methods for both displaying a chart and integrating it into the
+  * [[http://www.scala-lang.org/api/current/index.html#scala.swing.package Scala Swing UI
+  * framework]].
+  *
+  * @define title      the title of the enclosing frame
+  * @define scrollable whether the enclosing panel is scrollable
+  */
+trait DisplayableChart {
 
-// -------------------------------------------------------------------------------------------------
-// conversion from scala.collection to datasets
-// -------------------------------------------------------------------------------------------------
+  chart: Chart[_] ⇒
 
-object CollectionToPieDatasetViews extends CollectionToPieDatasetViews
-trait CollectionToPieDatasetViews {
-  implicit def asPieDataset[A <% Comparable[A], B <% Number](it: Iterable[(A,B)]): PieDataset =
-    it.toPieDataset
+  /** Shows the chart in a window. */
+  def show: Unit = show()
+
+  /** Shows the chart in a window.
+    *
+    * @param title      $title
+    * @param scrollable $scrollable
+    */
+  def show(title: String = "", scrollable: Boolean = true): Unit = Swing onEDT {
+    toFrame(title, scrollable).visible = true
+  }
+
+  /** Wraps a panel around this chart. */
+  def toPanel: Panel = new FlowPanel {
+    override lazy val peer = new ChartPanel(chart.peer)
+  }
+
+  /** Wraps a frame around this chart.
+    *
+    * @param title      $title
+    * @param scrollable $scrollable
+    */
+  def toFrame(title: String = "", scrollable: Boolean = true): Frame = {
+    val t = title
+    new Frame {
+      override lazy val peer = new ChartFrame(t, chart.peer, scrollable) with InterfaceMixin
+    }
+  }
+
 }
-
-// -------------------------------------------------------------------------------------------------
-// import containing all of the above
-// -------------------------------------------------------------------------------------------------
-
-object PieDatasetViews extends PieDatasetViews
-trait PieDatasetViews extends CollectionToPieDatasetViews

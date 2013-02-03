@@ -23,27 +23,87 @@
 
 
 package scalax.chart
-package views
 
-import language.implicitConversions
+import java.io._
 
-import org.jfree.data.general._
+import org.jfree.chart._
 
-import RichChartingCollections._
+/** Provides methods for saving a chart.
+  *
+  * @define output     the output file
+  * @define dim        dimension / geometry / width x height of the output
+  * @define fontMapper handles mappings between Java AWT Fonts and PDF fonts
+  */
+trait StorableChart {
 
-// -------------------------------------------------------------------------------------------------
-// conversion from scala.collection to datasets
-// -------------------------------------------------------------------------------------------------
+  self: Chart[_] ⇒
 
-object CollectionToPieDatasetViews extends CollectionToPieDatasetViews
-trait CollectionToPieDatasetViews {
-  implicit def asPieDataset[A <% Comparable[A], B <% Number](it: Iterable[(A,B)]): PieDataset =
-    it.toPieDataset
+  /** Saves the chart as a PNG image.
+    *
+    * @param output $output
+    * @param dim    $dim
+    */
+  def saveAsPNG(output: File, dim: (Int,Int)) {
+    val (width,height) = dim
+    ChartUtilities.saveChartAsPNG(output, peer, width, height)
+  }
+
+  /** Saves the chart as a JPEG image.
+    *
+    * @param output $output
+    * @param dim    $dim
+    */
+  def saveAsJPEG(output: File, dim: (Int,Int)) {
+    val (width,height) = dim
+    ChartUtilities.saveChartAsJPEG(output, peer, width, height)
+  }
+
+  import com.lowagie.text._
+  import com.lowagie.text.pdf._
+
+  /** Saves the chart as a PDF.
+    *
+    * @param output     $output
+    * @param dim        $dim
+    * @param fontMapper $fontMapper
+    */
+  def saveAsPDF(output: File, dim: (Int,Int), fontMapper: FontMapper = new DefaultFontMapper) {
+    val os = new BufferedOutputStream(new FileOutputStream(output))
+
+    try {
+      writeAsPDF(os, dim, fontMapper)
+    } finally {
+      os.close()
+    }
+  }
+
+  /** Writes the chart as a PDF.
+    *
+    * @param os         stream to where will be written
+    * @param dim        $dim
+    * @param fontMapper $fontMapper
+    */
+  protected def writeAsPDF(os: OutputStream, dim: (Int,Int), fontMapper: FontMapper) {
+    val (width,height) = dim
+
+    val pagesize = new Rectangle(width, height)
+    val document = new Document(pagesize)
+
+    try {
+      val writer = PdfWriter.getInstance(document, os)
+      document.open()
+
+      val cb = writer.getDirectContent
+      val tp = cb.createTemplate(width, height)
+      val g2 = tp.createGraphics(width, height, fontMapper)
+      val r2D = new java.awt.geom.Rectangle2D.Double(0, 0, width, height)
+
+      peer.draw(g2, r2D)
+      g2.dispose()
+      cb.addTemplate(tp, 0, 0)
+    } finally {
+      document.close()
+    }
+  }
+
 }
-
-// -------------------------------------------------------------------------------------------------
-// import containing all of the above
-// -------------------------------------------------------------------------------------------------
-
-object PieDatasetViews extends PieDatasetViews
-trait PieDatasetViews extends CollectionToPieDatasetViews
