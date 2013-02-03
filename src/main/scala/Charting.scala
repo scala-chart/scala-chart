@@ -30,7 +30,7 @@ object Charting extends Charting
 /** $ChartingInfo
   *
   * @define ChartingInfo Contains all enrichments. This import is the recommended starting point for
-  * working with scala-chart:
+  * working with this package:
   *
   * {{{
   * import scalax.chart._

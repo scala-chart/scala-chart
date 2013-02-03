@@ -29,15 +29,16 @@ import language.implicitConversions
 import scala.swing.Orientation
 import org.jfree.chart.plot.PlotOrientation
 
-/** This package contains wrappers for the [[http://www.jfree.org/jfreechart/ JFreeChart]] library.
-  * The basic starting point is to import the [[scalax.chart.Charting]] object:
+/** This package contains a library for creating and working with charts. It wraps
+  * [[http://www.jfree.org/jfreechart/ JFreeChart]], much like `scala.swing` does with the original
+  * `javax.swing` package. The basic starting point is to use the following imports:
   *
   * {{{
   * import scalax.chart._
   * import scalax.chart.Charting._
   * }}}
   *
-  * With this import you can convert Scala collections to JFreeChart datasets and use chart
+  * With these imports you can convert Scala collections to the datasets of JFreeChart and use chart
   * factories:
   *
   * {{{
@@ -46,9 +47,9 @@ import org.jfree.chart.plot.PlotOrientation
   * val chart = XYLineChart(dataset, title = "My Chart of Some Points")
   * }}}
   *
-  * There are also implicit conversions / views available in the [[scalax.chart.views]] package,
-  * but they are not contained by [[scalax.chart.Charting]], because of ambiguity issues with
-  * implicit conversions.
+  * There are also implicit conversions / views available in the [[scalax.chart.views]] package, but
+  * they are not contained by [[scalax.chart.Charting]], because of ambiguity issues with implicit
+  * conversions.
   */
 package object chart {
 

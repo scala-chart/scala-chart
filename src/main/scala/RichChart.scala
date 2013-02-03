@@ -43,7 +43,7 @@ object RichChart extends RichChart
   */
 trait RichChart {
 
-  /** Enriched JFreeChart. */
+  /** Enriched `JFreeChart`. */
   implicit class GenericRichChart(val peer: JFreeChart) extends Chart[Plot]
       with Orientable with DomainAxis with RangeAxis {
 

@@ -28,7 +28,9 @@ import scala.swing._
 
 import org.jfree.chart._
 
-/** Provides methods for displaying a chart.
+/** Provides methods for both displaying a chart and integrating it into the
+  * [[http://www.scala-lang.org/api/current/index.html#scala.swing.package Scala Swing UI
+  * framework]].
   *
   * @define title      the title of the enclosing frame
   * @define scrollable whether the enclosing panel is scrollable
