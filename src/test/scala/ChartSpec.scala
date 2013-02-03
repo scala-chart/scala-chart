@@ -38,6 +38,10 @@ class ChartSpec extends Specification { def is =
     "3D stacked must have a CategoryPlot"                                       ! bc4              ^
     "orienting works"                                                           ! bc5              ^
                                                                                                   p^
+  "BoxAndWhiskerChart"                                                                             ^
+    "must have a CategoryPlot"                                                  ! bwc1             ^
+    "orienting works"                                                           ! bwc2             ^
+                                                                                                  p^
   "LineChart"                                                                                      ^
     "must have a CategoryPlot"                                                  ! lc1              ^
     "3D must have a CategoryPlot"                                               ! lc2              ^
@@ -62,7 +66,12 @@ class ChartSpec extends Specification { def is =
                                                                                                   p^
   "XYBarChart"                                                                                     ^
     "must have an XYPlot"                                                       ! xybc1            ^
-    "orienting works"                                                           ! xybc2            ^
+    "stacked must have an XYPlot"                                               ! xybc2            ^
+    "orienting works"                                                           ! xybc3            ^
+                                                                                                  p^
+  "XYBoxAndWhiskerChart"                                                                           ^
+    "must have a XYPlot"                                                        ! xybwc1           ^
+    "orienting works"                                                           ! xybwc2           ^
                                                                                                   p^
   "XYLineChart"                                                                                    ^
     "must have an XYPlot"                                                       ! xylc1            ^
@@ -204,6 +213,17 @@ class ChartSpec extends Specification { def is =
     chart.orientation === Orientation.Horizontal
   }
 
+  def bwc1 = {
+    val chart = BoxAndWhiskerChart(bwcategorydataset)
+    (chart.plot must not (throwA[ClassCastException])) and (chart.plot must beAnInstanceOf[CategoryPlot])
+  }
+
+  def bwc2 = {
+    val chart = BoxAndWhiskerChart(bwcategorydataset)
+    chart.orientation = Orientation.Horizontal
+    chart.orientation === Orientation.Horizontal
+  }
+
   def lc1 = {
     val chart = LineChart(categorydataset)
     (chart.plot must not (throwA[ClassCastException])) and (chart.plot must beAnInstanceOf[CategoryPlot])
@@ -272,7 +292,23 @@ class ChartSpec extends Specification { def is =
   }
 
   def xybc2 = {
+    val chart = XYBarChart.stacked(tablexydataset)
+    (chart.plot must not (throwA[ClassCastException])) and (chart.plot must beAnInstanceOf[XYPlot])
+  }
+
+  def xybc3 = {
     val chart = XYBarChart(xydataset, orientation = Orientation.Vertical)
+    chart.orientation = Orientation.Horizontal
+    chart.orientation === Orientation.Horizontal
+  }
+
+  def xybwc1 = {
+    val chart = XYBoxAndWhiskerChart(bwxydataset)
+    (chart.plot must not (throwA[ClassCastException])) and (chart.plot must beAnInstanceOf[XYPlot])
+  }
+
+  def xybwc2 = {
+    val chart = XYBoxAndWhiskerChart(bwxydataset)
     chart.orientation = Orientation.Horizontal
     chart.orientation === Orientation.Horizontal
   }
@@ -292,8 +328,10 @@ class ChartSpec extends Specification { def is =
   // datasets
   // -----------------------------------------------------------------------------------------------
 
-  def points = for { i ← 1 to 2 } yield (i,i)
+  def points = Vector.tabulate(2)(i ⇒ (i,i))
 
+  def bwcategorydataset = Vector.tabulate(2)(i ⇒ (i,i to i)).toBoxAndWhiskerCategoryDataset
+  def bwxydataset = Vector.tabulate(1)(i ⇒ (new java.util.Date(i.toLong * 1000),i to i)).toBoxAndWhiskerXYDataset()
   def categorydataset = points.toCategoryDataset
   def piedataset = points.toPieDataset
   def tablexydataset = (for { category ← 'a' to 'b' } yield category.toString → points).toCategoryTableXYDataset
