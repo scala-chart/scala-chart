@@ -53,6 +53,32 @@ import org.jfree.chart.plot.PlotOrientation
   */
 package object chart {
 
+  // -----------------------------------------------------------------------------------------------
+  // more meaningful function aliases
+  // -----------------------------------------------------------------------------------------------
+
+  /** Function alias for creating item labels for [[scalax.chart.CategoryChart]]s. */
+  type CategoryItemLabelGenerator = (org.jfree.data.category.CategoryDataset,Int,Int) ⇒ String
+
+  /** Function alias for creating tooltips for [[scalax.chart.CategoryChart]]s. */
+  type CategoryToolTipGenerator = (org.jfree.data.category.CategoryDataset,Int,Int) ⇒ String
+
+  /** Function alias for creating item labels for [[scalax.chart.PieChartLike]] charts. */
+  type PieSectionLabelGenerator = (org.jfree.data.general.PieDataset,Comparable[_]) ⇒ String
+
+  /** Function alias for creating tooltips for [[scalax.chart.PieChartLike]] charts. */
+  type PieToolTipGenerator = (org.jfree.data.general.PieDataset,Comparable[_]) ⇒ String
+
+  /** Function alias for creating item labels for [[scalax.chart.XYChart]]s. */
+  type XYItemLabelGenerator = (org.jfree.data.xy.XYDataset,Int,Int) ⇒ String
+
+  /** Function alias for creating tooltips for [[scalax.chart.XYChart]]s. */
+  type XYToolTipGenerator = (org.jfree.data.xy.XYDataset,Int,Int) ⇒ String
+
+  // -----------------------------------------------------------------------------------------------
+  // implicit conversions between scala-chart and JFreeChart
+  // -----------------------------------------------------------------------------------------------
+
   private[chart] implicit def plotOrientation2orientation(o: PlotOrientation): Orientation.Value = o match {
     case PlotOrientation.HORIZONTAL ⇒ Orientation.Horizontal
     case PlotOrientation.VERTICAL   ⇒ Orientation.Vertical

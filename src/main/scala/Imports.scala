@@ -24,12 +24,25 @@
 
 package scalax.chart
 
+/** $ImportsInfo */
 object Imports extends Imports
+
+/** $TypeImportsInfo */
 object TypeImports extends TypeImports
+
+/** $StaticForwarderImportsInfo */
 object StaticForwarderImports extends StaticForwarderImports
 
+/** $ImportsInfo
+  *
+  * @define ImportsInfo Contains imports from foreign packages.
+  */
 trait Imports extends TypeImports with StaticForwarderImports
 
+/** $TypeImportsInfo
+  *
+  * @define TypeImportsInfo Contains only the type imports from foreign packages.
+  */
 trait TypeImports {
   type Orientation = scala.swing.Orientation.Value
 
@@ -41,15 +54,12 @@ trait TypeImports {
   type MultiplePiePlot = org.jfree.chart.plot.MultiplePiePlot
   type PiePlot = org.jfree.chart.plot.PiePlot
   type XYPlot = org.jfree.chart.plot.XYPlot
-
-  type CategoryItemLabelGenerator = (CategoryDataset,Int,Int) ⇒ String
-  type CategoryToolTipGenerator = (CategoryDataset,Int,Int) ⇒ String
-  type PieSectionLabelGenerator = (PieDataset,Comparable[_]) ⇒ String
-  type PieToolTipGenerator = (PieDataset,Comparable[_]) ⇒ String
-  type XYItemLabelGenerator = (XYDataset,Int,Int) ⇒ String
-  type XYToolTipGenerator = (XYDataset,Int,Int) ⇒ String
 }
 
+/** $StaticForwarderImportsInfo
+  *
+  * @define StaticForwarderImportsInfo Contains only the static forwarder imports from foreign packages.
+  */
 trait StaticForwarderImports {
   val Orientation = scala.swing.Orientation
 }
