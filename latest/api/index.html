@@ -1,66 +1,50 @@
-<h1>Scala Chart Library</h1>
-
-<p><code>scala-chart</code> is a Scala library for creating and working with charts. It wraps <a href="http://jfree.org/jfreechart/">JFreeChart</a>, much
-like <code>scala-swing</code> does with the original <code>javax.swing</code> package. This project is released under the
-same license as <a href="http://jfree.org/jfreechart/">JFreeChart</a> to make them fully license-compatible. Checkout the <a href="http://wookietreiber.github.com/scala-chart/latest/api/index.html">API</a>.</p>
-
-<h2>Usage</h2>
-
-<h3><a href="http://www.scala-sbt.org/">sbt</a></h3>
-
-<pre><code>libraryDependencies += "com.github.wookietreiber" %% "scala-chart" % "latest.integration"
-</code></pre>
-
-<h3><a href="http://maven.apache.org/">maven</a></h3>
-
-<pre><code>&lt;dependency&gt;
-   &lt;groupId&gt;com.github.wookietreiber&lt;/groupId&gt;
-   &lt;artifactId&gt;scala-chart_${scala.version}&lt;/artifactId&gt;
-   &lt;version&gt;latest.integration&lt;/version&gt;
-&lt;/dependency&gt;
-</code></pre>
-
-<h2>Examples</h2>
-
-<p>You can import nearly all of the <code>scala-chart</code> functionality (except the views, see below) with the
-following lines:</p>
-
-<pre><code>import scalax.chart._
-import scalax.chart.Charting._
-</code></pre>
-
-<p>You can use the conversions to convert from ordinary Scala collections to the datasets used by
-<a href="http://jfree.org/jfreechart/">JFreeChart</a>:</p>
-
-<pre><code>val dataset = Seq((1,2),(2,4),(3,6),(4,8)).toXYSeriesCollection("some points")
-</code></pre>
-
-<p>These datasets can be used by the chart factories, which differ from the <a href="http://jfree.org/jfreechart/">JFreeChart</a> ones in the
-aspect, that they make heavy use of default arguments, so you have to type as less as possible:</p>
-
-<pre><code>val chart = XYLineChart(dataset, title = "My Chart of Some Points")
-</code></pre>
-
-<p>There are also some enrichments for the charts themselves to display them in a window or save them
-to disk:</p>
-
-<pre><code>chart.show
-chart.saveAsPNG(new java.io.File("/tmp/chart.png"), (1024,768))
-chart.saveAsJPEG(new java.io.File("/tmp/chart.jpg"), (1024,768))
-chart.saveAsPDF(new java.io.File("/tmp/chart.pdf"), (1024,768))
-</code></pre>
-
-<p>There are also implicit conversions / views available, but they are not contained by the above
-imports, because of ambiguity issues with implicit conversions. There are different imports
-available for different kinds of datasets, e.g.:</p>
-
-<pre><code>import scalax.chart.views.XYDatasetViews._
-val data = Seq((1,2),(2,4),(3,6),(4,8))
-val chart = XYLineChart(data, title = "My Chart of Some Points")
-</code></pre>
-
-<p>Import these with care, it's most likely better to use the explicit conversions as shown above.</p>
-
-<hr />
-
-<p><a href="http://coderwall.com/wookietreiber"><img src="http://api.coderwall.com/wookietreiber/endorsecount.png" alt="endorse" title="" /></a></p>
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+        <head>
+          <title></title>
+          <meta name="description" content="" />
+          <meta name="keywords" content="" />
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+          
+      <link href="lib/index.css" media="screen" type="text/css" rel="stylesheet" />
+      <script type="text/javascript" src="lib/jquery.js"></script>
+      <script type="text/javascript" src="lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="lib/jquery.layout.js"></script>
+      <script type="text/javascript" src="lib/index.js"></script>
+      <script type="text/javascript" src="lib/scheduler.js"></script>
+    
+        </head>
+        <body>
+      <div id="library">
+        <img class="class icon" src="lib/class.png" />
+        <img class="trait icon" src="lib/trait.png" />
+        <img class="object icon" src="lib/object.png" />
+        <img class="package icon" src="lib/package.png" />
+      </div>
+      <div id="browser" class="ui-layout-west">
+      <div class="ui-west-center">
+      <div id="filter"></div>
+      <div class="pack" id="tpl">
+            
+            <ol class="templates"></ol>
+            <ol class="packages"> <li class="pack" title="scalax">
+            <a class="tplshow" href="scalax/package.html" target="template">scalax</a>
+            <ol class="templates"></ol>
+            <ol class="packages"> <li class="pack" title="scalax.chart">
+            <a class="tplshow" href="scalax/chart/package.html" target="template">scalax.chart</a>
+            <ol class="templates"><li title="scalax.chart.CategoryChart"><div class="placeholder"></div><a class="tplshow" href="scalax/chart/CategoryChart.html" target="template"><span class="trait">(trait)</span><span class="tplLink">CategoryChart</span></a></li><li title="scalax.chart.Chart"><div class="placeholder"></div><a class="tplshow" href="scalax/chart/Chart.html" target="template"><span class="trait">(trait)</span><span class="tplLink">Chart</span></a></li><li title="scalax.chart.ChartFactories"><a class="tplshow" href="scalax/chart/ChartFactories$.html" target="template"><span class="object">(object)</span></a><a class="tplshow" href="scalax/chart/ChartFactories.html" target="template"><span class="trait">(trait)</span><span class="tplLink">ChartFactories</span></a></li><li title="scalax.chart.Charting"><a class="tplshow" href="scalax/chart/Charting$.html" target="template"><span class="object">(object)</span></a><a class="tplshow" href="scalax/chart/Charting.html" target="template"><span class="trait">(trait)</span><span class="tplLink">Charting</span></a></li><li title="scalax.chart.DisplayableChart"><div class="placeholder"></div><a class="tplshow" href="scalax/chart/DisplayableChart.html" target="template"><span class="trait">(trait)</span><span class="tplLink">DisplayableChart</span></a></li><li title="scalax.chart.DomainAxis"><div class="placeholder"></div><a class="tplshow" href="scalax/chart/DomainAxis.html" target="template"><span class="trait">(trait)</span><span class="tplLink">DomainAxis</span></a></li><li title="scalax.chart.Imports"><a class="tplshow" href="scalax/chart/Imports$.html" target="template"><span class="object">(object)</span></a><a class="tplshow" href="scalax/chart/Imports.html" target="template"><span class="trait">(trait)</span><span class="tplLink">Imports</span></a></li><li title="scalax.chart.Labels"><div class="placeholder"></div><a class="tplshow" href="scalax/chart/Labels.html" target="template"><span class="trait">(trait)</span><span class="tplLink">Labels</span></a></li><li title="scalax.chart.MultiplePieChart"><div class="placeholder"></div><a class="tplshow" href="scalax/chart/MultiplePieChart.html" target="template"><span class="trait">(trait)</span><span class="tplLink">MultiplePieChart</span></a></li><li title="scalax.chart.PieChart"><div class="placeholder"></div><a class="tplshow" href="scalax/chart/PieChart.html" target="template"><span class="trait">(trait)</span><span class="tplLink">PieChart</span></a></li><li title="scalax.chart.PieChartLike"><div class="placeholder"></div><a class="tplshow" href="scalax/chart/PieChartLike.html" target="template"><span class="trait">(trait)</span><span class="tplLink">PieChartLike</span></a></li><li title="scalax.chart.RangeAxis"><div class="placeholder"></div><a class="tplshow" href="scalax/chart/RangeAxis.html" target="template"><span class="trait">(trait)</span><span class="tplLink">RangeAxis</span></a></li><li title="scalax.chart.RichChart"><a class="tplshow" href="scalax/chart/RichChart$.html" target="template"><span class="object">(object)</span></a><a class="tplshow" href="scalax/chart/RichChart.html" target="template"><span class="trait">(trait)</span><span class="tplLink">RichChart</span></a></li><li title="scalax.chart.RichChartingCollections"><a class="tplshow" href="scalax/chart/RichChartingCollections$.html" target="template"><span class="object">(object)</span></a><a class="tplshow" href="scalax/chart/RichChartingCollections.html" target="template"><span class="trait">(trait)</span><span class="tplLink">RichChartingCollections</span></a></li><li title="scalax.chart.RingChart"><div class="placeholder"></div><a class="tplshow" href="scalax/chart/RingChart.html" target="template"><span class="trait">(trait)</span><span class="tplLink">RingChart</span></a></li><li title="scalax.chart.StaticForwarderImports"><a class="tplshow" href="scalax/chart/StaticForwarderImports$.html" target="template"><span class="object">(object)</span></a><a class="tplshow" href="scalax/chart/StaticForwarderImports.html" target="template"><span class="trait">(trait)</span><span class="tplLink">StaticForwarderImports</span></a></li><li title="scalax.chart.StorableChart"><div class="placeholder"></div><a class="tplshow" href="scalax/chart/StorableChart.html" target="template"><span class="trait">(trait)</span><span class="tplLink">StorableChart</span></a></li><li title="scalax.chart.Tooltips"><div class="placeholder"></div><a class="tplshow" href="scalax/chart/Tooltips.html" target="template"><span class="trait">(trait)</span><span class="tplLink">Tooltips</span></a></li><li title="scalax.chart.TypeImports"><a class="tplshow" href="scalax/chart/TypeImports$.html" target="template"><span class="object">(object)</span></a><a class="tplshow" href="scalax/chart/TypeImports.html" target="template"><span class="trait">(trait)</span><span class="tplLink">TypeImports</span></a></li><li title="scalax.chart.XYChart"><div class="placeholder"></div><a class="tplshow" href="scalax/chart/XYChart.html" target="template"><span class="trait">(trait)</span><span class="tplLink">XYChart</span></a></li></ol>
+            <ol class="packages"> <li class="pack" title="scalax.chart.views">
+            <a class="tplshow" href="scalax/chart/views/package.html" target="template">scalax.chart.views</a>
+            <ol class="templates"><li title="scalax.chart.views.CategoryDatasetViews"><a class="tplshow" href="scalax/chart/views/CategoryDatasetViews$.html" target="template"><span class="object">(object)</span></a><a class="tplshow" href="scalax/chart/views/CategoryDatasetViews.html" target="template"><span class="trait">(trait)</span><span class="tplLink">CategoryDatasetViews</span></a></li><li title="scalax.chart.views.CollectionOfSeriesViews"><a class="tplshow" href="scalax/chart/views/CollectionOfSeriesViews$.html" target="template"><span class="object">(object)</span></a><a class="tplshow" href="scalax/chart/views/CollectionOfSeriesViews.html" target="template"><span class="trait">(trait)</span><span class="tplLink">CollectionOfSeriesViews</span></a></li><li title="scalax.chart.views.CollectionOfTimePeriodValuesViews"><a class="tplshow" href="scalax/chart/views/CollectionOfTimePeriodValuesViews$.html" target="template"><span class="object">(object)</span></a><a class="tplshow" href="scalax/chart/views/CollectionOfTimePeriodValuesViews.html" target="template"><span class="trait">(trait)</span><span class="tplLink">CollectionOfTimePeriodValuesViews</span></a></li><li title="scalax.chart.views.CollectionOfTimeSeriesViews"><a class="tplshow" href="scalax/chart/views/CollectionOfTimeSeriesViews$.html" target="template"><span class="object">(object)</span></a><a class="tplshow" href="scalax/chart/views/CollectionOfTimeSeriesViews.html" target="template"><span class="trait">(trait)</span><span class="tplLink">CollectionOfTimeSeriesViews</span></a></li><li title="scalax.chart.views.CollectionOfXYSeriesViews"><a class="tplshow" href="scalax/chart/views/CollectionOfXYSeriesViews$.html" target="template"><span class="object">(object)</span></a><a class="tplshow" href="scalax/chart/views/CollectionOfXYSeriesViews.html" target="template"><span class="trait">(trait)</span><span class="tplLink">CollectionOfXYSeriesViews</span></a></li><li title="scalax.chart.views.CollectionToCategoryDatasetViews"><a class="tplshow" href="scalax/chart/views/CollectionToCategoryDatasetViews$.html" target="template"><span class="object">(object)</span></a><a class="tplshow" href="scalax/chart/views/CollectionToCategoryDatasetViews.html" target="template"><span class="trait">(trait)</span><span class="tplLink">CollectionToCategoryDatasetViews</span></a></li><li title="scalax.chart.views.CollectionToPieDatasetViews"><a class="tplshow" href="scalax/chart/views/CollectionToPieDatasetViews$.html" target="template"><span class="object">(object)</span></a><a class="tplshow" href="scalax/chart/views/CollectionToPieDatasetViews.html" target="template"><span class="trait">(trait)</span><span class="tplLink">CollectionToPieDatasetViews</span></a></li><li title="scalax.chart.views.CollectionToTimePeriodValuesViews"><a class="tplshow" href="scalax/chart/views/CollectionToTimePeriodValuesViews$.html" target="template"><span class="object">(object)</span></a><a class="tplshow" href="scalax/chart/views/CollectionToTimePeriodValuesViews.html" target="template"><span class="trait">(trait)</span><span class="tplLink">CollectionToTimePeriodValuesViews</span></a></li><li title="scalax.chart.views.CollectionToTimeSeriesViews"><a class="tplshow" href="scalax/chart/views/CollectionToTimeSeriesViews$.html" target="template"><span class="object">(object)</span></a><a class="tplshow" href="scalax/chart/views/CollectionToTimeSeriesViews.html" target="template"><span class="trait">(trait)</span><span class="tplLink">CollectionToTimeSeriesViews</span></a></li><li title="scalax.chart.views.CollectionToTimeTableViews"><a class="tplshow" href="scalax/chart/views/CollectionToTimeTableViews$.html" target="template"><span class="object">(object)</span></a><a class="tplshow" href="scalax/chart/views/CollectionToTimeTableViews.html" target="template"><span class="trait">(trait)</span><span class="tplLink">CollectionToTimeTableViews</span></a></li><li title="scalax.chart.views.CollectionToXYSeriesViews"><a class="tplshow" href="scalax/chart/views/CollectionToXYSeriesViews$.html" target="template"><span class="object">(object)</span></a><a class="tplshow" href="scalax/chart/views/CollectionToXYSeriesViews.html" target="template"><span class="trait">(trait)</span><span class="tplLink">CollectionToXYSeriesViews</span></a></li><li title="scalax.chart.views.CollectionViews"><a class="tplshow" href="scalax/chart/views/CollectionViews$.html" target="template"><span class="object">(object)</span></a><a class="tplshow" href="scalax/chart/views/CollectionViews.html" target="template"><span class="trait">(trait)</span><span class="tplLink">CollectionViews</span></a></li><li title="scalax.chart.views.PieDatasetViews"><a class="tplshow" href="scalax/chart/views/PieDatasetViews$.html" target="template"><span class="object">(object)</span></a><a class="tplshow" href="scalax/chart/views/PieDatasetViews.html" target="template"><span class="trait">(trait)</span><span class="tplLink">PieDatasetViews</span></a></li><li title="scalax.chart.views.SeriesViews"><a class="tplshow" href="scalax/chart/views/SeriesViews$.html" target="template"><span class="object">(object)</span></a><a class="tplshow" href="scalax/chart/views/SeriesViews.html" target="template"><span class="trait">(trait)</span><span class="tplLink">SeriesViews</span></a></li><li title="scalax.chart.views.TimeDatasetViews"><a class="tplshow" href="scalax/chart/views/TimeDatasetViews$.html" target="template"><span class="object">(object)</span></a><a class="tplshow" href="scalax/chart/views/TimeDatasetViews.html" target="template"><span class="trait">(trait)</span><span class="tplLink">TimeDatasetViews</span></a></li><li title="scalax.chart.views.TimePeriodDatasetViews"><a class="tplshow" href="scalax/chart/views/TimePeriodDatasetViews$.html" target="template"><span class="object">(object)</span></a><a class="tplshow" href="scalax/chart/views/TimePeriodDatasetViews.html" target="template"><span class="trait">(trait)</span><span class="tplLink">TimePeriodDatasetViews</span></a></li><li title="scalax.chart.views.TimePeriodValuesViews"><a class="tplshow" href="scalax/chart/views/TimePeriodValuesViews$.html" target="template"><span class="object">(object)</span></a><a class="tplshow" href="scalax/chart/views/TimePeriodValuesViews.html" target="template"><span class="trait">(trait)</span><span class="tplLink">TimePeriodValuesViews</span></a></li><li title="scalax.chart.views.TimeSeriesViews"><a class="tplshow" href="scalax/chart/views/TimeSeriesViews$.html" target="template"><span class="object">(object)</span></a><a class="tplshow" href="scalax/chart/views/TimeSeriesViews.html" target="template"><span class="trait">(trait)</span><span class="tplLink">TimeSeriesViews</span></a></li><li title="scalax.chart.views.TimeTableDatasetViews"><a class="tplshow" href="scalax/chart/views/TimeTableDatasetViews$.html" target="template"><span class="object">(object)</span></a><a class="tplshow" href="scalax/chart/views/TimeTableDatasetViews.html" target="template"><span class="trait">(trait)</span><span class="tplLink">TimeTableDatasetViews</span></a></li><li title="scalax.chart.views.XYDatasetViews"><a class="tplshow" href="scalax/chart/views/XYDatasetViews$.html" target="template"><span class="object">(object)</span></a><a class="tplshow" href="scalax/chart/views/XYDatasetViews.html" target="template"><span class="trait">(trait)</span><span class="tplLink">XYDatasetViews</span></a></li><li title="scalax.chart.views.XYSeriesViews"><a class="tplshow" href="scalax/chart/views/XYSeriesViews$.html" target="template"><span class="object">(object)</span></a><a class="tplshow" href="scalax/chart/views/XYSeriesViews.html" target="template"><span class="trait">(trait)</span><span class="tplLink">XYSeriesViews</span></a></li></ol>
+            <ol class="packages"> </ol>
+          </li></ol>
+          </li></ol>
+          </li></ol>
+          </div></div><script src="index.js"></script>
+    </div>
+      <div id="content" class="ui-layout-center">
+        <iframe id="template" name="template" src="package.html"></iframe>
+      </div>
+    </body>
+      </html>
