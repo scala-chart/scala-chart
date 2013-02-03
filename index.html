@@ -1,0 +1,66 @@
+<h1>Scala Chart Library</h1>
+
+<p><code>scala-chart</code> is a Scala library for creating and working with charts. It wraps <a href="http://jfree.org/jfreechart/">JFreeChart</a>, much
+like <code>scala-swing</code> does with the original <code>javax.swing</code> package. This project is released under the
+same license as <a href="http://jfree.org/jfreechart/">JFreeChart</a> to make them fully license-compatible.</p>
+
+<h2>Usage</h2>
+
+<h3><a href="http://www.scala-sbt.org/">sbt</a></h3>
+
+<pre><code>libraryDependencies += "com.github.wookietreiber" %% "scala-chart" % "latest.integration"
+</code></pre>
+
+<h3><a href="http://maven.apache.org/">maven</a></h3>
+
+<pre><code>&lt;dependency&gt;
+   &lt;groupId&gt;com.github.wookietreiber&lt;/groupId&gt;
+   &lt;artifactId&gt;scala-chart_${scala.version}&lt;/artifactId&gt;
+   &lt;version&gt;latest.integration&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+
+<h2>Examples</h2>
+
+<p>You can import nearly all of the <code>scala-chart</code> functionality (except the views, see below) with the
+following lines:</p>
+
+<pre><code>import scalax.chart._
+import scalax.chart.Charting._
+</code></pre>
+
+<p>You can use the conversions to convert from ordinary Scala collections to the datasets used by
+<a href="http://jfree.org/jfreechart/">JFreeChart</a>:</p>
+
+<pre><code>val dataset = Seq((1,2),(2,4),(3,6),(4,8)).toXYSeriesCollection("some points")
+</code></pre>
+
+<p>These datasets can be used by the chart factories, which differ from the <a href="http://jfree.org/jfreechart/">JFreeChart</a> ones in the
+aspect, that they make heavy use of default arguments, so you have to type as less as possible:</p>
+
+<pre><code>val chart = XYLineChart(dataset, title = "My Chart of Some Points")
+</code></pre>
+
+<p>There are also some enrichments for the charts themselves to display them in a window or save them
+to disk:</p>
+
+<pre><code>chart.show
+chart.saveAsPNG(new java.io.File("/tmp/chart.png"), (1024,768))
+chart.saveAsJPEG(new java.io.File("/tmp/chart.jpg"), (1024,768))
+chart.saveAsPDF(new java.io.File("/tmp/chart.pdf"), (1024,768))
+</code></pre>
+
+<p>There are also implicit conversions / views available, but they are not contained by the above
+imports, because of ambiguity issues with implicit conversions. There are different imports
+available for different kinds of datasets, e.g.:</p>
+
+<pre><code>import scalax.chart.views.XYDatasetViews._
+val data = Seq((1,2),(2,4),(3,6),(4,8))
+val chart = XYLineChart(data, title = "My Chart of Some Points")
+</code></pre>
+
+<p>Import these with care, it's most likely better to use the explicit conversions as shown above.</p>
+
+<hr />
+
+<p><a href="http://coderwall.com/wookietreiber"><img src="http://api.coderwall.com/wookietreiber/endorsecount.png" alt="endorse" title="" /></a></p>
