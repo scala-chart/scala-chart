@@ -25,8 +25,10 @@
 package scalax.chart
 
 import scala.swing._
+import scala.swing.Swing._
 
 import org.jfree.chart._
+import org.jfree.chart.ChartPanel.{ DEFAULT_WIDTH, DEFAULT_HEIGHT }
 
 /** Provides methods for both displaying a chart and integrating it into the
   * [[http://www.scala-lang.org/api/current/index.html#scala.swing.package Scala Swing UI
@@ -47,8 +49,10 @@ trait DisplayableChart {
     * @param title      $title
     * @param scrollable $scrollable
     */
-  def show(title: String = "", scrollable: Boolean = true): Unit = Swing onEDT {
-    toFrame(title, scrollable).visible = true
+  def show(title: String = "", dim: (Int,Int) = (DEFAULT_WIDTH,DEFAULT_HEIGHT), scrollable: Boolean = false): Unit = Swing onEDT {
+    val frame = toFrame(title, scrollable)
+    frame.size = dim
+    frame.visible = true
   }
 
   /** Wraps a panel around this chart. */

@@ -1,9 +1,9 @@
 
 name := "scala-chart"
 
-version := "0.2.0"
+version := "0.2.1"
 
-scalaVersion := "2.10.0"
+scalaVersion := "2.10.1"
 
 libraryDependencies <+= scalaVersion { sv ⇒
   "org.scala-lang" % "scala-swing" % sv
@@ -11,7 +11,7 @@ libraryDependencies <+= scalaVersion { sv ⇒
 
 libraryDependencies ++= Seq (
   "org.jfree"  %  "jfreechart" % "1.0.14",
-  "org.specs2" %% "specs2"     % "1.13" % "test"
+  "org.specs2" %% "specs2"     % "1.14" % "test"
 )
 
 initialCommands in (Compile, consoleQuick) <<= initialCommands in Compile
