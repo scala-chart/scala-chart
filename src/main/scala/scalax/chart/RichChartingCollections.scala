@@ -118,8 +118,9 @@ trait RichChartingCollections {
       *
       * @param name $name
       */
-    def toXYSeries(name: Comparable[_] = "")(implicit eva: A ⇒ Number, evb: B ⇒ Number): XYSeries = {
-      val series = new XYSeries(name)
+    def toXYSeries(name: Comparable[_] = "", autoSort: Boolean = true)
+                  (implicit eva: A ⇒ Number, evb: B ⇒ Number): XYSeries = {
+      val series = new XYSeries(name, autoSort)
       it foreach { case (x,y) ⇒ series.add(x,y) }
       series
     }
@@ -128,8 +129,9 @@ trait RichChartingCollections {
       *
       * @param name $name
       */
-    def toXYSeriesCollection(name: Comparable[_] = "")(implicit eva: A ⇒ Number, evb: B ⇒ Number): XYSeriesCollection =
-      new XYSeriesCollection(toXYSeries(name))
+    def toXYSeriesCollection(name: Comparable[_] = "", autoSort: Boolean = true)
+                            (implicit eva: A ⇒ Number, evb: B ⇒ Number): XYSeriesCollection =
+      new XYSeriesCollection(toXYSeries(name, autoSort = autoSort))
 
   }
 
