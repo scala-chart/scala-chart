@@ -42,6 +42,10 @@ object RichChartingCollections extends RichChartingCollections
   * datasets. To see which conversions are provided have a look at the classes defined below.
   *
   * @define name the name of the dataset
+  *
+  * @define autoSort whether or not the items in the series are sorted
+  *
+  * @define allowDuplicateXValues whether or not duplicate x-values are allowed
   */
 trait RichChartingCollections {
 
@@ -117,9 +121,13 @@ trait RichChartingCollections {
     /** Converts this collection to an `XYSeries`.
       *
       * @param name $name
+      * @param autoSort $autoSort
+      * @param allowDuplicateXValues $allowDuplicateXValues
       */
-    def toXYSeries(name: Comparable[_] = "")(implicit eva: A ⇒ Number, evb: B ⇒ Number): XYSeries = {
-      val series = new XYSeries(name)
+    def toXYSeries(name: Comparable[_] = "", autoSort: Boolean = true, allowDuplicateXValues: Boolean = true)
+      (implicit eva: A ⇒ Number, evb: B ⇒ Number): XYSeries = {
+
+      val series = new XYSeries(name, autoSort, allowDuplicateXValues)
       it foreach { case (x,y) ⇒ series.add(x,y) }
       series
     }
@@ -127,9 +135,12 @@ trait RichChartingCollections {
     /** Converts this collection to an `XYSeriesCollection`.
       *
       * @param name $name
+      * @param autoSort $autoSort
+      * @param allowDuplicateXValues $allowDuplicateXValues
       */
-    def toXYSeriesCollection(name: Comparable[_] = "")(implicit eva: A ⇒ Number, evb: B ⇒ Number): XYSeriesCollection =
-      new XYSeriesCollection(toXYSeries(name))
+    def toXYSeriesCollection(name: Comparable[_] = "", autoSort: Boolean = true, allowDuplicateXValues: Boolean = true)
+      (implicit eva: A ⇒ Number, evb: B ⇒ Number): XYSeriesCollection =
+      new XYSeriesCollection(toXYSeries(name, autoSort, allowDuplicateXValues))
 
   }
 
@@ -137,7 +148,9 @@ trait RichChartingCollections {
   implicit class RichCategorizedTuples[A,B,C](it: Iterable[(A,Iterable[(B,C)])]) {
 
     /** Converts this collection to a `BoxAndWhiskerCategoryDataset`. */
-    def toBoxAndWhiskerCategoryDataset[D](implicit eva: A ⇒ Comparable[A], evb: B ⇒ Comparable[B], evc: C ⇒ Seq[D], evd: D ⇒ Number): BoxAndWhiskerCategoryDataset = {
+    def toBoxAndWhiskerCategoryDataset[D]
+      (implicit eva: A ⇒ Comparable[A], evb: B ⇒ Comparable[B], evc: C ⇒ Seq[D], evd: D ⇒ Number): BoxAndWhiskerCategoryDataset = {
+
       val dataset = new DefaultBoxAndWhiskerCategoryDataset()
       for {
         (upper,lvs) ← it
@@ -176,11 +189,17 @@ trait RichChartingCollections {
       dataset
     }
 
-    /** Converts this collection to an `XYSeriesCollection`. */
-    def toXYSeriesCollection(implicit eva: A ⇒ Comparable[A], evb: B ⇒ Number, evc: C ⇒ Number): XYSeriesCollection = {
+    /** Converts this collection to an `XYSeriesCollection`.
+      *
+      * @param autoSort $autoSort
+      * @param allowDuplicateXValues $allowDuplicateXValues
+      */
+    def toXYSeriesCollection(autoSort: Boolean = true, allowDuplicateXValues: Boolean = true)
+      (implicit eva: A ⇒ Comparable[A], evb: B ⇒ Number, evc: C ⇒ Number): XYSeriesCollection = {
+
       val seriess = for {
         (category,xys) ← it
-      } yield xys.toXYSeries(category)
+      } yield xys.toXYSeries(category, autoSort, allowDuplicateXValues)
       seriess.toXYSeriesCollection
     }
 
