@@ -13,7 +13,7 @@
       <script type="text/javascript" src="../../lib/jquery-ui.js"></script>
       <script type="text/javascript" src="../../lib/template.js"></script>
       <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
-      <script type="text/javascript" src="../../lib/modernizr.custom.js"></script><script type="text/javascript" src="../../lib/diagrams.js" id="diagrams-js"></script>
+      
       <script type="text/javascript">
          if(top === self) {
             var url = '../../index.html';
@@ -333,9 +333,8 @@
         <span class="name">stacked</span><span class="params">(<span name="dataset">dataset: <span class="extype" name="org.jfree.data.xy.IntervalXYDataset">IntervalXYDataset</span> with <span class="extype" name="org.jfree.data.xy.TableXYDataset">TableXYDataset</span></span>, <span name="title">title: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;&quot;</span></span>, <span name="domainAxisLabel">domainAxisLabel: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;&quot;</span></span>, <span name="rangeAxisLabel">rangeAxisLabel: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;&quot;</span></span>, <span name="orientation">orientation: <a href="Imports$.html#Orientation=swing.Orientation.Value" class="extmbr" name="scalax.chart.Imports.Orientation">Imports.Orientation</a> = <span class="symbol">Orientation.Vertical</span></span>, <span name="legend">legend: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">true</span></span>, <span name="tooltips">tooltips: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">false</span></span>)</span><span class="result">: <a href="XYChart.html" class="extype" name="scalax.chart.XYChart">XYChart</a></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Creates a new chart that represents numeric <code>x</code> (intervals) and <code>y</code> values with a line.</p><div class="fullcomment"><div class="comment cmt"><p>Creates a new chart that represents numeric <code>x</code> (intervals) and <code>y</code> values with a line.</p><p>If the input dataset is an instance of a <code>TimePeriodValuesCollection</code>,
-<code>TimeSeriesCollection</code> or <code>TimeTableXYDataset</code> the domain axis will correctly be set to a
-<code>DateAxis</code>.
+      <p class="shortcomment cmt">Creates a new chart that represents numeric <code>x</code> (intervals) and <code>y</code> values with a line.</p><div class="fullcomment"><div class="comment cmt"><p>Creates a new chart that represents numeric <code>x</code> (intervals) and <code>y</code> values with a line.</p><p>If the input dataset is an instance of a <code>TimeTableXYDataset</code> the domain axis will correctly
+be set to a <code>DateAxis</code>.
 </p></div><dl class="paramcmts block"><dt class="param">dataset</dt><dd class="cmt"><p>the data the chart will visualize</p></dd><dt class="param">title</dt><dd class="cmt"><p>the title of the chart</p></dd><dt class="param">domainAxisLabel</dt><dd class="cmt"><p>the label for the domain axis</p></dd><dt class="param">rangeAxisLabel</dt><dd class="cmt"><p>the label for the range axis</p></dd><dt class="param">orientation</dt><dd class="cmt"><p>the orientation of the chart</p></dd><dt class="param">legend</dt><dd class="cmt"><p>whether or not the chart will contain a legend</p></dd><dt class="param">tooltips</dt><dd class="cmt"><p>whether or not tooltips will be generated
 </p></dd></dl></div>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">

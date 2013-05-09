@@ -13,7 +13,7 @@
       <script type="text/javascript" src="../../lib/jquery-ui.js"></script>
       <script type="text/javascript" src="../../lib/template.js"></script>
       <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
-      <script type="text/javascript" src="../../lib/modernizr.custom.js"></script><script type="text/javascript" src="../../lib/diagrams.js" id="diagrams-js"></script>
+      
       <script type="text/javascript">
          if(top === self) {
             var url = '../../index.html';
@@ -50,9 +50,8 @@
 <span class="kw">import</span> scalax.chart.Charting._</pre><p>With these imports you can convert Scala collections to the datasets of JFreeChart and use chart
 factories:</p><pre><span class="kw">val</span> data = <span class="std">Seq</span>((<span class="num">1</span>,<span class="num">2</span>),(<span class="num">2</span>,<span class="num">4</span>),(<span class="num">3</span>,<span class="num">6</span>),(<span class="num">4</span>,<span class="num">8</span>))
 <span class="kw">val</span> dataset = data.toXYSeriesCollection(<span class="lit">"some points"</span>)
-<span class="kw">val</span> chart = XYLineChart(dataset, title = <span class="lit">"My Chart of Some Points"</span>)</pre><p>There are also implicit conversions / views available in the <a href="views/package.html" class="extype" name="scalax.chart.views">scalax.chart.views</a> package, but
-they are not contained by <a href="Charting.html" class="extype" name="scalax.chart.Charting">scalax.chart.Charting</a>, because of ambiguity issues with implicit
-conversions.
+<span class="kw">val</span> chart = XYLineChart(dataset, title = <span class="lit">"My Chart of Some Points"</span>)</pre><p>There are also implicit conversions / views available in the <a href="views/package.html" class="extype" name="scalax.chart.views">views</a> package, but they are not
+contained by <a href="Charting.html" class="extype" name="scalax.chart.Charting">Charting</a>, because of ambiguity issues with implicit conversions.
 </p></div><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
@@ -120,7 +119,7 @@ conversions.
         <span class="name">CategoryItemLabelGenerator</span><span class="result"> = (<span class="extype" name="org.jfree.data.category.CategoryDataset">CategoryDataset</span>, <span class="extype" name="scala.Int">Int</span>, <span class="extype" name="scala.Int">Int</span>) ⇒ <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Function alias for creating item labels for <a href="CategoryChart.html" class="extype" name="scalax.chart.CategoryChart">scalax.chart.CategoryChart</a>s.</p>
+      <p class="shortcomment cmt">Function alias for creating item labels for <a href="CategoryChart.html" class="extype" name="scalax.chart.CategoryChart">CategoryChart</a>s.</p>
     </li><li name="scalax.chart.CategoryToolTipGenerator" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="CategoryToolTipGenerator=(org.jfree.data.category.CategoryDataset,Int,Int)=&gt;String"></a>
       <a id="CategoryToolTipGenerator:(CategoryDataset,Int,Int)⇒String"></a>
@@ -133,7 +132,7 @@ conversions.
         <span class="name">CategoryToolTipGenerator</span><span class="result"> = (<span class="extype" name="org.jfree.data.category.CategoryDataset">CategoryDataset</span>, <span class="extype" name="scala.Int">Int</span>, <span class="extype" name="scala.Int">Int</span>) ⇒ <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Function alias for creating tooltips for <a href="CategoryChart.html" class="extype" name="scalax.chart.CategoryChart">scalax.chart.CategoryChart</a>s.</p>
+      <p class="shortcomment cmt">Function alias for creating tooltips for <a href="CategoryChart.html" class="extype" name="scalax.chart.CategoryChart">CategoryChart</a>s.</p>
     </li><li name="scalax.chart.Chart" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
       <a id="Chart[P&lt;:org.jfree.chart.plot.Plot]extendsDisplayableChartwithStorableChart"></a>
       <a id="Chart[P&lt;:Plot]:Chart[P]"></a>
@@ -278,7 +277,7 @@ framework</a>.</p>
         <span class="name">PieSectionLabelGenerator</span><span class="result"> = (<span class="extype" name="org.jfree.data.general.PieDataset">PieDataset</span>, <span class="extype" name="java.lang.Comparable">Comparable</span>[_]) ⇒ <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Function alias for creating item labels for <a href="PieChartLike.html" class="extype" name="scalax.chart.PieChartLike">scalax.chart.PieChartLike</a> charts.</p>
+      <p class="shortcomment cmt">Function alias for creating item labels for <a href="PieChartLike.html" class="extype" name="scalax.chart.PieChartLike">PieChartLike</a> charts.</p>
     </li><li name="scalax.chart.PieToolTipGenerator" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="PieToolTipGenerator=(org.jfree.data.general.PieDataset,Comparable[_])=&gt;String"></a>
       <a id="PieToolTipGenerator:(PieDataset,Comparable[_])⇒String"></a>
@@ -291,7 +290,7 @@ framework</a>.</p>
         <span class="name">PieToolTipGenerator</span><span class="result"> = (<span class="extype" name="org.jfree.data.general.PieDataset">PieDataset</span>, <span class="extype" name="java.lang.Comparable">Comparable</span>[_]) ⇒ <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Function alias for creating tooltips for <a href="PieChartLike.html" class="extype" name="scalax.chart.PieChartLike">scalax.chart.PieChartLike</a> charts.</p>
+      <p class="shortcomment cmt">Function alias for creating tooltips for <a href="PieChartLike.html" class="extype" name="scalax.chart.PieChartLike">PieChartLike</a> charts.</p>
     </li><li name="scalax.chart.RangeAxis" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
       <a id="RangeAxisextendsAnyRef"></a>
       <a id="RangeAxis:RangeAxis"></a>
@@ -423,7 +422,7 @@ datasets.</p>
         <span class="name">XYItemLabelGenerator</span><span class="result"> = (<span class="extype" name="org.jfree.data.xy.XYDataset">XYDataset</span>, <span class="extype" name="scala.Int">Int</span>, <span class="extype" name="scala.Int">Int</span>) ⇒ <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Function alias for creating item labels for <a href="XYChart.html" class="extype" name="scalax.chart.XYChart">scalax.chart.XYChart</a>s.</p>
+      <p class="shortcomment cmt">Function alias for creating item labels for <a href="XYChart.html" class="extype" name="scalax.chart.XYChart">XYChart</a>s.</p>
     </li><li name="scalax.chart.XYToolTipGenerator" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="XYToolTipGenerator=(org.jfree.data.xy.XYDataset,Int,Int)=&gt;String"></a>
       <a id="XYToolTipGenerator:(XYDataset,Int,Int)⇒String"></a>
@@ -436,7 +435,7 @@ datasets.</p>
         <span class="name">XYToolTipGenerator</span><span class="result"> = (<span class="extype" name="org.jfree.data.xy.XYDataset">XYDataset</span>, <span class="extype" name="scala.Int">Int</span>, <span class="extype" name="scala.Int">Int</span>) ⇒ <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Function alias for creating tooltips for <a href="XYChart.html" class="extype" name="scalax.chart.XYChart">scalax.chart.XYChart</a>s.</p>
+      <p class="shortcomment cmt">Function alias for creating tooltips for <a href="XYChart.html" class="extype" name="scalax.chart.XYChart">XYChart</a>s.</p>
     </li></ol>
             </div>
 

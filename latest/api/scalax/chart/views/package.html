@@ -13,7 +13,7 @@
       <script type="text/javascript" src="../../../lib/jquery-ui.js"></script>
       <script type="text/javascript" src="../../../lib/template.js"></script>
       <script type="text/javascript" src="../../../lib/tools.tooltip.js"></script>
-      <script type="text/javascript" src="../../../lib/modernizr.custom.js"></script><script type="text/javascript" src="../../../lib/diagrams.js" id="diagrams-js"></script>
+      
       <script type="text/javascript">
          if(top === self) {
             var url = '../../../index.html';
@@ -50,15 +50,15 @@ imports available for specific purposes to avoid ambiguous implicit conversions.
 <span class="kw">import</span> scalax.chart.views.CollectionToXYSeriesViews._
 
 <span class="kw">val</span> data = <span class="std">Seq</span>((<span class="num">1</span>,<span class="num">2</span>),(<span class="num">2</span>,<span class="num">4</span>),(<span class="num">3</span>,<span class="num">6</span>),(<span class="num">4</span>,<span class="num">8</span>))
-<span class="kw">val</span> chart = XYLineChart(data, title = <span class="lit">"My Chart of Some Points"</span>)</pre><h4> SeriesViews </h4><p><a href="SeriesViews.html" class="extype" name="scalax.chart.views.SeriesViews">scalax.chart.views.SeriesViews</a> contains views that convert the simpler <code>*Series</code> datasets
-to their <code>*SeriesCollection</code> counterparts so they can be used by chart factories:</p><pre><span class="kw">import</span> scalax.chart._
+<span class="kw">val</span> chart = XYLineChart(data, title = <span class="lit">"My Chart of Some Points"</span>)</pre><h4> SeriesViews </h4><p><a href="SeriesViews.html" class="extype" name="scalax.chart.views.SeriesViews">SeriesViews</a> contains views that convert the simpler <code>*Series</code> datasets to their
+<code>*SeriesCollection</code> counterparts so they can be used by chart factories:</p><pre><span class="kw">import</span> scalax.chart._
 <span class="kw">import</span> scalax.chart.Charting._
 <span class="kw">import</span> scalax.chart.views.SeriesViews._
 
 <span class="kw">val</span> dataset = <span class="std">Seq</span>((<span class="num">1</span>,<span class="num">2</span>),(<span class="num">2</span>,<span class="num">4</span>),(<span class="num">3</span>,<span class="num">6</span>),(<span class="num">4</span>,<span class="num">8</span>)).toXYSeries(<span class="lit">"some points"</span>)
-<span class="kw">val</span> chart = XYLineChart(dataset, title = <span class="lit">"My Chart of Some Points"</span>)</pre><h4> CollectionOfSeriesViews </h4><p><a href="CollectionOfSeriesViews.html" class="extype" name="scalax.chart.views.CollectionOfSeriesViews">scalax.chart.views.CollectionOfSeriesViews</a> contains views that convert Scala collections
-of the simpler <code>*Series</code> datasets to their <code>*SeriesCollection</code> counterparts so they can be used
-by chart factories:</p><pre><span class="kw">import</span> scalax.chart._
+<span class="kw">val</span> chart = XYLineChart(dataset, title = <span class="lit">"My Chart of Some Points"</span>)</pre><h4> CollectionOfSeriesViews </h4><p><a href="CollectionOfSeriesViews.html" class="extype" name="scalax.chart.views.CollectionOfSeriesViews">CollectionOfSeriesViews</a> contains views that convert Scala collections of the simpler
+<code>*Series</code> datasets to their <code>*SeriesCollection</code> counterparts so they can be used by chart
+factories:</p><pre><span class="kw">import</span> scalax.chart._
 <span class="kw">import</span> scalax.chart.Charting._
 <span class="kw">import</span> scalax.chart.views.CollectionOfSeriesViews._
 
