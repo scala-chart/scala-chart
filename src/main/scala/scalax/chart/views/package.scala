@@ -42,8 +42,8 @@ package scalax.chart
   *
   * == SeriesViews ==
   *
-  * [[scalax.chart.views.SeriesViews]] contains views that convert the simpler `*Series` datasets
-  * to their `*SeriesCollection` counterparts so they can be used by chart factories:
+  * [[SeriesViews]] contains views that convert the simpler `*Series` datasets to their
+  * `*SeriesCollection` counterparts so they can be used by chart factories:
   *
   * {{{
   * import scalax.chart._
@@ -56,9 +56,9 @@ package scalax.chart
   *
   * == CollectionOfSeriesViews ==
   *
-  * [[scalax.chart.views.CollectionOfSeriesViews]] contains views that convert Scala collections
-  * of the simpler `*Series` datasets to their `*SeriesCollection` counterparts so they can be used
-  * by chart factories:
+  * [[CollectionOfSeriesViews]] contains views that convert Scala collections of the simpler
+  * `*Series` datasets to their `*SeriesCollection` counterparts so they can be used by chart
+  * factories:
   *
   * {{{
   * import scalax.chart._

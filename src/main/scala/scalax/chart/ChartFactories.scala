@@ -566,9 +566,8 @@ trait ChartFactories {
 
     /** Creates a new chart that represents numeric `x` (intervals) and `y` values with a line.
       *
-      * If the input dataset is an instance of a `TimePeriodValuesCollection`,
-      * `TimeSeriesCollection` or `TimeTableXYDataset` the domain axis will correctly be set to a
-      * `DateAxis`.
+      * If the input dataset is an instance of a `TimeTableXYDataset` the domain axis will correctly
+      * be set to a `DateAxis`.
       *
       * @param dataset         $dataset
       * @param title           $title
