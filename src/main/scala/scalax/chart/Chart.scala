@@ -63,7 +63,7 @@ trait Chart[P <: Plot] extends DisplayableChart with StorableChart {
 
     override def insertAll(n: Int, elems: Traversable[Title]) {
       var i = n
-      elems. foreach { title ⇒
+      elems foreach { title ⇒
         peer.addSubtitle(i, title)
         i += 1
       }
