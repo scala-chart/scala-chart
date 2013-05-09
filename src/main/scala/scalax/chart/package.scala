@@ -47,9 +47,8 @@ import org.jfree.chart.plot.PlotOrientation
   * val chart = XYLineChart(dataset, title = "My Chart of Some Points")
   * }}}
   *
-  * There are also implicit conversions / views available in the [[scalax.chart.views]] package, but
-  * they are not contained by [[scalax.chart.Charting]], because of ambiguity issues with implicit
-  * conversions.
+  * There are also implicit conversions / views available in the [[views]] package, but they are not
+  * contained by [[Charting]], because of ambiguity issues with implicit conversions.
   */
 package object chart {
 
@@ -57,22 +56,22 @@ package object chart {
   // more meaningful function aliases
   // -----------------------------------------------------------------------------------------------
 
-  /** Function alias for creating item labels for [[scalax.chart.CategoryChart]]s. */
+  /** Function alias for creating item labels for [[CategoryChart]]s. */
   type CategoryItemLabelGenerator = (org.jfree.data.category.CategoryDataset,Int,Int) ⇒ String
 
-  /** Function alias for creating tooltips for [[scalax.chart.CategoryChart]]s. */
+  /** Function alias for creating tooltips for [[CategoryChart]]s. */
   type CategoryToolTipGenerator = (org.jfree.data.category.CategoryDataset,Int,Int) ⇒ String
 
-  /** Function alias for creating item labels for [[scalax.chart.PieChartLike]] charts. */
+  /** Function alias for creating item labels for [[PieChartLike]] charts. */
   type PieSectionLabelGenerator = (org.jfree.data.general.PieDataset,Comparable[_]) ⇒ String
 
-  /** Function alias for creating tooltips for [[scalax.chart.PieChartLike]] charts. */
+  /** Function alias for creating tooltips for [[PieChartLike]] charts. */
   type PieToolTipGenerator = (org.jfree.data.general.PieDataset,Comparable[_]) ⇒ String
 
-  /** Function alias for creating item labels for [[scalax.chart.XYChart]]s. */
+  /** Function alias for creating item labels for [[XYChart]]s. */
   type XYItemLabelGenerator = (org.jfree.data.xy.XYDataset,Int,Int) ⇒ String
 
-  /** Function alias for creating tooltips for [[scalax.chart.XYChart]]s. */
+  /** Function alias for creating tooltips for [[XYChart]]s. */
   type XYToolTipGenerator = (org.jfree.data.xy.XYDataset,Int,Int) ⇒ String
 
   // -----------------------------------------------------------------------------------------------

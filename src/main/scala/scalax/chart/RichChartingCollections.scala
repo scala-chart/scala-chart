@@ -42,13 +42,21 @@ object RichChartingCollections extends RichChartingCollections
   * datasets. To see which conversions are provided have a look at the classes defined below.
   *
   * @define name the name of the dataset
+  *
+  * @define autoSort whether or not the items in the series are sorted
+  *
+  * @define allowDuplicateXValues whether or not duplicate x-values are allowed
   */
 trait RichChartingCollections {
 
   /** Enriches a collection of data pairs. */
   implicit class RichTuples[A,B](it: Iterable[(A,B)]) {
 
-    /** Converts this collection to a `BoxAndWhiskerCategoryDataset`. */
+    /** Converts this collection to a `BoxAndWhiskerCategoryDataset`.
+      *
+      * @usecase def toBoxAndWhiskerCategoryDataset: BoxAndWhiskerCategoryDataset
+      *   @inheritdoc
+      */
     def toBoxAndWhiskerCategoryDataset[C](implicit eva: A ⇒ Comparable[A], evc: B ⇒ Seq[C], evd: C ⇒ Number): BoxAndWhiskerCategoryDataset = {
       val dataset = new DefaultBoxAndWhiskerCategoryDataset()
       it foreach { case (category,values) ⇒
@@ -57,7 +65,11 @@ trait RichChartingCollections {
       dataset
     }
 
-    /** Converts this collection to a `BoxAndWhiskerXYDataset`. */
+    /** Converts this collection to a `BoxAndWhiskerXYDataset`.
+      *
+      * @usecase def toBoxAndWhiskerXYDataset(): BoxAndWhiskerXYDataset
+      *   @inheritdoc
+      */
     def toBoxAndWhiskerXYDataset[C](name: String = "")(implicit eva: A ⇒ Date, evb: B ⇒ Seq[C], evc: C ⇒ Number): BoxAndWhiskerXYDataset = {
       val dataset = new DefaultBoxAndWhiskerXYDataset(name)
       it foreach { case (date,ys) ⇒
@@ -66,14 +78,22 @@ trait RichChartingCollections {
       dataset
     }
 
-    /** Converts this collection to a `CategoryDataset`. */
+    /** Converts this collection to a `CategoryDataset`.
+      *
+      * @usecase def toCategoryDataset: CategoryDataset
+      *   @inheritdoc
+      */
     def toCategoryDataset(implicit eva: A ⇒ Comparable[A], evb: B ⇒ Number): CategoryDataset = {
       val dataset = new DefaultCategoryDataset
       it foreach { case (category,value) ⇒ dataset.addValue(value, category, "") }
       dataset
     }
 
-    /** Converts this collection to a `PieDataset`. */
+    /** Converts this collection to a `PieDataset`.
+      *
+      * @usecase def toPieDataset: PieDataset
+      *   @inheritdoc
+      */
     def toPieDataset(implicit eva: A ⇒ Comparable[A], evb: B ⇒ Number): PieDataset = {
       val dataset = new DefaultPieDataset
       it foreach { case (category,value) ⇒ dataset.setValue(category, value) }
@@ -83,6 +103,9 @@ trait RichChartingCollections {
     /** Converts this collection to `TimePeriodValues`.
       *
       * @param name $name
+      *
+      * @usecase def toTimePeriodValues(): TimePeriodValues
+      *   @inheritdoc
       */
     def toTimePeriodValues(name: String = "")(implicit eva: A ⇒ TimePeriod, evb: B ⇒ Number): TimePeriodValues = {
       val series = new TimePeriodValues(name)
@@ -93,6 +116,9 @@ trait RichChartingCollections {
     /** Converts this collection to a `TimePeriodValuesCollection`.
       *
       * @param name $name
+      *
+      * @usecase def toTimePeriodValuesCollection(): TimePeriodValuesCollection
+      *   @inheritdoc
       */
     def toTimePeriodValuesCollection(name: String = "")(implicit eva: A ⇒ TimePeriod, evb: B ⇒ Number): TimePeriodValuesCollection =
       new TimePeriodValuesCollection(toTimePeriodValues(name))
@@ -100,6 +126,9 @@ trait RichChartingCollections {
     /** Converts this collection to a `TimeSeries`.
       *
       * @param name $name
+      *
+      * @usecase def toTimeSeries(): TimeSeries
+      *   @inheritdoc
       */
     def toTimeSeries(name: Comparable[_] = "")(implicit eva: A ⇒ RegularTimePeriod, evb: B ⇒ Number): TimeSeries = {
       val series = new TimeSeries(name)
@@ -110,6 +139,9 @@ trait RichChartingCollections {
     /** Converts this collection to a `TimeSeriesCollection`.
       *
       * @param name $name
+      *
+      * @usecase def toTimeSeriesCollection(): TimeSeriesCollection
+      *   @inheritdoc
       */
     def toTimeSeriesCollection(name: Comparable[_] = "")(implicit eva: A ⇒ RegularTimePeriod, evb: B ⇒ Number): TimeSeriesCollection =
       new TimeSeriesCollection(toTimeSeries(name))
@@ -117,9 +149,16 @@ trait RichChartingCollections {
     /** Converts this collection to an `XYSeries`.
       *
       * @param name $name
+      * @param autoSort $autoSort
+      * @param allowDuplicateXValues $allowDuplicateXValues
+      *
+      * @usecase def toXYSeries(): XYSeries
+      *   @inheritdoc
       */
-    def toXYSeries(name: Comparable[_] = "")(implicit eva: A ⇒ Number, evb: B ⇒ Number): XYSeries = {
-      val series = new XYSeries(name)
+    def toXYSeries(name: Comparable[_] = "", autoSort: Boolean = true, allowDuplicateXValues: Boolean = true)
+      (implicit eva: A ⇒ Number, evb: B ⇒ Number): XYSeries = {
+
+      val series = new XYSeries(name, autoSort, allowDuplicateXValues)
       it foreach { case (x,y) ⇒ series.add(x,y) }
       series
     }
@@ -127,17 +166,29 @@ trait RichChartingCollections {
     /** Converts this collection to an `XYSeriesCollection`.
       *
       * @param name $name
+      * @param autoSort $autoSort
+      * @param allowDuplicateXValues $allowDuplicateXValues
+      *
+      * @usecase def toXYSeriesCollection(): XYSeriesCollection
+      *   @inheritdoc
       */
-    def toXYSeriesCollection(name: Comparable[_] = "")(implicit eva: A ⇒ Number, evb: B ⇒ Number): XYSeriesCollection =
-      new XYSeriesCollection(toXYSeries(name))
+    def toXYSeriesCollection(name: Comparable[_] = "", autoSort: Boolean = true, allowDuplicateXValues: Boolean = true)
+      (implicit eva: A ⇒ Number, evb: B ⇒ Number): XYSeriesCollection =
+      new XYSeriesCollection(toXYSeries(name, autoSort, allowDuplicateXValues))
 
   }
 
   /** Enriches a collection of categorized data pairs. */
   implicit class RichCategorizedTuples[A,B,C](it: Iterable[(A,Iterable[(B,C)])]) {
 
-    /** Converts this collection to a `BoxAndWhiskerCategoryDataset`. */
-    def toBoxAndWhiskerCategoryDataset[D](implicit eva: A ⇒ Comparable[A], evb: B ⇒ Comparable[B], evc: C ⇒ Seq[D], evd: D ⇒ Number): BoxAndWhiskerCategoryDataset = {
+    /** Converts this collection to a `BoxAndWhiskerCategoryDataset`.
+      *
+      * @usecase def toBoxAndWhiskerCategoryDataset: BoxAndWhiskerCategoryDataset
+      *   @inheritdoc
+      */
+    def toBoxAndWhiskerCategoryDataset[D]
+      (implicit eva: A ⇒ Comparable[A], evb: B ⇒ Comparable[B], evc: C ⇒ Seq[D], evd: D ⇒ Number): BoxAndWhiskerCategoryDataset = {
+
       val dataset = new DefaultBoxAndWhiskerCategoryDataset()
       for {
         (upper,lvs) ← it
@@ -146,7 +197,11 @@ trait RichChartingCollections {
       dataset
     }
 
-    /** Converts this collection to a `CategoryDataset`. */
+    /** Converts this collection to a `CategoryDataset`.
+      *
+      * @usecase def toCategoryDataset: CategoryDataset
+      *   @inheritdoc
+      */
     def toCategoryDataset(implicit eva: A ⇒ Comparable[A], evb: B ⇒ Comparable[B], evc: C ⇒ Number): CategoryDataset = {
       val dataset = new DefaultCategoryDataset
       for {
@@ -156,7 +211,11 @@ trait RichChartingCollections {
       dataset
     }
 
-    /** Converts this collection to a `CategoryTableXYDataset`. */
+    /** Converts this collection to a `CategoryTableXYDataset`.
+      *
+      * @usecase def toCategoryTableXYDataset: CategoryTableXYDataset
+      *   @inheritdoc
+      */
     def toCategoryTableXYDataset(implicit eva: A ⇒ String, evb: B ⇒ Number, evc: C ⇒ Number): CategoryTableXYDataset = {
       val dataset = new CategoryTableXYDataset
       for {
@@ -166,7 +225,11 @@ trait RichChartingCollections {
       dataset
     }
 
-    /** Converts this collection to a time table. */
+    /** Converts this collection to a time table.
+      *
+      * @usecase def toTimeTable: TimeTableXYDataset
+      *   @inheritdoc
+      */
     def toTimeTable(implicit eva: A ⇒ Comparable[A], evb: B ⇒ TimePeriod, evc: C ⇒ Number): TimeTableXYDataset = {
       val dataset = new TimeTableXYDataset
       for {
@@ -176,11 +239,20 @@ trait RichChartingCollections {
       dataset
     }
 
-    /** Converts this collection to an `XYSeriesCollection`. */
-    def toXYSeriesCollection(implicit eva: A ⇒ Comparable[A], evb: B ⇒ Number, evc: C ⇒ Number): XYSeriesCollection = {
+    /** Converts this collection to an `XYSeriesCollection`.
+      *
+      * @param autoSort $autoSort
+      * @param allowDuplicateXValues $allowDuplicateXValues
+      *
+      * @usecase def toXYSeriesCollection(): XYSeriesCollection
+      *   @inheritdoc
+      */
+    def toXYSeriesCollection(autoSort: Boolean = true, allowDuplicateXValues: Boolean = true)
+      (implicit eva: A ⇒ Comparable[A], evb: B ⇒ Number, evc: C ⇒ Number): XYSeriesCollection = {
+
       val seriess = for {
         (category,xys) ← it
-      } yield xys.toXYSeries(category)
+      } yield xys.toXYSeries(category, autoSort, allowDuplicateXValues)
       seriess.toXYSeriesCollection
     }
 
@@ -192,7 +264,11 @@ trait RichChartingCollections {
     import org.jfree.chart.JFreeChart
     import org.jfree.chart.plot._
 
-    /** Converts this collection to a bar chart with a `CombinedDomainCategoryPlot`. */
+    /** Converts this collection to a bar chart with a `CombinedDomainCategoryPlot`.
+      *
+      * @usecase def toCombinedDomainBarChart: CategoryChart
+      *   @inheritdoc
+      */
     def toCombinedDomainBarChart(implicit eva: A ⇒ Comparable[A],
                                           evb: B ⇒ Comparable[B],
                                           evc: C ⇒ Comparable[C],

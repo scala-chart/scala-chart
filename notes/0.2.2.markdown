@@ -1,0 +1,8 @@
+-   fixes #2: tiny `chart.show` window by using default width and height of `org.jfree.chart.ChartPanel`
+-   fixes #3: adds `autoSort` and `allowDuplicateXValues` to `toXYSeries*` conversions
+-   documentation improvements
+
+
+For more information about `scala-chart` usage have a look at the
+[README](https://github.com/wookietreiber/scala-chart#readme) and at the
+[API](http://wookietreiber.github.com/scala-chart/latest/api/index.html).
