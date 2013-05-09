@@ -39,7 +39,7 @@ object RichChart extends RichChart
   *
   * @define RichChartInfo Contains an enriched `JFreeChart` that provides convenient access to
   * e.g. save and show the chart. To read the documentation for these methods, see
-  * [[scalax.chart.RichChart.GenericRichChart]].
+  * [[GenericRichChart]].
   */
 trait RichChart {
 
