@@ -33,7 +33,8 @@ following lines:
 You can use the conversions to convert from ordinary Scala collections to the datasets used by
 [JFreeChart][]:
 
-    val dataset = Seq((1,2),(2,4),(3,6),(4,8)).toXYSeriesCollection("some points")
+    val data    = Seq((1,2),(2,4),(3,6),(4,8))
+    val dataset = data.toXYSeriesCollection("some points")
 
 ### [Chart Factories](http://wookietreiber.github.io/scala-chart/latest/api/index.html#scalax.chart.ChartFactories)
 
