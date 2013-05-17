@@ -5,8 +5,8 @@ Scala Chart Library
 like `scala-swing` does with the original `javax.swing` package. This project is released under the
 same license as [JFreeChart][] to make them fully license-compatible. Checkout the [API][].
 
-Usage
------
+Example Usage
+-------------
 
 ### [sbt][]
 
@@ -20,8 +20,7 @@ Usage
        <version>latest.integration</version>
     </dependency>
 
-Example Usage
--------------
+### Imports
 
 You can import nearly all of the `scala-chart` functionality (except the views, see below) with the
 following lines:
