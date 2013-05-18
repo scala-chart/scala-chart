@@ -26,8 +26,10 @@ package scalax.chart
 
 import scala.swing.Orientation
 
+import org.jfree.chart.ChartTheme
 import org.jfree.chart.JFreeChart
 import org.jfree.chart.ChartFactory._
+import org.jfree.chart.StandardChartTheme.createJFreeTheme
 import org.jfree.chart.axis._
 import org.jfree.chart.labels.StandardXYToolTipGenerator
 import org.jfree.chart.renderer.xy.StackedXYBarRenderer
@@ -46,26 +48,44 @@ object ChartFactories extends ChartFactories
   *
   * @define ChartFactoriesInfo Contains various factories to conveniently create charts.
   *
-  * The only argument needed to create a chart is the dataset:
+  * == Usage ==
+  *
+  * The only argument needed to create a chart is a dataset:
   *
   * {{{
-  * val data = Seq((0,0),(1,1),(2,2)).toXYSeriesCollection("some data")
-  * val chart = XYLineChart(data)
+  * val data = Seq((0,0),(1,1),(2,2))
+  * val dataset = data.toXYSeriesCollection("some data")
   * }}}
   *
-  * The other arguments have defaults and can be conveniently overridden with named arguments:
+  * The factories make heavy use of default arguments, so you have to type as less as possible:
   *
   * {{{
-  * val data = Seq((0,0),(1,1),(2,2)).toXYSeriesCollection("some data")
-  * val chart = XYLineChart(data, legend = false, domainAxisLabel = "some description")
+  * val chart = XYLineChart(dataset)
+  * }}}
+  *
+  * For better readability of your own code, you should name all other arguments:
+  *
+  * {{{
+  * val chart = XYLineChart(dataset, legend = false, domainAxisLabel = "some description")
+  * }}}
+  *
+  * == Chart Themes ==
+  *
+  * The default theme used is the JFreeChart theme. To apply a different theme to the charts created
+  * by the factories, simply define an implicit chart theme in scope, e.g. the darkness theme from
+  * JFreeChart:
+  *
+  * {{{
+  * implicit val theme = org.jfree.chart.StandardChartTheme.createDarknessTheme
   * }}}
   *
   * @define dataset         the data the chart will visualize
-  * @define title           the title of the chart
   * @define domainAxisLabel the label for the domain axis
-  * @define rangeAxisLabel  the label for the range axis
-  * @define orientation     the orientation of the chart
   * @define legend          whether or not the chart will contain a legend
+  * @define orientation     the orientation of the chart
+  * @define rangeAxisLabel  the label for the range axis
+  * @define theme           the theme to apply to the chart
+  * @define title           the title of the chart
   * @define tooltips        whether or not tooltips will be generated
   */
 trait ChartFactories {
@@ -82,6 +102,7 @@ trait ChartFactories {
       * @param orientation     $orientation
       * @param legend          $legend
       * @param tooltips        $tooltips
+      * @param theme           $theme
       */
     def apply(dataset: CategoryDataset,
               title: String = "",
@@ -89,9 +110,12 @@ trait ChartFactories {
               rangeAxisLabel: String = "",
               orientation: Orientation = Orientation.Vertical,
               legend: Boolean = true,
-              tooltips: Boolean = false): CategoryChart = {
+              tooltips: Boolean = false)
+             (implicit theme: ChartTheme = createJFreeTheme): CategoryChart = {
       val chart = createAreaChart(title, domainAxisLabel, rangeAxisLabel, dataset, orientation,
         legend, tooltips, false)
+
+      theme(chart)
 
       new CategoryChart {
         override val peer = chart
@@ -107,6 +131,7 @@ trait ChartFactories {
       * @param orientation     $orientation
       * @param legend          $legend
       * @param tooltips        $tooltips
+      * @param theme           $theme
       */
     def stacked(dataset: CategoryDataset,
                 title: String = "",
@@ -114,9 +139,12 @@ trait ChartFactories {
                 rangeAxisLabel: String = "",
                 orientation: Orientation = Orientation.Vertical,
                 legend: Boolean = true,
-                tooltips: Boolean = false): CategoryChart = {
+                tooltips: Boolean = false)
+               (implicit theme: ChartTheme = createJFreeTheme): CategoryChart = {
       val chart = createStackedAreaChart(title, domainAxisLabel, rangeAxisLabel, dataset, orientation,
         legend, tooltips, false)
+
+      theme(chart)
 
       new CategoryChart {
         override val peer = chart
@@ -137,6 +165,7 @@ trait ChartFactories {
       * @param orientation     $orientation
       * @param legend          $legend
       * @param tooltips        $tooltips
+      * @param theme           $theme
       */
     def apply(dataset: CategoryDataset,
               title: String = "",
@@ -144,9 +173,12 @@ trait ChartFactories {
               rangeAxisLabel: String = "",
               orientation: Orientation = Orientation.Vertical,
               legend: Boolean = true,
-              tooltips: Boolean = false): CategoryChart = {
+              tooltips: Boolean = false)
+             (implicit theme: ChartTheme = createJFreeTheme): CategoryChart = {
       val chart = createBarChart(title, domainAxisLabel, rangeAxisLabel, dataset, orientation, legend,
         tooltips, false)
+
+      theme(chart)
 
       new CategoryChart {
         override val peer = chart
@@ -162,6 +194,7 @@ trait ChartFactories {
       * @param orientation     $orientation
       * @param legend          $legend
       * @param tooltips        $tooltips
+      * @param theme           $theme
       */
     def stacked(dataset: CategoryDataset,
                 title: String = "",
@@ -169,9 +202,12 @@ trait ChartFactories {
                 rangeAxisLabel: String = "",
                 orientation: Orientation = Orientation.Vertical,
                 legend: Boolean = true,
-                tooltips: Boolean = false): CategoryChart = {
+                tooltips: Boolean = false)
+               (implicit theme: ChartTheme = createJFreeTheme): CategoryChart = {
       val chart = createStackedBarChart(title, domainAxisLabel, rangeAxisLabel, dataset, orientation,
         legend, tooltips, false)
+
+      theme(chart)
 
       new CategoryChart {
         override val peer = chart
@@ -187,6 +223,7 @@ trait ChartFactories {
       * @param orientation     $orientation
       * @param legend          $legend
       * @param tooltips        $tooltips
+      * @param theme           $theme
       */
     def threeDimensional(dataset: CategoryDataset,
                          title: String = "",
@@ -194,9 +231,12 @@ trait ChartFactories {
                          rangeAxisLabel: String = "",
                          orientation: Orientation = Orientation.Vertical,
                          legend: Boolean = true,
-                         tooltips: Boolean = false): CategoryChart = {
+                         tooltips: Boolean = false)
+                        (implicit theme: ChartTheme = createJFreeTheme): CategoryChart = {
       val chart = createBarChart3D(title, domainAxisLabel, rangeAxisLabel, dataset, orientation,
         legend, tooltips, false)
+
+      theme(chart)
 
       new CategoryChart {
         override val peer = chart
@@ -212,6 +252,7 @@ trait ChartFactories {
       * @param orientation     $orientation
       * @param legend          $legend
       * @param tooltips        $tooltips
+      * @param theme           $theme
       */
     def threeDimensionalStacked(dataset: CategoryDataset,
                                 title: String = "",
@@ -219,9 +260,12 @@ trait ChartFactories {
                                 rangeAxisLabel: String = "",
                                 orientation: Orientation = Orientation.Vertical,
                                 legend: Boolean = true,
-                                tooltips: Boolean = false): CategoryChart = {
+                                tooltips: Boolean = false)
+                               (implicit theme: ChartTheme = createJFreeTheme): CategoryChart = {
       val chart = createStackedBarChart3D(title, domainAxisLabel, rangeAxisLabel, dataset,
         orientation, legend, tooltips, false)
+
+      theme(chart)
 
       new CategoryChart {
         override val peer = chart
@@ -240,13 +284,17 @@ trait ChartFactories {
       * @param domainAxisLabel $domainAxisLabel
       * @param rangeAxisLabel  $rangeAxisLabel
       * @param legend          $legend
+      * @param theme           $theme
       */
     def apply(dataset: BoxAndWhiskerCategoryDataset,
               title: String = "",
               domainAxisLabel: String = "",
               rangeAxisLabel: String = "",
-              legend: Boolean = true): CategoryChart = {
+              legend: Boolean = true)
+             (implicit theme: ChartTheme = createJFreeTheme): CategoryChart = {
       val chart = createBoxAndWhiskerChart(title, domainAxisLabel, rangeAxisLabel, dataset, legend)
+
+      theme(chart)
 
       new CategoryChart {
         override val peer = chart
@@ -267,6 +315,7 @@ trait ChartFactories {
       * @param orientation     $orientation
       * @param legend          $legend
       * @param tooltips        $tooltips
+      * @param theme           $theme
       */
     def apply(dataset: CategoryDataset,
               title: String = "",
@@ -274,9 +323,12 @@ trait ChartFactories {
               rangeAxisLabel: String = "",
               orientation: Orientation = Orientation.Vertical,
               legend: Boolean = true,
-              tooltips: Boolean = false): CategoryChart = {
+              tooltips: Boolean = false)
+             (implicit theme: ChartTheme = createJFreeTheme): CategoryChart = {
       val chart = createLineChart(title, domainAxisLabel, rangeAxisLabel, dataset, orientation,
         legend, tooltips, false)
+
+      theme(chart)
 
       new CategoryChart {
         override val peer = chart
@@ -293,6 +345,7 @@ trait ChartFactories {
       * @param orientation     $orientation
       * @param legend          $legend
       * @param tooltips        $tooltips
+      * @param theme           $theme
       */
     def threeDimensional(dataset: CategoryDataset,
                          title: String = "",
@@ -300,9 +353,12 @@ trait ChartFactories {
                          rangeAxisLabel: String = "",
                          orientation: Orientation = Orientation.Vertical,
                          legend: Boolean = true,
-                         tooltips: Boolean = false): CategoryChart = {
+                         tooltips: Boolean = false)
+                        (implicit theme: ChartTheme = createJFreeTheme): CategoryChart = {
       val chart = createLineChart3D(title, domainAxisLabel, rangeAxisLabel, dataset, orientation,
         legend, tooltips, false)
+
+      theme(chart)
 
       new CategoryChart {
         override val peer = chart
@@ -320,12 +376,17 @@ trait ChartFactories {
       * @param title    $title
       * @param legend   $legend
       * @param tooltips $tooltips
+      * @param theme    $theme
       */
     def apply(dataset: CategoryDataset,
               title: String = "",
               legend: Boolean = true,
-              tooltips: Boolean = true): MultiplePieChart = {
+              tooltips: Boolean = true)
+             (implicit theme: ChartTheme = createJFreeTheme): MultiplePieChart = {
       val chart = createMultiplePieChart(title, dataset, TableOrder.BY_COLUMN, legend, tooltips, false)
+
+      theme(chart)
+
       new MultiplePieChart {
         override val peer = chart
       }
@@ -337,12 +398,17 @@ trait ChartFactories {
       * @param title    $title
       * @param legend   $legend
       * @param tooltips $tooltips
+      * @param theme    $theme
       */
     def threeDimensional(dataset: CategoryDataset,
                          title: String = "",
                          legend: Boolean = true,
-                         tooltips: Boolean = true): MultiplePieChart = {
+                         tooltips: Boolean = true)
+                        (implicit theme: ChartTheme = createJFreeTheme): MultiplePieChart = {
       val chart = createMultiplePieChart3D(title, dataset, TableOrder.BY_COLUMN, legend, tooltips, false)
+
+      theme(chart)
+
       new MultiplePieChart {
         override val peer = chart
       }
@@ -359,12 +425,17 @@ trait ChartFactories {
       * @param title    $title
       * @param legend   $legend
       * @param tooltips $tooltips
+      * @param theme    $theme
       */
     def apply(dataset: PieDataset,
               title: String = "",
               legend: Boolean = true,
-              tooltips: Boolean = true): PieChart = {
+              tooltips: Boolean = true)
+             (implicit theme: ChartTheme = createJFreeTheme): PieChart = {
       val chart = createPieChart(title, dataset, legend, tooltips, false)
+
+      theme(chart)
+
       new PieChart {
         override val peer = chart
       }
@@ -376,12 +447,17 @@ trait ChartFactories {
       * @param title    $title
       * @param legend   $legend
       * @param tooltips $tooltips
+      * @param theme    $theme
       */
     def threeDimensional(dataset: PieDataset,
                          title: String = "",
                          legend: Boolean = true,
-                         tooltips: Boolean = true): PieChart = {
+                         tooltips: Boolean = true)
+                        (implicit theme: ChartTheme = createJFreeTheme): PieChart = {
       val chart = createPieChart3D(title, dataset, legend, tooltips, false)
+
+      theme(chart)
+
       new PieChart {
         override val peer = chart
       }
@@ -398,12 +474,17 @@ trait ChartFactories {
       * @param title    $title
       * @param legend   $legend
       * @param tooltips $tooltips
+      * @param theme    $theme
       */
     def apply(dataset: PieDataset,
               title: String = "",
               legend: Boolean = true,
-              tooltips: Boolean = true): RingChart = {
+              tooltips: Boolean = true)
+             (implicit theme: ChartTheme = createJFreeTheme): RingChart = {
       val chart = createRingChart(title, dataset, legend, tooltips, false)
+
+      theme(chart)
+
       new RingChart {
         override val peer = chart
       }
@@ -427,6 +508,7 @@ trait ChartFactories {
       * @param orientation     $orientation
       * @param legend          $legend
       * @param tooltips        $tooltips
+      * @param theme           $theme
       */
     def apply(dataset: XYDataset,
               title: String = "",
@@ -434,8 +516,8 @@ trait ChartFactories {
               rangeAxisLabel: String = "",
               orientation: Orientation = Orientation.Vertical,
               legend: Boolean = true,
-              tooltips: Boolean = false): XYChart = {
-
+              tooltips: Boolean = false)
+             (implicit theme: ChartTheme = createJFreeTheme): XYChart = {
       val chart = createXYAreaChart(title, domainAxisLabel, rangeAxisLabel, dataset, orientation,
         legend, tooltips, false)
 
@@ -445,6 +527,8 @@ trait ChartFactories {
         case _: TimeTableXYDataset         ⇒ chart.getXYPlot.setDomainAxis(new DateAxis)
         case _ ⇒
       }
+
+      theme(chart)
 
       new XYChart {
         override val peer = chart
@@ -463,6 +547,7 @@ trait ChartFactories {
       * @param orientation     $orientation
       * @param legend          $legend
       * @param tooltips        $tooltips
+      * @param theme           $theme
       */
     def stacked(dataset: TableXYDataset,
                 title: String = "",
@@ -470,8 +555,8 @@ trait ChartFactories {
                 rangeAxisLabel: String = "",
                 orientation: Orientation = Orientation.Vertical,
                 legend: Boolean = true,
-                tooltips: Boolean = false): XYChart = {
-
+                tooltips: Boolean = false)
+               (implicit theme: ChartTheme = createJFreeTheme): XYChart = {
       val chart = createStackedXYAreaChart(title, domainAxisLabel, rangeAxisLabel, dataset,
         orientation, legend, tooltips, false)
 
@@ -479,6 +564,8 @@ trait ChartFactories {
         case _: TimeTableXYDataset ⇒ chart.getXYPlot.setDomainAxis(new DateAxis)
         case _ ⇒
       }
+
+      theme(chart)
 
       new XYChart {
         override val peer = chart
@@ -498,6 +585,7 @@ trait ChartFactories {
       * @param orientation     $orientation
       * @param legend          $legend
       * @param tooltips        $tooltips
+      * @param theme           $theme
       */
     def stepped(dataset: XYDataset,
                 title: String = "",
@@ -505,8 +593,8 @@ trait ChartFactories {
                 rangeAxisLabel: String = "",
                 orientation: Orientation = Orientation.Vertical,
                 legend: Boolean = true,
-                tooltips: Boolean = false): XYChart = {
-
+                tooltips: Boolean = false)
+               (implicit theme: ChartTheme = createJFreeTheme): XYChart = {
       val chart = createXYStepAreaChart(title, domainAxisLabel, rangeAxisLabel, dataset, orientation,
         legend, tooltips, false)
 
@@ -516,6 +604,8 @@ trait ChartFactories {
         case _: TimeTableXYDataset         ⇒ chart.getXYPlot.setDomainAxis(new DateAxis)
         case _ ⇒
       }
+
+      theme(chart)
 
       new XYChart {
         override val peer = chart
@@ -540,6 +630,7 @@ trait ChartFactories {
       * @param orientation     $orientation
       * @param legend          $legend
       * @param tooltips        $tooltips
+      * @param theme           $theme
       */
     def apply(dataset: IntervalXYDataset,
               title: String = "",
@@ -547,8 +638,8 @@ trait ChartFactories {
               rangeAxisLabel: String = "",
               orientation: Orientation = Orientation.Vertical,
               legend: Boolean = true,
-              tooltips: Boolean = false): XYChart = {
-
+              tooltips: Boolean = false)
+             (implicit theme: ChartTheme = createJFreeTheme): XYChart = {
       val dateAxis = dataset match {
         case _: TimePeriodValuesCollection ⇒ true
         case _: TimeSeriesCollection       ⇒ true
@@ -558,6 +649,8 @@ trait ChartFactories {
 
       val chart = createXYBarChart(title, domainAxisLabel, dateAxis, rangeAxisLabel, dataset,
         orientation, legend, tooltips, false)
+
+      theme(chart)
 
       new XYChart {
         override val peer = chart
@@ -576,6 +669,7 @@ trait ChartFactories {
       * @param orientation     $orientation
       * @param legend          $legend
       * @param tooltips        $tooltips
+      * @param theme           $theme
       */
     def stacked(dataset: IntervalXYDataset with TableXYDataset,
                 title: String = "",
@@ -583,8 +677,8 @@ trait ChartFactories {
                 rangeAxisLabel: String = "",
                 orientation: Orientation = Orientation.Vertical,
                 legend: Boolean = true,
-                tooltips: Boolean = false): XYChart = {
-
+                tooltips: Boolean = false)
+               (implicit theme: ChartTheme = createJFreeTheme): XYChart = {
       val dateAxis = dataset match {
         case _: TimeTableXYDataset ⇒ true
         case _                     ⇒ false
@@ -614,7 +708,8 @@ trait ChartFactories {
       plot.setOrientation(orientation)
 
       val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      getChartTheme()(chart)
+
+      theme(chart)
 
       new XYChart {
         override val peer = chart
@@ -633,13 +728,17 @@ trait ChartFactories {
       * @param domainAxisLabel $domainAxisLabel
       * @param rangeAxisLabel  $rangeAxisLabel
       * @param legend          $legend
+      * @param theme           $theme
       */
     def apply(dataset: BoxAndWhiskerXYDataset,
               title: String = "",
               domainAxisLabel: String = "",
               rangeAxisLabel: String = "",
-              legend: Boolean = false): XYChart = {
+              legend: Boolean = false)
+             (implicit theme: ChartTheme = createJFreeTheme): XYChart = {
       val chart = createBoxAndWhiskerChart(title, domainAxisLabel, rangeAxisLabel, dataset, legend)
+
+      theme(chart)
 
       new XYChart {
         override val peer = chart
@@ -664,6 +763,7 @@ trait ChartFactories {
       * @param orientation     $orientation
       * @param legend          $legend
       * @param tooltips        $tooltips
+      * @param theme           $theme
       */
     def apply(dataset: XYDataset,
               title: String = "",
@@ -671,8 +771,8 @@ trait ChartFactories {
               rangeAxisLabel: String = "",
               orientation: Orientation = Orientation.Vertical,
               legend: Boolean = true,
-              tooltips: Boolean = false): XYChart = {
-
+              tooltips: Boolean = false)
+             (implicit theme: ChartTheme = createJFreeTheme): XYChart = {
       val chart = createXYLineChart(title, domainAxisLabel, rangeAxisLabel, dataset, orientation,
         legend, tooltips, false)
 
@@ -682,6 +782,8 @@ trait ChartFactories {
         case _: TimeTableXYDataset         ⇒ chart.getXYPlot.setDomainAxis(new DateAxis)
         case _ ⇒
       }
+
+      theme(chart)
 
       new XYChart {
         override val peer = chart
