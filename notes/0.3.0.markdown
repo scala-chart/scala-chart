@@ -1,0 +1,14 @@
+`scala-chart` version 0.3.0 includes the following changes:
+
+-   chart factories now accept implicit chart theme parameter
+
+    The default theme used is the JFreeChart theme. To apply a different theme to the charts created
+    by the factories, simply define an implicit chart theme in scope, e.g. the darkness theme from
+    JFreeChart:
+
+        implicit val theme = org.jfree.chart.StandardChartTheme.createDarknessTheme
+
+
+For more information about `scala-chart` usage have a look at the
+[README](https://github.com/wookietreiber/scala-chart#readme) and at the
+[API](http://wookietreiber.github.com/scala-chart/latest/api/index.html).
