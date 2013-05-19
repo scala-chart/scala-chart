@@ -53,6 +53,8 @@ trait TypeImports {
   type CategoryPlot = org.jfree.chart.plot.CategoryPlot
   type MultiplePiePlot = org.jfree.chart.plot.MultiplePiePlot
   type PiePlot = org.jfree.chart.plot.PiePlot
+  type PiePlot3D = org.jfree.chart.plot.PiePlot3D
+  type RingPlot = org.jfree.chart.plot.RingPlot
   type XYPlot = org.jfree.chart.plot.XYPlot
 }
 

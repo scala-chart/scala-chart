@@ -24,20 +24,19 @@
 
 package scalax.chart
 
-import scala.swing.Orientation
-
 import org.jfree.chart.ChartTheme
 import org.jfree.chart.JFreeChart
-import org.jfree.chart.ChartFactory._
-import org.jfree.chart.StandardChartTheme.createJFreeTheme
+import org.jfree.chart.StandardChartTheme
 import org.jfree.chart.axis._
-import org.jfree.chart.labels.StandardXYToolTipGenerator
-import org.jfree.chart.renderer.xy.StackedXYBarRenderer
-import org.jfree.data.category.CategoryDataset
+import org.jfree.chart.labels._
+import org.jfree.chart.renderer.category._
+import org.jfree.chart.renderer.xy._
+import org.jfree.chart.title.TextTitle
 import org.jfree.data.statistics._
 import org.jfree.data.time._
 import org.jfree.data.xy._
-import org.jfree.util.TableOrder
+import org.jfree.ui._
+import org.jfree.util._
 
 import Imports._
 
@@ -90,6 +89,35 @@ object ChartFactories extends ChartFactories
   */
 trait ChartFactories {
 
+  // -----------------------------------------------------------------------------------------------
+  // some small helpers
+  // -----------------------------------------------------------------------------------------------
+
+  private def needsDateAxis(dataset: XYDataset): Boolean = dataset match {
+    case _: TimePeriodValuesCollection ⇒ true
+    case _: TimeSeriesCollection       ⇒ true
+    case _: TimeTableXYDataset         ⇒ true
+    case _                             ⇒ false
+  }
+
+  private def xyDomainAxis(label: String, dateAxis: Boolean) = if (dateAxis) {
+    new DateAxis(label)
+  } else {
+    val axis = new NumberAxis(label)
+    axis.setAutoRangeIncludesZero(false)
+    axis
+  }
+
+  private def xyToolTipGenerator(dateAxis: Boolean) = if (dateAxis) {
+    StandardXYToolTipGenerator.getTimeSeriesInstance()
+  } else {
+    new StandardXYToolTipGenerator()
+  }
+
+  // -----------------------------------------------------------------------------------------------
+  // factories
+  // -----------------------------------------------------------------------------------------------
+
   /** Factory for area charts. */
   object AreaChart {
 
@@ -111,10 +139,20 @@ trait ChartFactories {
               orientation: Orientation = Orientation.Vertical,
               legend: Boolean = true,
               tooltips: Boolean = false)
-             (implicit theme: ChartTheme = createJFreeTheme): CategoryChart = {
-      val chart = createAreaChart(title, domainAxisLabel, rangeAxisLabel, dataset, orientation,
-        legend, tooltips, false)
+             (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): CategoryChart = {
 
+      val domainAxis = new CategoryAxis(domainAxisLabel)
+      domainAxis.setCategoryMargin(0.0)
+
+      val rangeAxis = new NumberAxis(rangeAxisLabel)
+
+      val renderer = new AreaRenderer()
+      if (tooltips) renderer.setBaseToolTipGenerator(new StandardCategoryToolTipGenerator())
+
+      val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
+      plot.setOrientation(orientation)
+
+      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
       theme(chart)
 
       new CategoryChart {
@@ -140,10 +178,20 @@ trait ChartFactories {
                 orientation: Orientation = Orientation.Vertical,
                 legend: Boolean = true,
                 tooltips: Boolean = false)
-               (implicit theme: ChartTheme = createJFreeTheme): CategoryChart = {
-      val chart = createStackedAreaChart(title, domainAxisLabel, rangeAxisLabel, dataset, orientation,
-        legend, tooltips, false)
+               (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): CategoryChart = {
 
+      val domainAxis = new CategoryAxis(domainAxisLabel)
+      domainAxis.setCategoryMargin(0.0)
+
+      val rangeAxis = new NumberAxis(rangeAxisLabel)
+
+      val renderer = new StackedAreaRenderer()
+      if (tooltips) renderer.setBaseToolTipGenerator(new StandardCategoryToolTipGenerator())
+
+      val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
+      plot.setOrientation(orientation)
+
+      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
       theme(chart)
 
       new CategoryChart {
@@ -174,10 +222,27 @@ trait ChartFactories {
               orientation: Orientation = Orientation.Vertical,
               legend: Boolean = true,
               tooltips: Boolean = false)
-             (implicit theme: ChartTheme = createJFreeTheme): CategoryChart = {
-      val chart = createBarChart(title, domainAxisLabel, rangeAxisLabel, dataset, orientation, legend,
-        tooltips, false)
+             (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): CategoryChart = {
 
+      val domainAxis = new CategoryAxis(domainAxisLabel)
+      val rangeAxis = new NumberAxis(rangeAxisLabel)
+
+      val renderer = new BarRenderer()
+      if (tooltips) renderer.setBaseToolTipGenerator(new StandardCategoryToolTipGenerator())
+      val (p1,p2) = if (orientation == Orientation.Horizontal) {
+        (new ItemLabelPosition(ItemLabelAnchor.OUTSIDE3, TextAnchor.CENTER_LEFT),
+         new ItemLabelPosition(ItemLabelAnchor.OUTSIDE9, TextAnchor.CENTER_RIGHT))
+      } else {
+        (new ItemLabelPosition(ItemLabelAnchor.OUTSIDE12, TextAnchor.BOTTOM_CENTER),
+         new ItemLabelPosition(ItemLabelAnchor.OUTSIDE6, TextAnchor.TOP_CENTER))
+      }
+      renderer.setBasePositiveItemLabelPosition(p1)
+      renderer.setBaseNegativeItemLabelPosition(p2)
+
+      val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
+      plot.setOrientation(orientation)
+
+      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
       theme(chart)
 
       new CategoryChart {
@@ -203,10 +268,18 @@ trait ChartFactories {
                 orientation: Orientation = Orientation.Vertical,
                 legend: Boolean = true,
                 tooltips: Boolean = false)
-               (implicit theme: ChartTheme = createJFreeTheme): CategoryChart = {
-      val chart = createStackedBarChart(title, domainAxisLabel, rangeAxisLabel, dataset, orientation,
-        legend, tooltips, false)
+               (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): CategoryChart = {
 
+      val domainAxis = new CategoryAxis(domainAxisLabel)
+      val rangeAxis = new NumberAxis(rangeAxisLabel)
+
+      val renderer = new StackedBarRenderer()
+      if (tooltips) renderer.setBaseToolTipGenerator(new StandardCategoryToolTipGenerator())
+
+      val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
+      plot.setOrientation(orientation)
+
+      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
       theme(chart)
 
       new CategoryChart {
@@ -232,10 +305,23 @@ trait ChartFactories {
                          orientation: Orientation = Orientation.Vertical,
                          legend: Boolean = true,
                          tooltips: Boolean = false)
-                        (implicit theme: ChartTheme = createJFreeTheme): CategoryChart = {
-      val chart = createBarChart3D(title, domainAxisLabel, rangeAxisLabel, dataset, orientation,
-        legend, tooltips, false)
+                        (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): CategoryChart = {
 
+      val domainAxis = new CategoryAxis3D(domainAxisLabel)
+      val rangeAxis = new NumberAxis3D(rangeAxisLabel)
+
+      val renderer = new BarRenderer3D()
+      if (tooltips) renderer.setBaseToolTipGenerator(new StandardCategoryToolTipGenerator())
+
+      val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
+      plot.setOrientation(orientation)
+      if (orientation == Orientation.Horizontal) {
+        plot.setRowRenderingOrder(SortOrder.DESCENDING)
+        plot.setColumnRenderingOrder(SortOrder.DESCENDING)
+      }
+      plot.setForegroundAlpha(0.75f)
+
+      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
       theme(chart)
 
       new CategoryChart {
@@ -261,10 +347,19 @@ trait ChartFactories {
                                 orientation: Orientation = Orientation.Vertical,
                                 legend: Boolean = true,
                                 tooltips: Boolean = false)
-                               (implicit theme: ChartTheme = createJFreeTheme): CategoryChart = {
-      val chart = createStackedBarChart3D(title, domainAxisLabel, rangeAxisLabel, dataset,
-        orientation, legend, tooltips, false)
+                               (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): CategoryChart = {
 
+      val domainAxis = new CategoryAxis3D(domainAxisLabel)
+      val rangeAxis = new NumberAxis3D(rangeAxisLabel)
+
+      val renderer = new StackedBarRenderer3D()
+      if (tooltips) renderer.setBaseToolTipGenerator(new StandardCategoryToolTipGenerator())
+
+      val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
+      plot.setOrientation(orientation)
+      if (orientation == Orientation.Horizontal) plot.setColumnRenderingOrder(SortOrder.DESCENDING)
+
+      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
       theme(chart)
 
       new CategoryChart {
@@ -291,9 +386,18 @@ trait ChartFactories {
               domainAxisLabel: String = "",
               rangeAxisLabel: String = "",
               legend: Boolean = true)
-             (implicit theme: ChartTheme = createJFreeTheme): CategoryChart = {
-      val chart = createBoxAndWhiskerChart(title, domainAxisLabel, rangeAxisLabel, dataset, legend)
+             (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): CategoryChart = {
 
+      val domainAxis = new CategoryAxis(domainAxisLabel)
+      val rangeAxis = new NumberAxis(rangeAxisLabel)
+      rangeAxis.setAutoRangeIncludesZero(false)
+
+      val renderer = new BoxAndWhiskerRenderer()
+      renderer.setBaseToolTipGenerator(new BoxAndWhiskerToolTipGenerator())
+
+      val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
+
+      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
       theme(chart)
 
       new CategoryChart {
@@ -324,10 +428,18 @@ trait ChartFactories {
               orientation: Orientation = Orientation.Vertical,
               legend: Boolean = true,
               tooltips: Boolean = false)
-             (implicit theme: ChartTheme = createJFreeTheme): CategoryChart = {
-      val chart = createLineChart(title, domainAxisLabel, rangeAxisLabel, dataset, orientation,
-        legend, tooltips, false)
+             (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): CategoryChart = {
 
+      val domainAxis = new CategoryAxis(domainAxisLabel)
+      val rangeAxis = new NumberAxis(rangeAxisLabel)
+
+      val renderer = new LineAndShapeRenderer(true, false)
+      if (tooltips) renderer.setBaseToolTipGenerator(new StandardCategoryToolTipGenerator())
+
+      val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
+      plot.setOrientation(orientation)
+
+      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
       theme(chart)
 
       new CategoryChart {
@@ -354,10 +466,18 @@ trait ChartFactories {
                          orientation: Orientation = Orientation.Vertical,
                          legend: Boolean = true,
                          tooltips: Boolean = false)
-                        (implicit theme: ChartTheme = createJFreeTheme): CategoryChart = {
-      val chart = createLineChart3D(title, domainAxisLabel, rangeAxisLabel, dataset, orientation,
-        legend, tooltips, false)
+                        (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): CategoryChart = {
 
+      val domainAxis = new CategoryAxis3D(domainAxisLabel)
+      val rangeAxis = new NumberAxis3D(rangeAxisLabel)
+
+      val renderer = new LineRenderer3D()
+      if (tooltips) renderer.setBaseToolTipGenerator(new StandardCategoryToolTipGenerator())
+
+      val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
+      plot.setOrientation(orientation)
+
+      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
       theme(chart)
 
       new CategoryChart {
@@ -382,9 +502,19 @@ trait ChartFactories {
               title: String = "",
               legend: Boolean = true,
               tooltips: Boolean = true)
-             (implicit theme: ChartTheme = createJFreeTheme): MultiplePieChart = {
-      val chart = createMultiplePieChart(title, dataset, TableOrder.BY_COLUMN, legend, tooltips, false)
+             (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): MultiplePieChart = {
 
+      val plot = new MultiplePiePlot(dataset)
+      plot.setDataExtractOrder(TableOrder.BY_COLUMN)
+      plot.setBackgroundPaint(null)
+      plot.setOutlineStroke(null)
+
+      if (tooltips) {
+        val pp = plot.getPieChart.getPlot.asInstanceOf[PiePlot]
+        pp.setToolTipGenerator(new StandardPieToolTipGenerator())
+      }
+
+      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
       theme(chart)
 
       new MultiplePieChart {
@@ -404,9 +534,23 @@ trait ChartFactories {
                          title: String = "",
                          legend: Boolean = true,
                          tooltips: Boolean = true)
-                        (implicit theme: ChartTheme = createJFreeTheme): MultiplePieChart = {
-      val chart = createMultiplePieChart3D(title, dataset, TableOrder.BY_COLUMN, legend, tooltips, false)
+                        (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): MultiplePieChart = {
 
+      val plot = new MultiplePiePlot(dataset)
+      plot.setDataExtractOrder(TableOrder.BY_COLUMN)
+      plot.setBackgroundPaint(null)
+      plot.setOutlineStroke(null)
+
+      val piePlot = new PiePlot3D()
+      if (tooltips) piePlot.setToolTipGenerator(new StandardPieToolTipGenerator())
+
+      val pieChart = new JFreeChart(piePlot)
+      pieChart.setTitle(new TextTitle("dummy title for setting edge"))
+      pieChart.getTitle.setPosition(RectangleEdge.BOTTOM)
+      pieChart.removeLegend()
+      plot.setPieChart(pieChart)
+
+      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
       theme(chart)
 
       new MultiplePieChart {
@@ -431,9 +575,14 @@ trait ChartFactories {
               title: String = "",
               legend: Boolean = true,
               tooltips: Boolean = true)
-             (implicit theme: ChartTheme = createJFreeTheme): PieChart = {
-      val chart = createPieChart(title, dataset, legend, tooltips, false)
+             (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): PieChart = {
 
+      val plot = new PiePlot(dataset)
+      plot.setLabelGenerator(new StandardPieSectionLabelGenerator())
+      plot.setInsets(new RectangleInsets(0.0, 5.0, 5.0, 5.0))
+      if (tooltips) plot.setToolTipGenerator(new StandardPieToolTipGenerator())
+
+      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
       theme(chart)
 
       new PieChart {
@@ -453,9 +602,13 @@ trait ChartFactories {
                          title: String = "",
                          legend: Boolean = true,
                          tooltips: Boolean = true)
-                        (implicit theme: ChartTheme = createJFreeTheme): PieChart = {
-      val chart = createPieChart3D(title, dataset, legend, tooltips, false)
+                        (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): PieChart = {
 
+      val plot = new PiePlot3D(dataset)
+      plot.setInsets(new RectangleInsets(0.0, 5.0, 5.0, 5.0))
+      if (tooltips) plot.setToolTipGenerator(new StandardPieToolTipGenerator())
+
+      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
       theme(chart)
 
       new PieChart {
@@ -480,9 +633,14 @@ trait ChartFactories {
               title: String = "",
               legend: Boolean = true,
               tooltips: Boolean = true)
-             (implicit theme: ChartTheme = createJFreeTheme): RingChart = {
-      val chart = createRingChart(title, dataset, legend, tooltips, false)
+             (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): RingChart = {
 
+      val plot = new RingPlot(dataset)
+      plot.setLabelGenerator(new StandardPieSectionLabelGenerator())
+      plot.setInsets(new RectangleInsets(0.0, 5.0, 5.0, 5.0))
+      if (tooltips) plot.setToolTipGenerator(new StandardPieToolTipGenerator())
+
+      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
       theme(chart)
 
       new RingChart {
@@ -517,17 +675,21 @@ trait ChartFactories {
               orientation: Orientation = Orientation.Vertical,
               legend: Boolean = true,
               tooltips: Boolean = false)
-             (implicit theme: ChartTheme = createJFreeTheme): XYChart = {
-      val chart = createXYAreaChart(title, domainAxisLabel, rangeAxisLabel, dataset, orientation,
-        legend, tooltips, false)
+             (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): XYChart = {
 
-      dataset match {
-        case _: TimePeriodValuesCollection ⇒ chart.getXYPlot.setDomainAxis(new DateAxis)
-        case _: TimeSeriesCollection       ⇒ chart.getXYPlot.setDomainAxis(new DateAxis)
-        case _: TimeTableXYDataset         ⇒ chart.getXYPlot.setDomainAxis(new DateAxis)
-        case _ ⇒
-      }
+      val dateAxis = needsDateAxis(dataset)
 
+      val domainAxis = xyDomainAxis(domainAxisLabel, dateAxis)
+      val rangeAxis = new NumberAxis(rangeAxisLabel)
+
+      val renderer = new XYAreaRenderer()
+      if (tooltips) renderer.setBaseToolTipGenerator(xyToolTipGenerator(dateAxis))
+
+      val plot = new XYPlot(dataset, domainAxis, rangeAxis, renderer)
+      plot.setOrientation(orientation)
+      plot.setForegroundAlpha(0.5f)
+
+      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
       theme(chart)
 
       new XYChart {
@@ -556,15 +718,25 @@ trait ChartFactories {
                 orientation: Orientation = Orientation.Vertical,
                 legend: Boolean = true,
                 tooltips: Boolean = false)
-               (implicit theme: ChartTheme = createJFreeTheme): XYChart = {
-      val chart = createStackedXYAreaChart(title, domainAxisLabel, rangeAxisLabel, dataset,
-        orientation, legend, tooltips, false)
+               (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): XYChart = {
 
-      dataset match {
-        case _: TimeTableXYDataset ⇒ chart.getXYPlot.setDomainAxis(new DateAxis)
-        case _ ⇒
-      }
+      val dateAxis = needsDateAxis(dataset)
 
+      val domainAxis = xyDomainAxis(domainAxisLabel, dateAxis)
+      domainAxis.setLowerMargin(0.0)
+      domainAxis.setUpperMargin(0.0)
+
+      val rangeAxis = new NumberAxis(rangeAxisLabel)
+
+      val renderer = new StackedXYAreaRenderer2()
+      renderer.setOutline(true)
+      if (tooltips) renderer.setBaseToolTipGenerator(xyToolTipGenerator(dateAxis))
+
+      val plot = new XYPlot(dataset, domainAxis, rangeAxis, renderer)
+      plot.setOrientation(orientation)
+      plot.setRangeAxis(rangeAxis)
+
+      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
       theme(chart)
 
       new XYChart {
@@ -594,17 +766,22 @@ trait ChartFactories {
                 orientation: Orientation = Orientation.Vertical,
                 legend: Boolean = true,
                 tooltips: Boolean = false)
-               (implicit theme: ChartTheme = createJFreeTheme): XYChart = {
-      val chart = createXYStepAreaChart(title, domainAxisLabel, rangeAxisLabel, dataset, orientation,
-        legend, tooltips, false)
+               (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): XYChart = {
 
-      dataset match {
-        case _: TimePeriodValuesCollection ⇒ chart.getXYPlot.setDomainAxis(new DateAxis)
-        case _: TimeSeriesCollection       ⇒ chart.getXYPlot.setDomainAxis(new DateAxis)
-        case _: TimeTableXYDataset         ⇒ chart.getXYPlot.setDomainAxis(new DateAxis)
-        case _ ⇒
-      }
+      val dateAxis = needsDateAxis(dataset)
 
+      val domainAxis = xyDomainAxis(domainAxisLabel, dateAxis)
+      val rangeAxis = new NumberAxis(rangeAxisLabel)
+
+      val renderer = new XYStepAreaRenderer()
+      if (tooltips) renderer.setBaseToolTipGenerator(xyToolTipGenerator(dateAxis))
+
+      val plot = new XYPlot(dataset, domainAxis, rangeAxis, renderer)
+      plot.setOrientation(orientation)
+      plot.setDomainCrosshairVisible(false)
+      plot.setRangeCrosshairVisible(false)
+
+      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
       theme(chart)
 
       new XYChart {
@@ -639,17 +816,20 @@ trait ChartFactories {
               orientation: Orientation = Orientation.Vertical,
               legend: Boolean = true,
               tooltips: Boolean = false)
-             (implicit theme: ChartTheme = createJFreeTheme): XYChart = {
-      val dateAxis = dataset match {
-        case _: TimePeriodValuesCollection ⇒ true
-        case _: TimeSeriesCollection       ⇒ true
-        case _: TimeTableXYDataset         ⇒ true
-        case _                             ⇒ false
-      }
+             (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): XYChart = {
 
-      val chart = createXYBarChart(title, domainAxisLabel, dateAxis, rangeAxisLabel, dataset,
-        orientation, legend, tooltips, false)
+      val dateAxis = needsDateAxis(dataset)
 
+      val domainAxis = xyDomainAxis(domainAxisLabel, dateAxis)
+      val rangeAxis = new NumberAxis(rangeAxisLabel)
+
+      val renderer = new XYBarRenderer()
+      if (tooltips) renderer.setBaseToolTipGenerator(xyToolTipGenerator(dateAxis))
+
+      val plot = new XYPlot(dataset, domainAxis, rangeAxis, renderer)
+      plot.setOrientation(orientation)
+
+      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
       theme(chart)
 
       new XYChart {
@@ -678,37 +858,20 @@ trait ChartFactories {
                 orientation: Orientation = Orientation.Vertical,
                 legend: Boolean = true,
                 tooltips: Boolean = false)
-               (implicit theme: ChartTheme = createJFreeTheme): XYChart = {
-      val dateAxis = dataset match {
-        case _: TimeTableXYDataset ⇒ true
-        case _                     ⇒ false
-      }
+               (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): XYChart = {
 
-      val domainAxis = if (dateAxis) {
-        new DateAxis(domainAxisLabel)
-      } else {
-        val axis = new NumberAxis(domainAxisLabel)
-        axis.setAutoRangeIncludesZero(false)
-        axis
-      }
+      val dateAxis = needsDateAxis(dataset)
 
-      val valueAxis = new NumberAxis(rangeAxisLabel)
+      val domainAxis = xyDomainAxis(domainAxisLabel, dateAxis)
+      val rangeAxis = new NumberAxis(rangeAxisLabel)
 
       val renderer = new StackedXYBarRenderer()
+      if (tooltips) renderer.setBaseToolTipGenerator(xyToolTipGenerator(dateAxis))
 
-      if (tooltips) {
-        if (dateAxis) {
-          renderer.setBaseToolTipGenerator(StandardXYToolTipGenerator.getTimeSeriesInstance)
-        } else {
-          renderer.setBaseToolTipGenerator(new StandardXYToolTipGenerator())
-        }
-      }
-
-      val plot = new XYPlot(dataset, domainAxis, valueAxis, renderer)
+      val plot = new XYPlot(dataset, domainAxis, rangeAxis, renderer)
       plot.setOrientation(orientation)
 
       val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-
       theme(chart)
 
       new XYChart {
@@ -735,9 +898,17 @@ trait ChartFactories {
               domainAxisLabel: String = "",
               rangeAxisLabel: String = "",
               legend: Boolean = false)
-             (implicit theme: ChartTheme = createJFreeTheme): XYChart = {
-      val chart = createBoxAndWhiskerChart(title, domainAxisLabel, rangeAxisLabel, dataset, legend)
+             (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): XYChart = {
 
+      val domainAxis = new DateAxis(domainAxisLabel)
+      val rangeAxis = new NumberAxis(rangeAxisLabel)
+      rangeAxis.setAutoRangeIncludesZero(false)
+
+      val renderer = new XYBoxAndWhiskerRenderer(10.0)
+
+      val plot = new XYPlot(dataset, domainAxis, rangeAxis, renderer)
+
+      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
       theme(chart)
 
       new XYChart {
@@ -772,17 +943,20 @@ trait ChartFactories {
               orientation: Orientation = Orientation.Vertical,
               legend: Boolean = true,
               tooltips: Boolean = false)
-             (implicit theme: ChartTheme = createJFreeTheme): XYChart = {
-      val chart = createXYLineChart(title, domainAxisLabel, rangeAxisLabel, dataset, orientation,
-        legend, tooltips, false)
+             (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): XYChart = {
 
-      dataset match {
-        case _: TimePeriodValuesCollection ⇒ chart.getXYPlot.setDomainAxis(new DateAxis)
-        case _: TimeSeriesCollection       ⇒ chart.getXYPlot.setDomainAxis(new DateAxis)
-        case _: TimeTableXYDataset         ⇒ chart.getXYPlot.setDomainAxis(new DateAxis)
-        case _ ⇒
-      }
+      val dateAxis = needsDateAxis(dataset)
 
+      val domainAxis = xyDomainAxis(domainAxisLabel, dateAxis)
+      val rangeAxis = new NumberAxis(rangeAxisLabel)
+
+      val renderer = new XYLineAndShapeRenderer(true, false)
+      if (tooltips) renderer.setBaseToolTipGenerator(xyToolTipGenerator(dateAxis))
+
+      val plot = new XYPlot(dataset, domainAxis, rangeAxis, renderer)
+      plot.setOrientation(orientation)
+
+      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
       theme(chart)
 
       new XYChart {
