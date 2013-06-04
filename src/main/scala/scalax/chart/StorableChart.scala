@@ -56,6 +56,19 @@ trait StorableChart {
     ChartUtilities.encodeAsPNG(peer.createBufferedImage(width, height))
   }
 
+  /** Returns the image encoded as PNG in a byte array
+   * @param dim           $dim
+   * @param encodeAlpha   should encode alpha channel
+   * @param compression   the PNG compression level (0-9)
+   */
+  def encodeAsPNG(dim: (Int, Int), encodeAlpha: Boolean, compression: Int): Array[Byte] = {
+    val (width, height) = dim
+    ChartUtilities.encodeAsPNG(
+      peer.createBufferedImage(width, height),
+      encodeAlpha,
+      compression)
+  }
+
   /** Saves the chart as a JPEG image.
     *
     * @param output $output
