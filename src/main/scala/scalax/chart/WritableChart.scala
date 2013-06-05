@@ -24,54 +24,46 @@
 
 package scalax.chart
 
-import java.io._
+import java.io.OutputStream
 
-import org.jfree.chart.ChartUtilities
+import com.lowagie.text.{ Document, Rectangle }
+import com.lowagie.text.pdf.{ DefaultFontMapper, FontMapper, PdfWriter }
 
-import com.lowagie.text.pdf.{ DefaultFontMapper, FontMapper }
-
-/** Provides methods for saving a chart.
+/** Provides methods for writing a chart to an `OutputStream`.
   *
-  * @define output the output file
+  * @define fontMapper handles mappings between Java AWT Fonts and PDF fonts
   */
-trait StorableChart extends WritableChart {
+trait WritableChart extends EncodableChart {
 
   self: Chart[_] ⇒
 
-  /** Saves the chart as a JPEG image.
+  /** Writes the chart as a PDF.
     *
-    * @param output $output
-    * @param dim    $dim
-    */
-  def saveAsJPEG(output: File, dim: (Int,Int)) {
-    val (width,height) = dim
-    ChartUtilities.saveChartAsJPEG(output, peer, width, height)
-  }
-
-  /** Saves the chart as a PDF.
-    *
-    * @param output     $output
+    * @param os         stream to where will be written
     * @param dim        $dim
     * @param fontMapper $fontMapper
     */
-  def saveAsPDF(output: File, dim: (Int,Int), fontMapper: FontMapper = new DefaultFontMapper) {
-    val os = new BufferedOutputStream(new FileOutputStream(output))
+  def writeAsPDF(os: OutputStream, dim: (Int,Int), fontMapper: FontMapper = new DefaultFontMapper) {
+    val (width,height) = dim
+
+    val pagesize = new Rectangle(width, height)
+    val document = new Document(pagesize)
 
     try {
-      writeAsPDF(os, dim, fontMapper)
-    } finally {
-      os.close()
-    }
-  }
+      val writer = PdfWriter.getInstance(document, os)
+      document.open()
 
-  /** Saves the chart as a PNG image.
-    *
-    * @param output $output
-    * @param dim    $dim
-    */
-  def saveAsPNG(output: File, dim: (Int,Int)) {
-    val (width,height) = dim
-    ChartUtilities.saveChartAsPNG(output, peer, width, height)
+      val cb = writer.getDirectContent
+      val tp = cb.createTemplate(width, height)
+      val g2 = tp.createGraphics(width, height, fontMapper)
+      val r2D = new java.awt.geom.Rectangle2D.Double(0, 0, width, height)
+
+      peer.draw(g2, r2D)
+      g2.dispose()
+      cb.addTemplate(tp, 0, 0)
+    } finally {
+      document.close()
+    }
   }
 
 }

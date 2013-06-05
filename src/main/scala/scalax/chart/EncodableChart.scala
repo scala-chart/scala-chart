@@ -24,54 +24,23 @@
 
 package scalax.chart
 
-import java.io._
-
 import org.jfree.chart.ChartUtilities
 
-import com.lowagie.text.pdf.{ DefaultFontMapper, FontMapper }
-
-/** Provides methods for saving a chart.
+/** Provides methods for encoding a chart.
   *
-  * @define output the output file
+  * @define dim dimension / geometry / width x height of the output
   */
-trait StorableChart extends WritableChart {
+trait EncodableChart {
 
   self: Chart[_] ⇒
 
-  /** Saves the chart as a JPEG image.
+  /** Returns the chart as a byte encoded PNG image.
     *
-    * @param output $output
-    * @param dim    $dim
+    * @param dim $dim
     */
-  def saveAsJPEG(output: File, dim: (Int,Int)) {
-    val (width,height) = dim
-    ChartUtilities.saveChartAsJPEG(output, peer, width, height)
-  }
-
-  /** Saves the chart as a PDF.
-    *
-    * @param output     $output
-    * @param dim        $dim
-    * @param fontMapper $fontMapper
-    */
-  def saveAsPDF(output: File, dim: (Int,Int), fontMapper: FontMapper = new DefaultFontMapper) {
-    val os = new BufferedOutputStream(new FileOutputStream(output))
-
-    try {
-      writeAsPDF(os, dim, fontMapper)
-    } finally {
-      os.close()
-    }
-  }
-
-  /** Saves the chart as a PNG image.
-    *
-    * @param output $output
-    * @param dim    $dim
-    */
-  def saveAsPNG(output: File, dim: (Int,Int)) {
-    val (width,height) = dim
-    ChartUtilities.saveChartAsPNG(output, peer, width, height)
+  def encodeAsPNG(dim: (Int, Int)): Array[Byte] = {
+    val (width, height) = dim
+    ChartUtilities.encodeAsPNG(peer.createBufferedImage(width, height))
   }
 
 }
