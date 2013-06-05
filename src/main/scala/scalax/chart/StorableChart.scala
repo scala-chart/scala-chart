@@ -28,29 +28,24 @@ import java.io._
 
 import org.jfree.chart._
 
+import com.lowagie.text.{ Document, Rectangle }
+import com.lowagie.text.pdf.{ DefaultFontMapper, FontMapper, PdfWriter }
+
 /** Provides methods for saving a chart.
   *
   * @define output     the output file
   * @define dim        dimension / geometry / width x height of the output
   * @define fontMapper handles mappings between Java AWT Fonts and PDF fonts
-  * @define encodeAlpha     should encode alpha level
-  * @define compression     the PNG compression level (0-9)
   */
 trait StorableChart {
 
   self: Chart[_] ⇒
 
-  /** Saves the chart as a PNG image.
-    *
-    * @param output $output
-    * @param dim    $dim
-    */
-  def saveAsPNG(output: File, dim: (Int,Int)) {
-    val (width,height) = dim
-    ChartUtilities.saveChartAsPNG(output, peer, width, height)
-  }
+  // -----------------------------------------------------------------------------------------------
+  // byte encoding
+  // -----------------------------------------------------------------------------------------------
 
-  /** Returns the image encoded as PNG in a byte array
+  /** Returns the chart as a byte encoded PNG image.
     *
     * @param dim $dim
     */
@@ -59,48 +54,9 @@ trait StorableChart {
     ChartUtilities.encodeAsPNG(peer.createBufferedImage(width, height))
   }
 
-  /** Returns the image encoded as PNG in a byte array
-    *
-    * @param dim           $dim
-    * @param encodeAlpha   $encodeAlpha
-    * @param compression   $compression
-    */
-  def encodeAsPNG(dim: (Int, Int), encodeAlpha: Boolean, compression: Int): Array[Byte] = {
-    val (width, height) = dim
-    ChartUtilities.encodeAsPNG(
-      peer.createBufferedImage(width, height),
-      encodeAlpha,
-      compression)
-  }
-
-  /** Saves the chart as a JPEG image.
-    *
-    * @param output $output
-    * @param dim    $dim
-    */
-  def saveAsJPEG(output: File, dim: (Int,Int)) {
-    val (width,height) = dim
-    ChartUtilities.saveChartAsJPEG(output, peer, width, height)
-  }
-
-  import com.lowagie.text._
-  import com.lowagie.text.pdf._
-
-  /** Saves the chart as a PDF.
-    *
-    * @param output     $output
-    * @param dim        $dim
-    * @param fontMapper $fontMapper
-    */
-  def saveAsPDF(output: File, dim: (Int,Int), fontMapper: FontMapper = new DefaultFontMapper) {
-    val os = new BufferedOutputStream(new FileOutputStream(output))
-
-    try {
-      writeAsPDF(os, dim, fontMapper)
-    } finally {
-      os.close()
-    }
-  }
+  // -----------------------------------------------------------------------------------------------
+  // writing to stream
+  // -----------------------------------------------------------------------------------------------
 
   /** Writes the chart as a PDF.
     *
@@ -129,6 +85,46 @@ trait StorableChart {
     } finally {
       document.close()
     }
+  }
+
+  // -----------------------------------------------------------------------------------------------
+  // saving to file
+  // -----------------------------------------------------------------------------------------------
+
+  /** Saves the chart as a JPEG image.
+    *
+    * @param output $output
+    * @param dim    $dim
+    */
+  def saveAsJPEG(output: File, dim: (Int,Int)) {
+    val (width,height) = dim
+    ChartUtilities.saveChartAsJPEG(output, peer, width, height)
+  }
+
+  /** Saves the chart as a PDF.
+    *
+    * @param output     $output
+    * @param dim        $dim
+    * @param fontMapper $fontMapper
+    */
+  def saveAsPDF(output: File, dim: (Int,Int), fontMapper: FontMapper = new DefaultFontMapper) {
+    val os = new BufferedOutputStream(new FileOutputStream(output))
+
+    try {
+      writeAsPDF(os, dim, fontMapper)
+    } finally {
+      os.close()
+    }
+  }
+
+  /** Saves the chart as a PNG image.
+    *
+    * @param output $output
+    * @param dim    $dim
+    */
+  def saveAsPNG(output: File, dim: (Int,Int)) {
+    val (width,height) = dim
+    ChartUtilities.saveChartAsPNG(output, peer, width, height)
   }
 
 }
