@@ -37,7 +37,16 @@ trait WritableChart extends EncodableChart {
 
   self: Chart[_] ⇒
 
-  /** Writes the chart as a PDF.
+  /** Writes the chart as a JPEG to an output stream.
+    *
+    * @param os  stream to where will be written
+    * @param dim $dim
+    */
+  def writeAsJPEG(os: OutputStream, dim: (Int,Int)) {
+    os.write(encodeAsJPEG(dim))
+  }
+
+  /** Writes the chart as a PDF to an output stream.
     *
     * @param os         stream to where will be written
     * @param dim        $dim
@@ -64,6 +73,15 @@ trait WritableChart extends EncodableChart {
     } finally {
       document.close()
     }
+  }
+
+  /** Writes the chart as a PNG to an output stream.
+    *
+    * @param os  stream to where will be written
+    * @param dim $dim
+    */
+  def writeAsPNG(os: OutputStream, dim: (Int,Int)) {
+    os.write(encodeAsPNG(dim))
   }
 
 }
