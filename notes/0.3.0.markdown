@@ -8,9 +8,12 @@
 
         implicit val theme = org.jfree.chart.StandardChartTheme.createDarknessTheme
 
--   StorableChart primitives
+-   StorableChart changes
 
-    -   byte encode chart as PNG image
+    -   saveAs methods now take String as output file argument instead of File
+    -   byte encode chart in trait EncodableChart
+    -   writing charts to OutputStream in trait WritableChart extends EncodableChart
+    -   StorableChart contains just the saveAs methods and extends WritableChart
 
 
 For more information about `scala-chart` usage have a look at the
