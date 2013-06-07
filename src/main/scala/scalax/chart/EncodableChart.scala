@@ -24,7 +24,6 @@
 
 package scalax.chart
 
-import org.jfree.chart.ChartUtilities
 import org.jfree.chart.encoders.EncoderUtil
 
 /** Provides methods for encoding a chart.
@@ -51,7 +50,8 @@ trait EncodableChart {
     */
   def encodeAsPNG(dim: (Int, Int)): Array[Byte] = {
     val (width, height) = dim
-    ChartUtilities.encodeAsPNG(peer.createBufferedImage(width, height))
+    val image = peer.createBufferedImage(width, height)
+    EncoderUtil.encode(image, "png")
   }
 
 }
