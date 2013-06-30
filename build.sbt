@@ -11,7 +11,7 @@ libraryDependencies <+= scalaVersion { sv ⇒
 
 libraryDependencies ++= Seq (
   "org.jfree"  %  "jfreechart" % "1.0.14",
-  "org.specs2" %% "specs2"     % "1.14" % "test"
+  "org.specs2" %% "specs2"     % "2.0" % "test"
 )
 
 initialCommands in (Compile, consoleQuick) <<= initialCommands in Compile
@@ -20,6 +20,10 @@ initialCommands in Compile in console += """
   import scalax.chart._
   import scalax.chart.Charting._
 """
+
+scalacOptions in (Compile, doc) <++= (baseDirectory) map { bd =>
+  Seq("-sourcepath", bd.getAbsolutePath, "-doc-source-url", "https://github.com/wookietreiber/scala-chart/tree/develop€{FILE_PATH}.scala")
+}
 
 // -------------------------------------------------------------------------------------------------
 // supplementary project information
