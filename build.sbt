@@ -11,7 +11,7 @@ libraryDependencies <+= scalaVersion { sv ⇒
 
 libraryDependencies ++= Seq (
   "org.jfree"  %  "jfreechart" % "1.0.14",
-  "org.specs2" %% "specs2"     % "2.0" % "test"
+  "org.specs2" %% "specs2"     % "2.1.1" % "test"
 )
 
 initialCommands in (Compile, consoleQuick) <<= initialCommands in Compile
