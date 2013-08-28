@@ -31,6 +31,8 @@ import org.jfree.chart.JFreeChart
 import org.jfree.chart.plot.Plot
 import org.jfree.chart.title.Title
 
+import Imports._
+
 /** Generic graphical representation of data.
   *
   * @tparam P used plot type
@@ -47,7 +49,13 @@ trait Chart[P <: Plot] extends DisplayableChart with StorableChart {
   def antiAlias: Boolean = peer.getAntiAlias
 
   /** Sets whether or not this chart is drawn with anti-aliasing. */
-  def antiAlias_=(a: Boolean) = peer.setAntiAlias(a)
+  def antiAlias_=(a: Boolean): Unit = peer.setAntiAlias(a)
+
+  /** Returns the paint used for the chart background. */
+  def backgroundPaint: Paint = peer.getBackgroundPaint
+
+  /** Sets the paint used for the chart background. */
+  def backgroundPaint_=(p: Paint): Unit = peer.setBackgroundPaint(p)
 
   /** Contains this charts subtitles and legends. */
   object subtitles extends Buffer[Title] {

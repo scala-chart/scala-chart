@@ -12,6 +12,7 @@ class ChartSpec extends Specification { def is = s2"""
 
   Chart
     anti-aliasing value                                                                   $caa1
+    background paint value                                                                $cbp1
     title value                                                                           $ct1
     subtitles is a Buffer[Title]
       append value                                                                        $cst1
@@ -81,8 +82,16 @@ class ChartSpec extends Specification { def is = s2"""
 
   def caa1 = {
     val chart = AreaChart(categorydataset, title = "foo")
-    chart.title = "bar"
-    chart.title === "bar"
+    val t = "bar"
+    chart.title = t
+    chart.title === t
+  }
+
+  def cbp1 = {
+    val chart = AreaChart(categorydataset)
+    val c = new Color(42,42,42)
+    chart.backgroundPaint = c
+    chart.backgroundPaint === c
   }
 
   def ct1 = {

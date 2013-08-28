@@ -44,6 +44,9 @@ trait Imports extends TypeImports with StaticForwarderImports
   * @define TypeImportsInfo Contains only the type imports from foreign packages.
   */
 trait TypeImports {
+  type Color = java.awt.Color
+  type Paint = java.awt.Paint
+
   type Orientation = scala.swing.Orientation.Value
 
   type CategoryDataset = org.jfree.data.category.CategoryDataset
