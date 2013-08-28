@@ -10,21 +10,17 @@ import CollectionOfSeriesViews._
 import org.jfree.data.time._
 import org.jfree.data.xy._
 
-class CollectionOfSeriesViewsSpec extends Specification with BeViewableAs with Implicits { def is =
+class CollectionOfSeriesViewsSpec extends Specification with BeViewableAs with Implicits { def is = s2"""
 
-  // -----------------------------------------------------------------------------------------------
-  // fragments
-  // -----------------------------------------------------------------------------------------------
+  TimePeriodValuesCollection
+    from Seq[TimePeriodValues]                                                            $e1
 
-  "TimePeriodValuesCollection"                                                                     ^
-    "from Seq[TimePeriodValues]"                                                ! e1               ^
-                                                                                                  p^
-  "TimeSeriesCollection"                                                                           ^
-    "from Seq[TimeSeries]"                                                      ! e2               ^
-                                                                                                  p^
-  "XYSeriesCollection"                                                                             ^
-    "from Seq[XYSeries]"                                                        ! e3               ^
-                                                                                                 end
+  TimeSeriesCollection
+    from Seq[TimeSeries]                                                                  $e2
+
+  XYSeriesCollection
+    from Seq[XYSeries]                                                                    $e3
+                                                                                                 """
   // -----------------------------------------------------------------------------------------------
   // tests
   // -----------------------------------------------------------------------------------------------
