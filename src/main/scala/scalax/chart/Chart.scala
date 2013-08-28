@@ -43,6 +43,12 @@ trait Chart[P <: Plot] extends DisplayableChart with StorableChart {
   /** Returns the plot. */
   def plot: P
 
+  /** Returns true if this chart is drawn with anti-aliasing. */
+  def antiAlias: Boolean = peer.getAntiAlias
+
+  /** Sets whether or not this chart is drawn with anti-aliasing. */
+  def antiAlias_=(a: Boolean) = peer.setAntiAlias(a)
+
   /** Contains this charts subtitles and legends. */
   object subtitles extends Buffer[Title] {
     override def +=(title: Title): this.type = {
