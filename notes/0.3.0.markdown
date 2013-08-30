@@ -24,6 +24,10 @@
 
     -   YIntervalSeries and YIntervalSeriesCollection
 
+-   new chart factories
+
+    -   XYDeviationChart(IntervalXYDataset) with a DeviationRenderer
+
 
 For more information about `scala-chart` usage have a look at the
 [README](https://github.com/wookietreiber/scala-chart#readme) and at the

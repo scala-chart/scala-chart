@@ -918,6 +918,54 @@ trait ChartFactories {
 
   }
 
+  /** Factory for numeric deviation charts. */
+  object XYDeviationChart {
+
+    /** Creates a new chart that represents numeric `x` and `y` values with a line and a shaded area.
+      *
+      * If the input dataset is an instance of a `TimePeriodValuesCollection`,
+      * `TimeSeriesCollection` or `TimeTableXYDataset` the domain axis will correctly be set to a
+      * `DateAxis`.
+      *
+      * @param dataset         $dataset
+      * @param title           $title
+      * @param domainAxisLabel $domainAxisLabel
+      * @param rangeAxisLabel  $rangeAxisLabel
+      * @param orientation     $orientation
+      * @param legend          $legend
+      * @param tooltips        $tooltips
+      * @param theme           $theme
+      */
+    def apply(dataset: IntervalXYDataset,
+              title: String = "",
+              domainAxisLabel: String = "",
+              rangeAxisLabel: String = "",
+              orientation: Orientation = Orientation.Vertical,
+              legend: Boolean = true,
+              tooltips: Boolean = false)
+             (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): XYChart = {
+
+      val dateAxis = needsDateAxis(dataset)
+
+      val domainAxis = xyDomainAxis(domainAxisLabel, dateAxis)
+      val rangeAxis = new NumberAxis(rangeAxisLabel)
+
+      val renderer = new DeviationRenderer()
+      if (tooltips) renderer.setBaseToolTipGenerator(xyToolTipGenerator(dateAxis))
+
+      val plot = new XYPlot(dataset, domainAxis, rangeAxis, renderer)
+      plot.setOrientation(orientation)
+
+      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
+      theme(chart)
+
+      new XYChart {
+        override val peer = chart
+      }
+    }
+
+  }
+
   /** Factory for numeric line charts. */
   object XYLineChart {
 

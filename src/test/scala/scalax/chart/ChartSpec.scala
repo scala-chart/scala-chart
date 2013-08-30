@@ -72,6 +72,10 @@ class ChartSpec extends Specification { def is = s2"""
     must have a XYPlot                                                                    $xybwc1
     orienting works                                                                       $xybwc2
 
+  XYDeviationChart
+    must have an XYPlot                                                                   $xydc1
+    orienting works                                                                       $xydc2
+
   XYLineChart
     must have an XYPlot                                                                   $xylc1
     orienting works                                                                       $xylc2
@@ -329,6 +333,17 @@ class ChartSpec extends Specification { def is = s2"""
 
   def xybwc2 = {
     val chart = XYBoxAndWhiskerChart(bwxydataset)
+    chart.orientation = Orientation.Horizontal
+    chart.orientation === Orientation.Horizontal
+  }
+
+  def xydc1 = {
+    val chart = XYDeviationChart(xydataset)
+    (chart.plot must not (throwA[ClassCastException])) and (chart.plot must beAnInstanceOf[XYPlot])
+  }
+
+  def xydc2 = {
+    val chart = XYDeviationChart(xydataset, orientation = Orientation.Vertical)
     chart.orientation = Orientation.Horizontal
     chart.orientation === Orientation.Horizontal
   }
