@@ -50,7 +50,7 @@ object RichChartingCollections extends RichChartingCollections
 trait RichChartingCollections {
 
   /** Enriches a collection of data pairs. */
-  implicit class RichTuples[A,B](it: Iterable[(A,B)]) {
+  implicit class RichTuple2s[A,B](it: Iterable[(A,B)]) {
 
     /** Converts this collection to a `BoxAndWhiskerCategoryDataset`.
       *
@@ -178,8 +178,86 @@ trait RichChartingCollections {
 
   }
 
+  /** Enriches a collection of data 4-tuples. */
+  implicit class RichTuple4s[A,B,C,D](it: Iterable[(A,B,C,D)]) {
+
+    /** Converts this collection to a `YIntervalSeries`.
+      *
+      * @param name $name
+      * @param autoSort $autoSort
+      * @param allowDuplicateXValues $allowDuplicateXValues
+      *
+      * @usecase def toYIntervalSeries(): YIntervalSeries
+      *   @inheritdoc
+      */
+    def toYIntervalSeries(name: Comparable[_] = "", autoSort: Boolean = true, allowDuplicateXValues: Boolean = true)
+      (implicit eva: A ⇒ Double, evb: B ⇒ Double, evc: C ⇒ Double, evd: D ⇒ Double): YIntervalSeries = {
+
+      val series = new YIntervalSeries(name, autoSort, allowDuplicateXValues)
+      it foreach { case (x,y,yLow,yHigh) ⇒ series.add(x,y,yLow,yHigh) }
+      series
+    }
+
+    /** Converts this collection to a `YIntervalSeriesCollection`.
+      *
+      * @param name $name
+      * @param autoSort $autoSort
+      * @param allowDuplicateXValues $allowDuplicateXValues
+      *
+      * @usecase def toYIntervalSeriesCollection(): YIntervalSeriesCollection
+      *   @inheritdoc
+      */
+    def toYIntervalSeriesCollection(name: Comparable[_] = "", autoSort: Boolean = true, allowDuplicateXValues: Boolean = true)
+      (implicit eva: A ⇒ Double, evb: B ⇒ Double, evc: C ⇒ Double, evd: D ⇒ Double): YIntervalSeriesCollection = {
+      val series = toYIntervalSeries(name, autoSort, allowDuplicateXValues)
+      val coll = new YIntervalSeriesCollection()
+      coll.addSeries(series)
+      coll
+    }
+
+  }
+
+  /** Enriches a collection of mapped 3-tuples. */
+  implicit class RichMappedTuple3s[A,B,C,D](it: Iterable[(A,(B,C,D))]) {
+
+    /** Converts this collection to a `YIntervalSeries`.
+      *
+      * @param name $name
+      * @param autoSort $autoSort
+      * @param allowDuplicateXValues $allowDuplicateXValues
+      *
+      * @usecase def toYIntervalSeries(): YIntervalSeries
+      *   @inheritdoc
+      */
+    def toYIntervalSeries(name: Comparable[_] = "", autoSort: Boolean = true, allowDuplicateXValues: Boolean = true)
+      (implicit eva: A ⇒ Double, evb: B ⇒ Double, evc: C ⇒ Double, evd: D ⇒ Double): YIntervalSeries = {
+
+      val series = new YIntervalSeries(name, autoSort, allowDuplicateXValues)
+      it foreach { case (x,(y,yLow,yHigh)) ⇒ series.add(x,y,yLow,yHigh) }
+      series
+    }
+
+    /** Converts this collection to a `YIntervalSeriesCollection`.
+      *
+      * @param name $name
+      * @param autoSort $autoSort
+      * @param allowDuplicateXValues $allowDuplicateXValues
+      *
+      * @usecase def toYIntervalSeriesCollection(): YIntervalSeriesCollection
+      *   @inheritdoc
+      */
+    def toYIntervalSeriesCollection(name: Comparable[_] = "", autoSort: Boolean = true, allowDuplicateXValues: Boolean = true)
+      (implicit eva: A ⇒ Double, evb: B ⇒ Double, evc: C ⇒ Double, evd: D ⇒ Double): YIntervalSeriesCollection = {
+      val series = toYIntervalSeries(name, autoSort, allowDuplicateXValues)
+      val coll = new YIntervalSeriesCollection()
+      coll.addSeries(series)
+      coll
+    }
+
+  }
+
   /** Enriches a collection of categorized data pairs. */
-  implicit class RichCategorizedTuples[A,B,C](it: Iterable[(A,Iterable[(B,C)])]) {
+  implicit class RichCategorizedTuple2s[A,B,C](it: Iterable[(A,Iterable[(B,C)])]) {
 
     /** Converts this collection to a `BoxAndWhiskerCategoryDataset`.
       *
@@ -258,8 +336,52 @@ trait RichChartingCollections {
 
   }
 
+  /** Enriches a collection of categorized 4-tuples. */
+  implicit class RichCategorizedTuple4s[A,B,C,D,E](it: Iterable[(A,Iterable[(B,C,D,E)])]) {
+
+    /** Converts this collection to a `YIntervalSeriesCollection`.
+      *
+      * @param autoSort $autoSort
+      * @param allowDuplicateXValues $allowDuplicateXValues
+      *
+      * @usecase def toYIntervalSeriesCollection(): YIntervalSeriesCollection
+      *   @inheritdoc
+      */
+    def toYIntervalSeriesCollection(autoSort: Boolean = true, allowDuplicateXValues: Boolean = true)
+      (implicit eva: A ⇒ Comparable[_], evb: B ⇒ Double, evc: C ⇒ Double, evd: D ⇒ Double, eve: E ⇒ Double): YIntervalSeriesCollection = {
+
+      val seriess = for ((name,data) ← it) yield
+        data.toYIntervalSeries(name, autoSort, allowDuplicateXValues)
+
+      seriess.toYIntervalSeriesCollection
+    }
+
+  }
+
+  /** Enriches a collection of categorized mapped 3-tuples. */
+  implicit class RichCategorizedMappedTuple3s[A,B,C,D,E](it: Iterable[(A,Iterable[(B,(C,D,E))])]) {
+
+    /** Converts this collection to a `YIntervalSeriesCollection`.
+      *
+      * @param autoSort $autoSort
+      * @param allowDuplicateXValues $allowDuplicateXValues
+      *
+      * @usecase def toYIntervalSeriesCollection(): YIntervalSeriesCollection
+      *   @inheritdoc
+      */
+    def toYIntervalSeriesCollection(autoSort: Boolean = true, allowDuplicateXValues: Boolean = true)
+      (implicit eva: A ⇒ Comparable[_], evb: B ⇒ Double, evc: C ⇒ Double, evd: D ⇒ Double, eve: E ⇒ Double): YIntervalSeriesCollection = {
+
+      val seriess = for ((name,data) ← it) yield
+        data.toYIntervalSeries(name, autoSort, allowDuplicateXValues)
+
+      seriess.toYIntervalSeriesCollection
+    }
+
+  }
+
   /** Enriches a collection of categorized categorized data pairs. */
-  implicit class RichCategorizedCategorizedTuples[A,B,C,D](it: Iterable[(A,Iterable[(B,Iterable[(C,D)])])]) {
+  implicit class RichCategorizedCategorizedTuple2s[A,B,C,D](it: Iterable[(A,Iterable[(B,Iterable[(C,D)])])]) {
 
     import org.jfree.chart.JFreeChart
     import org.jfree.chart.plot._
@@ -319,6 +441,16 @@ trait RichChartingCollections {
     /** Converts this collection of `TimePeriodValues` to a `TimePeriodValuesCollection`. */
     def toTimePeriodValuesCollection: TimePeriodValuesCollection = {
       val coll = new TimePeriodValuesCollection
+      it foreach coll.addSeries
+      coll
+    }
+  }
+
+  /** Enriches a collection of `YIntervalSeries`. */
+  implicit class RichYIntervalSeriesCollection(it: Iterable[YIntervalSeries]) {
+    /** Converts this collection of `YIntervalSeries` to a `YIntervalSeriesCollection`. */
+    def toYIntervalSeriesCollection: YIntervalSeriesCollection = {
+      val coll = new YIntervalSeriesCollection
       it foreach coll.addSeries
       coll
     }
