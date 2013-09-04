@@ -20,9 +20,10 @@
     -   anti-aliasing getter/setter
     -   background paint getter/setter
 
--   new supported datasets
+-   new supported datasets conversions
 
     -   YIntervalSeries and YIntervalSeriesCollection
+    -   CategoryDataset from Iterable[(A,B,C)]
 
 -   new chart factories
 

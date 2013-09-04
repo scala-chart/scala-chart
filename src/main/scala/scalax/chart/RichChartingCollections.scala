@@ -178,6 +178,22 @@ trait RichChartingCollections {
 
   }
 
+  /** Enriches a collection of data triples. */
+  implicit class RichTuple3s[A,B,C](it: Iterable[(A,B,C)]) {
+
+    /** Converts this collection to a `CategoryDataset`.
+      *
+      * @usecase def toCategoryDataset: CategoryDataset
+      *   @inheritdoc
+      */
+    def toCategoryDataset(implicit eva: A ⇒ Comparable[A], evb: B ⇒ Comparable[B], evc: C ⇒ Number): CategoryDataset = {
+      val dataset = new DefaultCategoryDataset
+      it foreach { case (category,series,value) ⇒ dataset.addValue(value, series, category) }
+      dataset
+    }
+
+  }
+
   /** Enriches a collection of data 4-tuples. */
   implicit class RichTuple4s[A,B,C,D](it: Iterable[(A,B,C,D)]) {
 

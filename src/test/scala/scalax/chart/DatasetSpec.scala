@@ -10,6 +10,9 @@ import org.specs2._
 
 class DatasetSpec extends Specification { def is = s2"""
 
+  CategoryDataset
+    explicit conversion from Coll[(A,B,C)]                                                $cdec1
+
   YIntervalSeries
     explicit conversion from Coll[(A,B,C,D)]                                              $yisec1
     explicit conversion from Coll[(A,(B,C,D))]                                            $yisec2
@@ -24,6 +27,12 @@ class DatasetSpec extends Specification { def is = s2"""
   // -----------------------------------------------------------------------------------------------
   // tests
   // -----------------------------------------------------------------------------------------------
+
+  def cdec1 = {
+    val data = List(("category","series",3))
+    val dataset = data.toCategoryDataset
+    dataset must beAnInstanceOf[CategoryDataset]
+  }
 
   def yisec1 = {
     val data = List((1,3,2,4))
