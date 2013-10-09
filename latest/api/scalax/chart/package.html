@@ -9,11 +9,6 @@
           
       <link href="../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
       <link href="../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
-      <script type="text/javascript" src="../../lib/jquery.js" id="jquery-js"></script>
-      <script type="text/javascript" src="../../lib/jquery-ui.js"></script>
-      <script type="text/javascript" src="../../lib/template.js"></script>
-      <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
-      
       <script type="text/javascript">
          if(top === self) {
             var url = '../../index.html';
@@ -52,7 +47,7 @@ factories:</p><pre><span class="kw">val</span> data = <span class="std">Seq</spa
 <span class="kw">val</span> dataset = data.toXYSeriesCollection(<span class="lit">"some points"</span>)
 <span class="kw">val</span> chart = XYLineChart(dataset, title = <span class="lit">"My Chart of Some Points"</span>)</pre><p>There are also implicit conversions / views available in the <a href="views/package.html" class="extype" name="scalax.chart.views">views</a> package, but they are not
 contained by <a href="Charting.html" class="extype" name="scalax.chart.Charting">Charting</a>, because of ambiguity issues with implicit conversions.
-</p></div><div class="toggleContainer block">
+</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/wookietreiber/scala-chart/tree/develop/src/main/scala/scalax/chart/package.scala" target="_blank">package.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -200,6 +195,19 @@ framework</a>.</p>
       </span>
       </h4>
       <p class="comment cmt">Mixin for charts with a domain axis.</p>
+    </li><li name="scalax.chart.EncodableChart" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="EncodableChartextendsAnyRef"></a>
+      <a id="EncodableChart:EncodableChart"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="EncodableChart.html"><span class="name">EncodableChart</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Provides methods for encoding a chart.</p>
     </li><li name="scalax.chart.Imports" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
       <a id="ImportsextendsTypeImportswithStaticForwarderImports"></a>
       <a id="Imports:Imports"></a>
@@ -359,7 +367,7 @@ datasets.</p>
       </h4>
       <p class="comment cmt">Contains only the static forwarder imports from foreign packages.</p>
     </li><li name="scalax.chart.StorableChart" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="StorableChartextendsAnyRef"></a>
+      <a id="StorableChartextendsWritableChart"></a>
       <a id="StorableChart:StorableChart"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -367,7 +375,7 @@ datasets.</p>
         <span class="kind">trait</span>
       </span>
       <span class="symbol">
-        <a href="StorableChart.html"><span class="name">StorableChart</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+        <a href="StorableChart.html"><span class="name">StorableChart</span></a><span class="result"> extends <a href="WritableChart.html" class="extype" name="scalax.chart.WritableChart">WritableChart</a></span>
       </span>
       </h4>
       <p class="comment cmt">Provides methods for saving a chart.</p>
@@ -397,6 +405,19 @@ datasets.</p>
       </span>
       </h4>
       <p class="comment cmt">Contains only the type imports from foreign packages.</p>
+    </li><li name="scalax.chart.WritableChart" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="WritableChartextendsEncodableChart"></a>
+      <a id="WritableChart:WritableChart"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <a href="WritableChart.html"><span class="name">WritableChart</span></a><span class="result"> extends <a href="EncodableChart.html" class="extype" name="scalax.chart.EncodableChart">EncodableChart</a></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Provides methods for writing a chart to an <code>OutputStream</code>.</p>
     </li><li name="scalax.chart.XYChart" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
       <a id="XYChartextendsChart[scalax.chart.Imports.XYPlot]withOrientablewithDomainAxiswithRangeAxiswithLabels[(org.jfree.data.xy.XYDataset,Int,Int)=&gt;String]withTooltips[(org.jfree.data.xy.XYDataset,Int,Int)=&gt;String]"></a>
       <a id="XYChart:XYChart"></a>
@@ -578,7 +599,6 @@ datasets.</p>
       <div id="tooltip"></div>
 
       <div id="footer">  </div>
-
-
+      <script defer="defer" type="text/javascript" id="jquery-js" src="../../lib/jquery.js"></script><script defer="defer" type="text/javascript" id="jquery-ui-js" src="../../lib/jquery-ui.js"></script><script defer="defer" type="text/javascript" id="tools-tooltip-js" src="../../lib/tools.tooltip.js"></script><script defer="defer" type="text/javascript" id="template-js" src="../../lib/template.js"></script>
     </body>
       </html>

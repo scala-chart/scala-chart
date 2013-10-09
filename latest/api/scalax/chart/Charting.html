@@ -9,11 +9,6 @@
           
       <link href="../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
       <link href="../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
-      <script type="text/javascript" src="../../lib/jquery.js" id="jquery-js"></script>
-      <script type="text/javascript" src="../../lib/jquery-ui.js"></script>
-      <script type="text/javascript" src="../../lib/template.js"></script>
-      <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
-      
       <script type="text/javascript">
          if(top === self) {
             var url = '../../index.html';
@@ -48,7 +43,7 @@
 working with this package:</p><pre><span class="kw">import</span> scalax.chart._
 <span class="kw">import</span> scalax.chart.Charting._
 <span class="kw">val</span> data = <span class="std">Seq</span>((<span class="num">0</span>,<span class="num">0</span>),(<span class="num">1</span>,<span class="num">1</span>),(<span class="num">2</span>,<span class="num">2</span>)).toXYSeriesCollection(<span class="lit">"some data"</span>)
-<span class="kw">val</span> chart = XYLineChart(data)</pre></div><div class="toggleContainer block">
+<span class="kw">val</span> chart = XYLineChart(data)</pre></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/wookietreiber/scala-chart/tree/develop/src/main/scala/scalax/chart/Charting.scala" target="_blank">Charting.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><a href="Imports.html" class="extype" name="scalax.chart.Imports">Imports</a>, <a href="StaticForwarderImports.html" class="extype" name="scalax.chart.StaticForwarderImports">StaticForwarderImports</a>, <a href="TypeImports.html" class="extype" name="scalax.chart.TypeImports">TypeImports</a>, <a href="RichChart.html" class="extype" name="scalax.chart.RichChart">RichChart</a>, <a href="ChartFactories.html" class="extype" name="scalax.chart.ChartFactories">ChartFactories</a>, <a href="RichChartingCollections.html" class="extype" name="scalax.chart.RichChartingCollections">RichChartingCollections</a>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div><div class="toggleContainer block">
@@ -124,6 +119,19 @@ working with this package:</p><pre><span class="kw">import</span> scalax.chart._
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="TypeImports.html" class="extype" name="scalax.chart.TypeImports">TypeImports</a></dd></dl></div>
+    </li><li name="scalax.chart.TypeImports.Color" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="Color=java.awt.Color"></a>
+      <a id="Color:Color"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Color</span><span class="result"> = <span class="extype" name="java.awt.Color">java.awt.Color</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="TypeImports.html" class="extype" name="scalax.chart.TypeImports">TypeImports</a></dd></dl></div>
     </li><li name="scalax.chart.RichChart.GenericRichChart" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="GenericRichChartextendsChart[org.jfree.chart.plot.Plot]withOrientablewithDomainAxiswithRangeAxis"></a>
       <a id="GenericRichChart:GenericRichChart"></a>
@@ -163,6 +171,19 @@ working with this package:</p><pre><span class="kw">import</span> scalax.chart._
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="TypeImports.html" class="extype" name="scalax.chart.TypeImports">TypeImports</a></dd></dl></div>
+    </li><li name="scalax.chart.TypeImports.Paint" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="Paint=java.awt.Paint"></a>
+      <a id="Paint:Paint"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Paint</span><span class="result"> = <span class="extype" name="java.awt.Paint">java.awt.Paint</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="TypeImports.html" class="extype" name="scalax.chart.TypeImports">TypeImports</a></dd></dl></div>
     </li><li name="scalax.chart.TypeImports.PieDataset" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="PieDataset=org.jfree.data.general.PieDataset"></a>
       <a id="PieDataset:PieDataset"></a>
@@ -189,32 +210,84 @@ working with this package:</p><pre><span class="kw">import</span> scalax.chart._
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="TypeImports.html" class="extype" name="scalax.chart.TypeImports">TypeImports</a></dd></dl></div>
-    </li><li name="scalax.chart.RichChartingCollections.RichCategorizedCategorizedTuples" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="RichCategorizedCategorizedTuples[A,B,C,D]extendsAnyRef"></a>
-      <a id="RichCategorizedCategorizedTuples[A,B,C,D]:RichCategorizedCategorizedTuples[A,B,C,D]"></a>
+    </li><li name="scalax.chart.TypeImports.PiePlot3D" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="PiePlot3D=org.jfree.chart.plot.PiePlot3D"></a>
+      <a id="PiePlot3D:PiePlot3D"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">PiePlot3D</span><span class="result"> = <span class="extype" name="org.jfree.chart.plot.PiePlot3D">org.jfree.chart.plot.PiePlot3D</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="TypeImports.html" class="extype" name="scalax.chart.TypeImports">TypeImports</a></dd></dl></div>
+    </li><li name="scalax.chart.RichChartingCollections.RichCategorizedCategorizedTuple2s" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="RichCategorizedCategorizedTuple2s[A,B,C,D]extendsAnyRef"></a>
+      <a id="RichCategorizedCategorizedTuple2s[A,B,C,D]:RichCategorizedCategorizedTuple2s[A,B,C,D]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">implicit </span>
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <a href="RichChartingCollections$RichCategorizedCategorizedTuples.html"><span class="name">RichCategorizedCategorizedTuples</span></a><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>, <span name="C">C</span>, <span name="D">D</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+        <a href="RichChartingCollections$RichCategorizedCategorizedTuple2s.html"><span class="name">RichCategorizedCategorizedTuple2s</span></a><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>, <span name="C">C</span>, <span name="D">D</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4>
       <p class="comment cmt">Enriches a collection of categorized categorized data pairs.</p>
-    </li><li name="scalax.chart.RichChartingCollections.RichCategorizedTuples" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="RichCategorizedTuples[A,B,C]extendsAnyRef"></a>
-      <a id="RichCategorizedTuples[A,B,C]:RichCategorizedTuples[A,B,C]"></a>
+    </li><li name="scalax.chart.RichChartingCollections.RichCategorizedMappedTuple3s" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="RichCategorizedMappedTuple3s[A,B,C,D,E]extendsAnyRef"></a>
+      <a id="RichCategorizedMappedTuple3s[A,B,C,D,E]:RichCategorizedMappedTuple3s[A,B,C,D,E]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">implicit </span>
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <a href="RichChartingCollections$RichCategorizedTuples.html"><span class="name">RichCategorizedTuples</span></a><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>, <span name="C">C</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+        <a href="RichChartingCollections$RichCategorizedMappedTuple3s.html"><span class="name">RichCategorizedMappedTuple3s</span></a><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>, <span name="C">C</span>, <span name="D">D</span>, <span name="E">E</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Enriches a collection of categorized mapped 3-tuples.</p>
+    </li><li name="scalax.chart.RichChartingCollections.RichCategorizedTuple2s" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="RichCategorizedTuple2s[A,B,C]extendsAnyRef"></a>
+      <a id="RichCategorizedTuple2s[A,B,C]:RichCategorizedTuple2s[A,B,C]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="RichChartingCollections$RichCategorizedTuple2s.html"><span class="name">RichCategorizedTuple2s</span></a><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>, <span name="C">C</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4>
       <p class="comment cmt">Enriches a collection of categorized data pairs.</p>
+    </li><li name="scalax.chart.RichChartingCollections.RichCategorizedTuple4s" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="RichCategorizedTuple4s[A,B,C,D,E]extendsAnyRef"></a>
+      <a id="RichCategorizedTuple4s[A,B,C,D,E]:RichCategorizedTuple4s[A,B,C,D,E]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="RichChartingCollections$RichCategorizedTuple4s.html"><span class="name">RichCategorizedTuple4s</span></a><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>, <span name="C">C</span>, <span name="D">D</span>, <span name="E">E</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Enriches a collection of categorized 4-tuples.</p>
+    </li><li name="scalax.chart.RichChartingCollections.RichMappedTuple3s" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="RichMappedTuple3s[A,B,C,D]extendsAnyRef"></a>
+      <a id="RichMappedTuple3s[A,B,C,D]:RichMappedTuple3s[A,B,C,D]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="RichChartingCollections$RichMappedTuple3s.html"><span class="name">RichMappedTuple3s</span></a><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>, <span name="C">C</span>, <span name="D">D</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Enriches a collection of mapped 3-tuples.</p>
     </li><li name="scalax.chart.RichChartingCollections.RichTimePeriodValuesCollection" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="RichTimePeriodValuesCollectionextendsAnyRef"></a>
       <a id="RichTimePeriodValuesCollection:RichTimePeriodValuesCollection"></a>
@@ -241,19 +314,45 @@ working with this package:</p><pre><span class="kw">import</span> scalax.chart._
       </span>
       </h4>
       <p class="comment cmt">Enriches a collection of <code>TimeSeries</code>.</p>
-    </li><li name="scalax.chart.RichChartingCollections.RichTuples" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="RichTuples[A,B]extendsAnyRef"></a>
-      <a id="RichTuples[A,B]:RichTuples[A,B]"></a>
+    </li><li name="scalax.chart.RichChartingCollections.RichTuple2s" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="RichTuple2s[A,B]extendsAnyRef"></a>
+      <a id="RichTuple2s[A,B]:RichTuple2s[A,B]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">implicit </span>
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <a href="RichChartingCollections$RichTuples.html"><span class="name">RichTuples</span></a><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+        <a href="RichChartingCollections$RichTuple2s.html"><span class="name">RichTuple2s</span></a><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4>
       <p class="comment cmt">Enriches a collection of data pairs.</p>
+    </li><li name="scalax.chart.RichChartingCollections.RichTuple3s" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="RichTuple3s[A,B,C]extendsAnyRef"></a>
+      <a id="RichTuple3s[A,B,C]:RichTuple3s[A,B,C]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="RichChartingCollections$RichTuple3s.html"><span class="name">RichTuple3s</span></a><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>, <span name="C">C</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Enriches a collection of data triples.</p>
+    </li><li name="scalax.chart.RichChartingCollections.RichTuple4s" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="RichTuple4s[A,B,C,D]extendsAnyRef"></a>
+      <a id="RichTuple4s[A,B,C,D]:RichTuple4s[A,B,C,D]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="RichChartingCollections$RichTuple4s.html"><span class="name">RichTuple4s</span></a><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>, <span name="C">C</span>, <span name="D">D</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Enriches a collection of data 4-tuples.</p>
     </li><li name="scalax.chart.RichChartingCollections.RichXYSeriesCollection" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="RichXYSeriesCollectionextendsAnyRef"></a>
       <a id="RichXYSeriesCollection:RichXYSeriesCollection"></a>
@@ -267,6 +366,32 @@ working with this package:</p><pre><span class="kw">import</span> scalax.chart._
       </span>
       </h4>
       <p class="comment cmt">Enriches a collection of <code>XYSeries</code>.</p>
+    </li><li name="scalax.chart.RichChartingCollections.RichYIntervalSeriesCollection" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="RichYIntervalSeriesCollectionextendsAnyRef"></a>
+      <a id="RichYIntervalSeriesCollection:RichYIntervalSeriesCollection"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="RichChartingCollections$RichYIntervalSeriesCollection.html"><span class="name">RichYIntervalSeriesCollection</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Enriches a collection of <code>YIntervalSeries</code>.</p>
+    </li><li name="scalax.chart.TypeImports.RingPlot" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="RingPlot=org.jfree.chart.plot.RingPlot"></a>
+      <a id="RingPlot:RingPlot"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">RingPlot</span><span class="result"> = <span class="extype" name="org.jfree.chart.plot.RingPlot">org.jfree.chart.plot.RingPlot</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="TypeImports.html" class="extype" name="scalax.chart.TypeImports">TypeImports</a></dd></dl></div>
     </li><li name="scalax.chart.TypeImports.XYDataset" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="XYDataset=org.jfree.data.xy.XYDataset"></a>
       <a id="XYDataset:XYDataset"></a>
@@ -545,6 +670,19 @@ working with this package:</p><pre><span class="kw">import</span> scalax.chart._
       </span>
       </h4>
       <p class="comment cmt">Factory for box and whisker charts.</p>
+    </li><li name="scalax.chart.ChartFactories.XYDeviationChart" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="XYDeviationChart"></a>
+      <a id="XYDeviationChart:XYDeviationChart"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="ChartFactories$XYDeviationChart$.html"><span class="name">XYDeviationChart</span></a>
+      </span>
+      </h4>
+      <p class="comment cmt">Factory for numeric deviation charts.</p>
     </li><li name="scalax.chart.ChartFactories.XYLineChart" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="XYLineChart"></a>
       <a id="XYLineChart:XYLineChart"></a>
@@ -584,7 +722,10 @@ working with this package:</p><pre><span class="kw">import</span> scalax.chart._
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.CloneNotSupportedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li><li name="scala.Predef.any2Ensuring#ensuring" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -694,7 +835,10 @@ working with this package:</p><pre><span class="kw">import</span> scalax.chart._
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="symbol">classOf[java.lang.Throwable]</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li><li name="scala.Predef.any2stringfmt#formatted" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -834,7 +978,10 @@ working with this package:</p><pre><span class="kw">import</span> scalax.chart._
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -850,7 +997,10 @@ working with this package:</p><pre><span class="kw">import</span> scalax.chart._
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -866,7 +1016,10 @@ working with this package:</p><pre><span class="kw">import</span> scalax.chart._
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li><li name="scala.Predef.any2ArrowAssoc#→" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -890,7 +1043,7 @@ working with this package:</p><pre><span class="kw">import</span> scalax.chart._
             </div>
 
         <div id="values" class="values members">
-              <h3>Shadowed Implict Value Members</h3>
+              <h3>Shadowed Implicit Value Members</h3>
               <ol><li name="scala.Predef.any2stringadd#self" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="self:Any"></a>
       <a id="self:Any"></a>
@@ -1023,7 +1176,6 @@ working with this package:</p><pre><span class="kw">import</span> scalax.chart._
       <div id="tooltip"></div>
 
       <div id="footer">  </div>
-
-
+      <script defer="defer" type="text/javascript" id="jquery-js" src="../../lib/jquery.js"></script><script defer="defer" type="text/javascript" id="jquery-ui-js" src="../../lib/jquery-ui.js"></script><script defer="defer" type="text/javascript" id="tools-tooltip-js" src="../../lib/tools.tooltip.js"></script><script defer="defer" type="text/javascript" id="template-js" src="../../lib/template.js"></script>
     </body>
       </html>

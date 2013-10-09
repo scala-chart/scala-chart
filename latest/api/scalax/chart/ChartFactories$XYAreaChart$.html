@@ -9,11 +9,6 @@
           
       <link href="../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
       <link href="../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
-      <script type="text/javascript" src="../../lib/jquery.js" id="jquery-js"></script>
-      <script type="text/javascript" src="../../lib/jquery-ui.js"></script>
-      <script type="text/javascript" src="../../lib/template.js"></script>
-      <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
-      
       <script type="text/javascript">
          if(top === self) {
             var url = '../../index.html';
@@ -44,7 +39,7 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Factory for numeric area charts.</p></div><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Factory for numeric area charts.</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/wookietreiber/scala-chart/tree/develop/src/main/scala/scalax/chart/ChartFactories.scala" target="_blank">ChartFactories.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -156,21 +151,21 @@
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
     </li><li name="scalax.chart.ChartFactories.XYAreaChart#apply" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="apply(dataset:scalax.chart.Imports.XYDataset,title:String,domainAxisLabel:String,rangeAxisLabel:String,orientation:scalax.chart.Imports.Orientation,legend:Boolean,tooltips:Boolean):scalax.chart.XYChart"></a>
-      <a id="apply(Imports.XYDataset,String,String,String,Imports.Orientation,Boolean,Boolean):XYChart"></a>
+      <a id="apply(dataset:scalax.chart.Imports.XYDataset,title:String,domainAxisLabel:String,rangeAxisLabel:String,orientation:scalax.chart.Imports.Orientation,legend:Boolean,tooltips:Boolean)(implicittheme:org.jfree.chart.ChartTheme):scalax.chart.XYChart"></a>
+      <a id="apply(Imports.XYDataset,String,String,String,Imports.Orientation,Boolean,Boolean)(ChartTheme):XYChart"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">apply</span><span class="params">(<span name="dataset">dataset: <a href="Imports$.html#XYDataset=org.jfree.data.xy.XYDataset" class="extmbr" name="scalax.chart.Imports.XYDataset">Imports.XYDataset</a></span>, <span name="title">title: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;&quot;</span></span>, <span name="domainAxisLabel">domainAxisLabel: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;&quot;</span></span>, <span name="rangeAxisLabel">rangeAxisLabel: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;&quot;</span></span>, <span name="orientation">orientation: <a href="Imports$.html#Orientation=swing.Orientation.Value" class="extmbr" name="scalax.chart.Imports.Orientation">Imports.Orientation</a> = <span class="symbol">Orientation.Vertical</span></span>, <span name="legend">legend: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">true</span></span>, <span name="tooltips">tooltips: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">false</span></span>)</span><span class="result">: <a href="XYChart.html" class="extype" name="scalax.chart.XYChart">XYChart</a></span>
+        <span class="name">apply</span><span class="params">(<span name="dataset">dataset: <a href="Imports$.html#XYDataset=org.jfree.data.xy.XYDataset" class="extmbr" name="scalax.chart.Imports.XYDataset">Imports.XYDataset</a></span>, <span name="title">title: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;&quot;</span></span>, <span name="domainAxisLabel">domainAxisLabel: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;&quot;</span></span>, <span name="rangeAxisLabel">rangeAxisLabel: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;&quot;</span></span>, <span name="orientation">orientation: <a href="Imports$.html#Orientation=swing.Orientation.Value" class="extmbr" name="scalax.chart.Imports.Orientation">Imports.Orientation</a> = <span class="symbol"><span class="name"><a href="Imports$.html">Orientation.Vertical</a></span></span></span>, <span name="legend">legend: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">true</span></span>, <span name="tooltips">tooltips: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">false</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="theme">theme: <span class="extype" name="org.jfree.chart.ChartTheme">ChartTheme</span> = <span class="symbol">StandardChartTheme.createJFreeTheme</span></span>)</span><span class="result">: <a href="XYChart.html" class="extype" name="scalax.chart.XYChart">XYChart</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Creates a new chart that represents numeric <code>x</code> and <code>y</code> values with an area.</p><div class="fullcomment"><div class="comment cmt"><p>Creates a new chart that represents numeric <code>x</code> and <code>y</code> values with an area.</p><p>If the input dataset is an instance of a <code>TimePeriodValuesCollection</code>,
 <code>TimeSeriesCollection</code> or <code>TimeTableXYDataset</code> the domain axis will correctly be set to a
 <code>DateAxis</code>.
-</p></div><dl class="paramcmts block"><dt class="param">dataset</dt><dd class="cmt"><p>the data the chart will visualize</p></dd><dt class="param">title</dt><dd class="cmt"><p>the title of the chart</p></dd><dt class="param">domainAxisLabel</dt><dd class="cmt"><p>the label for the domain axis</p></dd><dt class="param">rangeAxisLabel</dt><dd class="cmt"><p>the label for the range axis</p></dd><dt class="param">orientation</dt><dd class="cmt"><p>the orientation of the chart</p></dd><dt class="param">legend</dt><dd class="cmt"><p>whether or not the chart will contain a legend</p></dd><dt class="param">tooltips</dt><dd class="cmt"><p>whether or not tooltips will be generated
+</p></div><dl class="paramcmts block"><dt class="param">dataset</dt><dd class="cmt"><p>the data the chart will visualize</p></dd><dt class="param">title</dt><dd class="cmt"><p>the title of the chart</p></dd><dt class="param">domainAxisLabel</dt><dd class="cmt"><p>the label for the domain axis</p></dd><dt class="param">rangeAxisLabel</dt><dd class="cmt"><p>the label for the range axis</p></dd><dt class="param">orientation</dt><dd class="cmt"><p>the orientation of the chart</p></dd><dt class="param">legend</dt><dd class="cmt"><p>whether or not the chart will contain a legend</p></dd><dt class="param">tooltips</dt><dd class="cmt"><p>whether or not tooltips will be generated</p></dd><dt class="param">theme</dt><dd class="cmt"><p>the theme to apply to the chart
 </p></dd></dl></div>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
@@ -198,7 +193,10 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.CloneNotSupportedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -240,7 +238,10 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="symbol">classOf[java.lang.Throwable]</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -322,37 +323,37 @@
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="scalax.chart.ChartFactories.XYAreaChart#stacked" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="stacked(dataset:org.jfree.data.xy.TableXYDataset,title:String,domainAxisLabel:String,rangeAxisLabel:String,orientation:scalax.chart.Imports.Orientation,legend:Boolean,tooltips:Boolean):scalax.chart.XYChart"></a>
-      <a id="stacked(TableXYDataset,String,String,String,Imports.Orientation,Boolean,Boolean):XYChart"></a>
+      <a id="stacked(dataset:org.jfree.data.xy.TableXYDataset,title:String,domainAxisLabel:String,rangeAxisLabel:String,orientation:scalax.chart.Imports.Orientation,legend:Boolean,tooltips:Boolean)(implicittheme:org.jfree.chart.ChartTheme):scalax.chart.XYChart"></a>
+      <a id="stacked(TableXYDataset,String,String,String,Imports.Orientation,Boolean,Boolean)(ChartTheme):XYChart"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">stacked</span><span class="params">(<span name="dataset">dataset: <span class="extype" name="org.jfree.data.xy.TableXYDataset">TableXYDataset</span></span>, <span name="title">title: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;&quot;</span></span>, <span name="domainAxisLabel">domainAxisLabel: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;&quot;</span></span>, <span name="rangeAxisLabel">rangeAxisLabel: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;&quot;</span></span>, <span name="orientation">orientation: <a href="Imports$.html#Orientation=swing.Orientation.Value" class="extmbr" name="scalax.chart.Imports.Orientation">Imports.Orientation</a> = <span class="symbol">Orientation.Vertical</span></span>, <span name="legend">legend: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">true</span></span>, <span name="tooltips">tooltips: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">false</span></span>)</span><span class="result">: <a href="XYChart.html" class="extype" name="scalax.chart.XYChart">XYChart</a></span>
+        <span class="name">stacked</span><span class="params">(<span name="dataset">dataset: <span class="extype" name="org.jfree.data.xy.TableXYDataset">TableXYDataset</span></span>, <span name="title">title: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;&quot;</span></span>, <span name="domainAxisLabel">domainAxisLabel: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;&quot;</span></span>, <span name="rangeAxisLabel">rangeAxisLabel: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;&quot;</span></span>, <span name="orientation">orientation: <a href="Imports$.html#Orientation=swing.Orientation.Value" class="extmbr" name="scalax.chart.Imports.Orientation">Imports.Orientation</a> = <span class="symbol"><span class="name"><a href="Imports$.html">Orientation.Vertical</a></span></span></span>, <span name="legend">legend: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">true</span></span>, <span name="tooltips">tooltips: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">false</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="theme">theme: <span class="extype" name="org.jfree.chart.ChartTheme">ChartTheme</span> = <span class="symbol">StandardChartTheme.createJFreeTheme</span></span>)</span><span class="result">: <a href="XYChart.html" class="extype" name="scalax.chart.XYChart">XYChart</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Creates a new chart that represents multiple numeric <code>x</code> and <code>y</code> values with stacked areas.</p><div class="fullcomment"><div class="comment cmt"><p>Creates a new chart that represents multiple numeric <code>x</code> and <code>y</code> values with stacked areas.</p><p>If the input dataset is an instance of a <code>TimeTableXYDataset</code> the domain axis will correctly
 be set to a <code>DateAxis</code>.
-</p></div><dl class="paramcmts block"><dt class="param">dataset</dt><dd class="cmt"><p>the data the chart will visualize</p></dd><dt class="param">title</dt><dd class="cmt"><p>the title of the chart</p></dd><dt class="param">domainAxisLabel</dt><dd class="cmt"><p>the label for the domain axis</p></dd><dt class="param">rangeAxisLabel</dt><dd class="cmt"><p>the label for the range axis</p></dd><dt class="param">orientation</dt><dd class="cmt"><p>the orientation of the chart</p></dd><dt class="param">legend</dt><dd class="cmt"><p>whether or not the chart will contain a legend</p></dd><dt class="param">tooltips</dt><dd class="cmt"><p>whether or not tooltips will be generated
+</p></div><dl class="paramcmts block"><dt class="param">dataset</dt><dd class="cmt"><p>the data the chart will visualize</p></dd><dt class="param">title</dt><dd class="cmt"><p>the title of the chart</p></dd><dt class="param">domainAxisLabel</dt><dd class="cmt"><p>the label for the domain axis</p></dd><dt class="param">rangeAxisLabel</dt><dd class="cmt"><p>the label for the range axis</p></dd><dt class="param">orientation</dt><dd class="cmt"><p>the orientation of the chart</p></dd><dt class="param">legend</dt><dd class="cmt"><p>whether or not the chart will contain a legend</p></dd><dt class="param">tooltips</dt><dd class="cmt"><p>whether or not tooltips will be generated</p></dd><dt class="param">theme</dt><dd class="cmt"><p>the theme to apply to the chart
 </p></dd></dl></div>
     </li><li name="scalax.chart.ChartFactories.XYAreaChart#stepped" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="stepped(dataset:scalax.chart.Imports.XYDataset,title:String,domainAxisLabel:String,rangeAxisLabel:String,orientation:scalax.chart.Imports.Orientation,legend:Boolean,tooltips:Boolean):scalax.chart.XYChart"></a>
-      <a id="stepped(Imports.XYDataset,String,String,String,Imports.Orientation,Boolean,Boolean):XYChart"></a>
+      <a id="stepped(dataset:scalax.chart.Imports.XYDataset,title:String,domainAxisLabel:String,rangeAxisLabel:String,orientation:scalax.chart.Imports.Orientation,legend:Boolean,tooltips:Boolean)(implicittheme:org.jfree.chart.ChartTheme):scalax.chart.XYChart"></a>
+      <a id="stepped(Imports.XYDataset,String,String,String,Imports.Orientation,Boolean,Boolean)(ChartTheme):XYChart"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">stepped</span><span class="params">(<span name="dataset">dataset: <a href="Imports$.html#XYDataset=org.jfree.data.xy.XYDataset" class="extmbr" name="scalax.chart.Imports.XYDataset">Imports.XYDataset</a></span>, <span name="title">title: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;&quot;</span></span>, <span name="domainAxisLabel">domainAxisLabel: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;&quot;</span></span>, <span name="rangeAxisLabel">rangeAxisLabel: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;&quot;</span></span>, <span name="orientation">orientation: <a href="Imports$.html#Orientation=swing.Orientation.Value" class="extmbr" name="scalax.chart.Imports.Orientation">Imports.Orientation</a> = <span class="symbol">Orientation.Vertical</span></span>, <span name="legend">legend: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">true</span></span>, <span name="tooltips">tooltips: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">false</span></span>)</span><span class="result">: <a href="XYChart.html" class="extype" name="scalax.chart.XYChart">XYChart</a></span>
+        <span class="name">stepped</span><span class="params">(<span name="dataset">dataset: <a href="Imports$.html#XYDataset=org.jfree.data.xy.XYDataset" class="extmbr" name="scalax.chart.Imports.XYDataset">Imports.XYDataset</a></span>, <span name="title">title: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;&quot;</span></span>, <span name="domainAxisLabel">domainAxisLabel: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;&quot;</span></span>, <span name="rangeAxisLabel">rangeAxisLabel: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;&quot;</span></span>, <span name="orientation">orientation: <a href="Imports$.html#Orientation=swing.Orientation.Value" class="extmbr" name="scalax.chart.Imports.Orientation">Imports.Orientation</a> = <span class="symbol"><span class="name"><a href="Imports$.html">Orientation.Vertical</a></span></span></span>, <span name="legend">legend: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">true</span></span>, <span name="tooltips">tooltips: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">false</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="theme">theme: <span class="extype" name="org.jfree.chart.ChartTheme">ChartTheme</span> = <span class="symbol">StandardChartTheme.createJFreeTheme</span></span>)</span><span class="result">: <a href="XYChart.html" class="extype" name="scalax.chart.XYChart">XYChart</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Creates a new chart that represents multiple numeric <code>x</code> and <code>y</code> values with a stepped area.</p><div class="fullcomment"><div class="comment cmt"><p>Creates a new chart that represents multiple numeric <code>x</code> and <code>y</code> values with a stepped area.</p><p>If the input dataset is an instance of a <code>TimePeriodValuesCollection</code>,
 <code>TimeSeriesCollection</code> or <code>TimeTableXYDataset</code> the domain axis will correctly be set to a
 <code>DateAxis</code>.
-</p></div><dl class="paramcmts block"><dt class="param">dataset</dt><dd class="cmt"><p>the data the chart will visualize</p></dd><dt class="param">title</dt><dd class="cmt"><p>the title of the chart</p></dd><dt class="param">domainAxisLabel</dt><dd class="cmt"><p>the label for the domain axis</p></dd><dt class="param">rangeAxisLabel</dt><dd class="cmt"><p>the label for the range axis</p></dd><dt class="param">orientation</dt><dd class="cmt"><p>the orientation of the chart</p></dd><dt class="param">legend</dt><dd class="cmt"><p>whether or not the chart will contain a legend</p></dd><dt class="param">tooltips</dt><dd class="cmt"><p>whether or not tooltips will be generated
+</p></div><dl class="paramcmts block"><dt class="param">dataset</dt><dd class="cmt"><p>the data the chart will visualize</p></dd><dt class="param">title</dt><dd class="cmt"><p>the title of the chart</p></dd><dt class="param">domainAxisLabel</dt><dd class="cmt"><p>the label for the domain axis</p></dd><dt class="param">rangeAxisLabel</dt><dd class="cmt"><p>the label for the range axis</p></dd><dt class="param">orientation</dt><dd class="cmt"><p>the orientation of the chart</p></dd><dt class="param">legend</dt><dd class="cmt"><p>whether or not the chart will contain a legend</p></dd><dt class="param">tooltips</dt><dd class="cmt"><p>whether or not tooltips will be generated</p></dd><dt class="param">theme</dt><dd class="cmt"><p>the theme to apply to the chart
 </p></dd></dl></div>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
@@ -393,7 +394,10 @@ be set to a <code>DateAxis</code>.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -409,7 +413,10 @@ be set to a <code>DateAxis</code>.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -425,7 +432,10 @@ be set to a <code>DateAxis</code>.
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li></ol>
@@ -457,7 +467,6 @@ be set to a <code>DateAxis</code>.
       <div id="tooltip"></div>
 
       <div id="footer">  </div>
-
-
+      <script defer="defer" type="text/javascript" id="jquery-js" src="../../lib/jquery.js"></script><script defer="defer" type="text/javascript" id="jquery-ui-js" src="../../lib/jquery-ui.js"></script><script defer="defer" type="text/javascript" id="tools-tooltip-js" src="../../lib/tools.tooltip.js"></script><script defer="defer" type="text/javascript" id="template-js" src="../../lib/template.js"></script>
     </body>
       </html>

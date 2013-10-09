@@ -9,11 +9,6 @@
           
       <link href="../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
       <link href="../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
-      <script type="text/javascript" src="../../lib/jquery.js" id="jquery-js"></script>
-      <script type="text/javascript" src="../../lib/jquery-ui.js"></script>
-      <script type="text/javascript" src="../../lib/template.js"></script>
-      <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
-      
       <script type="text/javascript">
          if(top === self) {
             var url = '../../index.html';
@@ -44,9 +39,10 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Contains various factories to conveniently create charts.</p><p>The only argument needed to create a chart is the dataset:</p><pre><span class="kw">val</span> data = <span class="std">Seq</span>((<span class="num">0</span>,<span class="num">0</span>),(<span class="num">1</span>,<span class="num">1</span>),(<span class="num">2</span>,<span class="num">2</span>)).toXYSeriesCollection(<span class="lit">"some data"</span>)
-<span class="kw">val</span> chart = XYLineChart(data)</pre><p>The other arguments have defaults and can be conveniently overridden with named arguments:</p><pre><span class="kw">val</span> data = <span class="std">Seq</span>((<span class="num">0</span>,<span class="num">0</span>),(<span class="num">1</span>,<span class="num">1</span>),(<span class="num">2</span>,<span class="num">2</span>)).toXYSeriesCollection(<span class="lit">"some data"</span>)
-<span class="kw">val</span> chart = XYLineChart(data, legend = <span class="kw">false</span>, domainAxisLabel = <span class="lit">"some description"</span>)</pre></div><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Contains various factories to conveniently create charts.</p><h4> Usage </h4><p>The only argument needed to create a chart is a dataset:</p><pre><span class="kw">val</span> data = <span class="std">Seq</span>((<span class="num">0</span>,<span class="num">0</span>),(<span class="num">1</span>,<span class="num">1</span>),(<span class="num">2</span>,<span class="num">2</span>))
+<span class="kw">val</span> dataset = data.toXYSeriesCollection(<span class="lit">"some data"</span>)</pre><p>The factories make heavy use of default arguments, so you have to type as less as possible:</p><pre><span class="kw">val</span> chart = XYLineChart(dataset)</pre><p>For better readability of your own code, you should name all other arguments:</p><pre><span class="kw">val</span> chart = XYLineChart(dataset, legend = <span class="kw">false</span>, domainAxisLabel = <span class="lit">"some description"</span>)</pre><h4> Chart Themes </h4><p>The default theme used is the JFreeChart theme. To apply a different theme to the charts created
+by the factories, simply define an implicit chart theme in scope, e.g. the darkness theme from
+JFreeChart:</p><pre><span class="kw">implicit</span> <span class="kw">val</span> theme = org.jfree.chart.StandardChartTheme.createDarknessTheme</pre></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/wookietreiber/scala-chart/tree/develop/src/main/scala/scalax/chart/ChartFactories.scala" target="_blank">ChartFactories.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div><div class="toggleContainer block">
@@ -332,6 +328,19 @@
       </span>
       </h4>
       <p class="comment cmt">Factory for box and whisker charts.</p>
+    </li><li name="scalax.chart.ChartFactories.XYDeviationChart" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="XYDeviationChart"></a>
+      <a id="XYDeviationChart:XYDeviationChart"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="ChartFactories$XYDeviationChart$.html"><span class="name">XYDeviationChart</span></a>
+      </span>
+      </h4>
+      <p class="comment cmt">Factory for numeric deviation charts.</p>
     </li><li name="scalax.chart.ChartFactories.XYLineChart" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="XYLineChart"></a>
       <a id="XYLineChart:XYLineChart"></a>
@@ -371,7 +380,10 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.CloneNotSupportedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li><li name="scala.Predef.any2Ensuring#ensuring" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -481,7 +493,10 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="symbol">classOf[java.lang.Throwable]</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li><li name="scala.Predef.any2stringfmt#formatted" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -621,7 +636,10 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -637,7 +655,10 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -653,7 +674,10 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li><li name="scala.Predef.any2ArrowAssoc#→" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -677,7 +701,7 @@
             </div>
 
         <div id="values" class="values members">
-              <h3>Shadowed Implict Value Members</h3>
+              <h3>Shadowed Implicit Value Members</h3>
               <ol><li name="scala.Predef.any2stringadd#self" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="self:Any"></a>
       <a id="self:Any"></a>
@@ -798,7 +822,6 @@
       <div id="tooltip"></div>
 
       <div id="footer">  </div>
-
-
+      <script defer="defer" type="text/javascript" id="jquery-js" src="../../lib/jquery.js"></script><script defer="defer" type="text/javascript" id="jquery-ui-js" src="../../lib/jquery-ui.js"></script><script defer="defer" type="text/javascript" id="tools-tooltip-js" src="../../lib/tools.tooltip.js"></script><script defer="defer" type="text/javascript" id="template-js" src="../../lib/template.js"></script>
     </body>
       </html>

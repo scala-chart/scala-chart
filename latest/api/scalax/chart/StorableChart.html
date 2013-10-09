@@ -9,11 +9,6 @@
           
       <link href="../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
       <link href="../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
-      <script type="text/javascript" src="../../lib/jquery.js" id="jquery-js"></script>
-      <script type="text/javascript" src="../../lib/jquery-ui.js"></script>
-      <script type="text/javascript" src="../../lib/template.js"></script>
-      <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
-      
       <script type="text/javascript">
          if(top === self) {
             var url = '../../index.html';
@@ -40,13 +35,13 @@
         <span class="kind">trait</span>
       </span>
       <span class="symbol">
-        <span class="name">StorableChart</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+        <span class="name">StorableChart</span><span class="result"> extends <a href="WritableChart.html" class="extype" name="scalax.chart.WritableChart">WritableChart</a></span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Provides methods for saving a chart.</p></div><dl class="attributes block"> <dt>Self Type</dt><dd><a href="Chart.html" class="extype" name="scalax.chart.Chart">Chart</a>[_]</dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Provides methods for saving a chart.</p></div><dl class="attributes block"> <dt>Self Type</dt><dd><a href="Chart.html" class="extype" name="scalax.chart.Chart">Chart</a>[_]</dd><dt>Source</dt><dd><a href="https://github.com/wookietreiber/scala-chart/tree/develop/src/main/scala/scalax/chart/StorableChart.scala" target="_blank">StorableChart.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
-          <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+          <div class="superTypes hiddenContent"><a href="WritableChart.html" class="extype" name="scalax.chart.WritableChart">WritableChart</a>, <a href="EncodableChart.html" class="extype" name="scalax.chart.EncodableChart">EncodableChart</a>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div><div class="toggleContainer block">
           <span class="toggle">Known Subclasses</span>
           <div class="subClasses hiddenContent"><a href="CategoryChart.html" class="extype" name="scalax.chart.CategoryChart">CategoryChart</a>, <a href="Chart.html" class="extype" name="scalax.chart.Chart">Chart</a>, <a href="RichChart$GenericRichChart.html" class="extype" name="scalax.chart.RichChart.GenericRichChart">GenericRichChart</a>, <a href="MultiplePieChart.html" class="extype" name="scalax.chart.MultiplePieChart">MultiplePieChart</a>, <a href="PieChart.html" class="extype" name="scalax.chart.PieChart">PieChart</a>, <a href="RingChart.html" class="extype" name="scalax.chart.RingChart">RingChart</a>, <a href="XYChart.html" class="extype" name="scalax.chart.XYChart">XYChart</a></div>
@@ -67,7 +62,7 @@
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="scalax.chart.StorableChart"><span>StorableChart</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="scalax.chart.StorableChart"><span>StorableChart</span></li><li class="in" name="scalax.chart.WritableChart"><span>WritableChart</span></li><li class="in" name="scalax.chart.EncodableChart"><span>EncodableChart</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
                 <span class="filtertype">Implicitly<br />
@@ -226,9 +221,42 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.CloneNotSupportedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
+    </li><li name="scalax.chart.EncodableChart#encodeAsJPEG" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="encodeAsJPEG(dim:(Int,Int)):Array[Byte]"></a>
+      <a id="encodeAsJPEG((Int,Int)):Array[Byte]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">encodeAsJPEG</span><span class="params">(<span name="dim">dim: (<span class="extype" name="scala.Int">Int</span>, <span class="extype" name="scala.Int">Int</span>)</span>)</span><span class="result">: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Byte">Byte</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Returns the chart as a byte encoded JPEG image.</p><div class="fullcomment"><div class="comment cmt"><p>Returns the chart as a byte encoded JPEG image.
+</p></div><dl class="paramcmts block"><dt class="param">dim</dt><dd class="cmt"><p>dimension / geometry / width x height of the output
+</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="EncodableChart.html" class="extype" name="scalax.chart.EncodableChart">EncodableChart</a></dd></dl></div>
+    </li><li name="scalax.chart.EncodableChart#encodeAsPNG" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="encodeAsPNG(dim:(Int,Int)):Array[Byte]"></a>
+      <a id="encodeAsPNG((Int,Int)):Array[Byte]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">encodeAsPNG</span><span class="params">(<span name="dim">dim: (<span class="extype" name="scala.Int">Int</span>, <span class="extype" name="scala.Int">Int</span>)</span>)</span><span class="result">: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Byte">Byte</span>]</span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Returns the chart as a byte encoded PNG image.</p><div class="fullcomment"><div class="comment cmt"><p>Returns the chart as a byte encoded PNG image.
+</p></div><dl class="paramcmts block"><dt class="param">dim</dt><dd class="cmt"><p>dimension / geometry / width x height of the output
+</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="EncodableChart.html" class="extype" name="scalax.chart.EncodableChart">EncodableChart</a></dd></dl></div>
     </li><li name="scala.Predef.any2Ensuring#ensuring" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ensuring(cond:A=&gt;Boolean,msg:=&gt;Any):A"></a>
       <a id="ensuring((StorableChart)⇒Boolean,⇒Any):StorableChart"></a>
@@ -336,7 +364,10 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="symbol">classOf[java.lang.Throwable]</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li><li name="scala.Predef.any2stringfmt#formatted" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -438,49 +469,49 @@
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="scalax.chart.StorableChart#saveAsJPEG" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="saveAsJPEG(output:java.io.File,dim:(Int,Int)):Unit"></a>
-      <a id="saveAsJPEG(File,(Int,Int)):Unit"></a>
+      <a id="saveAsJPEG(file:String,dim:(Int,Int)):Unit"></a>
+      <a id="saveAsJPEG(String,(Int,Int)):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">saveAsJPEG</span><span class="params">(<span name="output">output: <span class="extype" name="java.io.File">File</span></span>, <span name="dim">dim: (<span class="extype" name="scala.Int">Int</span>, <span class="extype" name="scala.Int">Int</span>)</span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">saveAsJPEG</span><span class="params">(<span name="file">file: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="dim">dim: (<span class="extype" name="scala.Int">Int</span>, <span class="extype" name="scala.Int">Int</span>)</span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Saves the chart as a JPEG image.</p><div class="fullcomment"><div class="comment cmt"><p>Saves the chart as a JPEG image.
-</p></div><dl class="paramcmts block"><dt class="param">output</dt><dd class="cmt"><p>the output file</p></dd><dt class="param">dim</dt><dd class="cmt"><p>dimension / geometry / width x height of the output
+</p></div><dl class="paramcmts block"><dt class="param">file</dt><dd class="cmt"><p>the output file</p></dd><dt class="param">dim</dt><dd class="cmt"><p>dimension / geometry / width x height of the output
 </p></dd></dl></div>
     </li><li name="scalax.chart.StorableChart#saveAsPDF" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="saveAsPDF(output:java.io.File,dim:(Int,Int),fontMapper:com.lowagie.text.pdf.FontMapper):Unit"></a>
-      <a id="saveAsPDF(File,(Int,Int),FontMapper):Unit"></a>
+      <a id="saveAsPDF(file:String,dim:(Int,Int),fontMapper:com.lowagie.text.pdf.FontMapper):Unit"></a>
+      <a id="saveAsPDF(String,(Int,Int),FontMapper):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">saveAsPDF</span><span class="params">(<span name="output">output: <span class="extype" name="java.io.File">File</span></span>, <span name="dim">dim: (<span class="extype" name="scala.Int">Int</span>, <span class="extype" name="scala.Int">Int</span>)</span>, <span name="fontMapper">fontMapper: <span class="extype" name="com.lowagie.text.pdf.FontMapper">FontMapper</span> = <span class="symbol">new DefaultFontMapper</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">saveAsPDF</span><span class="params">(<span name="file">file: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="dim">dim: (<span class="extype" name="scala.Int">Int</span>, <span class="extype" name="scala.Int">Int</span>)</span>, <span name="fontMapper">fontMapper: <span class="extype" name="com.lowagie.text.pdf.FontMapper">FontMapper</span> = <span class="symbol">new DefaultFontMapper</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Saves the chart as a PDF.</p><div class="fullcomment"><div class="comment cmt"><p>Saves the chart as a PDF.
-</p></div><dl class="paramcmts block"><dt class="param">output</dt><dd class="cmt"><p>the output file</p></dd><dt class="param">dim</dt><dd class="cmt"><p>dimension / geometry / width x height of the output</p></dd><dt class="param">fontMapper</dt><dd class="cmt"><p>handles mappings between Java AWT Fonts and PDF fonts
+</p></div><dl class="paramcmts block"><dt class="param">file</dt><dd class="cmt"><p>the output file</p></dd><dt class="param">dim</dt><dd class="cmt"><p>dimension / geometry / width x height of the output</p></dd><dt class="param">fontMapper</dt><dd class="cmt"><p>handles mappings between Java AWT Fonts and PDF fonts
 </p></dd></dl></div>
     </li><li name="scalax.chart.StorableChart#saveAsPNG" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="saveAsPNG(output:java.io.File,dim:(Int,Int)):Unit"></a>
-      <a id="saveAsPNG(File,(Int,Int)):Unit"></a>
+      <a id="saveAsPNG(file:String,dim:(Int,Int)):Unit"></a>
+      <a id="saveAsPNG(String,(Int,Int)):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">saveAsPNG</span><span class="params">(<span name="output">output: <span class="extype" name="java.io.File">File</span></span>, <span name="dim">dim: (<span class="extype" name="scala.Int">Int</span>, <span class="extype" name="scala.Int">Int</span>)</span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">saveAsPNG</span><span class="params">(<span name="file">file: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="dim">dim: (<span class="extype" name="scala.Int">Int</span>, <span class="extype" name="scala.Int">Int</span>)</span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Saves the chart as a PNG image.</p><div class="fullcomment"><div class="comment cmt"><p>Saves the chart as a PNG image.
-</p></div><dl class="paramcmts block"><dt class="param">output</dt><dd class="cmt"><p>the output file</p></dd><dt class="param">dim</dt><dd class="cmt"><p>dimension / geometry / width x height of the output
+</p></div><dl class="paramcmts block"><dt class="param">file</dt><dd class="cmt"><p>the output file</p></dd><dt class="param">dim</dt><dd class="cmt"><p>dimension / geometry / width x height of the output
 </p></dd></dl></div>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
@@ -521,7 +552,10 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -537,7 +571,10 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -553,10 +590,28 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
-                <span class="name">@throws</span><span class="args">()</span>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
               
         </dd></dl></div>
-    </li><li name="scalax.chart.StorableChart#writeAsPDF" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+    </li><li name="scalax.chart.WritableChart#writeAsJPEG" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="writeAsJPEG(os:java.io.OutputStream,dim:(Int,Int)):Unit"></a>
+      <a id="writeAsJPEG(OutputStream,(Int,Int)):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">writeAsJPEG</span><span class="params">(<span name="os">os: <span class="extype" name="java.io.OutputStream">OutputStream</span></span>, <span name="dim">dim: (<span class="extype" name="scala.Int">Int</span>, <span class="extype" name="scala.Int">Int</span>)</span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Writes the chart as a JPEG to an output stream.</p><div class="fullcomment"><div class="comment cmt"><p>Writes the chart as a JPEG to an output stream.
+</p></div><dl class="paramcmts block"><dt class="param">os</dt><dd class="cmt"><p>stream to where will be written</p></dd><dt class="param">dim</dt><dd class="cmt"><p>dimension / geometry / width x height of the output
+</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="WritableChart.html" class="extype" name="scalax.chart.WritableChart">WritableChart</a></dd></dl></div>
+    </li><li name="scalax.chart.WritableChart#writeAsPDF" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="writeAsPDF(os:java.io.OutputStream,dim:(Int,Int),fontMapper:com.lowagie.text.pdf.FontMapper):Unit"></a>
       <a id="writeAsPDF(OutputStream,(Int,Int),FontMapper):Unit"></a>
       <h4 class="signature">
@@ -565,12 +620,27 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">writeAsPDF</span><span class="params">(<span name="os">os: <span class="extype" name="java.io.OutputStream">OutputStream</span></span>, <span name="dim">dim: (<span class="extype" name="scala.Int">Int</span>, <span class="extype" name="scala.Int">Int</span>)</span>, <span name="fontMapper">fontMapper: <span class="extype" name="com.lowagie.text.pdf.FontMapper">FontMapper</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">writeAsPDF</span><span class="params">(<span name="os">os: <span class="extype" name="java.io.OutputStream">OutputStream</span></span>, <span name="dim">dim: (<span class="extype" name="scala.Int">Int</span>, <span class="extype" name="scala.Int">Int</span>)</span>, <span name="fontMapper">fontMapper: <span class="extype" name="com.lowagie.text.pdf.FontMapper">FontMapper</span> = <span class="symbol">new DefaultFontMapper</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Writes the chart as a PDF.</p><div class="fullcomment"><div class="comment cmt"><p>Writes the chart as a PDF.
+      <p class="shortcomment cmt">Writes the chart as a PDF to an output stream.</p><div class="fullcomment"><div class="comment cmt"><p>Writes the chart as a PDF to an output stream.
 </p></div><dl class="paramcmts block"><dt class="param">os</dt><dd class="cmt"><p>stream to where will be written</p></dd><dt class="param">dim</dt><dd class="cmt"><p>dimension / geometry / width x height of the output</p></dd><dt class="param">fontMapper</dt><dd class="cmt"><p>handles mappings between Java AWT Fonts and PDF fonts
-</p></dd></dl><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd></dl></div>
+</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="WritableChart.html" class="extype" name="scalax.chart.WritableChart">WritableChart</a></dd></dl></div>
+    </li><li name="scalax.chart.WritableChart#writeAsPNG" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="writeAsPNG(os:java.io.OutputStream,dim:(Int,Int)):Unit"></a>
+      <a id="writeAsPNG(OutputStream,(Int,Int)):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">writeAsPNG</span><span class="params">(<span name="os">os: <span class="extype" name="java.io.OutputStream">OutputStream</span></span>, <span name="dim">dim: (<span class="extype" name="scala.Int">Int</span>, <span class="extype" name="scala.Int">Int</span>)</span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Writes the chart as a PNG to an output stream.</p><div class="fullcomment"><div class="comment cmt"><p>Writes the chart as a PNG to an output stream.
+</p></div><dl class="paramcmts block"><dt class="param">os</dt><dd class="cmt"><p>stream to where will be written</p></dd><dt class="param">dim</dt><dd class="cmt"><p>dimension / geometry / width x height of the output
+</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="WritableChart.html" class="extype" name="scalax.chart.WritableChart">WritableChart</a></dd></dl></div>
     </li><li name="scala.Predef.any2ArrowAssoc#→" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="→[B](y:B):(A,B)"></a>
       <a id="→[B](B):(StorableChart,B)"></a>
@@ -592,7 +662,7 @@
             </div>
 
         <div id="values" class="values members">
-              <h3>Shadowed Implict Value Members</h3>
+              <h3>Shadowed Implicit Value Members</h3>
               <ol><li name="scala.Predef.any2stringadd#self" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="self:Any"></a>
       <a id="self:Any"></a>
@@ -677,7 +747,11 @@
         </div>
 
         <div id="inheritedMembers">
-        <div class="parent" name="scala.AnyRef">
+        <div class="parent" name="scalax.chart.WritableChart">
+              <h3>Inherited from <a href="WritableChart.html" class="extype" name="scalax.chart.WritableChart">WritableChart</a></h3>
+            </div><div class="parent" name="scalax.chart.EncodableChart">
+              <h3>Inherited from <a href="EncodableChart.html" class="extype" name="scalax.chart.EncodableChart">EncodableChart</a></h3>
+            </div><div class="parent" name="scala.AnyRef">
               <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
             </div><div class="parent" name="scala.Any">
               <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>
@@ -713,7 +787,6 @@
       <div id="tooltip"></div>
 
       <div id="footer">  </div>
-
-
+      <script defer="defer" type="text/javascript" id="jquery-js" src="../../lib/jquery.js"></script><script defer="defer" type="text/javascript" id="jquery-ui-js" src="../../lib/jquery-ui.js"></script><script defer="defer" type="text/javascript" id="tools-tooltip-js" src="../../lib/tools.tooltip.js"></script><script defer="defer" type="text/javascript" id="template-js" src="../../lib/template.js"></script>
     </body>
       </html>
