@@ -1,0 +1,35 @@
+`scala-chart` version 0.3.0 includes the following changes:
+
+-   chart factories now accept implicit chart theme parameter
+
+    The default theme used is the JFreeChart theme. To apply a different theme to the charts created
+    by the factories, simply define an implicit chart theme in scope, e.g. the darkness theme from
+    JFreeChart:
+
+        implicit val theme = org.jfree.chart.StandardChartTheme.createDarknessTheme
+
+-   StorableChart changes
+
+    -   saveAs methods now take String as output file argument instead of File
+    -   byte encode chart in trait EncodableChart
+    -   writing charts to OutputStream in trait WritableChart extends EncodableChart
+    -   StorableChart contains just the saveAs methods and extends WritableChart
+
+-   Chart wrapper changes
+
+    -   anti-aliasing getter/setter
+    -   background paint getter/setter
+
+-   new supported datasets conversions
+
+    -   YIntervalSeries and YIntervalSeriesCollection
+    -   CategoryDataset from Iterable[(A,B,C)]
+
+-   new chart factories
+
+    -   XYDeviationChart(IntervalXYDataset) with a DeviationRenderer
+
+
+For more information about `scala-chart` usage have a look at the
+[README](https://github.com/wookietreiber/scala-chart#readme) and at the
+[API](http://wookietreiber.github.com/scala-chart/latest/api/index.html).

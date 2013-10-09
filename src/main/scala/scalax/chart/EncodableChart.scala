@@ -24,47 +24,34 @@
 
 package scalax.chart
 
-/** $ImportsInfo */
-object Imports extends Imports
+import org.jfree.chart.encoders.EncoderUtil
 
-/** $TypeImportsInfo */
-object TypeImports extends TypeImports
-
-/** $StaticForwarderImportsInfo */
-object StaticForwarderImports extends StaticForwarderImports
-
-/** $ImportsInfo
+/** Provides methods for encoding a chart.
   *
-  * @define ImportsInfo Contains imports from foreign packages.
+  * @define dim dimension / geometry / width x height of the output
   */
-trait Imports extends TypeImports with StaticForwarderImports
+trait EncodableChart {
 
-/** $TypeImportsInfo
-  *
-  * @define TypeImportsInfo Contains only the type imports from foreign packages.
-  */
-trait TypeImports {
-  type Color = java.awt.Color
-  type Paint = java.awt.Paint
+  self: Chart[_] ⇒
 
-  type Orientation = scala.swing.Orientation.Value
+  /** Returns the chart as a byte encoded JPEG image.
+    *
+    * @param dim $dim
+    */
+  def encodeAsJPEG(dim: (Int, Int)): Array[Byte] = {
+    val (width, height) = dim
+    val image = peer.createBufferedImage(width, height, java.awt.image.BufferedImage.TYPE_INT_RGB, null)
+    EncoderUtil.encode(image, "jpeg")
+  }
 
-  type CategoryDataset = org.jfree.data.category.CategoryDataset
-  type PieDataset = org.jfree.data.general.PieDataset
-  type XYDataset = org.jfree.data.xy.XYDataset
+  /** Returns the chart as a byte encoded PNG image.
+    *
+    * @param dim $dim
+    */
+  def encodeAsPNG(dim: (Int, Int)): Array[Byte] = {
+    val (width, height) = dim
+    val image = peer.createBufferedImage(width, height)
+    EncoderUtil.encode(image, "png")
+  }
 
-  type CategoryPlot = org.jfree.chart.plot.CategoryPlot
-  type MultiplePiePlot = org.jfree.chart.plot.MultiplePiePlot
-  type PiePlot = org.jfree.chart.plot.PiePlot
-  type PiePlot3D = org.jfree.chart.plot.PiePlot3D
-  type RingPlot = org.jfree.chart.plot.RingPlot
-  type XYPlot = org.jfree.chart.plot.XYPlot
-}
-
-/** $StaticForwarderImportsInfo
-  *
-  * @define StaticForwarderImportsInfo Contains only the static forwarder imports from foreign packages.
-  */
-trait StaticForwarderImports {
-  val Orientation = scala.swing.Orientation
 }

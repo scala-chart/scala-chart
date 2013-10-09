@@ -8,78 +8,102 @@ import org.jfree.chart.title.TextTitle
 
 import org.specs2._
 
-class ChartSpec extends Specification { def is =
+class ChartSpec extends Specification { def is = s2"""
 
-  // -----------------------------------------------------------------------------------------------
-  // fragments
-  // -----------------------------------------------------------------------------------------------
+  Chart
+    anti-aliasing value                                                                   $caa1
+    background paint value                                                                $cbp1
+    title value                                                                           $ct1
+    subtitles is a Buffer[Title]
+      append value                                                                        $cst1
+      prepend value                                                                       $cst2
+      select value by index                                                               $cst3
+      clear all values                                                                    $cst4
+      insert collection of values                                                         $cst5
+      provide an iterator                                                                 $cst6
+      buffer length                                                                       $cst7
+      remove value                                                                        $cst8
+      update a value by index                                                             $cst9
 
-  "Chart"                                                                                          ^
-    "subtitles is a Buffer[Title]"                                                                 ^
-      "append value"                                                            ! cst1             ^
-      "prepend value"                                                           ! cst2             ^
-      "select value by index"                                                   ! cst3             ^
-      "clear all values"                                                        ! cst4             ^
-      "insert collection of values"                                             ! cst5             ^
-      "provide an iterator"                                                     ! cst6             ^
-      "buffer length"                                                           ! cst7             ^
-      "remove value"                                                            ! cst8             ^
-      "update a value by index"                                                 ! cst9          ^bt^
-                                                                                                  p^
-  "AreaChart"                                                                                      ^
-    "must have a CategoryPlot"                                                  ! ac1              ^
-    "stacked must have a CategoryPlot"                                          ! ac2              ^
-    "orienting works"                                                           ! ac3              ^
-                                                                                                  p^
-  "BarChart"                                                                                       ^
-    "must have a CategoryPlot"                                                  ! bc1              ^
-    "stacked must have a CategoryPlot"                                          ! bc2              ^
-    "3D must have a CategoryPlot"                                               ! bc3              ^
-    "3D stacked must have a CategoryPlot"                                       ! bc4              ^
-    "orienting works"                                                           ! bc5              ^
-                                                                                                  p^
-  "BoxAndWhiskerChart"                                                                             ^
-    "must have a CategoryPlot"                                                  ! bwc1             ^
-    "orienting works"                                                           ! bwc2             ^
-                                                                                                  p^
-  "LineChart"                                                                                      ^
-    "must have a CategoryPlot"                                                  ! lc1              ^
-    "3D must have a CategoryPlot"                                               ! lc2              ^
-    "orienting works"                                                           ! lc3              ^
-                                                                                                  p^
-  "MultiplePieChart"                                                                               ^
-    "must have a MultiplePiePlot"                                               ! mpc1             ^
-    "3D must have a MultiplePiePlot"                                            ! mpc2             ^
-                                                                                                  p^
-  "PieChart"                                                                                       ^
-    "must have a PiePlot"                                                       ! pc1              ^
-    "3D must have a PiePlot"                                                    ! pc2              ^
-                                                                                                  p^
-  "RingChart"                                                                                      ^
-    "must have a RingPlot"                                                      ! rc1              ^
-                                                                                                  p^
-  "XYAreaChart"                                                                                    ^
-    "must have an XYPlot"                                                       ! xyac1            ^
-    "stacked must have an XYPlot"                                               ! xyac2            ^
-    "stepped must have an XYPlot"                                               ! xyac3            ^
-    "orienting works"                                                           ! xyac4            ^
-                                                                                                  p^
-  "XYBarChart"                                                                                     ^
-    "must have an XYPlot"                                                       ! xybc1            ^
-    "stacked must have an XYPlot"                                               ! xybc2            ^
-    "orienting works"                                                           ! xybc3            ^
-                                                                                                  p^
-  "XYBoxAndWhiskerChart"                                                                           ^
-    "must have a XYPlot"                                                        ! xybwc1           ^
-    "orienting works"                                                           ! xybwc2           ^
-                                                                                                  p^
-  "XYLineChart"                                                                                    ^
-    "must have an XYPlot"                                                       ! xylc1            ^
-    "orienting works"                                                           ! xylc2            ^
-                                                                                                 end
+  AreaChart
+    must have a CategoryPlot                                                              $ac1
+    stacked must have a CategoryPlot                                                      $ac2
+    orienting works                                                                       $ac3
+
+  BarChart
+    must have a CategoryPlot                                                              $bc1
+    stacked must have a CategoryPlot                                                      $bc2
+    3D must have a CategoryPlot                                                           $bc3
+    3D stacked must have a CategoryPlot                                                   $bc4
+    orienting works                                                                       $bc5
+
+  BoxAndWhiskerChart
+    must have a CategoryPlot                                                              $bwc1
+    orienting works                                                                       $bwc2
+
+  LineChart
+    must have a CategoryPlot                                                              $lc1
+    3D must have a CategoryPlot                                                           $lc2
+    orienting works                                                                       $lc3
+
+  MultiplePieChart
+    must have a MultiplePiePlot                                                           $mpc1
+    3D must have a MultiplePiePlot                                                        $mpc2
+
+  PieChart
+    must have a PiePlot                                                                   $pc1
+    3D must have a PiePlot                                                                $pc2
+
+  RingChart
+    must have a RingPlot                                                                  $rc1
+
+  XYAreaChart
+    must have an XYPlot                                                                   $xyac1
+    stacked must have an XYPlot                                                           $xyac2
+    stepped must have an XYPlot                                                           $xyac3
+    orienting works                                                                       $xyac4
+
+  XYBarChart
+    must have an XYPlot                                                                   $xybc1
+    stacked must have an XYPlot                                                           $xybc2
+    orienting works                                                                       $xybc3
+
+  XYBoxAndWhiskerChart
+    must have a XYPlot                                                                    $xybwc1
+    orienting works                                                                       $xybwc2
+
+  XYDeviationChart
+    must have an XYPlot                                                                   $xydc1
+    orienting works                                                                       $xydc2
+
+  XYLineChart
+    must have an XYPlot                                                                   $xylc1
+    orienting works                                                                       $xylc2
+                                                                                                 """
   // -----------------------------------------------------------------------------------------------
   // tests
   // -----------------------------------------------------------------------------------------------
+
+  def caa1 = {
+    val chart = AreaChart(categorydataset, title = "foo")
+    val t = "bar"
+    chart.title = t
+    chart.title === t
+  }
+
+  def cbp1 = {
+    val chart = AreaChart(categorydataset)
+    val c = new Color(42,42,42)
+    chart.backgroundPaint = c
+    chart.backgroundPaint === c
+  }
+
+  def ct1 = {
+    val chart = AreaChart(categorydataset)
+    chart.peer.setAntiAlias(false)
+    chart.antiAlias = true
+    chart.antiAlias === true
+  }
 
   def cstchart: Chart[_] = {
     val chart = AreaChart(categorydataset)
@@ -309,6 +333,17 @@ class ChartSpec extends Specification { def is =
 
   def xybwc2 = {
     val chart = XYBoxAndWhiskerChart(bwxydataset)
+    chart.orientation = Orientation.Horizontal
+    chart.orientation === Orientation.Horizontal
+  }
+
+  def xydc1 = {
+    val chart = XYDeviationChart(xydataset)
+    (chart.plot must not (throwA[ClassCastException])) and (chart.plot must beAnInstanceOf[XYPlot])
+  }
+
+  def xydc2 = {
+    val chart = XYDeviationChart(xydataset, orientation = Orientation.Vertical)
     chart.orientation = Orientation.Horizontal
     chart.orientation === Orientation.Horizontal
   }

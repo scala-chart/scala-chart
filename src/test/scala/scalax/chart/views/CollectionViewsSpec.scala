@@ -10,34 +10,30 @@ import org.jfree.data.xy._
 import Imports._
 import CollectionViews._
 
-class CollectionViewsSpec extends Specification with BeViewableAs with Implicits { def is =
+class CollectionViewsSpec extends Specification with BeViewableAs with Implicits { def is = s2"""
 
-  // -----------------------------------------------------------------------------------------------
-  // fragments
-  // -----------------------------------------------------------------------------------------------
+  XYSeries(Collection)
+    Seq[(Int,Int)] to XYSeries                                                            $e1
+    Seq[(Int,Int)] to XYSeriesCollection                                                  $e2
 
-  "XYSeries(Collection)"                                                                           ^
-    "Seq[(Int,Int)] to XYSeries"                                                ! e1               ^
-    "Seq[(Int,Int)] to XYSeriesCollection"                                      ! e2               ^
-                                                                                                  p^
-  "TimeSeries(Collection)"                                                                         ^
-    "Seq[(Date,Int)] to TimeSeries"                                             ! e3               ^
-    "Seq[(Date,Int)] to TimeSeriesCollection"                                   ! e4               ^
-                                                                                                  p^
-  "TimePeriodValues(Collection)"                                                                   ^
-    "Seq[(Date,Int)] to TimePeriodValues"                                       ! e5               ^
-    "Seq[(Date,Int)] to TimePeriodValuesCollection"                             ! e6               ^
-                                                                                                  p^
-  "CategoryDataset"                                                                                ^
-    "Seq[(String,Int)] to CategoryDataset"                                      ! e7               ^
-    "Seq[(String,Seq[(String,Int)])] to CategoryDataset"                        ! e9               ^
-                                                                                                  p^
-  "TimeTableXYDataset"                                                                             ^
-    "Seq[(String,Seq[(Date,Int)])] to TimeTableXYDataset"                       ! e8               ^
-                                                                                                  p^
-  "PieDataset"                                                                                     ^
-    "Seq[(String,Int)] to PieDataset"                                           ! e10              ^
-                                                                                                 end
+  TimeSeries(Collection)
+    Seq[(Date,Int)] to TimeSeries                                                         $e3
+    Seq[(Date,Int)] to TimeSeriesCollection                                               $e4
+
+  TimePeriodValues(Collection)
+    Seq[(Date,Int)] to TimePeriodValues                                                   $e5
+    Seq[(Date,Int)] to TimePeriodValuesCollection                                         $e6
+
+  CategoryDataset
+    Seq[(String,Int)] to CategoryDataset                                                  $e7
+    Seq[(String,Seq[(String,Int)])] to CategoryDataset                                    $e9
+
+  TimeTableXYDataset
+    Seq[(String,Seq[(Date,Int)])] to TimeTableXYDataset                                   $e8
+
+  PieDataset
+    Seq[(String,Int)] to PieDataset                                                       $e10
+                                                                                                 """
   // -----------------------------------------------------------------------------------------------
   // tests
   // -----------------------------------------------------------------------------------------------

@@ -31,6 +31,8 @@ import org.jfree.chart.JFreeChart
 import org.jfree.chart.plot.Plot
 import org.jfree.chart.title.Title
 
+import Imports._
+
 /** Generic graphical representation of data.
   *
   * @tparam P used plot type
@@ -42,6 +44,30 @@ trait Chart[P <: Plot] extends DisplayableChart with StorableChart {
 
   /** Returns the plot. */
   def plot: P
+
+  /** Returns true if this chart is drawn with anti-aliasing. */
+  def antiAlias: Boolean =
+    peer.getAntiAlias
+
+  /** Sets whether or not this chart is drawn with anti-aliasing. */
+  def antiAlias_=(a: Boolean): Unit =
+    peer.setAntiAlias(a)
+
+  /** Returns the paint used for the chart background. */
+  def backgroundPaint: Paint =
+    peer.getBackgroundPaint
+
+  /** Sets the paint used for the chart background. */
+  def backgroundPaint_=(p: Paint): Unit =
+    peer.setBackgroundPaint(p)
+
+  /** Returns the title of this chart. */
+  def title: String =
+    peer.getTitle.getText
+
+  /** Sets the title of this chart. */
+  def title_=(title: String): Unit =
+    peer.setTitle(title)
 
   /** Contains this charts subtitles and legends. */
   object subtitles extends Buffer[Title] {
@@ -55,13 +81,13 @@ trait Chart[P <: Plot] extends DisplayableChart with StorableChart {
       this
     }
 
-    override def apply(n: Int): Title = peer.getSubtitle(n)
+    override def apply(n: Int): Title =
+      peer.getSubtitle(n)
 
-    override def clear() {
+    override def clear(): Unit =
       peer.clearSubtitles()
-    }
 
-    override def insertAll(n: Int, elems: Traversable[Title]) {
+    override def insertAll(n: Int, elems: Traversable[Title]): Unit = {
       var i = n
       elems foreach { title ⇒
         peer.addSubtitle(i, title)
@@ -79,7 +105,8 @@ trait Chart[P <: Plot] extends DisplayableChart with StorableChart {
       }
     }
 
-    override def length: Int = peer.getSubtitleCount
+    override def length: Int =
+      peer.getSubtitleCount
 
     override def remove(n: Int): Title = {
       val title = apply(n)
@@ -87,17 +114,10 @@ trait Chart[P <: Plot] extends DisplayableChart with StorableChart {
       title
     }
 
-    override def update(n: Int, newTitle: Title) {
-      val oldTitle = apply(n)
+    override def update(n: Int, newTitle: Title): Unit = {
       remove(n)
       peer.addSubtitle(n, newTitle)
     }
   }
-
-  /** Returns the title of this chart. */
-  def title: String = peer.getTitle.getText
-
-  /** Sets the title of this chart. */
-  def title_=(title: String): Unit = peer.setTitle(title)
 
 }

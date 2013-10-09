@@ -24,86 +24,46 @@
 
 package scalax.chart
 
-import java.io._
+import java.io.FileOutputStream
 
-import org.jfree.chart._
+import com.lowagie.text.pdf.{ DefaultFontMapper, FontMapper }
 
 /** Provides methods for saving a chart.
   *
-  * @define output     the output file
-  * @define dim        dimension / geometry / width x height of the output
-  * @define fontMapper handles mappings between Java AWT Fonts and PDF fonts
+  * @define file the output file
   */
-trait StorableChart {
+trait StorableChart extends WritableChart {
 
   self: Chart[_] ⇒
 
-  /** Saves the chart as a PNG image.
-    *
-    * @param output $output
-    * @param dim    $dim
-    */
-  def saveAsPNG(output: File, dim: (Int,Int)) {
-    val (width,height) = dim
-    ChartUtilities.saveChartAsPNG(output, peer, width, height)
-  }
+  private def managed[R <: FileOutputStream](r: R)(f: R ⇒ Unit): Unit = try { f(r) } finally { r.close() }
 
   /** Saves the chart as a JPEG image.
     *
-    * @param output $output
-    * @param dim    $dim
+    * @param file $file
+    * @param dim  $dim
     */
-  def saveAsJPEG(output: File, dim: (Int,Int)) {
-    val (width,height) = dim
-    ChartUtilities.saveChartAsJPEG(output, peer, width, height)
+  def saveAsJPEG(file: String, dim: (Int,Int)) {
+    managed(new FileOutputStream(file)) { os ⇒ writeAsJPEG(os, dim) }
   }
-
-  import com.lowagie.text._
-  import com.lowagie.text.pdf._
 
   /** Saves the chart as a PDF.
     *
-    * @param output     $output
+    * @param file       $file
     * @param dim        $dim
     * @param fontMapper $fontMapper
     */
-  def saveAsPDF(output: File, dim: (Int,Int), fontMapper: FontMapper = new DefaultFontMapper) {
-    val os = new BufferedOutputStream(new FileOutputStream(output))
-
-    try {
-      writeAsPDF(os, dim, fontMapper)
-    } finally {
-      os.close()
-    }
+  def saveAsPDF(file: String, dim: (Int,Int), fontMapper: FontMapper = new DefaultFontMapper) {
+    managed(new FileOutputStream(file)) { os ⇒ writeAsPDF(os, dim, fontMapper) }
   }
 
-  /** Writes the chart as a PDF.
+  /** Saves the chart as a PNG image.
     *
-    * @param os         stream to where will be written
-    * @param dim        $dim
-    * @param fontMapper $fontMapper
+    * @param file $file
+    * @param dim  $dim
     */
-  protected def writeAsPDF(os: OutputStream, dim: (Int,Int), fontMapper: FontMapper) {
-    val (width,height) = dim
-
-    val pagesize = new Rectangle(width, height)
-    val document = new Document(pagesize)
-
-    try {
-      val writer = PdfWriter.getInstance(document, os)
-      document.open()
-
-      val cb = writer.getDirectContent
-      val tp = cb.createTemplate(width, height)
-      val g2 = tp.createGraphics(width, height, fontMapper)
-      val r2D = new java.awt.geom.Rectangle2D.Double(0, 0, width, height)
-
-      peer.draw(g2, r2D)
-      g2.dispose()
-      cb.addTemplate(tp, 0, 0)
-    } finally {
-      document.close()
-    }
+  def saveAsPNG(file: String, dim: (Int,Int)) {
+    managed(new FileOutputStream(file)) { os ⇒ writeAsPNG(os, dim) }
   }
 
 }

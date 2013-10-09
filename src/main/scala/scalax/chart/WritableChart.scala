@@ -24,47 +24,64 @@
 
 package scalax.chart
 
-/** $ImportsInfo */
-object Imports extends Imports
+import java.io.OutputStream
 
-/** $TypeImportsInfo */
-object TypeImports extends TypeImports
+import com.lowagie.text.{ Document, Rectangle }
+import com.lowagie.text.pdf.{ DefaultFontMapper, FontMapper, PdfWriter }
 
-/** $StaticForwarderImportsInfo */
-object StaticForwarderImports extends StaticForwarderImports
-
-/** $ImportsInfo
+/** Provides methods for writing a chart to an `OutputStream`.
   *
-  * @define ImportsInfo Contains imports from foreign packages.
+  * @define fontMapper handles mappings between Java AWT Fonts and PDF fonts
   */
-trait Imports extends TypeImports with StaticForwarderImports
+trait WritableChart extends EncodableChart {
 
-/** $TypeImportsInfo
-  *
-  * @define TypeImportsInfo Contains only the type imports from foreign packages.
-  */
-trait TypeImports {
-  type Color = java.awt.Color
-  type Paint = java.awt.Paint
+  self: Chart[_] ⇒
 
-  type Orientation = scala.swing.Orientation.Value
+  /** Writes the chart as a JPEG to an output stream.
+    *
+    * @param os  stream to where will be written
+    * @param dim $dim
+    */
+  def writeAsJPEG(os: OutputStream, dim: (Int,Int)) {
+    os.write(encodeAsJPEG(dim))
+  }
 
-  type CategoryDataset = org.jfree.data.category.CategoryDataset
-  type PieDataset = org.jfree.data.general.PieDataset
-  type XYDataset = org.jfree.data.xy.XYDataset
+  /** Writes the chart as a PDF to an output stream.
+    *
+    * @param os         stream to where will be written
+    * @param dim        $dim
+    * @param fontMapper $fontMapper
+    */
+  def writeAsPDF(os: OutputStream, dim: (Int,Int), fontMapper: FontMapper = new DefaultFontMapper) {
+    val (width,height) = dim
 
-  type CategoryPlot = org.jfree.chart.plot.CategoryPlot
-  type MultiplePiePlot = org.jfree.chart.plot.MultiplePiePlot
-  type PiePlot = org.jfree.chart.plot.PiePlot
-  type PiePlot3D = org.jfree.chart.plot.PiePlot3D
-  type RingPlot = org.jfree.chart.plot.RingPlot
-  type XYPlot = org.jfree.chart.plot.XYPlot
-}
+    val pagesize = new Rectangle(width, height)
+    val document = new Document(pagesize)
 
-/** $StaticForwarderImportsInfo
-  *
-  * @define StaticForwarderImportsInfo Contains only the static forwarder imports from foreign packages.
-  */
-trait StaticForwarderImports {
-  val Orientation = scala.swing.Orientation
+    try {
+      val writer = PdfWriter.getInstance(document, os)
+      document.open()
+
+      val cb = writer.getDirectContent
+      val tp = cb.createTemplate(width, height)
+      val g2 = tp.createGraphics(width, height, fontMapper)
+      val r2D = new java.awt.geom.Rectangle2D.Double(0, 0, width, height)
+
+      peer.draw(g2, r2D)
+      g2.dispose()
+      cb.addTemplate(tp, 0, 0)
+    } finally {
+      document.close()
+    }
+  }
+
+  /** Writes the chart as a PNG to an output stream.
+    *
+    * @param os  stream to where will be written
+    * @param dim $dim
+    */
+  def writeAsPNG(os: OutputStream, dim: (Int,Int)) {
+    os.write(encodeAsPNG(dim))
+  }
+
 }
