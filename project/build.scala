@@ -6,7 +6,7 @@ import Keys._
 package object build {
   val commonSettings = Seq (
     organization := "com.github.wookietreiber",
-    version      := "0.3.0-SNAPSHOT",
+    version      := "0.3.0",
     scalaVersion := "2.10.3",
     initialCommands in Compile in console += """
       import scalax.chart._
