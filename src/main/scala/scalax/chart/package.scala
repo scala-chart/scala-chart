@@ -46,9 +46,6 @@ import org.jfree.chart.plot.PlotOrientation
   * val dataset = data.toXYSeriesCollection("some points")
   * val chart = XYLineChart(dataset, title = "My Chart of Some Points")
   * }}}
-  *
-  * There are also implicit conversions / views available in the [[views]] package, but they are not
-  * contained by [[Charting]], because of ambiguity issues with implicit conversions.
   */
 package object chart {
 
