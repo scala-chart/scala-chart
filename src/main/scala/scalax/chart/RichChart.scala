@@ -32,7 +32,7 @@ trait RichChart {
         case plot: FastScatterPlot ⇒ plot.getDomainAxis.getLabel
         case plot: XYPlot          ⇒ plot.getDomainAxis.getLabel
         case plot ⇒ throw new UnsupportedOperationException (
-          "The underlying plot (%s) has no domain axis.".format(plot.getPlotType)
+          s"""The underlying ${plot.getPlotType} has no domain axis."""
         )
       }
 
@@ -48,7 +48,7 @@ trait RichChart {
         case plot: FastScatterPlot ⇒ plot.getDomainAxis.setLabel(l)
         case plot: XYPlot          ⇒ plot.getDomainAxis.setLabel(l)
         case plot ⇒ throw new UnsupportedOperationException (
-          "The underlying plot (%s) has no domain axis.".format(plot.getPlotType)
+          s"""The underlying ${plot.getPlotType} has no domain axis."""
         )
       }
     }
@@ -57,7 +57,7 @@ trait RichChart {
       case plot: CategoryPlot ⇒ plot.getOrientation
       case plot: XYPlot       ⇒ plot.getOrientation
       case plot ⇒ throw new UnsupportedOperationException (
-        "The underlying plot (%s) is not orientable.".format(plot.getPlotType)
+        s"""The underlying ${plot.getPlotType} is not orientable."""
       )
     }
 
@@ -65,7 +65,7 @@ trait RichChart {
       case plot: CategoryPlot ⇒ plot.setOrientation(orientation)
       case plot: XYPlot       ⇒ plot.setOrientation(orientation)
       case plot ⇒ throw new UnsupportedOperationException (
-        "The underlying plot (%s) is not orientable.".format(plot.getPlotType)
+        s"""The underlying ${plot.getPlotType} is not orientable."""
       )
     }
 
@@ -77,7 +77,7 @@ trait RichChart {
         case plot: ThermometerPlot ⇒ plot.getRangeAxis.getLabel
         case plot: XYPlot          ⇒ plot.getRangeAxis.getLabel
         case plot ⇒ throw new UnsupportedOperationException (
-          "The underlying plot (%s) has no range axis.".format(plot.getPlotType)
+          s"""The underlying ${plot.getPlotType} has no range axis."""
         )
       }
 
@@ -94,7 +94,7 @@ trait RichChart {
         case plot: ThermometerPlot ⇒ plot.getRangeAxis.setLabel(l)
         case plot: XYPlot          ⇒ plot.getRangeAxis.setLabel(l)
         case plot ⇒ throw new UnsupportedOperationException (
-          "The underlying plot (%s) has no range axis.".format(plot.getPlotType)
+          s"""The underlying ${plot.getPlotType} has no range axis."""
         )
       }
     }
