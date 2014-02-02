@@ -365,6 +365,8 @@ class ChartSpec extends Specification { def is = s2"""
 
   def points = Vector.tabulate(2)(i ⇒ (i,i))
 
+  implicit val IntNumeric = Numeric.IntIsIntegral
+
   def bwcategorydataset = Vector.tabulate(2)(i ⇒ (i,i to i)).toBoxAndWhiskerCategoryDataset
   def bwxydataset = Vector.tabulate(1)(i ⇒ (new java.util.Date(i.toLong * 1000),i to i)).toBoxAndWhiskerXYDataset()
   def categorydataset = points.toCategoryDataset
