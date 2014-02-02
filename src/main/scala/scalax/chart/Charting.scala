@@ -15,5 +15,9 @@ object Charting extends Charting
   * val chart = XYLineChart(data)
   * }}}
   *
+  * == Marking ==
+  *
+  * $MarkingInfo
   */
 trait Charting extends RichChartingCollections with ChartFactories with RichChart with Imports
+    with Marking
