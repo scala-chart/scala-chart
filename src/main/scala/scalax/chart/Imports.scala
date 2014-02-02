@@ -17,6 +17,8 @@ trait Imports {
   type CategoryDataset = org.jfree.data.category.CategoryDataset
   type PieDataset = org.jfree.data.general.PieDataset
   type XYDataset = org.jfree.data.xy.XYDataset
+  type XYSeries = org.jfree.data.xy.XYSeries
+  type XYSeriesCollection = org.jfree.data.xy.XYSeriesCollection
 
   type CategoryPlot = org.jfree.chart.plot.CategoryPlot
   type MultiplePiePlot = org.jfree.chart.plot.MultiplePiePlot

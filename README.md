@@ -55,6 +55,21 @@ to disk:
     chart.saveAsJPEG(new java.io.File("/tmp/chart.jpg"), (1024,768))
     chart.saveAsPDF(new java.io.File("/tmp/chart.pdf"), (1024,768))
 
+### Animations / Live Chart Updates
+
+You can also do some animations, i.e. perform live updates on your datasets:
+
+    val series = new XYSeries("f(x) = sin(x)")
+    val dataset = new XYSeriesCollection(series)
+    val chart = XYLineChart(dataset)
+    chart.show
+    for (x <- -4.0 to 4 by 0.1) {
+      swing.Swing onEDT {
+        series.add(x,math.sin(x))
+      }
+      Thread.sleep(50)
+    }
+
 
 [JFreeChart]: http://jfree.org/jfreechart/
 [API]: http://wookietreiber.github.com/scala-chart/latest/api/index.html
