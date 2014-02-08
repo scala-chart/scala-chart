@@ -1,5 +1,6 @@
 package scalax.chart
 
+import scala.collection.JavaConverters._
 import scala.collection.Traversable
 import scala.collection.mutable.Buffer
 
@@ -71,15 +72,8 @@ trait Chart[P <: Plot] extends DisplayableChart with StorableChart {
       }
     }
 
-    override def iterator: Iterator[Title] = new Iterator[Title] {
-      private var current = 0
-      override def hasNext: Boolean = subtitles.size > current
-      override def next: Title = {
-        val subtitle = subtitles(current)
-        current += 1
-        subtitle
-      }
-    }
+    override def iterator: Iterator[Title] =
+      peer.getSubtitles.iterator.asScala.map(_.asInstanceOf[Title])
 
     override def length: Int =
       peer.getSubtitleCount

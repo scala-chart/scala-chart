@@ -7,7 +7,6 @@ import org.jfree.chart.axis._
 import org.jfree.chart.labels._
 import org.jfree.chart.renderer.category._
 import org.jfree.chart.renderer.xy._
-import org.jfree.chart.title.TextTitle
 import org.jfree.data.statistics._
 import org.jfree.data.time._
 import org.jfree.data.xy._
@@ -53,17 +52,8 @@ object ChartFactories extends ChartFactories
   * {{{
   * implicit val theme = org.jfree.chart.StandardChartTheme.createDarknessTheme
   * }}}
-  *
-  * @define dataset         the data the chart will visualize
-  * @define domainAxisLabel the label for the domain axis
-  * @define legend          whether or not the chart will contain a legend
-  * @define orientation     the orientation of the chart
-  * @define rangeAxisLabel  the label for the range axis
-  * @define theme           the theme to apply to the chart
-  * @define title           the title of the chart
-  * @define tooltips        whether or not tooltips will be generated
   */
-trait ChartFactories {
+trait ChartFactories extends DocMacros {
 
   // -----------------------------------------------------------------------------------------------
   // some small helpers
@@ -99,7 +89,7 @@ trait ChartFactories {
 
     /** Creates a new chart that represents categorized numeric data with an area.
       *
-      * @param dataset         $dataset
+      * @param dataset         $data
       * @param title           $title
       * @param domainAxisLabel $domainAxisLabel
       * @param rangeAxisLabel  $rangeAxisLabel
@@ -128,17 +118,12 @@ trait ChartFactories {
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
       plot.setOrientation(orientation)
 
-      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      theme(chart)
-
-      new CategoryChart {
-        override val peer = chart
-      }
+      CategoryChart(plot, title, legend, theme)
     }
 
     /** Creates a new chart that represents categorized numeric data with stacked areas.
       *
-      * @param dataset         $dataset
+      * @param dataset         $data
       * @param title           $title
       * @param domainAxisLabel $domainAxisLabel
       * @param rangeAxisLabel  $rangeAxisLabel
@@ -167,12 +152,7 @@ trait ChartFactories {
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
       plot.setOrientation(orientation)
 
-      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      theme(chart)
-
-      new CategoryChart {
-        override val peer = chart
-      }
+      CategoryChart(plot, title, legend, theme)
     }
 
   }
@@ -182,7 +162,7 @@ trait ChartFactories {
 
     /** Creates a new chart that represents categorized numeric data with bars.
       *
-      * @param dataset         $dataset
+      * @param dataset         $data
       * @param title           $title
       * @param domainAxisLabel $domainAxisLabel
       * @param rangeAxisLabel  $rangeAxisLabel
@@ -218,17 +198,12 @@ trait ChartFactories {
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
       plot.setOrientation(orientation)
 
-      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      theme(chart)
-
-      new CategoryChart {
-        override val peer = chart
-      }
+      CategoryChart(plot, title, legend, theme)
     }
 
     /** Creates a new chart that represents categorized numeric data with stacked bars.
       *
-      * @param dataset         $dataset
+      * @param dataset         $data
       * @param title           $title
       * @param domainAxisLabel $domainAxisLabel
       * @param rangeAxisLabel  $rangeAxisLabel
@@ -255,17 +230,12 @@ trait ChartFactories {
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
       plot.setOrientation(orientation)
 
-      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      theme(chart)
-
-      new CategoryChart {
-        override val peer = chart
-      }
+      CategoryChart(plot, title, legend, theme)
     }
 
     /** Creates a new chart that represents categorized numeric data with three dimensional bars.
       *
-      * @param dataset         $dataset
+      * @param dataset         $data
       * @param title           $title
       * @param domainAxisLabel $domainAxisLabel
       * @param rangeAxisLabel  $rangeAxisLabel
@@ -297,17 +267,12 @@ trait ChartFactories {
       }
       plot.setForegroundAlpha(0.75f)
 
-      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      theme(chart)
-
-      new CategoryChart {
-        override val peer = chart
-      }
+      CategoryChart(plot, title, legend, theme)
     }
 
     /** Creates a new chart that represents categorized numeric data with three dimensional bars.
       *
-      * @param dataset         $dataset
+      * @param dataset         $data
       * @param title           $title
       * @param domainAxisLabel $domainAxisLabel
       * @param rangeAxisLabel  $rangeAxisLabel
@@ -335,12 +300,7 @@ trait ChartFactories {
       plot.setOrientation(orientation)
       if (orientation == Orientation.Horizontal) plot.setColumnRenderingOrder(SortOrder.DESCENDING)
 
-      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      theme(chart)
-
-      new CategoryChart {
-        override val peer = chart
-      }
+      CategoryChart(plot, title, legend, theme)
     }
 
   }
@@ -350,7 +310,7 @@ trait ChartFactories {
 
     /** Creates a new box and whisker chart.
       *
-      * @param dataset         $dataset
+      * @param dataset         $data
       * @param title           $title
       * @param domainAxisLabel $domainAxisLabel
       * @param rangeAxisLabel  $rangeAxisLabel
@@ -373,12 +333,7 @@ trait ChartFactories {
 
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
 
-      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      theme(chart)
-
-      new CategoryChart {
-        override val peer = chart
-      }
+      CategoryChart(plot, title, legend, theme)
     }
 
   }
@@ -388,7 +343,7 @@ trait ChartFactories {
 
     /** Creates a new chart that represents categorized numeric values with a line.
       *
-      * @param dataset         $dataset
+      * @param dataset         $data
       * @param title           $title
       * @param domainAxisLabel $domainAxisLabel
       * @param rangeAxisLabel  $rangeAxisLabel
@@ -415,18 +370,13 @@ trait ChartFactories {
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
       plot.setOrientation(orientation)
 
-      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      theme(chart)
-
-      new CategoryChart {
-        override val peer = chart
-      }
+      CategoryChart(plot, title, legend, theme)
     }
 
     /** Creates a new chart that represents categorized numeric values with three dimensional a
       * line.
       *
-      * @param dataset         $dataset
+      * @param dataset         $data
       * @param title           $title
       * @param domainAxisLabel $domainAxisLabel
       * @param rangeAxisLabel  $rangeAxisLabel
@@ -453,175 +403,7 @@ trait ChartFactories {
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
       plot.setOrientation(orientation)
 
-      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      theme(chart)
-
-      new CategoryChart {
-        override val peer = chart
-      }
-    }
-
-  }
-
-  /** Factory for multiple pie charts. */
-  object MultiplePieChart {
-
-    /** Creates a new multiple pie chart.
-      *
-      * @param dataset  $dataset
-      * @param title    $title
-      * @param legend   $legend
-      * @param tooltips $tooltips
-      * @param theme    $theme
-      */
-    def apply(dataset: CategoryDataset,
-              title: String = "",
-              legend: Boolean = true,
-              tooltips: Boolean = true)
-             (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): MultiplePieChart = {
-
-      val plot = new MultiplePiePlot(dataset)
-      plot.setDataExtractOrder(TableOrder.BY_COLUMN)
-      plot.setBackgroundPaint(null)
-      plot.setOutlineStroke(null)
-
-      if (tooltips) {
-        val pp = plot.getPieChart.getPlot.asInstanceOf[PiePlot]
-        pp.setToolTipGenerator(new StandardPieToolTipGenerator())
-      }
-
-      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      theme(chart)
-
-      new MultiplePieChart {
-        override val peer = chart
-      }
-    }
-
-    /** Creates a new multiple pie chart with three dimensional pies.
-      *
-      * @param dataset  $dataset
-      * @param title    $title
-      * @param legend   $legend
-      * @param tooltips $tooltips
-      * @param theme    $theme
-      */
-    def threeDimensional(dataset: CategoryDataset,
-                         title: String = "",
-                         legend: Boolean = true,
-                         tooltips: Boolean = true)
-                        (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): MultiplePieChart = {
-
-      val plot = new MultiplePiePlot(dataset)
-      plot.setDataExtractOrder(TableOrder.BY_COLUMN)
-      plot.setBackgroundPaint(null)
-      plot.setOutlineStroke(null)
-
-      val piePlot = new PiePlot3D()
-      if (tooltips) piePlot.setToolTipGenerator(new StandardPieToolTipGenerator())
-
-      val pieChart = new JFreeChart(piePlot)
-      pieChart.setTitle(new TextTitle("dummy title for setting edge"))
-      pieChart.getTitle.setPosition(RectangleEdge.BOTTOM)
-      pieChart.removeLegend()
-      plot.setPieChart(pieChart)
-
-      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      theme(chart)
-
-      new MultiplePieChart {
-        override val peer = chart
-      }
-    }
-
-  }
-
-  /** Factory for pie charts. */
-  object PieChart {
-
-    /** Creates a new pie chart.
-      *
-      * @param dataset  $dataset
-      * @param title    $title
-      * @param legend   $legend
-      * @param tooltips $tooltips
-      * @param theme    $theme
-      */
-    def apply(dataset: PieDataset,
-              title: String = "",
-              legend: Boolean = true,
-              tooltips: Boolean = true)
-             (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): PieChart = {
-
-      val plot = new PiePlot(dataset)
-      plot.setLabelGenerator(new StandardPieSectionLabelGenerator())
-      plot.setInsets(new RectangleInsets(0.0, 5.0, 5.0, 5.0))
-      if (tooltips) plot.setToolTipGenerator(new StandardPieToolTipGenerator())
-
-      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      theme(chart)
-
-      new PieChart {
-        override val peer = chart
-      }
-    }
-
-    /** Creates a new pie chart with a three dimensional pie.
-      *
-      * @param dataset  $dataset
-      * @param title    $title
-      * @param legend   $legend
-      * @param tooltips $tooltips
-      * @param theme    $theme
-      */
-    def threeDimensional(dataset: PieDataset,
-                         title: String = "",
-                         legend: Boolean = true,
-                         tooltips: Boolean = true)
-                        (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): PieChart = {
-
-      val plot = new PiePlot3D(dataset)
-      plot.setInsets(new RectangleInsets(0.0, 5.0, 5.0, 5.0))
-      if (tooltips) plot.setToolTipGenerator(new StandardPieToolTipGenerator())
-
-      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      theme(chart)
-
-      new PieChart {
-        override val peer = chart
-      }
-    }
-
-  }
-
-  /** Factory for ring charts. */
-  object RingChart {
-
-    /** Creates a new ring chart.
-      *
-      * @param dataset  $dataset
-      * @param title    $title
-      * @param legend   $legend
-      * @param tooltips $tooltips
-      * @param theme    $theme
-      */
-    def apply(dataset: PieDataset,
-              title: String = "",
-              legend: Boolean = true,
-              tooltips: Boolean = true)
-             (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): RingChart = {
-
-      val plot = new RingPlot(dataset)
-      plot.setLabelGenerator(new StandardPieSectionLabelGenerator())
-      plot.setInsets(new RectangleInsets(0.0, 5.0, 5.0, 5.0))
-      if (tooltips) plot.setToolTipGenerator(new StandardPieToolTipGenerator())
-
-      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      theme(chart)
-
-      new RingChart {
-        override val peer = chart
-      }
+      CategoryChart(plot, title, legend, theme)
     }
 
   }
@@ -635,7 +417,7 @@ trait ChartFactories {
       * `TimeSeriesCollection` or `TimeTableXYDataset` the domain axis will correctly be set to a
       * `DateAxis`.
       *
-      * @param dataset         $dataset
+      * @param dataset         $data
       * @param title           $title
       * @param domainAxisLabel $domainAxisLabel
       * @param rangeAxisLabel  $rangeAxisLabel
@@ -665,12 +447,7 @@ trait ChartFactories {
       plot.setOrientation(orientation)
       plot.setForegroundAlpha(0.5f)
 
-      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      theme(chart)
-
-      new XYChart {
-        override val peer = chart
-      }
+      XYChart(plot, title, legend, theme)
     }
 
     /** Creates a new chart that represents multiple numeric `x` and `y` values with stacked areas.
@@ -678,7 +455,7 @@ trait ChartFactories {
       * If the input dataset is an instance of a `TimeTableXYDataset` the domain axis will correctly
       * be set to a `DateAxis`.
       *
-      * @param dataset         $dataset
+      * @param dataset         $data
       * @param title           $title
       * @param domainAxisLabel $domainAxisLabel
       * @param rangeAxisLabel  $rangeAxisLabel
@@ -712,12 +489,7 @@ trait ChartFactories {
       plot.setOrientation(orientation)
       plot.setRangeAxis(rangeAxis)
 
-      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      theme(chart)
-
-      new XYChart {
-        override val peer = chart
-      }
+      XYChart(plot, title, legend, theme)
     }
 
     /** Creates a new chart that represents multiple numeric `x` and `y` values with a stepped area.
@@ -726,7 +498,7 @@ trait ChartFactories {
       * `TimeSeriesCollection` or `TimeTableXYDataset` the domain axis will correctly be set to a
       * `DateAxis`.
       *
-      * @param dataset         $dataset
+      * @param dataset         $data
       * @param title           $title
       * @param domainAxisLabel $domainAxisLabel
       * @param rangeAxisLabel  $rangeAxisLabel
@@ -757,12 +529,7 @@ trait ChartFactories {
       plot.setDomainCrosshairVisible(false)
       plot.setRangeCrosshairVisible(false)
 
-      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      theme(chart)
-
-      new XYChart {
-        override val peer = chart
-      }
+      XYChart(plot, title, legend, theme)
     }
 
   }
@@ -776,7 +543,7 @@ trait ChartFactories {
       * `TimeSeriesCollection` or `TimeTableXYDataset` the domain axis will correctly be set to a
       * `DateAxis`.
       *
-      * @param dataset         $dataset
+      * @param dataset         $data
       * @param title           $title
       * @param domainAxisLabel $domainAxisLabel
       * @param rangeAxisLabel  $rangeAxisLabel
@@ -805,12 +572,7 @@ trait ChartFactories {
       val plot = new XYPlot(dataset, domainAxis, rangeAxis, renderer)
       plot.setOrientation(orientation)
 
-      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      theme(chart)
-
-      new XYChart {
-        override val peer = chart
-      }
+      XYChart(plot, title, legend, theme)
     }
 
     /** Creates a new chart that represents numeric `x` (intervals) and `y` values with a line.
@@ -818,7 +580,7 @@ trait ChartFactories {
       * If the input dataset is an instance of a `TimeTableXYDataset` the domain axis will correctly
       * be set to a `DateAxis`.
       *
-      * @param dataset         $dataset
+      * @param dataset         $data
       * @param title           $title
       * @param domainAxisLabel $domainAxisLabel
       * @param rangeAxisLabel  $rangeAxisLabel
@@ -847,12 +609,7 @@ trait ChartFactories {
       val plot = new XYPlot(dataset, domainAxis, rangeAxis, renderer)
       plot.setOrientation(orientation)
 
-      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      theme(chart)
-
-      new XYChart {
-        override val peer = chart
-      }
+      XYChart(plot, title, legend, theme)
     }
 
   }
@@ -862,7 +619,7 @@ trait ChartFactories {
 
     /** Creates a new box and whisker chart.
       *
-      * @param dataset         $dataset
+      * @param dataset         $data
       * @param title           $title
       * @param domainAxisLabel $domainAxisLabel
       * @param rangeAxisLabel  $rangeAxisLabel
@@ -884,12 +641,7 @@ trait ChartFactories {
 
       val plot = new XYPlot(dataset, domainAxis, rangeAxis, renderer)
 
-      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      theme(chart)
-
-      new XYChart {
-        override val peer = chart
-      }
+      XYChart(plot, title, legend, theme)
     }
 
   }
@@ -903,7 +655,7 @@ trait ChartFactories {
       * `TimeSeriesCollection` or `TimeTableXYDataset` the domain axis will correctly be set to a
       * `DateAxis`.
       *
-      * @param dataset         $dataset
+      * @param dataset         $data
       * @param title           $title
       * @param domainAxisLabel $domainAxisLabel
       * @param rangeAxisLabel  $rangeAxisLabel
@@ -932,12 +684,7 @@ trait ChartFactories {
       val plot = new XYPlot(dataset, domainAxis, rangeAxis, renderer)
       plot.setOrientation(orientation)
 
-      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      theme(chart)
-
-      new XYChart {
-        override val peer = chart
-      }
+      XYChart(plot, title, legend, theme)
     }
 
   }
@@ -951,7 +698,7 @@ trait ChartFactories {
       * `TimeSeriesCollection` or `TimeTableXYDataset` the domain axis will correctly be set to a
       * `DateAxis`.
       *
-      * @param dataset         $dataset
+      * @param dataset         $data
       * @param title           $title
       * @param domainAxisLabel $domainAxisLabel
       * @param rangeAxisLabel  $rangeAxisLabel
@@ -980,12 +727,7 @@ trait ChartFactories {
       val plot = new XYPlot(dataset, domainAxis, rangeAxis, renderer)
       plot.setOrientation(orientation)
 
-      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      theme(chart)
-
-      new XYChart {
-        override val peer = chart
-      }
+      XYChart(plot, title, legend, theme)
     }
 
   }
