@@ -7,7 +7,6 @@ import org.jfree.chart.axis._
 import org.jfree.chart.labels._
 import org.jfree.chart.renderer.category._
 import org.jfree.chart.renderer.xy._
-import org.jfree.chart.title.TextTitle
 import org.jfree.data.statistics._
 import org.jfree.data.time._
 import org.jfree.data.xy._
@@ -414,79 +413,6 @@ trait ChartFactories extends DocMacros {
 
       val peer = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
       CategoryChart.fromPeer(peer, theme)
-    }
-
-  }
-
-  /** Factory for multiple pie charts. */
-  object MultiplePieChart {
-
-    /** Creates a new multiple pie chart.
-      *
-      * @param dataset  $data
-      * @param title    $title
-      * @param legend   $legend
-      * @param tooltips $tooltips
-      * @param theme    $theme
-      */
-    def apply(dataset: CategoryDataset,
-              title: String = "",
-              legend: Boolean = true,
-              tooltips: Boolean = true)
-             (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): MultiplePieChart = {
-
-      val plot = new MultiplePiePlot(dataset)
-      plot.setDataExtractOrder(TableOrder.BY_COLUMN)
-      plot.setBackgroundPaint(null)
-      plot.setOutlineStroke(null)
-
-      if (tooltips) {
-        val pp = plot.getPieChart.getPlot.asInstanceOf[PiePlot]
-        pp.setToolTipGenerator(new StandardPieToolTipGenerator())
-      }
-
-      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      theme(chart)
-
-      new MultiplePieChart {
-        override val peer = chart
-      }
-    }
-
-    /** Creates a new multiple pie chart with three dimensional pies.
-      *
-      * @param dataset  $data
-      * @param title    $title
-      * @param legend   $legend
-      * @param tooltips $tooltips
-      * @param theme    $theme
-      */
-    def threeDimensional(dataset: CategoryDataset,
-                         title: String = "",
-                         legend: Boolean = true,
-                         tooltips: Boolean = true)
-                        (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): MultiplePieChart = {
-
-      val plot = new MultiplePiePlot(dataset)
-      plot.setDataExtractOrder(TableOrder.BY_COLUMN)
-      plot.setBackgroundPaint(null)
-      plot.setOutlineStroke(null)
-
-      val piePlot = new PiePlot3D()
-      if (tooltips) piePlot.setToolTipGenerator(new StandardPieToolTipGenerator())
-
-      val pieChart = new JFreeChart(piePlot)
-      pieChart.setTitle(new TextTitle("dummy title for setting edge"))
-      pieChart.getTitle.setPosition(RectangleEdge.BOTTOM)
-      pieChart.removeLegend()
-      plot.setPieChart(pieChart)
-
-      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      theme(chart)
-
-      new MultiplePieChart {
-        override val peer = chart
-      }
     }
 
   }
