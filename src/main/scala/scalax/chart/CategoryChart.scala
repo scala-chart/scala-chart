@@ -2,6 +2,8 @@ package scalax.chart
 
 import scala.swing.Orientable
 
+import org.jfree.chart.JFreeChart
+
 import Imports._
 
 /** Represents categorized numeric data. These charts have a domain axis that consists of the
@@ -58,4 +60,10 @@ trait CategoryChart extends Chart[CategoryPlot] with Orientable with DomainAxis 
     ).orNull)
   }
 
+}
+
+object CategoryChart extends ChartCompanion[CategoryChart] {
+  override final def fromPeer(chart: JFreeChart): CategoryChart = new CategoryChart {
+    override final val peer = chart
+  }
 }

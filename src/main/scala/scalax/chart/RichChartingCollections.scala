@@ -399,11 +399,7 @@ trait RichChartingCollections {
         chart       = ChartFactories.BarChart(dataset, outer.toString)
       } plot.add(chart.plot)
 
-      val chart = new JFreeChart(plot)
-
-      new CategoryChart {
-        override val peer = chart
-      }
+      CategoryChart(new JFreeChart(plot))
     }
 
   }

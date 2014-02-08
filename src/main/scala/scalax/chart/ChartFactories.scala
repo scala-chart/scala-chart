@@ -128,12 +128,8 @@ trait ChartFactories {
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
       plot.setOrientation(orientation)
 
-      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      theme(chart)
-
-      new CategoryChart {
-        override val peer = chart
-      }
+      val peer = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
+      CategoryChart(peer)
     }
 
     /** Creates a new chart that represents categorized numeric data with stacked areas.
@@ -167,12 +163,8 @@ trait ChartFactories {
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
       plot.setOrientation(orientation)
 
-      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      theme(chart)
-
-      new CategoryChart {
-        override val peer = chart
-      }
+      val peer = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
+      CategoryChart(peer)
     }
 
   }
@@ -218,12 +210,8 @@ trait ChartFactories {
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
       plot.setOrientation(orientation)
 
-      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      theme(chart)
-
-      new CategoryChart {
-        override val peer = chart
-      }
+      val peer = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
+      CategoryChart(peer)
     }
 
     /** Creates a new chart that represents categorized numeric data with stacked bars.
@@ -255,12 +243,8 @@ trait ChartFactories {
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
       plot.setOrientation(orientation)
 
-      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      theme(chart)
-
-      new CategoryChart {
-        override val peer = chart
-      }
+      val peer = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
+      CategoryChart(peer)
     }
 
     /** Creates a new chart that represents categorized numeric data with three dimensional bars.
@@ -297,12 +281,8 @@ trait ChartFactories {
       }
       plot.setForegroundAlpha(0.75f)
 
-      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      theme(chart)
-
-      new CategoryChart {
-        override val peer = chart
-      }
+      val peer = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
+      CategoryChart(peer)
     }
 
     /** Creates a new chart that represents categorized numeric data with three dimensional bars.
@@ -335,12 +315,8 @@ trait ChartFactories {
       plot.setOrientation(orientation)
       if (orientation == Orientation.Horizontal) plot.setColumnRenderingOrder(SortOrder.DESCENDING)
 
-      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      theme(chart)
-
-      new CategoryChart {
-        override val peer = chart
-      }
+      val peer = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
+      CategoryChart(peer)
     }
 
   }
@@ -373,12 +349,8 @@ trait ChartFactories {
 
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
 
-      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      theme(chart)
-
-      new CategoryChart {
-        override val peer = chart
-      }
+      val peer = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
+      CategoryChart(peer)
     }
 
   }
@@ -415,12 +387,8 @@ trait ChartFactories {
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
       plot.setOrientation(orientation)
 
-      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      theme(chart)
-
-      new CategoryChart {
-        override val peer = chart
-      }
+      val peer = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
+      CategoryChart(peer)
     }
 
     /** Creates a new chart that represents categorized numeric values with three dimensional a
@@ -453,12 +421,8 @@ trait ChartFactories {
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
       plot.setOrientation(orientation)
 
-      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      theme(chart)
-
-      new CategoryChart {
-        override val peer = chart
-      }
+      val peer = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
+      CategoryChart(peer)
     }
 
   }
