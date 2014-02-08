@@ -9,7 +9,7 @@ import Imports._
 /** Represents categorized numeric data. These charts have a domain axis that consists of the
   * categories and a numeric range axis.
   */
-trait CategoryChart extends Chart[CategoryPlot] with Orientable with DomainAxis with RangeAxis
+abstract class CategoryChart protected () extends Chart[CategoryPlot] with Orientable with DomainAxis with RangeAxis
     with Labels[CategoryItemLabelGenerator]
     with Tooltips[CategoryToolTipGenerator] {
 

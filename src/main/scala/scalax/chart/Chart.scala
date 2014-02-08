@@ -14,7 +14,7 @@ import Imports._
   *
   * @tparam P used plot type
   */
-trait Chart[P <: Plot] extends DisplayableChart with StorableChart {
+abstract class Chart[P <: Plot] protected () extends DisplayableChart with StorableChart {
 
   /** Returns the underlying chart. */
   def peer: JFreeChart

@@ -10,7 +10,7 @@ import org.jfree.util._
 import Imports._
 
 /** Represents categorized numeric data with multiple pies. */
-trait MultiplePieChart extends Chart[MultiplePiePlot]
+abstract class MultiplePieChart protected () extends Chart[MultiplePiePlot]
     with Labels[PieSectionLabelGenerator]
     with Tooltips[PieToolTipGenerator] {
 

@@ -7,7 +7,7 @@ import org.jfree.chart.JFreeChart
 import Imports._
 
 /** Represents numeric data. */
-trait XYChart extends Chart[XYPlot] with Orientable with DomainAxis with RangeAxis
+abstract class XYChart protected () extends Chart[XYPlot] with Orientable with DomainAxis with RangeAxis
     with Labels[XYItemLabelGenerator]
     with Tooltips[XYToolTipGenerator] {
 

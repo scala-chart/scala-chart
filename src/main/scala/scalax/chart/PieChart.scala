@@ -7,7 +7,7 @@ import org.jfree.ui._
 import Imports._
 
 /** Represents categorized numeric data with a pie. */
-trait PieChart extends Chart[PiePlot] with PieChartLike[PiePlot] {
+abstract class PieChart protected () extends Chart[PiePlot] with PieChartLike[PiePlot] {
   override def plot: PiePlot = peer.getPlot.asInstanceOf[PiePlot]
 }
 
