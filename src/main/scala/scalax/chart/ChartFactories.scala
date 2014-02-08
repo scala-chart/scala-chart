@@ -549,38 +549,6 @@ trait ChartFactories extends DocMacros {
 
   }
 
-  /** Factory for ring charts. */
-  object RingChart {
-
-    /** Creates a new ring chart.
-      *
-      * @param dataset  $data
-      * @param title    $title
-      * @param legend   $legend
-      * @param tooltips $tooltips
-      * @param theme    $theme
-      */
-    def apply(dataset: PieDataset,
-              title: String = "",
-              legend: Boolean = true,
-              tooltips: Boolean = true)
-             (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): RingChart = {
-
-      val plot = new RingPlot(dataset)
-      plot.setLabelGenerator(new StandardPieSectionLabelGenerator())
-      plot.setInsets(new RectangleInsets(0.0, 5.0, 5.0, 5.0))
-      if (tooltips) plot.setToolTipGenerator(new StandardPieToolTipGenerator())
-
-      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      theme(chart)
-
-      new RingChart {
-        override val peer = chart
-      }
-    }
-
-  }
-
   /** Factory for numeric area charts. */
   object XYAreaChart {
 
