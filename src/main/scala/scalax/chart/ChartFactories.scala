@@ -53,17 +53,8 @@ object ChartFactories extends ChartFactories
   * {{{
   * implicit val theme = org.jfree.chart.StandardChartTheme.createDarknessTheme
   * }}}
-  *
-  * @define dataset         the data the chart will visualize
-  * @define domainAxisLabel the label for the domain axis
-  * @define legend          whether or not the chart will contain a legend
-  * @define orientation     the orientation of the chart
-  * @define rangeAxisLabel  the label for the range axis
-  * @define theme           the theme to apply to the chart
-  * @define title           the title of the chart
-  * @define tooltips        whether or not tooltips will be generated
   */
-trait ChartFactories {
+trait ChartFactories extends DocMacros {
 
   // -----------------------------------------------------------------------------------------------
   // some small helpers
@@ -99,7 +90,7 @@ trait ChartFactories {
 
     /** Creates a new chart that represents categorized numeric data with an area.
       *
-      * @param dataset         $dataset
+      * @param dataset         $data
       * @param title           $title
       * @param domainAxisLabel $domainAxisLabel
       * @param rangeAxisLabel  $rangeAxisLabel
@@ -134,7 +125,7 @@ trait ChartFactories {
 
     /** Creates a new chart that represents categorized numeric data with stacked areas.
       *
-      * @param dataset         $dataset
+      * @param dataset         $data
       * @param title           $title
       * @param domainAxisLabel $domainAxisLabel
       * @param rangeAxisLabel  $rangeAxisLabel
@@ -174,7 +165,7 @@ trait ChartFactories {
 
     /** Creates a new chart that represents categorized numeric data with bars.
       *
-      * @param dataset         $dataset
+      * @param dataset         $data
       * @param title           $title
       * @param domainAxisLabel $domainAxisLabel
       * @param rangeAxisLabel  $rangeAxisLabel
@@ -216,7 +207,7 @@ trait ChartFactories {
 
     /** Creates a new chart that represents categorized numeric data with stacked bars.
       *
-      * @param dataset         $dataset
+      * @param dataset         $data
       * @param title           $title
       * @param domainAxisLabel $domainAxisLabel
       * @param rangeAxisLabel  $rangeAxisLabel
@@ -249,7 +240,7 @@ trait ChartFactories {
 
     /** Creates a new chart that represents categorized numeric data with three dimensional bars.
       *
-      * @param dataset         $dataset
+      * @param dataset         $data
       * @param title           $title
       * @param domainAxisLabel $domainAxisLabel
       * @param rangeAxisLabel  $rangeAxisLabel
@@ -287,7 +278,7 @@ trait ChartFactories {
 
     /** Creates a new chart that represents categorized numeric data with three dimensional bars.
       *
-      * @param dataset         $dataset
+      * @param dataset         $data
       * @param title           $title
       * @param domainAxisLabel $domainAxisLabel
       * @param rangeAxisLabel  $rangeAxisLabel
@@ -326,7 +317,7 @@ trait ChartFactories {
 
     /** Creates a new box and whisker chart.
       *
-      * @param dataset         $dataset
+      * @param dataset         $data
       * @param title           $title
       * @param domainAxisLabel $domainAxisLabel
       * @param rangeAxisLabel  $rangeAxisLabel
@@ -360,7 +351,7 @@ trait ChartFactories {
 
     /** Creates a new chart that represents categorized numeric values with a line.
       *
-      * @param dataset         $dataset
+      * @param dataset         $data
       * @param title           $title
       * @param domainAxisLabel $domainAxisLabel
       * @param rangeAxisLabel  $rangeAxisLabel
@@ -394,7 +385,7 @@ trait ChartFactories {
     /** Creates a new chart that represents categorized numeric values with three dimensional a
       * line.
       *
-      * @param dataset         $dataset
+      * @param dataset         $data
       * @param title           $title
       * @param domainAxisLabel $domainAxisLabel
       * @param rangeAxisLabel  $rangeAxisLabel
@@ -432,7 +423,7 @@ trait ChartFactories {
 
     /** Creates a new multiple pie chart.
       *
-      * @param dataset  $dataset
+      * @param dataset  $data
       * @param title    $title
       * @param legend   $legend
       * @param tooltips $tooltips
@@ -464,7 +455,7 @@ trait ChartFactories {
 
     /** Creates a new multiple pie chart with three dimensional pies.
       *
-      * @param dataset  $dataset
+      * @param dataset  $data
       * @param title    $title
       * @param legend   $legend
       * @param tooltips $tooltips
@@ -505,7 +496,7 @@ trait ChartFactories {
 
     /** Creates a new pie chart.
       *
-      * @param dataset  $dataset
+      * @param dataset  $data
       * @param title    $title
       * @param legend   $legend
       * @param tooltips $tooltips
@@ -532,7 +523,7 @@ trait ChartFactories {
 
     /** Creates a new pie chart with a three dimensional pie.
       *
-      * @param dataset  $dataset
+      * @param dataset  $data
       * @param title    $title
       * @param legend   $legend
       * @param tooltips $tooltips
@@ -563,7 +554,7 @@ trait ChartFactories {
 
     /** Creates a new ring chart.
       *
-      * @param dataset  $dataset
+      * @param dataset  $data
       * @param title    $title
       * @param legend   $legend
       * @param tooltips $tooltips
@@ -599,7 +590,7 @@ trait ChartFactories {
       * `TimeSeriesCollection` or `TimeTableXYDataset` the domain axis will correctly be set to a
       * `DateAxis`.
       *
-      * @param dataset         $dataset
+      * @param dataset         $data
       * @param title           $title
       * @param domainAxisLabel $domainAxisLabel
       * @param rangeAxisLabel  $rangeAxisLabel
@@ -638,7 +629,7 @@ trait ChartFactories {
       * If the input dataset is an instance of a `TimeTableXYDataset` the domain axis will correctly
       * be set to a `DateAxis`.
       *
-      * @param dataset         $dataset
+      * @param dataset         $data
       * @param title           $title
       * @param domainAxisLabel $domainAxisLabel
       * @param rangeAxisLabel  $rangeAxisLabel
@@ -682,7 +673,7 @@ trait ChartFactories {
       * `TimeSeriesCollection` or `TimeTableXYDataset` the domain axis will correctly be set to a
       * `DateAxis`.
       *
-      * @param dataset         $dataset
+      * @param dataset         $data
       * @param title           $title
       * @param domainAxisLabel $domainAxisLabel
       * @param rangeAxisLabel  $rangeAxisLabel
@@ -728,7 +719,7 @@ trait ChartFactories {
       * `TimeSeriesCollection` or `TimeTableXYDataset` the domain axis will correctly be set to a
       * `DateAxis`.
       *
-      * @param dataset         $dataset
+      * @param dataset         $data
       * @param title           $title
       * @param domainAxisLabel $domainAxisLabel
       * @param rangeAxisLabel  $rangeAxisLabel
@@ -766,7 +757,7 @@ trait ChartFactories {
       * If the input dataset is an instance of a `TimeTableXYDataset` the domain axis will correctly
       * be set to a `DateAxis`.
       *
-      * @param dataset         $dataset
+      * @param dataset         $data
       * @param title           $title
       * @param domainAxisLabel $domainAxisLabel
       * @param rangeAxisLabel  $rangeAxisLabel
@@ -806,7 +797,7 @@ trait ChartFactories {
 
     /** Creates a new box and whisker chart.
       *
-      * @param dataset         $dataset
+      * @param dataset         $data
       * @param title           $title
       * @param domainAxisLabel $domainAxisLabel
       * @param rangeAxisLabel  $rangeAxisLabel
@@ -843,7 +834,7 @@ trait ChartFactories {
       * `TimeSeriesCollection` or `TimeTableXYDataset` the domain axis will correctly be set to a
       * `DateAxis`.
       *
-      * @param dataset         $dataset
+      * @param dataset         $data
       * @param title           $title
       * @param domainAxisLabel $domainAxisLabel
       * @param rangeAxisLabel  $rangeAxisLabel
@@ -887,7 +878,7 @@ trait ChartFactories {
       * `TimeSeriesCollection` or `TimeTableXYDataset` the domain axis will correctly be set to a
       * `DateAxis`.
       *
-      * @param dataset         $dataset
+      * @param dataset         $data
       * @param title           $title
       * @param domainAxisLabel $domainAxisLabel
       * @param rangeAxisLabel  $rangeAxisLabel
