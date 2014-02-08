@@ -30,10 +30,10 @@ object RingChart extends ChartCompanion[RingPlot,RingChart] with DocMacros {
     * @param tooltips $tooltips
     * @param theme    $theme
     *
-    * @usecase def apply(dataset: PieDataset): RingChart
+    * @usecase def apply(dataset: PieDataset): RingChart = ???
     *   @inheritdoc
     *
-    * @usecase def apply(dataset: PieDataset, title: String, legend: Boolean, tooltips: Boolean): RingChart
+    * @usecase def apply(dataset: PieDataset, title: String, legend: Boolean, tooltips: Boolean): RingChart = ???
     *   @inheritdoc
     */
   def apply(dataset: PieDataset, title: String = "", legend: Boolean = true, tooltips: Boolean = true)

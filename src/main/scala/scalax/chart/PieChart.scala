@@ -30,10 +30,10 @@ object PieChart extends ChartCompanion[PiePlot,PieChart] with DocMacros {
     * @param tooltips $tooltips
     * @param theme    $theme
     *
-    * @usecase def apply(dataset: PieDataset): PieChart
+    * @usecase def apply(dataset: PieDataset): PieChart = ???
     *   @inheritdoc
     *
-    * @usecase def apply(dataset: PieDataset, title: String, legend: Boolean, tooltips: Boolean): PieChart
+    * @usecase def apply(dataset: PieDataset, title: String, legend: Boolean, tooltips: Boolean): PieChart = ???
     *   @inheritdoc
     */
   def apply(dataset: PieDataset, title: String = "", legend: Boolean = true, tooltips: Boolean = true)
@@ -55,10 +55,10 @@ object PieChart extends ChartCompanion[PiePlot,PieChart] with DocMacros {
     * @param tooltips $tooltips
     * @param theme    $theme
     *
-    * @usecase def threeDimensional(dataset: PieDataset): PieChart
+    * @usecase def threeDimensional(dataset: PieDataset): PieChart = ???
     *   @inheritdoc
     *
-    * @usecase def threeDimensional(dataset: PieDataset, title: String, legend: Boolean, tooltips: Boolean): PieChart
+    * @usecase def threeDimensional(dataset: PieDataset, title: String, legend: Boolean, tooltips: Boolean): PieChart = ???
     *   @inheritdoc
     */
   def threeDimensional(dataset: PieDataset, title: String = "", legend: Boolean = true, tooltips: Boolean = true)

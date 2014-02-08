@@ -53,10 +53,10 @@ object MultiplePieChart extends ChartCompanion[MultiplePiePlot,MultiplePieChart]
     * @param tooltips $tooltips
     * @param theme    $theme
     *
-    * @usecase def apply(dataset: CategoryDataset): MultiplePieChart
+    * @usecase def apply(dataset: CategoryDataset): MultiplePieChart = ???
     *   @inheritdoc
     *
-    * @usecase def apply(dataset: CategoryDataset, title: String, legend: Boolean, tooltips: Boolean): MultiplePieChart
+    * @usecase def apply(dataset: CategoryDataset, title: String, legend: Boolean, tooltips: Boolean): MultiplePieChart = ???
     *   @inheritdoc
     */
   def apply(dataset: CategoryDataset, title: String = "", legend: Boolean = true, tooltips: Boolean = true)
@@ -83,10 +83,10 @@ object MultiplePieChart extends ChartCompanion[MultiplePiePlot,MultiplePieChart]
     * @param tooltips $tooltips
     * @param theme    $theme
     *
-    * @usecase def threeDimensional(dataset: CategoryDataset): MultiplePieChart
+    * @usecase def threeDimensional(dataset: CategoryDataset): MultiplePieChart = ???
     *   @inheritdoc
     *
-    * @usecase def threeDimensional(dataset: CategoryDataset, title: String, legend: Boolean, tooltips: Boolean): MultiplePieChart
+    * @usecase def threeDimensional(dataset: CategoryDataset, title: String, legend: Boolean, tooltips: Boolean): MultiplePieChart = ???
     *   @inheritdoc
     */
   def threeDimensional(dataset: CategoryDataset, title: String = "", legend: Boolean = true, tooltips: Boolean = true)
