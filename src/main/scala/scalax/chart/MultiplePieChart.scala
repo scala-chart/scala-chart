@@ -39,7 +39,7 @@ trait MultiplePieChart extends Chart[MultiplePiePlot]
   * @define chart multiple pie chart
   * @define Chart MultiplePieChart
   */
-object MultiplePieChart extends ChartCompanion[MultiplePieChart] {
+object MultiplePieChart extends ChartCompanion[MultiplePiePlot,MultiplePieChart] {
 
   override final def fromPeer(jfree: JFreeChart): MultiplePieChart = new MultiplePieChart {
     override final val peer = jfree
@@ -72,8 +72,7 @@ object MultiplePieChart extends ChartCompanion[MultiplePieChart] {
       pp.setToolTipGenerator(new StandardPieToolTipGenerator())
     }
 
-    val peer = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-    MultiplePieChart.fromPeer(peer, theme)
+    MultiplePieChart(plot, title, legend, theme)
   }
 
   /** Creates a new $chart with three dimensional visualization.
@@ -107,8 +106,7 @@ object MultiplePieChart extends ChartCompanion[MultiplePieChart] {
     pieChart.removeLegend()
     plot.setPieChart(pieChart)
 
-    val peer = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-    MultiplePieChart.fromPeer(peer, theme)
+    MultiplePieChart(plot, title, legend, theme)
   }
 
 }

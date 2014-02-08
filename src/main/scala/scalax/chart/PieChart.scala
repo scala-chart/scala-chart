@@ -16,7 +16,7 @@ trait PieChart extends Chart[PiePlot] with PieChartLike[PiePlot] {
   * @define chart pie chart
   * @define Chart PieChart
   */
-object PieChart extends ChartCompanion[PieChart] with DocMacros {
+object PieChart extends ChartCompanion[PiePlot,PieChart] with DocMacros {
 
   override final def fromPeer(jfree: JFreeChart): PieChart = new PieChart {
     override final val peer = jfree
@@ -44,8 +44,7 @@ object PieChart extends ChartCompanion[PieChart] with DocMacros {
     plot.setInsets(new RectangleInsets(0.0, 5.0, 5.0, 5.0))
     if (tooltips) plot.setToolTipGenerator(new StandardPieToolTipGenerator())
 
-    val peer = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-    PieChart.fromPeer(peer, theme)
+    PieChart(plot, title, legend, theme)
   }
 
   /** Creates a new $chart with a three dimensional visualization.
@@ -69,8 +68,7 @@ object PieChart extends ChartCompanion[PieChart] with DocMacros {
     plot.setInsets(new RectangleInsets(0.0, 5.0, 5.0, 5.0))
     if (tooltips) plot.setToolTipGenerator(new StandardPieToolTipGenerator())
 
-    val peer = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-    PieChart.fromPeer(peer, theme)
+    PieChart(plot, title, legend, theme)
   }
 
 }

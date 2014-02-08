@@ -62,7 +62,7 @@ trait CategoryChart extends Chart[CategoryPlot] with Orientable with DomainAxis 
 
 }
 
-object CategoryChart extends ChartCompanion[CategoryChart] {
+object CategoryChart extends ChartCompanion[CategoryPlot,CategoryChart] {
   override final def fromPeer(jfree: JFreeChart): CategoryChart = new CategoryChart {
     override final val peer = jfree
   }

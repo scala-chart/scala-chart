@@ -118,8 +118,7 @@ trait ChartFactories extends DocMacros {
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
       plot.setOrientation(orientation)
 
-      val peer = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      CategoryChart.fromPeer(peer, theme)
+      CategoryChart(plot, title, legend, theme)
     }
 
     /** Creates a new chart that represents categorized numeric data with stacked areas.
@@ -153,8 +152,7 @@ trait ChartFactories extends DocMacros {
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
       plot.setOrientation(orientation)
 
-      val peer = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      CategoryChart.fromPeer(peer, theme)
+      CategoryChart(plot, title, legend, theme)
     }
 
   }
@@ -200,8 +198,7 @@ trait ChartFactories extends DocMacros {
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
       plot.setOrientation(orientation)
 
-      val peer = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      CategoryChart.fromPeer(peer, theme)
+      CategoryChart(plot, title, legend, theme)
     }
 
     /** Creates a new chart that represents categorized numeric data with stacked bars.
@@ -233,8 +230,7 @@ trait ChartFactories extends DocMacros {
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
       plot.setOrientation(orientation)
 
-      val peer = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      CategoryChart.fromPeer(peer, theme)
+      CategoryChart(plot, title, legend, theme)
     }
 
     /** Creates a new chart that represents categorized numeric data with three dimensional bars.
@@ -271,8 +267,7 @@ trait ChartFactories extends DocMacros {
       }
       plot.setForegroundAlpha(0.75f)
 
-      val peer = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      CategoryChart.fromPeer(peer, theme)
+      CategoryChart(plot, title, legend, theme)
     }
 
     /** Creates a new chart that represents categorized numeric data with three dimensional bars.
@@ -305,8 +300,7 @@ trait ChartFactories extends DocMacros {
       plot.setOrientation(orientation)
       if (orientation == Orientation.Horizontal) plot.setColumnRenderingOrder(SortOrder.DESCENDING)
 
-      val peer = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      CategoryChart.fromPeer(peer, theme)
+      CategoryChart(plot, title, legend, theme)
     }
 
   }
@@ -339,8 +333,7 @@ trait ChartFactories extends DocMacros {
 
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
 
-      val peer = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      CategoryChart.fromPeer(peer, theme)
+      CategoryChart(plot, title, legend, theme)
     }
 
   }
@@ -377,8 +370,7 @@ trait ChartFactories extends DocMacros {
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
       plot.setOrientation(orientation)
 
-      val peer = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      CategoryChart.fromPeer(peer, theme)
+      CategoryChart(plot, title, legend, theme)
     }
 
     /** Creates a new chart that represents categorized numeric values with three dimensional a
@@ -411,8 +403,7 @@ trait ChartFactories extends DocMacros {
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
       plot.setOrientation(orientation)
 
-      val peer = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      CategoryChart.fromPeer(peer, theme)
+      CategoryChart(plot, title, legend, theme)
     }
 
   }
@@ -456,8 +447,7 @@ trait ChartFactories extends DocMacros {
       plot.setOrientation(orientation)
       plot.setForegroundAlpha(0.5f)
 
-      val peer = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      XYChart.fromPeer(peer, theme)
+      XYChart(plot, title, legend, theme)
     }
 
     /** Creates a new chart that represents multiple numeric `x` and `y` values with stacked areas.
@@ -499,8 +489,7 @@ trait ChartFactories extends DocMacros {
       plot.setOrientation(orientation)
       plot.setRangeAxis(rangeAxis)
 
-      val peer = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      XYChart.fromPeer(peer, theme)
+      XYChart(plot, title, legend, theme)
     }
 
     /** Creates a new chart that represents multiple numeric `x` and `y` values with a stepped area.
@@ -540,8 +529,7 @@ trait ChartFactories extends DocMacros {
       plot.setDomainCrosshairVisible(false)
       plot.setRangeCrosshairVisible(false)
 
-      val peer = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      XYChart.fromPeer(peer, theme)
+      XYChart(plot, title, legend, theme)
     }
 
   }
@@ -584,8 +572,7 @@ trait ChartFactories extends DocMacros {
       val plot = new XYPlot(dataset, domainAxis, rangeAxis, renderer)
       plot.setOrientation(orientation)
 
-      val peer = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      XYChart.fromPeer(peer, theme)
+      XYChart(plot, title, legend, theme)
     }
 
     /** Creates a new chart that represents numeric `x` (intervals) and `y` values with a line.
@@ -622,8 +609,7 @@ trait ChartFactories extends DocMacros {
       val plot = new XYPlot(dataset, domainAxis, rangeAxis, renderer)
       plot.setOrientation(orientation)
 
-      val peer = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      XYChart.fromPeer(peer, theme)
+      XYChart(plot, title, legend, theme)
     }
 
   }
@@ -655,8 +641,7 @@ trait ChartFactories extends DocMacros {
 
       val plot = new XYPlot(dataset, domainAxis, rangeAxis, renderer)
 
-      val peer = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      XYChart.fromPeer(peer, theme)
+      XYChart(plot, title, legend, theme)
     }
 
   }
@@ -699,8 +684,7 @@ trait ChartFactories extends DocMacros {
       val plot = new XYPlot(dataset, domainAxis, rangeAxis, renderer)
       plot.setOrientation(orientation)
 
-      val peer = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      XYChart.fromPeer(peer, theme)
+      XYChart(plot, title, legend, theme)
     }
 
   }
@@ -743,8 +727,7 @@ trait ChartFactories extends DocMacros {
       val plot = new XYPlot(dataset, domainAxis, rangeAxis, renderer)
       plot.setOrientation(orientation)
 
-      val peer = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      XYChart.fromPeer(peer, theme)
+      XYChart(plot, title, legend, theme)
     }
 
   }

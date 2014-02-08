@@ -16,7 +16,7 @@ trait RingChart extends Chart[RingPlot] with PieChartLike[RingPlot] {
   * @define chart ring chart
   * @define Chart RingChart
   */
-object RingChart extends ChartCompanion[RingChart] with DocMacros {
+object RingChart extends ChartCompanion[RingPlot,RingChart] with DocMacros {
 
   override final def fromPeer(jfree: JFreeChart): RingChart = new RingChart {
     override final val peer = jfree
@@ -44,8 +44,7 @@ object RingChart extends ChartCompanion[RingChart] with DocMacros {
     plot.setInsets(new RectangleInsets(0.0, 5.0, 5.0, 5.0))
     if (tooltips) plot.setToolTipGenerator(new StandardPieToolTipGenerator())
 
-    val peer = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-    RingChart.fromPeer(peer, theme)
+    RingChart(plot, title, legend, theme)
   }
 
 }

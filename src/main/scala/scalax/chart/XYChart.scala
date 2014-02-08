@@ -58,7 +58,7 @@ trait XYChart extends Chart[XYPlot] with Orientable with DomainAxis with RangeAx
 
 }
 
-object XYChart extends ChartCompanion[XYChart] {
+object XYChart extends ChartCompanion[XYPlot,XYChart] {
   override final def fromPeer(jfree: JFreeChart): XYChart = new XYChart {
     override final val peer = jfree
   }
