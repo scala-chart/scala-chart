@@ -399,7 +399,7 @@ trait RichChartingCollections {
         chart       = ChartFactories.BarChart(dataset, outer.toString)
       } plot.add(chart.plot)
 
-      CategoryChart(new JFreeChart(plot))
+      CategoryChart.fromPeer(new JFreeChart(plot))
     }
 
   }

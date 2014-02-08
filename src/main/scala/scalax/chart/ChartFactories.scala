@@ -129,7 +129,7 @@ trait ChartFactories {
       plot.setOrientation(orientation)
 
       val peer = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      CategoryChart(peer)
+      CategoryChart.fromPeer(peer, theme)
     }
 
     /** Creates a new chart that represents categorized numeric data with stacked areas.
@@ -164,7 +164,7 @@ trait ChartFactories {
       plot.setOrientation(orientation)
 
       val peer = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      CategoryChart(peer)
+      CategoryChart.fromPeer(peer, theme)
     }
 
   }
@@ -211,7 +211,7 @@ trait ChartFactories {
       plot.setOrientation(orientation)
 
       val peer = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      CategoryChart(peer)
+      CategoryChart.fromPeer(peer, theme)
     }
 
     /** Creates a new chart that represents categorized numeric data with stacked bars.
@@ -244,7 +244,7 @@ trait ChartFactories {
       plot.setOrientation(orientation)
 
       val peer = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      CategoryChart(peer)
+      CategoryChart.fromPeer(peer, theme)
     }
 
     /** Creates a new chart that represents categorized numeric data with three dimensional bars.
@@ -282,7 +282,7 @@ trait ChartFactories {
       plot.setForegroundAlpha(0.75f)
 
       val peer = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      CategoryChart(peer)
+      CategoryChart.fromPeer(peer, theme)
     }
 
     /** Creates a new chart that represents categorized numeric data with three dimensional bars.
@@ -316,7 +316,7 @@ trait ChartFactories {
       if (orientation == Orientation.Horizontal) plot.setColumnRenderingOrder(SortOrder.DESCENDING)
 
       val peer = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      CategoryChart(peer)
+      CategoryChart.fromPeer(peer, theme)
     }
 
   }
@@ -350,7 +350,7 @@ trait ChartFactories {
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
 
       val peer = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      CategoryChart(peer)
+      CategoryChart.fromPeer(peer, theme)
     }
 
   }
@@ -388,7 +388,7 @@ trait ChartFactories {
       plot.setOrientation(orientation)
 
       val peer = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      CategoryChart(peer)
+      CategoryChart.fromPeer(peer, theme)
     }
 
     /** Creates a new chart that represents categorized numeric values with three dimensional a
@@ -422,7 +422,7 @@ trait ChartFactories {
       plot.setOrientation(orientation)
 
       val peer = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      CategoryChart(peer)
+      CategoryChart.fromPeer(peer, theme)
     }
 
   }
@@ -630,7 +630,7 @@ trait ChartFactories {
       plot.setForegroundAlpha(0.5f)
 
       val peer = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      XYChart(peer)
+      XYChart.fromPeer(peer, theme)
     }
 
     /** Creates a new chart that represents multiple numeric `x` and `y` values with stacked areas.
@@ -673,7 +673,7 @@ trait ChartFactories {
       plot.setRangeAxis(rangeAxis)
 
       val peer = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      XYChart(peer)
+      XYChart.fromPeer(peer, theme)
     }
 
     /** Creates a new chart that represents multiple numeric `x` and `y` values with a stepped area.
@@ -714,7 +714,7 @@ trait ChartFactories {
       plot.setRangeCrosshairVisible(false)
 
       val peer = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      XYChart(peer)
+      XYChart.fromPeer(peer, theme)
     }
 
   }
@@ -758,7 +758,7 @@ trait ChartFactories {
       plot.setOrientation(orientation)
 
       val peer = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      XYChart(peer)
+      XYChart.fromPeer(peer, theme)
     }
 
     /** Creates a new chart that represents numeric `x` (intervals) and `y` values with a line.
@@ -796,7 +796,7 @@ trait ChartFactories {
       plot.setOrientation(orientation)
 
       val peer = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      XYChart(peer)
+      XYChart.fromPeer(peer, theme)
     }
 
   }
@@ -829,7 +829,7 @@ trait ChartFactories {
       val plot = new XYPlot(dataset, domainAxis, rangeAxis, renderer)
 
       val peer = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      XYChart(peer)
+      XYChart.fromPeer(peer, theme)
     }
 
   }
@@ -873,7 +873,7 @@ trait ChartFactories {
       plot.setOrientation(orientation)
 
       val peer = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      XYChart(peer)
+      XYChart.fromPeer(peer, theme)
     }
 
   }
@@ -917,7 +917,7 @@ trait ChartFactories {
       plot.setOrientation(orientation)
 
       val peer = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      XYChart(peer)
+      XYChart.fromPeer(peer, theme)
     }
 
   }
