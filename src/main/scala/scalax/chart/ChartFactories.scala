@@ -491,64 +491,6 @@ trait ChartFactories extends DocMacros {
 
   }
 
-  /** Factory for pie charts. */
-  object PieChart {
-
-    /** Creates a new pie chart.
-      *
-      * @param dataset  $data
-      * @param title    $title
-      * @param legend   $legend
-      * @param tooltips $tooltips
-      * @param theme    $theme
-      */
-    def apply(dataset: PieDataset,
-              title: String = "",
-              legend: Boolean = true,
-              tooltips: Boolean = true)
-             (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): PieChart = {
-
-      val plot = new PiePlot(dataset)
-      plot.setLabelGenerator(new StandardPieSectionLabelGenerator())
-      plot.setInsets(new RectangleInsets(0.0, 5.0, 5.0, 5.0))
-      if (tooltips) plot.setToolTipGenerator(new StandardPieToolTipGenerator())
-
-      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      theme(chart)
-
-      new PieChart {
-        override val peer = chart
-      }
-    }
-
-    /** Creates a new pie chart with a three dimensional pie.
-      *
-      * @param dataset  $data
-      * @param title    $title
-      * @param legend   $legend
-      * @param tooltips $tooltips
-      * @param theme    $theme
-      */
-    def threeDimensional(dataset: PieDataset,
-                         title: String = "",
-                         legend: Boolean = true,
-                         tooltips: Boolean = true)
-                        (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): PieChart = {
-
-      val plot = new PiePlot3D(dataset)
-      plot.setInsets(new RectangleInsets(0.0, 5.0, 5.0, 5.0))
-      if (tooltips) plot.setToolTipGenerator(new StandardPieToolTipGenerator())
-
-      val chart = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
-      theme(chart)
-
-      new PieChart {
-        override val peer = chart
-      }
-    }
-
-  }
-
   /** Factory for numeric area charts. */
   object XYAreaChart {
 
