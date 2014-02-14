@@ -16,7 +16,7 @@ abstract class RingChart protected () extends Chart[RingPlot] with PieChartLike[
   * @define chart ring chart
   * @define Chart RingChart
   */
-object RingChart extends ChartCompanion[RingPlot,RingChart] with DocMacros {
+object RingChart extends ChartCompanion[RingPlot,RingChart] with PieDatasetConversions with DocMacros {
 
   override final def fromPeer(jfree: JFreeChart): RingChart = new RingChart {
     override final val peer = jfree
@@ -36,8 +36,9 @@ object RingChart extends ChartCompanion[RingPlot,RingChart] with DocMacros {
     * @usecase def apply(dataset: PieDataset, title: String, legend: Boolean, tooltips: Boolean): RingChart = ???
     *   @inheritdoc
     */
-  def apply(dataset: PieDataset, title: String = "", legend: Boolean = true, tooltips: Boolean = true)
+  def apply[A: ToPieDataset](data: A, title: String = "", legend: Boolean = true, tooltips: Boolean = true)
     (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): RingChart = {
+    val dataset = data.toDataset
 
     val plot = new RingPlot(dataset)
     plot.setLabelGenerator(new StandardPieSectionLabelGenerator())

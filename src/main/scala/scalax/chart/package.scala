@@ -61,4 +61,9 @@ package object chart {
     case Orientation.Vertical   ⇒ PlotOrientation.VERTICAL
   }
 
+  private[chart] implicit class ToDatasetOps[A](underlying: A) {
+    def toDataset(implicit converter: ToDataset[A]): converter.X =
+      converter.toDataset(underlying)
+  }
+
 }

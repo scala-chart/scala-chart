@@ -367,11 +367,11 @@ class ChartSpec extends Specification { def is = s2"""
 
   implicit val IntNumeric = Numeric.IntIsIntegral
 
-  def bwcategorydataset = Vector.tabulate(2)(i ⇒ (i,i to i)).toBoxAndWhiskerCategoryDataset
-  def bwxydataset = Vector.tabulate(1)(i ⇒ (new java.util.Date(i.toLong * 1000),i to i)).toBoxAndWhiskerXYDataset()
-  def categorydataset = points.toCategoryDataset
-  def piedataset = points.toPieDataset
-  def tablexydataset = (for { category ← 'a' to 'b' } yield category.toString → points).toCategoryTableXYDataset
-  def xydataset = points.toXYSeriesCollection()
+  def bwcategorydataset = Vector.tabulate(2)(i => (i,i to i))
+  def bwxydataset = Vector.tabulate(1)(i => (new java.util.Date(i.toLong * 1000),i to i))
+  def categorydataset = points
+  def piedataset = points
+  def tablexydataset = for (category <- 'a' to 'b') yield (category.toString,points)
+  def xydataset = points
 
 }

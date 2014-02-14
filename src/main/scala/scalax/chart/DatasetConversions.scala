@@ -1,0 +1,6 @@
+package scalax.chart
+
+object DatasetConversions extends DatasetConversions
+
+trait DatasetConversions extends BoxAndWhiskerDatasetConversions with CategoryDatasetConversions
+    with PieDatasetConversions with TableXYDatasetConversions with XYDatasetConversions

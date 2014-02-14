@@ -16,7 +16,7 @@ abstract class PieChart protected () extends Chart[PiePlot] with PieChartLike[Pi
   * @define chart pie chart
   * @define Chart PieChart
   */
-object PieChart extends ChartCompanion[PiePlot,PieChart] with DocMacros {
+object PieChart extends ChartCompanion[PiePlot,PieChart] with PieDatasetConversions with DocMacros {
 
   override final def fromPeer(jfree: JFreeChart): PieChart = new PieChart {
     override final val peer = jfree
@@ -36,8 +36,9 @@ object PieChart extends ChartCompanion[PiePlot,PieChart] with DocMacros {
     * @usecase def apply(dataset: PieDataset, title: String, legend: Boolean, tooltips: Boolean): PieChart = ???
     *   @inheritdoc
     */
-  def apply(dataset: PieDataset, title: String = "", legend: Boolean = true, tooltips: Boolean = true)
+  def apply[A: ToPieDataset](data: A, title: String = "", legend: Boolean = true, tooltips: Boolean = true)
     (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): PieChart = {
+    val dataset = data.toDataset
 
     val plot = new PiePlot(dataset)
     plot.setLabelGenerator(new StandardPieSectionLabelGenerator())
@@ -61,8 +62,9 @@ object PieChart extends ChartCompanion[PiePlot,PieChart] with DocMacros {
     * @usecase def threeDimensional(dataset: PieDataset, title: String, legend: Boolean, tooltips: Boolean): PieChart = ???
     *   @inheritdoc
     */
-  def threeDimensional(dataset: PieDataset, title: String = "", legend: Boolean = true, tooltips: Boolean = true)
+  def threeDimensional[A: ToPieDataset](data: A, title: String = "", legend: Boolean = true, tooltips: Boolean = true)
     (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): PieChart = {
+    val dataset = data.toDataset
 
     val plot = new PiePlot3D(dataset)
     plot.setInsets(new RectangleInsets(0.0, 5.0, 5.0, 5.0))

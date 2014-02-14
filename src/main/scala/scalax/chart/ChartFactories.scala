@@ -1,15 +1,12 @@
 package scalax.chart
 
 import org.jfree.chart.ChartTheme
-import org.jfree.chart.JFreeChart
 import org.jfree.chart.StandardChartTheme
 import org.jfree.chart.axis._
 import org.jfree.chart.labels._
 import org.jfree.chart.renderer.category._
 import org.jfree.chart.renderer.xy._
-import org.jfree.data.statistics._
 import org.jfree.data.time._
-import org.jfree.data.xy._
 import org.jfree.ui._
 import org.jfree.util._
 
@@ -53,7 +50,7 @@ object ChartFactories extends ChartFactories
   * implicit val theme = org.jfree.chart.StandardChartTheme.createDarknessTheme
   * }}}
   */
-trait ChartFactories extends DocMacros {
+trait ChartFactories extends DatasetConversions with DocMacros {
 
   // -----------------------------------------------------------------------------------------------
   // some small helpers
@@ -89,7 +86,7 @@ trait ChartFactories extends DocMacros {
 
     /** Creates a new chart that represents categorized numeric data with an area.
       *
-      * @param dataset         $data
+      * @param data            $data
       * @param title           $title
       * @param domainAxisLabel $domainAxisLabel
       * @param rangeAxisLabel  $rangeAxisLabel
@@ -98,7 +95,7 @@ trait ChartFactories extends DocMacros {
       * @param tooltips        $tooltips
       * @param theme           $theme
       */
-    def apply(dataset: CategoryDataset,
+    def apply[A: ToCategoryDataset](data: A,
               title: String = "",
               domainAxisLabel: String = "",
               rangeAxisLabel: String = "",
@@ -106,6 +103,8 @@ trait ChartFactories extends DocMacros {
               legend: Boolean = true,
               tooltips: Boolean = false)
              (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): CategoryChart = {
+
+      val dataset = data.toDataset
 
       val domainAxis = new CategoryAxis(domainAxisLabel)
       domainAxis.setCategoryMargin(0.0)
@@ -123,7 +122,7 @@ trait ChartFactories extends DocMacros {
 
     /** Creates a new chart that represents categorized numeric data with stacked areas.
       *
-      * @param dataset         $data
+      * @param data            $data
       * @param title           $title
       * @param domainAxisLabel $domainAxisLabel
       * @param rangeAxisLabel  $rangeAxisLabel
@@ -132,7 +131,7 @@ trait ChartFactories extends DocMacros {
       * @param tooltips        $tooltips
       * @param theme           $theme
       */
-    def stacked(dataset: CategoryDataset,
+    def stacked[A: ToCategoryDataset](data: A,
                 title: String = "",
                 domainAxisLabel: String = "",
                 rangeAxisLabel: String = "",
@@ -140,6 +139,8 @@ trait ChartFactories extends DocMacros {
                 legend: Boolean = true,
                 tooltips: Boolean = false)
                (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): CategoryChart = {
+
+      val dataset = data.toDataset
 
       val domainAxis = new CategoryAxis(domainAxisLabel)
       domainAxis.setCategoryMargin(0.0)
@@ -162,7 +163,7 @@ trait ChartFactories extends DocMacros {
 
     /** Creates a new chart that represents categorized numeric data with bars.
       *
-      * @param dataset         $data
+      * @param data            $data
       * @param title           $title
       * @param domainAxisLabel $domainAxisLabel
       * @param rangeAxisLabel  $rangeAxisLabel
@@ -171,7 +172,7 @@ trait ChartFactories extends DocMacros {
       * @param tooltips        $tooltips
       * @param theme           $theme
       */
-    def apply(dataset: CategoryDataset,
+    def apply[A: ToCategoryDataset](data: A,
               title: String = "",
               domainAxisLabel: String = "",
               rangeAxisLabel: String = "",
@@ -179,6 +180,8 @@ trait ChartFactories extends DocMacros {
               legend: Boolean = true,
               tooltips: Boolean = false)
              (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): CategoryChart = {
+
+      val dataset = data.toDataset
 
       val domainAxis = new CategoryAxis(domainAxisLabel)
       val rangeAxis = new NumberAxis(rangeAxisLabel)
@@ -203,7 +206,7 @@ trait ChartFactories extends DocMacros {
 
     /** Creates a new chart that represents categorized numeric data with stacked bars.
       *
-      * @param dataset         $data
+      * @param data            $data
       * @param title           $title
       * @param domainAxisLabel $domainAxisLabel
       * @param rangeAxisLabel  $rangeAxisLabel
@@ -212,7 +215,7 @@ trait ChartFactories extends DocMacros {
       * @param tooltips        $tooltips
       * @param theme           $theme
       */
-    def stacked(dataset: CategoryDataset,
+    def stacked[A: ToCategoryDataset](data: A,
                 title: String = "",
                 domainAxisLabel: String = "",
                 rangeAxisLabel: String = "",
@@ -220,6 +223,8 @@ trait ChartFactories extends DocMacros {
                 legend: Boolean = true,
                 tooltips: Boolean = false)
                (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): CategoryChart = {
+
+      val dataset = data.toDataset
 
       val domainAxis = new CategoryAxis(domainAxisLabel)
       val rangeAxis = new NumberAxis(rangeAxisLabel)
@@ -235,7 +240,7 @@ trait ChartFactories extends DocMacros {
 
     /** Creates a new chart that represents categorized numeric data with three dimensional bars.
       *
-      * @param dataset         $data
+      * @param data            $data
       * @param title           $title
       * @param domainAxisLabel $domainAxisLabel
       * @param rangeAxisLabel  $rangeAxisLabel
@@ -244,7 +249,7 @@ trait ChartFactories extends DocMacros {
       * @param tooltips        $tooltips
       * @param theme           $theme
       */
-    def threeDimensional(dataset: CategoryDataset,
+    def threeDimensional[A: ToCategoryDataset](data: A,
                          title: String = "",
                          domainAxisLabel: String = "",
                          rangeAxisLabel: String = "",
@@ -252,6 +257,8 @@ trait ChartFactories extends DocMacros {
                          legend: Boolean = true,
                          tooltips: Boolean = false)
                         (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): CategoryChart = {
+
+      val dataset = data.toDataset
 
       val domainAxis = new CategoryAxis3D(domainAxisLabel)
       val rangeAxis = new NumberAxis3D(rangeAxisLabel)
@@ -272,7 +279,7 @@ trait ChartFactories extends DocMacros {
 
     /** Creates a new chart that represents categorized numeric data with three dimensional bars.
       *
-      * @param dataset         $data
+      * @param data            $data
       * @param title           $title
       * @param domainAxisLabel $domainAxisLabel
       * @param rangeAxisLabel  $rangeAxisLabel
@@ -281,7 +288,7 @@ trait ChartFactories extends DocMacros {
       * @param tooltips        $tooltips
       * @param theme           $theme
       */
-    def threeDimensionalStacked(dataset: CategoryDataset,
+    def threeDimensionalStacked[A: ToCategoryDataset](data: A,
                                 title: String = "",
                                 domainAxisLabel: String = "",
                                 rangeAxisLabel: String = "",
@@ -289,6 +296,8 @@ trait ChartFactories extends DocMacros {
                                 legend: Boolean = true,
                                 tooltips: Boolean = false)
                                (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): CategoryChart = {
+
+      val dataset = data.toDataset
 
       val domainAxis = new CategoryAxis3D(domainAxisLabel)
       val rangeAxis = new NumberAxis3D(rangeAxisLabel)
@@ -310,19 +319,21 @@ trait ChartFactories extends DocMacros {
 
     /** Creates a new box and whisker chart.
       *
-      * @param dataset         $data
+      * @param data            $data
       * @param title           $title
       * @param domainAxisLabel $domainAxisLabel
       * @param rangeAxisLabel  $rangeAxisLabel
       * @param legend          $legend
       * @param theme           $theme
       */
-    def apply(dataset: BoxAndWhiskerCategoryDataset,
+    def apply[A: ToBoxAndWhiskerCategoryDataset](data: A,
               title: String = "",
               domainAxisLabel: String = "",
               rangeAxisLabel: String = "",
               legend: Boolean = true)
              (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): CategoryChart = {
+
+      val dataset = data.toDataset
 
       val domainAxis = new CategoryAxis(domainAxisLabel)
       val rangeAxis = new NumberAxis(rangeAxisLabel)
@@ -343,7 +354,7 @@ trait ChartFactories extends DocMacros {
 
     /** Creates a new chart that represents categorized numeric values with a line.
       *
-      * @param dataset         $data
+      * @param data            $data
       * @param title           $title
       * @param domainAxisLabel $domainAxisLabel
       * @param rangeAxisLabel  $rangeAxisLabel
@@ -352,7 +363,7 @@ trait ChartFactories extends DocMacros {
       * @param tooltips        $tooltips
       * @param theme           $theme
       */
-    def apply(dataset: CategoryDataset,
+    def apply[A: ToCategoryDataset](data: A,
               title: String = "",
               domainAxisLabel: String = "",
               rangeAxisLabel: String = "",
@@ -360,6 +371,8 @@ trait ChartFactories extends DocMacros {
               legend: Boolean = true,
               tooltips: Boolean = false)
              (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): CategoryChart = {
+
+      val dataset = data.toDataset
 
       val domainAxis = new CategoryAxis(domainAxisLabel)
       val rangeAxis = new NumberAxis(rangeAxisLabel)
@@ -376,7 +389,7 @@ trait ChartFactories extends DocMacros {
     /** Creates a new chart that represents categorized numeric values with three dimensional a
       * line.
       *
-      * @param dataset         $data
+      * @param data            $data
       * @param title           $title
       * @param domainAxisLabel $domainAxisLabel
       * @param rangeAxisLabel  $rangeAxisLabel
@@ -385,7 +398,7 @@ trait ChartFactories extends DocMacros {
       * @param tooltips        $tooltips
       * @param theme           $theme
       */
-    def threeDimensional(dataset: CategoryDataset,
+    def threeDimensional[A: ToCategoryDataset](data: A,
                          title: String = "",
                          domainAxisLabel: String = "",
                          rangeAxisLabel: String = "",
@@ -393,6 +406,8 @@ trait ChartFactories extends DocMacros {
                          legend: Boolean = true,
                          tooltips: Boolean = false)
                         (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): CategoryChart = {
+
+      val dataset = data.toDataset
 
       val domainAxis = new CategoryAxis3D(domainAxisLabel)
       val rangeAxis = new NumberAxis3D(rangeAxisLabel)
@@ -417,7 +432,7 @@ trait ChartFactories extends DocMacros {
       * `TimeSeriesCollection` or `TimeTableXYDataset` the domain axis will correctly be set to a
       * `DateAxis`.
       *
-      * @param dataset         $data
+      * @param data            $data
       * @param title           $title
       * @param domainAxisLabel $domainAxisLabel
       * @param rangeAxisLabel  $rangeAxisLabel
@@ -426,7 +441,7 @@ trait ChartFactories extends DocMacros {
       * @param tooltips        $tooltips
       * @param theme           $theme
       */
-    def apply(dataset: XYDataset,
+    def apply[A: ToXYDataset](data: A,
               title: String = "",
               domainAxisLabel: String = "",
               rangeAxisLabel: String = "",
@@ -434,6 +449,8 @@ trait ChartFactories extends DocMacros {
               legend: Boolean = true,
               tooltips: Boolean = false)
              (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): XYChart = {
+
+      val dataset = data.toDataset
 
       val dateAxis = needsDateAxis(dataset)
 
@@ -455,7 +472,7 @@ trait ChartFactories extends DocMacros {
       * If the input dataset is an instance of a `TimeTableXYDataset` the domain axis will correctly
       * be set to a `DateAxis`.
       *
-      * @param dataset         $data
+      * @param data            $data
       * @param title           $title
       * @param domainAxisLabel $domainAxisLabel
       * @param rangeAxisLabel  $rangeAxisLabel
@@ -464,7 +481,7 @@ trait ChartFactories extends DocMacros {
       * @param tooltips        $tooltips
       * @param theme           $theme
       */
-    def stacked(dataset: TableXYDataset,
+    def stacked[A: ToTableXYDataset](data: A,
                 title: String = "",
                 domainAxisLabel: String = "",
                 rangeAxisLabel: String = "",
@@ -472,6 +489,8 @@ trait ChartFactories extends DocMacros {
                 legend: Boolean = true,
                 tooltips: Boolean = false)
                (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): XYChart = {
+
+      val dataset = data.toDataset
 
       val dateAxis = needsDateAxis(dataset)
 
@@ -498,7 +517,7 @@ trait ChartFactories extends DocMacros {
       * `TimeSeriesCollection` or `TimeTableXYDataset` the domain axis will correctly be set to a
       * `DateAxis`.
       *
-      * @param dataset         $data
+      * @param data            $data
       * @param title           $title
       * @param domainAxisLabel $domainAxisLabel
       * @param rangeAxisLabel  $rangeAxisLabel
@@ -507,7 +526,7 @@ trait ChartFactories extends DocMacros {
       * @param tooltips        $tooltips
       * @param theme           $theme
       */
-    def stepped(dataset: XYDataset,
+    def stepped[A: ToXYDataset](data: A,
                 title: String = "",
                 domainAxisLabel: String = "",
                 rangeAxisLabel: String = "",
@@ -515,6 +534,8 @@ trait ChartFactories extends DocMacros {
                 legend: Boolean = true,
                 tooltips: Boolean = false)
                (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): XYChart = {
+
+      val dataset = data.toDataset
 
       val dateAxis = needsDateAxis(dataset)
 
@@ -543,7 +564,7 @@ trait ChartFactories extends DocMacros {
       * `TimeSeriesCollection` or `TimeTableXYDataset` the domain axis will correctly be set to a
       * `DateAxis`.
       *
-      * @param dataset         $data
+      * @param data            $data
       * @param title           $title
       * @param domainAxisLabel $domainAxisLabel
       * @param rangeAxisLabel  $rangeAxisLabel
@@ -552,7 +573,7 @@ trait ChartFactories extends DocMacros {
       * @param tooltips        $tooltips
       * @param theme           $theme
       */
-    def apply(dataset: IntervalXYDataset,
+    def apply[A: ToIntervalXYDataset](data: A,
               title: String = "",
               domainAxisLabel: String = "",
               rangeAxisLabel: String = "",
@@ -560,6 +581,8 @@ trait ChartFactories extends DocMacros {
               legend: Boolean = true,
               tooltips: Boolean = false)
              (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): XYChart = {
+
+      val dataset = data.toDataset
 
       val dateAxis = needsDateAxis(dataset)
 
@@ -580,7 +603,7 @@ trait ChartFactories extends DocMacros {
       * If the input dataset is an instance of a `TimeTableXYDataset` the domain axis will correctly
       * be set to a `DateAxis`.
       *
-      * @param dataset         $data
+      * @param data            $data
       * @param title           $title
       * @param domainAxisLabel $domainAxisLabel
       * @param rangeAxisLabel  $rangeAxisLabel
@@ -589,7 +612,7 @@ trait ChartFactories extends DocMacros {
       * @param tooltips        $tooltips
       * @param theme           $theme
       */
-    def stacked(dataset: IntervalXYDataset with TableXYDataset,
+    def stacked[A: ToTableXYDataset](data: A,
                 title: String = "",
                 domainAxisLabel: String = "",
                 rangeAxisLabel: String = "",
@@ -597,6 +620,8 @@ trait ChartFactories extends DocMacros {
                 legend: Boolean = true,
                 tooltips: Boolean = false)
                (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): XYChart = {
+
+      val dataset = data.toDataset
 
       val dateAxis = needsDateAxis(dataset)
 
@@ -619,19 +644,21 @@ trait ChartFactories extends DocMacros {
 
     /** Creates a new box and whisker chart.
       *
-      * @param dataset         $data
+      * @param data            $data
       * @param title           $title
       * @param domainAxisLabel $domainAxisLabel
       * @param rangeAxisLabel  $rangeAxisLabel
       * @param legend          $legend
       * @param theme           $theme
       */
-    def apply(dataset: BoxAndWhiskerXYDataset,
+    def apply[A: ToBoxAndWhiskerXYDataset](data: A,
               title: String = "",
               domainAxisLabel: String = "",
               rangeAxisLabel: String = "",
               legend: Boolean = false)
              (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): XYChart = {
+
+      val dataset = data.toDataset
 
       val domainAxis = new DateAxis(domainAxisLabel)
       val rangeAxis = new NumberAxis(rangeAxisLabel)
@@ -655,7 +682,7 @@ trait ChartFactories extends DocMacros {
       * `TimeSeriesCollection` or `TimeTableXYDataset` the domain axis will correctly be set to a
       * `DateAxis`.
       *
-      * @param dataset         $data
+      * @param data            $data
       * @param title           $title
       * @param domainAxisLabel $domainAxisLabel
       * @param rangeAxisLabel  $rangeAxisLabel
@@ -664,7 +691,7 @@ trait ChartFactories extends DocMacros {
       * @param tooltips        $tooltips
       * @param theme           $theme
       */
-    def apply(dataset: IntervalXYDataset,
+    def apply[A: ToIntervalXYDataset](data: A,
               title: String = "",
               domainAxisLabel: String = "",
               rangeAxisLabel: String = "",
@@ -672,6 +699,8 @@ trait ChartFactories extends DocMacros {
               legend: Boolean = true,
               tooltips: Boolean = false)
              (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): XYChart = {
+
+      val dataset = data.toDataset
 
       val dateAxis = needsDateAxis(dataset)
 
@@ -698,7 +727,7 @@ trait ChartFactories extends DocMacros {
       * `TimeSeriesCollection` or `TimeTableXYDataset` the domain axis will correctly be set to a
       * `DateAxis`.
       *
-      * @param dataset         $data
+      * @param data            $data
       * @param title           $title
       * @param domainAxisLabel $domainAxisLabel
       * @param rangeAxisLabel  $rangeAxisLabel
@@ -707,7 +736,7 @@ trait ChartFactories extends DocMacros {
       * @param tooltips        $tooltips
       * @param theme           $theme
       */
-    def apply(dataset: XYDataset,
+    def apply[A: ToXYDataset](data: A,
               title: String = "",
               domainAxisLabel: String = "",
               rangeAxisLabel: String = "",
@@ -715,6 +744,8 @@ trait ChartFactories extends DocMacros {
               legend: Boolean = true,
               tooltips: Boolean = false)
              (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): XYChart = {
+
+      val dataset = data.toDataset
 
       val dateAxis = needsDateAxis(dataset)
 

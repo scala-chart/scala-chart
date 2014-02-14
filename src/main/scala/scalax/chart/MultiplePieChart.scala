@@ -39,7 +39,7 @@ abstract class MultiplePieChart protected () extends Chart[MultiplePiePlot]
   * @define chart multiple pie chart
   * @define Chart MultiplePieChart
   */
-object MultiplePieChart extends ChartCompanion[MultiplePiePlot,MultiplePieChart] {
+object MultiplePieChart extends ChartCompanion[MultiplePiePlot,MultiplePieChart] with CategoryDatasetConversions {
 
   override final def fromPeer(jfree: JFreeChart): MultiplePieChart = new MultiplePieChart {
     override final val peer = jfree
@@ -59,8 +59,9 @@ object MultiplePieChart extends ChartCompanion[MultiplePiePlot,MultiplePieChart]
     * @usecase def apply(dataset: CategoryDataset, title: String, legend: Boolean, tooltips: Boolean): MultiplePieChart = ???
     *   @inheritdoc
     */
-  def apply(dataset: CategoryDataset, title: String = "", legend: Boolean = true, tooltips: Boolean = true)
+  def apply[A: ToCategoryDataset](data: A, title: String = "", legend: Boolean = true, tooltips: Boolean = true)
     (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): MultiplePieChart = {
+    val dataset = data.toDataset
 
     val plot = new MultiplePiePlot(dataset)
     plot.setDataExtractOrder(TableOrder.BY_COLUMN)
@@ -89,8 +90,9 @@ object MultiplePieChart extends ChartCompanion[MultiplePiePlot,MultiplePieChart]
     * @usecase def threeDimensional(dataset: CategoryDataset, title: String, legend: Boolean, tooltips: Boolean): MultiplePieChart = ???
     *   @inheritdoc
     */
-  def threeDimensional(dataset: CategoryDataset, title: String = "", legend: Boolean = true, tooltips: Boolean = true)
+  def threeDimensional[A: ToCategoryDataset](data: A, title: String = "", legend: Boolean = true, tooltips: Boolean = true)
     (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): MultiplePieChart = {
+    val dataset = data.toDataset
 
     val plot = new MultiplePiePlot(dataset)
     plot.setDataExtractOrder(TableOrder.BY_COLUMN)
