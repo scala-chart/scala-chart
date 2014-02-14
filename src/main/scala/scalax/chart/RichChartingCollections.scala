@@ -6,14 +6,13 @@ import java.util.Date
 
 import scala.collection.JavaConverters.seqAsJavaListConverter
 import scala.collection.GenTraversableOnce
+import scala.math.Numeric.Implicits._
 
 import org.jfree.data.category._
 import org.jfree.data.general._
 import org.jfree.data.statistics._
 import org.jfree.data.time._
 import org.jfree.data.xy._
-
-import Numeric.Implicits._
 
 /** $RichChartingCollectionsInfo */
 object RichChartingCollections extends RichChartingCollections

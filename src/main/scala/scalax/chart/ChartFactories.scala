@@ -94,6 +94,9 @@ trait ChartFactories extends DatasetConversions with DocMacros {
       * @param legend          $legend
       * @param tooltips        $tooltips
       * @param theme           $theme
+      *
+      * @usecase def apply(data: CategoryDataset): CategoryChart = ???
+      *   @inheritdoc
       */
     def apply[A: ToCategoryDataset](data: A,
               title: String = "",
@@ -130,6 +133,9 @@ trait ChartFactories extends DatasetConversions with DocMacros {
       * @param legend          $legend
       * @param tooltips        $tooltips
       * @param theme           $theme
+      *
+      * @usecase def stacked(data: CategoryDataset): CategoryChart = ???
+      *   @inheritdoc
       */
     def stacked[A: ToCategoryDataset](data: A,
                 title: String = "",
@@ -171,6 +177,9 @@ trait ChartFactories extends DatasetConversions with DocMacros {
       * @param legend          $legend
       * @param tooltips        $tooltips
       * @param theme           $theme
+      *
+      * @usecase def apply(data: CategoryDataset): CategoryChart = ???
+      *   @inheritdoc
       */
     def apply[A: ToCategoryDataset](data: A,
               title: String = "",
@@ -214,6 +223,9 @@ trait ChartFactories extends DatasetConversions with DocMacros {
       * @param legend          $legend
       * @param tooltips        $tooltips
       * @param theme           $theme
+      *
+      * @usecase def stacked(data: CategoryDataset): CategoryChart = ???
+      *   @inheritdoc
       */
     def stacked[A: ToCategoryDataset](data: A,
                 title: String = "",
@@ -248,6 +260,9 @@ trait ChartFactories extends DatasetConversions with DocMacros {
       * @param legend          $legend
       * @param tooltips        $tooltips
       * @param theme           $theme
+      *
+      * @usecase def threeDimensional(data: CategoryDataset): CategoryChart = ???
+      *   @inheritdoc
       */
     def threeDimensional[A: ToCategoryDataset](data: A,
                          title: String = "",
@@ -287,6 +302,9 @@ trait ChartFactories extends DatasetConversions with DocMacros {
       * @param legend          $legend
       * @param tooltips        $tooltips
       * @param theme           $theme
+      *
+      * @usecase def threeDimensionalStacked(data: CategoryDataset): CategoryChart = ???
+      *   @inheritdoc
       */
     def threeDimensionalStacked[A: ToCategoryDataset](data: A,
                                 title: String = "",
@@ -325,6 +343,9 @@ trait ChartFactories extends DatasetConversions with DocMacros {
       * @param rangeAxisLabel  $rangeAxisLabel
       * @param legend          $legend
       * @param theme           $theme
+      *
+      * @usecase def apply(data: BoxAndWhiskerCategoryDataset): CategoryChart = ???
+      *   @inheritdoc
       */
     def apply[A: ToBoxAndWhiskerCategoryDataset](data: A,
               title: String = "",
@@ -362,6 +383,9 @@ trait ChartFactories extends DatasetConversions with DocMacros {
       * @param legend          $legend
       * @param tooltips        $tooltips
       * @param theme           $theme
+      *
+      * @usecase def apply(data: CategoryDataset): CategoryChart = ???
+      *   @inheritdoc
       */
     def apply[A: ToCategoryDataset](data: A,
               title: String = "",
@@ -397,6 +421,9 @@ trait ChartFactories extends DatasetConversions with DocMacros {
       * @param legend          $legend
       * @param tooltips        $tooltips
       * @param theme           $theme
+      *
+      * @usecase def threeDimensional(data: CategoryDataset): CategoryChart = ???
+      *   @inheritdoc
       */
     def threeDimensional[A: ToCategoryDataset](data: A,
                          title: String = "",
@@ -440,6 +467,9 @@ trait ChartFactories extends DatasetConversions with DocMacros {
       * @param legend          $legend
       * @param tooltips        $tooltips
       * @param theme           $theme
+      *
+      * @usecase def apply(data: XYDataset): XYChart = ???
+      *   @inheritdoc
       */
     def apply[A: ToXYDataset](data: A,
               title: String = "",
@@ -480,6 +510,9 @@ trait ChartFactories extends DatasetConversions with DocMacros {
       * @param legend          $legend
       * @param tooltips        $tooltips
       * @param theme           $theme
+      *
+      * @usecase def stacked(data: TableXYDataset): XYChart = ???
+      *   @inheritdoc
       */
     def stacked[A: ToTableXYDataset](data: A,
                 title: String = "",
@@ -525,6 +558,9 @@ trait ChartFactories extends DatasetConversions with DocMacros {
       * @param legend          $legend
       * @param tooltips        $tooltips
       * @param theme           $theme
+      *
+      * @usecase def stepped(data: XYDataset): XYChart = ???
+      *   @inheritdoc
       */
     def stepped[A: ToXYDataset](data: A,
                 title: String = "",
@@ -572,6 +608,9 @@ trait ChartFactories extends DatasetConversions with DocMacros {
       * @param legend          $legend
       * @param tooltips        $tooltips
       * @param theme           $theme
+      *
+      * @usecase def apply(data: IntervalXYDataset): XYChart = ???
+      *   @inheritdoc
       */
     def apply[A: ToIntervalXYDataset](data: A,
               title: String = "",
@@ -611,6 +650,9 @@ trait ChartFactories extends DatasetConversions with DocMacros {
       * @param legend          $legend
       * @param tooltips        $tooltips
       * @param theme           $theme
+      *
+      * @usecase def stacked(data: TableXYDataset): XYChart = ???
+      *   @inheritdoc
       */
     def stacked[A: ToTableXYDataset](data: A,
                 title: String = "",
@@ -650,6 +692,9 @@ trait ChartFactories extends DatasetConversions with DocMacros {
       * @param rangeAxisLabel  $rangeAxisLabel
       * @param legend          $legend
       * @param theme           $theme
+      *
+      * @usecase def apply(data: BoxAndWhiskerXYDataset): XYChart = ???
+      *   @inheritdoc
       */
     def apply[A: ToBoxAndWhiskerXYDataset](data: A,
               title: String = "",
@@ -690,6 +735,9 @@ trait ChartFactories extends DatasetConversions with DocMacros {
       * @param legend          $legend
       * @param tooltips        $tooltips
       * @param theme           $theme
+      *
+      * @usecase def apply(data: IntervalXYDataset): XYChart = ???
+      *   @inheritdoc
       */
     def apply[A: ToIntervalXYDataset](data: A,
               title: String = "",
@@ -735,6 +783,9 @@ trait ChartFactories extends DatasetConversions with DocMacros {
       * @param legend          $legend
       * @param tooltips        $tooltips
       * @param theme           $theme
+      *
+      * @usecase def apply(data: XYDataset): XYChart = ???
+      *   @inheritdoc
       */
     def apply[A: ToXYDataset](data: A,
               title: String = "",

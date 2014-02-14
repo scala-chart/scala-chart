@@ -14,8 +14,12 @@ trait Imports {
   type Orientation = scala.swing.Orientation.Value
   val Orientation = scala.swing.Orientation
 
+  type BoxAndWhiskerCategoryDataset = org.jfree.data.statistics.BoxAndWhiskerCategoryDataset
+  type BoxAndWhiskerXYDataset = org.jfree.data.statistics.BoxAndWhiskerXYDataset
   type CategoryDataset = org.jfree.data.category.CategoryDataset
+  type IntervalXYDataset = org.jfree.data.xy.IntervalXYDataset
   type PieDataset = org.jfree.data.general.PieDataset
+  type TableXYDataset = org.jfree.data.xy.TableXYDataset
   type XYDataset = org.jfree.data.xy.XYDataset
   type XYSeries = org.jfree.data.xy.XYSeries
   type XYSeriesCollection = org.jfree.data.xy.XYSeriesCollection

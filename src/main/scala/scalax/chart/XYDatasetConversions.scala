@@ -5,10 +5,8 @@ import language.higherKinds
 import scala.collection.GenTraversableOnce
 import scala.math.Numeric.Implicits._
 
-import org.jfree.data.xy.IntervalXYDataset
-
-import Imports._
 import RichChartingCollections._
+import Imports._
 
 private[chart] trait XYDatasetConversions {
 

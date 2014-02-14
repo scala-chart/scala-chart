@@ -6,9 +6,8 @@ import java.util.Date
 
 import scala.collection.GenTraversableOnce
 
-import org.jfree.data.statistics._
-
 import RichChartingCollections._
+import Imports._
 
 private[chart] trait BoxAndWhiskerDatasetConversions {
 
