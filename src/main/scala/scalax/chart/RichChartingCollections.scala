@@ -351,16 +351,16 @@ trait RichChartingCollections {
       *   @inheritdoc
       */
     def toXYSeriesCollection(autoSort: Boolean = true, allowDuplicateXValues: Boolean = true)
-      (implicit eva: A => Comparable[A], numb: Numeric[B], numc: Numeric[C]): XYSeriesCollection = {
+      (implicit eva: A => Comparable[A], numb: Numeric[B], numc: Numeric[C]): IntervalXYDataset = {
 
       val seqop = (xs: List[XYSeries], catxys: (A,GenTraversableOnce[(B,C)])) => {
         val (category,xys) = catxys
         xys.toXYSeries(category, autoSort, allowDuplicateXValues) :: xs
       }
 
-      val seriess = trav.aggregate(List[XYSeries]())(seqop, _ ::: _).reverse
-
-      seriess.toXYSeriesCollection
+      DatasetConversions.ToIntervalXYDataset.CollOfXYSeriesToIntervalXYDataset toDataset {
+        trav.aggregate(List[XYSeries]())(seqop, _ ::: _).reverse
+      }
     }
 
   }
@@ -377,16 +377,16 @@ trait RichChartingCollections {
       *   @inheritdoc
       */
     def toYIntervalSeriesCollection(autoSort: Boolean = true, allowDuplicateXValues: Boolean = true)
-      (implicit eva: A => Comparable[_], evb: B => Double, evc: C => Double, evd: D => Double, eve: E => Double): YIntervalSeriesCollection = {
+      (implicit eva: A => Comparable[_], evb: B => Double, evc: C => Double, evd: D => Double, eve: E => Double): IntervalXYDataset = {
 
       val seqop = (l: List[YIntervalSeries], catvals: (A,GenTraversableOnce[(B,C,D,E)])) => {
         val (name,data) = catvals
         data.toYIntervalSeries(name, autoSort, allowDuplicateXValues) :: l
       }
 
-      val seriess = trav.aggregate(List[YIntervalSeries]())(seqop, _ ::: _).reverse
-
-      seriess.toYIntervalSeriesCollection
+      DatasetConversions.ToIntervalXYDataset.CollOfYIntervalSeriesToIntervalXYDataset toDataset {
+        trav.aggregate(List[YIntervalSeries]())(seqop, _ ::: _).reverse
+      }
     }
 
   }
@@ -403,16 +403,16 @@ trait RichChartingCollections {
       *   @inheritdoc
       */
     def toYIntervalSeriesCollection(autoSort: Boolean = true, allowDuplicateXValues: Boolean = true)
-      (implicit eva: A => Comparable[_], evb: B => Double, evc: C => Double, evd: D => Double, eve: E => Double): YIntervalSeriesCollection = {
+      (implicit eva: A => Comparable[_], evb: B => Double, evc: C => Double, evd: D => Double, eve: E => Double): IntervalXYDataset = {
 
       val seqop = (l: List[YIntervalSeries], catvals: (A,GenTraversableOnce[(B,(C,D,E))])) => {
         val (name,data) = catvals
         data.toYIntervalSeries(name, autoSort, allowDuplicateXValues) :: l
       }
 
-      val seriess = trav.aggregate(List[YIntervalSeries]())(seqop, _ ::: _).reverse
-
-      seriess.toYIntervalSeriesCollection
+      DatasetConversions.ToIntervalXYDataset.CollOfYIntervalSeriesToIntervalXYDataset toDataset {
+        trav.aggregate(List[YIntervalSeries]())(seqop, _ ::: _).reverse
+      }
     }
 
   }
@@ -451,54 +451,6 @@ trait RichChartingCollections {
       CategoryChart.fromPeer(new JFreeChart(combinedPlot))
     }
 
-  }
-
-  // -----------------------------------------------------------------------------------------------
-  // convert a collection of *Series to a *Collection / *Dataset
-  // -----------------------------------------------------------------------------------------------
-
-  /** Enriches a collection of `TimeSeries`. */
-  implicit class RichTimeSeriesCollection(trav: GenTraversableOnce[TimeSeries]) {
-    /** Converts this collection of `TimeSeries` to a `TimeSeriesCollection`. */
-    def toTimeSeriesCollection: TimeSeriesCollection = {
-      trav.foldLeft(new TimeSeriesCollection) { (coll, series) =>
-        coll addSeries series
-        coll
-      }
-    }
-  }
-
-  /** Enriches a collection of `XYSeries`. */
-  implicit class RichXYSeriesCollection(trav: GenTraversableOnce[XYSeries]) {
-    /** Converts this collection of `XYSeries` to a `XYSeriesCollection`. */
-    def toXYSeriesCollection: XYSeriesCollection = {
-      trav.foldLeft(new XYSeriesCollection) { (coll, series) =>
-        coll addSeries series
-        coll
-      }
-    }
-  }
-
-  /** Enriches a collection of `TimePeriodValues`. */
-  implicit class RichTimePeriodValuesCollection(trav: GenTraversableOnce[TimePeriodValues]) {
-    /** Converts this collection of `TimePeriodValues` to a `TimePeriodValuesCollection`. */
-    def toTimePeriodValuesCollection: TimePeriodValuesCollection = {
-      trav.foldLeft(new TimePeriodValuesCollection) { (coll, series) =>
-        coll addSeries series
-        coll
-      }
-    }
-  }
-
-  /** Enriches a collection of `YIntervalSeries`. */
-  implicit class RichYIntervalSeriesCollection(trav: GenTraversableOnce[YIntervalSeries]) {
-    /** Converts this collection of `YIntervalSeries` to a `YIntervalSeriesCollection`. */
-    def toYIntervalSeriesCollection: YIntervalSeriesCollection = {
-      trav.foldLeft(new YIntervalSeriesCollection) { (coll, series) =>
-        coll addSeries series
-        coll
-      }
-    }
   }
 
 }

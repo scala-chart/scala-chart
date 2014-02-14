@@ -20,9 +20,16 @@ trait Imports {
   type IntervalXYDataset = org.jfree.data.xy.IntervalXYDataset
   type PieDataset = org.jfree.data.general.PieDataset
   type TableXYDataset = org.jfree.data.xy.TableXYDataset
+  type TimePeriodValues = org.jfree.data.time.TimePeriodValues
+  type TimePeriodValuesCollection = org.jfree.data.time.TimePeriodValuesCollection
+  type TimeSeries = org.jfree.data.time.TimeSeries
+  type TimeSeriesCollection = org.jfree.data.time.TimeSeriesCollection
+  type TimeTableXYDataset = org.jfree.data.time.TimeTableXYDataset
   type XYDataset = org.jfree.data.xy.XYDataset
   type XYSeries = org.jfree.data.xy.XYSeries
   type XYSeriesCollection = org.jfree.data.xy.XYSeriesCollection
+  type YIntervalSeries = org.jfree.data.xy.YIntervalSeries
+  type YIntervalSeriesCollection = org.jfree.data.xy.YIntervalSeriesCollection
 
   type CategoryPlot = org.jfree.chart.plot.CategoryPlot
   type MultiplePiePlot = org.jfree.chart.plot.MultiplePiePlot

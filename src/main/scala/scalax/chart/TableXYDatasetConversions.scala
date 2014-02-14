@@ -3,10 +3,8 @@ package scalax.chart
 import language.higherKinds
 
 import scala.collection.GenTraversableOnce
-import scala.math.Numeric.Implicits._
 
-import org.jfree.data.time._
-import org.jfree.data.xy._
+import org.jfree.data.time.TimePeriod
 
 import Imports._
 import RichChartingCollections._

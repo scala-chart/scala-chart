@@ -6,7 +6,6 @@ import org.jfree.chart.axis._
 import org.jfree.chart.labels._
 import org.jfree.chart.renderer.category._
 import org.jfree.chart.renderer.xy._
-import org.jfree.data.time._
 import org.jfree.ui._
 import org.jfree.util._
 

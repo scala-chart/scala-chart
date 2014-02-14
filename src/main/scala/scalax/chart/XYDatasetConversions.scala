@@ -21,7 +21,7 @@ private[chart] trait XYDatasetConversions {
     }
 
     implicit def GenTraversableOnceXYSeriesToXYDataset[CC[X] <: GenTraversableOnce[X]]: ToXYDataset[CC[XYSeries]] =
-      ToIntervalXYDataset.GenTraversableOnceXYSeriesToIntervalXYDataset
+      ToIntervalXYDataset.CollOfXYSeriesToIntervalXYDataset
 
     implicit val XYSeriesToXYDataset: ToXYDataset[XYSeries] =
       ToIntervalXYDataset.XYSeriesToIntervalXYDataset
@@ -40,14 +40,48 @@ private[chart] trait XYDatasetConversions {
       def toDataset(a: A): X = f(a)
     }
 
-    implicit def GenTraversableOnceXYSeriesToIntervalXYDataset[CC[X] <: GenTraversableOnce[X]]: ToIntervalXYDataset[CC[XYSeries]] =
-      apply(_.toXYSeriesCollection)
-
     implicit val XYSeriesToIntervalXYDataset: ToIntervalXYDataset[XYSeries] =
       apply(new XYSeriesCollection(_))
 
     implicit def GenTraversableOnceToIntervalXYDataset[A: Numeric, B: Numeric, CC[X] <: GenTraversableOnce[X]]: ToIntervalXYDataset[CC[(A,B)]] =
       apply(_.toXYSeriesCollection())
+
+    implicit def CollOfXYSeriesToIntervalXYDataset[CC[X] <: GenTraversableOnce[X]]: ToIntervalXYDataset[CC[XYSeries]] =
+      apply(_.foldLeft(new XYSeriesCollection) { (coll, series) =>
+        coll addSeries series
+        coll
+      })
+
+    implicit val TimePeriodValuesToIntervalXYDataset: ToIntervalXYDataset[TimePeriodValues] =
+      apply(new TimePeriodValuesCollection(_))
+
+    implicit def CollOfTimePeriodValuesToIntervalXYDataset[CC[X] <: GenTraversableOnce[X]]: ToIntervalXYDataset[CC[TimePeriodValues]] =
+      apply(_.foldLeft(new TimePeriodValuesCollection) { (dataset,series) =>
+        dataset addSeries series
+        dataset
+      })
+
+    implicit val TimeSeriesToIntervalXYDataset: ToIntervalXYDataset[TimeSeries] =
+      apply(new TimeSeriesCollection(_))
+
+    implicit def CollOfTimeSeriesToIntervalXYDataset[CC[X] <: GenTraversableOnce[X]]: ToIntervalXYDataset[CC[TimeSeries]] =
+      apply(_.foldLeft(new TimeSeriesCollection) { (dataset, series) =>
+        dataset addSeries series
+        dataset
+      })
+
+    implicit val YIntervalSeriesToIntervalXYDataset: ToIntervalXYDataset[YIntervalSeries] =
+      apply { a =>
+        val dataset = new YIntervalSeriesCollection
+        dataset addSeries a
+        dataset
+      }
+
+    implicit def CollOfYIntervalSeriesToIntervalXYDataset[CC[X] <: GenTraversableOnce[X]]: ToIntervalXYDataset[CC[YIntervalSeries]] =
+      apply(_.foldLeft(new YIntervalSeriesCollection) { (coll, series) =>
+        coll addSeries series
+        coll
+      })
   }
 
 }
