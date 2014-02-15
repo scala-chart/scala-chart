@@ -6,7 +6,7 @@ lazy val chart = (
   ChartProject("scala-chart", ".")
   settings (
     autoAPIMappings := true,
-    libraryDependencies ++= Seq(swing % scalaVersion.value, jfreechart, specs2 % "test"),
+    libraryDependencies ++= Seq(jfreechart, itext, swing(scalaVersion.value)) ++ specs(scalaVersion.value),
     scalacOptions in (Compile, doc) <++= (baseDirectory) map { bd =>
       Seq("-sourcepath", bd.getAbsolutePath, "-doc-source-url", docURL)
     }
