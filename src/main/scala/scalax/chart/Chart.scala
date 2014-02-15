@@ -4,13 +4,23 @@ import scala.collection.JavaConverters._
 import scala.collection.Traversable
 import scala.collection.mutable.Buffer
 
-import org.jfree.chart.JFreeChart
+import org.jfree.chart.{ ChartPanel, JFreeChart }
 import org.jfree.chart.plot.Plot
 import org.jfree.chart.title.Title
+
+import com.lowagie.text.pdf.{ DefaultFontMapper, FontMapper }
 
 import Imports._
 
 /** Generic graphical representation of data.
+  *
+  * == Swing Integration ==
+  *
+  * $DisplayableChartInfo
+  *
+  * == Saving Charts ==
+  *
+  * $StorableChartInfo
   *
   * @tparam P used plot type
   */
@@ -88,6 +98,19 @@ abstract class Chart[P <: Plot] protected () extends DisplayableChart with Stora
       remove(n)
       peer.addSubtitle(n, newTitle)
     }
+  }
+
+}
+
+object Chart {
+
+  object Default {
+    def Height: Int = ChartPanel.DEFAULT_HEIGHT
+    def Width: Int = ChartPanel.DEFAULT_WIDTH
+
+    def Resolution: (Int,Int) = (Width,Height)
+
+    def FontMapper: FontMapper = new DefaultFontMapper
   }
 
 }

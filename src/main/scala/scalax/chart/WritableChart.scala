@@ -3,32 +3,37 @@ package scalax.chart
 import java.io.OutputStream
 
 import com.lowagie.text.{ Document, Rectangle }
-import com.lowagie.text.pdf.{ DefaultFontMapper, FontMapper, PdfWriter }
+import com.lowagie.text.pdf.{ FontMapper, PdfWriter }
 
 /** Provides methods for writing a chart to an `OutputStream`.
   *
   * @define fontMapper handles mappings between Java AWT Fonts and PDF fonts
   */
-trait WritableChart extends EncodableChart {
+private[chart] trait WritableChart extends EncodableChart {
 
   self: Chart[_] ⇒
 
-  /** Writes the chart as a JPEG to an output stream.
+  /** Writes the chart as a JPEG image to the output stream.
     *
     * @param os  stream to where will be written
     * @param dim $dim
+    *
+    * @usecase def writeAsJPEG(os: OutputStream): Unit
+    *   @inheritdoc
     */
-  def writeAsJPEG(os: OutputStream, dim: (Int,Int)) {
+  def writeAsJPEG(os: OutputStream, dim: (Int,Int) = Chart.Default.Resolution): Unit =
     os.write(encodeAsJPEG(dim))
-  }
 
-  /** Writes the chart as a PDF to an output stream.
+  /** Writes the chart as a PDF document to the output stream.
     *
     * @param os         stream to where will be written
     * @param dim        $dim
     * @param fontMapper $fontMapper
+    *
+    * @usecase def writeAsPDF(os: OutputStream): Unit
+    *   @inheritdoc
     */
-  def writeAsPDF(os: OutputStream, dim: (Int,Int), fontMapper: FontMapper = new DefaultFontMapper) {
+  def writeAsPDF(os: OutputStream, dim: (Int,Int) = Chart.Default.Resolution, fontMapper: FontMapper = Chart.Default.FontMapper): Unit = {
     val (width,height) = dim
 
     val pagesize = new Rectangle(width, height)
@@ -51,13 +56,15 @@ trait WritableChart extends EncodableChart {
     }
   }
 
-  /** Writes the chart as a PNG to an output stream.
+  /** Writes the chart as a PNG image to the output stream.
     *
     * @param os  stream to where will be written
     * @param dim $dim
+    *
+    * @usecase def writeAsPNG(os: OutputStream): Unit
+    *   @inheritdoc
     */
-  def writeAsPNG(os: OutputStream, dim: (Int,Int)) {
+  def writeAsPNG(os: OutputStream, dim: (Int,Int) = Chart.Default.Resolution): Unit =
     os.write(encodeAsPNG(dim))
-  }
 
 }
