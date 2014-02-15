@@ -22,6 +22,17 @@ import org.jfree.chart.plot.PlotOrientation
   * val dataset = data.toXYSeriesCollection("some points")
   * val chart = XYLineChart(dataset, title = "My Chart of Some Points")
   * }}}
+  *
+  * == API Getting To Know Starting Points ==
+  *
+  * If you would like to get into this API you should start with the following members (generally,
+  * these mix in a lot of others, so I recommended hitting '''Hide All''' and then iteratively
+  * browse through the '''Inherited''' members):
+  *
+  *  - [[RichChartingCollections]] how to convert data to create charts
+  *  - [[ChartFactories]] entry point for most chart factories
+  *  - [[Chart]] as the base wrapper class
+  *  - [[Charting]] as the base import
   */
 package object chart {
 
@@ -29,22 +40,22 @@ package object chart {
   // more meaningful function aliases
   // -----------------------------------------------------------------------------------------------
 
-  /** Function alias for creating item labels for [[CategoryChart]]s. */
+  /** Function alias for creating item labels for category charts. */
   type CategoryItemLabelGenerator = (org.jfree.data.category.CategoryDataset,Int,Int) ⇒ String
 
-  /** Function alias for creating tooltips for [[CategoryChart]]s. */
+  /** Function alias for creating tooltips for category charts. */
   type CategoryToolTipGenerator = (org.jfree.data.category.CategoryDataset,Int,Int) ⇒ String
 
-  /** Function alias for creating item labels for [[PieChartLike]] charts. */
+  /** Function alias for creating item labels for pie charts. */
   type PieSectionLabelGenerator = (org.jfree.data.general.PieDataset,Comparable[_]) ⇒ String
 
-  /** Function alias for creating tooltips for [[PieChartLike]] charts. */
+  /** Function alias for creating tooltips for pie charts. */
   type PieToolTipGenerator = (org.jfree.data.general.PieDataset,Comparable[_]) ⇒ String
 
-  /** Function alias for creating item labels for [[XYChart]]s. */
+  /** Function alias for creating item labels for xy charts. */
   type XYItemLabelGenerator = (org.jfree.data.xy.XYDataset,Int,Int) ⇒ String
 
-  /** Function alias for creating tooltips for [[XYChart]]s. */
+  /** Function alias for creating tooltips for xy charts. */
   type XYToolTipGenerator = (org.jfree.data.xy.XYDataset,Int,Int) ⇒ String
 
   // -----------------------------------------------------------------------------------------------
