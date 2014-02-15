@@ -23,6 +23,9 @@ private[chart] trait CategoryDatasetConversions {
     }
 
     implicit def Tuple2sToCategoryDataset[A <% Comparable[A],B: Numeric,CC[X] <: GenTraversableOnce[X]]: ToCategoryDataset[CC[(A,B)]] =
+      apply(_.toCategoryDataset())
+
+    implicit def CatTuple2sToCategoryDataset[A <% Comparable[A],B <% Comparable[B], C: Numeric, CC[X] <: GenTraversableOnce[X], DD[X] <: GenTraversableOnce[X]]: ToCategoryDataset[CC[(A,DD[(B,C)])]] =
       apply(_.toCategoryDataset)
 
     implicit def Tuple3sToCategoryDataset[A <% Comparable[A],B <% Comparable[B], C: Numeric, CC[X] <: GenTraversableOnce[X]]: ToCategoryDataset[CC[(A,B,C)]] =

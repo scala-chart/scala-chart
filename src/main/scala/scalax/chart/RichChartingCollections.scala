@@ -22,7 +22,7 @@ object RichChartingCollections extends RichChartingCollections
   * @define RichChartingCollectionsInfo Contains enrichments for collections for conversions to
   * datasets. To see which conversions are provided have a look at the classes defined below.
   *
-  * @define name the name of the dataset
+  * @define seriesname the name of the series (will show in the legend)
   *
   * @define autoSort whether or not the items in the series are sorted
   *
@@ -38,22 +38,26 @@ trait RichChartingCollections {
 
     /** Converts this collection to a `BoxAndWhiskerCategoryDataset`.
       *
-      * @usecase def toBoxAndWhiskerCategoryDataset: BoxAndWhiskerCategoryDataset
+      * @param name $seriesname
+      *
+      * @usecase def toBoxAndWhiskerCategoryDataset(name: String): BoxAndWhiskerCategoryDataset
       *   @inheritdoc
       */
-    def toBoxAndWhiskerCategoryDataset[C: Numeric](implicit eva: A => Comparable[A], evc: B => Seq[C]): BoxAndWhiskerCategoryDataset = {
+    def toBoxAndWhiskerCategoryDataset[C: Numeric](name: Comparable[_] = "")(implicit eva: A => Comparable[A], evc: B => Seq[C]): BoxAndWhiskerCategoryDataset = {
       trav.foldLeft(new DefaultBoxAndWhiskerCategoryDataset()) { case (dataset,(category,values)) =>
-        dataset.add(calculateBoxAndWhiskerStatistics(values), category, "")
+        dataset.add(calculateBoxAndWhiskerStatistics(values), name, category)
         dataset
       }
     }
 
     /** Converts this collection to a `BoxAndWhiskerXYDataset`.
       *
-      * @usecase def toBoxAndWhiskerXYDataset(): BoxAndWhiskerXYDataset
+      * @param name $seriesname
+      *
+      * @usecase def toBoxAndWhiskerXYDataset(name: String): BoxAndWhiskerXYDataset
       *   @inheritdoc
       */
-    def toBoxAndWhiskerXYDataset[C: Numeric](name: String = "")(implicit eva: A => Date, evb: B => Seq[C]): BoxAndWhiskerXYDataset = {
+    def toBoxAndWhiskerXYDataset[C: Numeric](name: Comparable[_] = "")(implicit eva: A => Date, evb: B => Seq[C]): BoxAndWhiskerXYDataset = {
       trav.foldLeft(new DefaultBoxAndWhiskerXYDataset(name)) { case (dataset,(date,ys)) =>
         dataset.add(date, calculateBoxAndWhiskerStatistics(ys))
         dataset
@@ -62,17 +66,21 @@ trait RichChartingCollections {
 
     /** Converts this collection to a `CategoryDataset`.
       *
-      * @usecase def toCategoryDataset: CategoryDataset
+      * @param name $seriesname
+      *
+      * @usecase def toCategoryDataset(name: String): CategoryDataset
       *   @inheritdoc
       */
-    def toCategoryDataset(implicit eva: A => Comparable[A], numb: Numeric[B]): CategoryDataset = {
+    def toCategoryDataset(name: Comparable[_] = "")(implicit eva: A => Comparable[A], numb: Numeric[B]): CategoryDataset = {
       trav.foldLeft(new DefaultCategoryDataset) { case (dataset,(category,value)) =>
-        dataset.addValue(value.toDouble, category, "")
+        dataset.addValue(value.toDouble, name, category)
         dataset
       }
     }
 
     /** Converts this collection to a `PieDataset`.
+      *
+      * @param name $seriesname
       *
       * @usecase def toPieDataset: PieDataset
       *   @inheritdoc
@@ -86,9 +94,9 @@ trait RichChartingCollections {
 
     /** Converts this collection to `TimePeriodValues`.
       *
-      * @param name $name
+      * @param name $seriesname
       *
-      * @usecase def toTimePeriodValues(): TimePeriodValues
+      * @usecase def toTimePeriodValues(name: String): TimePeriodValues
       *   @inheritdoc
       */
     def toTimePeriodValues(name: String = "")(implicit eva: A => TimePeriod, numb: Numeric[B]): TimePeriodValues = {
@@ -100,9 +108,9 @@ trait RichChartingCollections {
 
     /** Converts this collection to a `TimePeriodValuesCollection`.
       *
-      * @param name $name
+      * @param name $seriesname
       *
-      * @usecase def toTimePeriodValuesCollection(): TimePeriodValuesCollection
+      * @usecase def toTimePeriodValuesCollection(name: String): TimePeriodValuesCollection
       *   @inheritdoc
       */
     def toTimePeriodValuesCollection(name: String = "")(implicit eva: A => TimePeriod, numb: Numeric[B]): TimePeriodValuesCollection =
@@ -110,9 +118,9 @@ trait RichChartingCollections {
 
     /** Converts this collection to a `TimeSeries`.
       *
-      * @param name $name
+      * @param name $seriesname
       *
-      * @usecase def toTimeSeries(): TimeSeries
+      * @usecase def toTimeSeries(name: String): TimeSeries
       *   @inheritdoc
       */
     def toTimeSeries(name: Comparable[_] = "")(implicit eva: A => RegularTimePeriod, numb: Numeric[B]): TimeSeries = {
@@ -124,9 +132,9 @@ trait RichChartingCollections {
 
     /** Converts this collection to a `TimeSeriesCollection`.
       *
-      * @param name $name
+      * @param name $seriesname
       *
-      * @usecase def toTimeSeriesCollection(): TimeSeriesCollection
+      * @usecase def toTimeSeriesCollection(name: String): TimeSeriesCollection
       *   @inheritdoc
       */
     def toTimeSeriesCollection(name: Comparable[_] = "")(implicit eva: A => RegularTimePeriod, numb: Numeric[B]): TimeSeriesCollection =
@@ -134,11 +142,11 @@ trait RichChartingCollections {
 
     /** Converts this collection to an `XYSeries`.
       *
-      * @param name $name
+      * @param name $seriesname
       * @param autoSort $autoSort
       * @param allowDuplicateXValues $allowDuplicateXValues
       *
-      * @usecase def toXYSeries(): XYSeries
+      * @usecase def toXYSeries(name: String): XYSeries
       *   @inheritdoc
       */
     def toXYSeries(name: Comparable[_] = "", autoSort: Boolean = true, allowDuplicateXValues: Boolean = true)
@@ -151,11 +159,11 @@ trait RichChartingCollections {
 
     /** Converts this collection to an `XYSeriesCollection`.
       *
-      * @param name $name
+      * @param name $seriesname
       * @param autoSort $autoSort
       * @param allowDuplicateXValues $allowDuplicateXValues
       *
-      * @usecase def toXYSeriesCollection(): XYSeriesCollection
+      * @usecase def toXYSeriesCollection(name: String): XYSeriesCollection
       *   @inheritdoc
       */
     def toXYSeriesCollection(name: Comparable[_] = "", autoSort: Boolean = true, allowDuplicateXValues: Boolean = true)
@@ -173,7 +181,7 @@ trait RichChartingCollections {
       *   @inheritdoc
       */
     def toCategoryDataset(implicit eva: A => Comparable[A], evb: B => Comparable[B], numc: Numeric[C]): CategoryDataset = {
-      trav.foldLeft(new DefaultCategoryDataset) { case (dataset,(category,series,value)) =>
+      trav.foldLeft(new DefaultCategoryDataset) { case (dataset,(series,category,value)) =>
         dataset.addValue(value.toDouble, series, category)
         dataset
       }
@@ -198,11 +206,11 @@ trait RichChartingCollections {
 
     /** Converts this collection to a `YIntervalSeries`.
       *
-      * @param name $name
+      * @param name $seriesname
       * @param autoSort $autoSort
       * @param allowDuplicateXValues $allowDuplicateXValues
       *
-      * @usecase def toYIntervalSeries(): YIntervalSeries
+      * @usecase def toYIntervalSeries(name: String): YIntervalSeries
       *   @inheritdoc
       */
     def toYIntervalSeries(name: Comparable[_] = "", autoSort: Boolean = true, allowDuplicateXValues: Boolean = true)
@@ -215,11 +223,11 @@ trait RichChartingCollections {
 
     /** Converts this collection to a `YIntervalSeriesCollection`.
       *
-      * @param name $name
+      * @param name $seriesname
       * @param autoSort $autoSort
       * @param allowDuplicateXValues $allowDuplicateXValues
       *
-      * @usecase def toYIntervalSeriesCollection(): YIntervalSeriesCollection
+      * @usecase def toYIntervalSeriesCollection(name: String): YIntervalSeriesCollection
       *   @inheritdoc
       */
     def toYIntervalSeriesCollection(name: Comparable[_] = "", autoSort: Boolean = true, allowDuplicateXValues: Boolean = true)
@@ -237,11 +245,11 @@ trait RichChartingCollections {
 
     /** Converts this collection to a `YIntervalSeries`.
       *
-      * @param name $name
+      * @param name $seriesname
       * @param autoSort $autoSort
       * @param allowDuplicateXValues $allowDuplicateXValues
       *
-      * @usecase def toYIntervalSeries(): YIntervalSeries
+      * @usecase def toYIntervalSeries(name: String): YIntervalSeries
       *   @inheritdoc
       */
     def toYIntervalSeries(name: Comparable[_] = "", autoSort: Boolean = true, allowDuplicateXValues: Boolean = true)
@@ -254,11 +262,11 @@ trait RichChartingCollections {
 
     /** Converts this collection to a `YIntervalSeriesCollection`.
       *
-      * @param name $name
+      * @param name $seriesname
       * @param autoSort $autoSort
       * @param allowDuplicateXValues $allowDuplicateXValues
       *
-      * @usecase def toYIntervalSeriesCollection(): YIntervalSeriesCollection
+      * @usecase def toYIntervalSeriesCollection(name: String): YIntervalSeriesCollection
       *   @inheritdoc
       */
     def toYIntervalSeriesCollection(name: Comparable[_] = "", autoSort: Boolean = true, allowDuplicateXValues: Boolean = true)
@@ -297,10 +305,10 @@ trait RichChartingCollections {
       *   @inheritdoc
       */
     def toCategoryDataset(implicit eva: A => Comparable[A], evb: B => Comparable[B], numc: Numeric[C]): CategoryDataset = {
-      trav.foldLeft(new DefaultCategoryDataset) { case (dataset,(upper,lvs)) =>
+      trav.foldLeft(new DefaultCategoryDataset) { case (dataset,(series,catvals)) =>
 
-        lvs.foldLeft(dataset) { case (dataset,(lower,value)) =>
-          dataset.addValue(value.toDouble, lower, upper)
+        catvals.foldLeft(dataset) { case (dataset,(category,value)) =>
+          dataset.addValue(value.toDouble, series, category)
           dataset
         }
 
@@ -331,9 +339,9 @@ trait RichChartingCollections {
       *   @inheritdoc
       */
     def toTimeTable(implicit eva: A => Comparable[A], evb: B => TimePeriod, numc: Numeric[C]): TimeTableXYDataset = {
-      trav.foldLeft(new TimeTableXYDataset) { case (dataset,(category,tvs)) =>
+      trav.foldLeft(new TimeTableXYDataset) { case (dataset,(category,timevals)) =>
 
-        tvs.foldLeft(dataset) { case (dataset,(time,value)) =>
+        timevals.foldLeft(dataset) { case (dataset,(time,value)) =>
           dataset.add(time,value.toDouble,category,false)
           dataset
         }

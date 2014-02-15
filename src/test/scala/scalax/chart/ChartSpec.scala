@@ -364,14 +364,15 @@ class ChartSpec extends Specification { def is = s2"""
   // -----------------------------------------------------------------------------------------------
 
   def points = Vector.tabulate(2)(i ⇒ (i,i))
+  def catpoints = Vector("foo" -> points)
 
   implicit val IntNumeric = Numeric.IntIsIntegral
 
   def bwcategorydataset = Vector.tabulate(2)(i => (i,i to i))
   def bwxydataset = Vector.tabulate(1)(i => (new java.util.Date(i.toLong * 1000),i to i))
-  def categorydataset = points
+  def categorydataset = catpoints
   def piedataset = points
-  def tablexydataset = for (category <- 'a' to 'b') yield (category.toString,points)
+  def tablexydataset = catpoints
   def xydataset = points
 
 }

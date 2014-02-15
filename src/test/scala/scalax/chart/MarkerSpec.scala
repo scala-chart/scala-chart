@@ -47,7 +47,7 @@ class MarkerSpec extends Specification { def is = s2"""
   // -----------------------------------------------------------------------------------------------
 
   def categoryplot = {
-    val data    = Seq((1,2),(2,4),(3,6),(4,8))
+    val data    = List("series" -> List("category" -> 1))
     val dataset = data.toCategoryDataset
     LineChart(dataset).plot
   }

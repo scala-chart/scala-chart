@@ -22,7 +22,7 @@ private[chart] trait BoxAndWhiskerDatasetConversions {
     }
 
     implicit def GenTraversableOnceToBoxAndWhiskerCategoryDataset[A <% Comparable[A],B: Numeric, BB <: Seq[B], CC[X] <: GenTraversableOnce[X]]: ToBoxAndWhiskerCategoryDataset[CC[(A,BB)]] =
-      apply(_.toBoxAndWhiskerCategoryDataset)
+      apply(_.toBoxAndWhiskerCategoryDataset())
   }
 
   abstract class ToBoxAndWhiskerXYDataset[A] protected () extends ToDataset[A] {
