@@ -3,7 +3,7 @@ package scalax.chart
 import Imports._
 
 /** Template trait for pie charts. */
-trait PieChartLike[P <: PiePlot]
+private[chart] trait PieChartLike[P <: PiePlot]
     extends Labels[PieSectionLabelGenerator]
     with Tooltips[PieToolTipGenerator] {
 
