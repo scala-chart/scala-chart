@@ -51,6 +51,8 @@ class DatasetSpec extends Specification { def is = s2"""
       from Coll[TimeSeries]                                                               $tsci1
 
   XYSeriesCollection
+    explicit conversion
+      from Coll[(A,B)]                                                                    $xysce1
     implicit conversion
       from Coll[XYSeries]                                                                 $xysci1
 
@@ -208,6 +210,12 @@ class DatasetSpec extends Specification { def is = s2"""
     val s2 = List(1 -> (3,2,4)).toYIntervalSeries("s2")
     val data = List(s1,s2)
     hasIXYD(data)
+  }
+
+  def xysce1 = {
+    val data = List((1,2))
+    val dataset = data.toXYSeriesCollection("series name")
+    dataset must beAnInstanceOf[XYSeriesCollection]
   }
 
   def xysci1 = {
