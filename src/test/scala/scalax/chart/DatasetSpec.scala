@@ -32,6 +32,8 @@ class DatasetSpec extends Specification { def is = s2"""
   PieDataset
     explicit conversion
       from Coll[(A,B)]                                                                    $pde1
+    implicit conversion
+      from Coll[(A,B)]                                                                    $pdi1
 
   TimePeriodValues
     explicit conversion
@@ -128,9 +130,14 @@ class DatasetSpec extends Specification { def is = s2"""
   }
 
   def pde1 = {
-    val data = List(("category",1))
+    val data = List("category" -> 1)
     val dataset = data.toPieDataset
     dataset must beAnInstanceOf[PieDataset]
+  }
+
+  def pdi1 = {
+    val data = List("category" -> 1)
+    hasIPD(data)
   }
 
   def tpve1 = {
@@ -214,10 +221,13 @@ class DatasetSpec extends Specification { def is = s2"""
   // util
   // -----------------------------------------------------------------------------------------------
 
-  def hasIXYD[A: ToIntervalXYDataset](a: A) =
-    a.toDataset must beAnInstanceOf[IntervalXYDataset]
-
   def hasICD[A: ToCategoryDataset](a: A) =
     a.toDataset must beAnInstanceOf[CategoryDataset]
+
+  def hasIPD[A: ToPieDataset](a: A) =
+    a.toDataset must beAnInstanceOf[PieDataset]
+
+  def hasIXYD[A: ToIntervalXYDataset](a: A) =
+    a.toDataset must beAnInstanceOf[IntervalXYDataset]
 
 }
