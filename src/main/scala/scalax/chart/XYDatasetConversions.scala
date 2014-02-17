@@ -46,6 +46,9 @@ private[chart] trait XYDatasetConversions {
     implicit def GenTraversableOnceToIntervalXYDataset[A: Numeric, B: Numeric, CC[X] <: GenTraversableOnce[X]]: ToIntervalXYDataset[CC[(A,B)]] =
       apply(_.toXYSeriesCollection())
 
+    implicit def CatCollToIntervalXYDataset[A <% Comparable[A], B: Numeric, C: Numeric, CC[X] <: GenTraversableOnce[X], DD[X] <: GenTraversableOnce[X]]: ToIntervalXYDataset[CC[(A,DD[(B,C)])]] =
+      apply(_.toXYSeriesCollection())
+
     implicit def CollOfXYSeriesToIntervalXYDataset[CC[X] <: GenTraversableOnce[X]]: ToIntervalXYDataset[CC[XYSeries]] =
       apply(_.foldLeft(new XYSeriesCollection) { (coll, series) =>
         coll addSeries series

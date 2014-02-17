@@ -56,6 +56,8 @@ class DatasetSpec extends Specification { def is = s2"""
       from Coll[(A,Coll[(B,C)])]                                                          $xysce2
     implicit conversion
       from Coll[XYSeries]                                                                 $xysci1
+      from Coll[(A,B)]                                                                    $xysci2
+      from Coll[(A,Coll[(B,C)])]                                                          $xysci3
 
   YIntervalSeries
     explicit conversion
@@ -170,6 +172,35 @@ class DatasetSpec extends Specification { def is = s2"""
     hasIXYD(List(data,data))
   }
 
+  def xysce1 = {
+    val data = List((1,2))
+    val dataset = data.toXYSeriesCollection("series name")
+    dataset must beAnInstanceOf[XYSeriesCollection]
+  }
+
+  def xysce2 = {
+    val data = List("series" -> List((1,2)))
+    val dataset = data.toXYSeriesCollection()
+    dataset must beAnInstanceOf[XYSeriesCollection]
+  }
+
+  def xysci1 = {
+    val s1 = List((1,2)).toXYSeries("s1")
+    val s2 = List((3,4)).toXYSeries("s2")
+    val data = List(s1,s2)
+    hasIXYD(data)
+  }
+
+  def xysci2 = {
+    val data = List((1,2))
+    hasIXYD(data)
+  }
+
+  def xysci3 = {
+    val data = List("series" -> List((1,2)))
+    hasIXYD(data)
+  }
+
   def yisec1 = {
     val data = List((1,3,2,4))
     val series = data.toYIntervalSeries()
@@ -209,25 +240,6 @@ class DatasetSpec extends Specification { def is = s2"""
   def yisci1 = {
     val s1 = List(1 -> (3,2,4)).toYIntervalSeries("s1")
     val s2 = List(1 -> (3,2,4)).toYIntervalSeries("s2")
-    val data = List(s1,s2)
-    hasIXYD(data)
-  }
-
-  def xysce1 = {
-    val data = List((1,2))
-    val dataset = data.toXYSeriesCollection("series name")
-    dataset must beAnInstanceOf[XYSeriesCollection]
-  }
-
-  def xysce2 = {
-    val data = List("series" -> List((1,2)))
-    val dataset = data.toXYSeriesCollection()
-    dataset must beAnInstanceOf[XYSeriesCollection]
-  }
-
-  def xysci1 = {
-    val s1 = List((1,2)).toXYSeries("s1")
-    val s2 = List((3,4)).toXYSeries("s2")
     val data = List(s1,s2)
     hasIXYD(data)
   }
