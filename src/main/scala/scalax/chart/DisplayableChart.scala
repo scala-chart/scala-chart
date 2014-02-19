@@ -22,7 +22,7 @@ import org.jfree.chart._
   * for interactive usage, e.g. when working with the Scala REPL. The simplest form is:
   *
   * {{{
-  * chart.show
+  * chart.show()
   * }}}
   *
   * @define title      the title of the enclosing frame
@@ -31,9 +31,6 @@ import org.jfree.chart._
 private[chart] trait DisplayableChart {
 
   chart: Chart[_] ⇒
-
-  /** Shows the chart in a window. */
-  def show: Unit = show()
 
   /** Shows the chart in a window.
     *

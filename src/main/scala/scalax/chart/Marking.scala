@@ -22,7 +22,7 @@ object Marking extends Marking
   *
   * chart.plot.domain.markers += 1
   *
-  * chart.show
+  * chart.show()
   * }}}
   */
 trait Marking extends Imports {

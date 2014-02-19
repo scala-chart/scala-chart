@@ -50,7 +50,7 @@ of your own code, you should name the other arguments:
 There are also some enrichments for the charts themselves to display them in a window or save them
 to disk:
 
-    chart.show
+    chart.show()
     chart.saveAsPNG(new java.io.File("/tmp/chart.png"), (1024,768))
     chart.saveAsJPEG(new java.io.File("/tmp/chart.jpg"), (1024,768))
     chart.saveAsPDF(new java.io.File("/tmp/chart.pdf"), (1024,768))
@@ -61,7 +61,7 @@ You can also do some animations, i.e. perform live updates on your datasets:
 
     val series = Seq[(Int,Int)]() toXYSeries "f(x) = sin(x)"
     val chart = XYLineChart(series)
-    chart.show
+    chart.show()
     for (x <- -4.0 to 4 by 0.1) {
       swing.Swing onEDT {
         series.add(x,math.sin(x))
