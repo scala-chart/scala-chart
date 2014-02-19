@@ -26,19 +26,19 @@ class MarkerSpec extends Specification { def is = s2"""
 
   def cp2 = {
     val plot = categoryplot
-    plot.range.markers += 3 += 3L += 3.0 += (1.0,2.0) += new ValueMarker(3.0)
+    plot.range.markers += 3 += 3L += 3.0 += ((1.0,2.0)) += new ValueMarker(3.0)
     plot.range.markers.iterator.length === 5
   }
 
   def xyp1 = {
     val plot = xyplot
-    plot.domain.markers += 3 += 3L += 3.0 += (1.0,2.0) += new ValueMarker(3.0)
+    plot.domain.markers += 3 += 3L += 3.0 += ((1.0,2.0)) += new ValueMarker(3.0)
     plot.domain.markers.iterator.length === 5
   }
 
   def xyp2 = {
     val plot = xyplot
-    plot.range.markers += 3 += 3L += 3.0 += (1.0,2.0) += new ValueMarker(3.0)
+    plot.range.markers += 3 += 3L += 3.0 += ((1.0,2.0)) += new ValueMarker(3.0)
     plot.range.markers.iterator.length === 5
   }
 
