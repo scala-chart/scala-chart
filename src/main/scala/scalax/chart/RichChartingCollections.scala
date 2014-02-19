@@ -294,6 +294,30 @@ trait RichChartingCollections {
       }
     }
 
+    /** Converts this collection to a `TimePeriodValuesCollection`.
+      *
+      * @usecase def toTimePeriodValuesCollection: TimePeriodValuesCollection
+      *   @inheritdoc
+      */
+    def toTimePeriodValuesCollection(implicit eva: A => String, evb: B => TimePeriod, numc: Numeric[C]): TimePeriodValuesCollection =
+      trav.foldLeft(new TimePeriodValuesCollection) { case (dataset,(category,timevals)) =>
+        val series = timevals.toTimePeriodValues(category)
+        dataset.addSeries(series)
+        dataset
+      }
+
+    /** Converts this collection to a `TimeSeriesCollection`.
+      *
+      * @usecase def toTimeSeriesCollection: TimeSeriesCollection
+      *   @inheritdoc
+      */
+    def toTimeSeriesCollection(implicit eva: A => Comparable[A], evb: B => RegularTimePeriod, numc: Numeric[C]): TimeSeriesCollection =
+      trav.foldLeft(new TimeSeriesCollection) { case (dataset,(category,timevals)) =>
+        val series = timevals.toTimeSeries(category)
+        dataset.addSeries(series)
+        dataset
+      }
+
     /** Converts this collection to a time table.
       *
       * @usecase def toTimeTable: TimeTableXYDataset

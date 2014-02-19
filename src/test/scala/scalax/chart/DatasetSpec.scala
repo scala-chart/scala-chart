@@ -40,6 +40,7 @@ class DatasetSpec extends Specification { def is = s2"""
       from Coll[(A,B)]                                                                    $tpv
     explicit conversion
       from Coll[(A,B)]                                                                    $tpvce1
+      from Coll[(A,Coll[(B,C)])]                                                          $tpvce2
     implicit conversion
       from TimePeriodValues                                                               $tpvci1
       from Coll[TimePeriodValues]                                                         $tpvci2
@@ -47,6 +48,9 @@ class DatasetSpec extends Specification { def is = s2"""
   TimeSeriesCollection
     TimeSeries
       from Coll[(A,B)]                                                                    $ts
+    explicit conversion
+      from Coll[(A,B)]                                                                    $tsce1
+      from Coll[(A,Coll[(B,C)])]                                                          $tsce2
     implicit conversion
       from TimeSeries                                                                     $tsci1
       from Coll[TimeSeries]                                                               $tsci2
@@ -154,7 +158,13 @@ class DatasetSpec extends Specification { def is = s2"""
 
   def tpvce1 = {
     val data = List((new Date,1))
-    val dataset = data.toTimePeriodValuesCollection()
+    val dataset = data.toTimePeriodValuesCollection("series name")
+    dataset must beAnInstanceOf[TimePeriodValuesCollection]
+  }
+
+  def tpvce2 = {
+    val data = List("series" -> List((new Date,1)))
+    val dataset = data.toTimePeriodValuesCollection
     dataset must beAnInstanceOf[TimePeriodValuesCollection]
   }
 
@@ -171,6 +181,18 @@ class DatasetSpec extends Specification { def is = s2"""
   def ts = {
     val series = List((new Date,1)) toTimeSeries "series name"
     series must beAnInstanceOf[TimeSeries]
+  }
+
+  def tsce1 = {
+    val data = List((new Date,1))
+    val dataset = data.toTimeSeriesCollection("series name")
+    dataset must beAnInstanceOf[TimeSeriesCollection]
+  }
+
+  def tsce2 = {
+    val data = List("series name" -> List((new Date,1)))
+    val dataset = data.toTimeSeriesCollection
+    dataset must beAnInstanceOf[TimeSeriesCollection]
   }
 
   def tsci1 = {
