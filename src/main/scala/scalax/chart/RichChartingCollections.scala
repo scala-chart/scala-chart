@@ -214,9 +214,9 @@ trait RichChartingCollections {
       *   @inheritdoc
       */
     def toYIntervalSeries(name: Comparable[_] = "", autoSort: Boolean = true, allowDuplicateXValues: Boolean = true)
-      (implicit eva: A => Double, evb: B => Double, evc: C => Double, evd: D => Double): YIntervalSeries = {
+      (implicit numa: Numeric[A], numb: Numeric[B], numc: Numeric[C], numd: Numeric[D]): YIntervalSeries = {
       trav.foldLeft(new YIntervalSeries(name, autoSort, allowDuplicateXValues)) { case (series,(x,y,yLow,yHigh)) =>
-        series.add(x,y,yLow,yHigh)
+        series.add(x.toDouble, y.toDouble, yLow.toDouble, yHigh.toDouble)
         series
       }
     }
@@ -231,46 +231,7 @@ trait RichChartingCollections {
       *   @inheritdoc
       */
     def toYIntervalSeriesCollection(name: Comparable[_] = "", autoSort: Boolean = true, allowDuplicateXValues: Boolean = true)
-      (implicit eva: A => Double, evb: B => Double, evc: C => Double, evd: D => Double): YIntervalSeriesCollection = {
-      val series = toYIntervalSeries(name, autoSort, allowDuplicateXValues)
-      val coll = new YIntervalSeriesCollection()
-      coll.addSeries(series)
-      coll
-    }
-
-  }
-
-  /** Enriches a collection of mapped 3-tuples. */
-  implicit class RichMappedTuple3s[A,B,C,D](trav: GenTraversableOnce[(A,(B,C,D))]) {
-
-    /** Converts this collection to a `YIntervalSeries`.
-      *
-      * @param name $seriesname
-      * @param autoSort $autoSort
-      * @param allowDuplicateXValues $allowDuplicateXValues
-      *
-      * @usecase def toYIntervalSeries(name: String): YIntervalSeries
-      *   @inheritdoc
-      */
-    def toYIntervalSeries(name: Comparable[_] = "", autoSort: Boolean = true, allowDuplicateXValues: Boolean = true)
-      (implicit eva: A => Double, evb: B => Double, evc: C => Double, evd: D => Double): YIntervalSeries = {
-      trav.foldLeft(new YIntervalSeries(name, autoSort, allowDuplicateXValues)) { case (series,(x,(y,yLow,yHigh))) =>
-        series.add(x,y,yLow,yHigh)
-        series
-      }
-    }
-
-    /** Converts this collection to a `YIntervalSeriesCollection`.
-      *
-      * @param name $seriesname
-      * @param autoSort $autoSort
-      * @param allowDuplicateXValues $allowDuplicateXValues
-      *
-      * @usecase def toYIntervalSeriesCollection(name: String): YIntervalSeriesCollection
-      *   @inheritdoc
-      */
-    def toYIntervalSeriesCollection(name: Comparable[_] = "", autoSort: Boolean = true, allowDuplicateXValues: Boolean = true)
-      (implicit eva: A => Double, evb: B => Double, evc: C => Double, evd: D => Double): YIntervalSeriesCollection = {
+      (implicit numa: Numeric[A], numb: Numeric[B], numc: Numeric[C], numd: Numeric[D]): YIntervalSeriesCollection = {
       val series = toYIntervalSeries(name, autoSort, allowDuplicateXValues)
       val coll = new YIntervalSeriesCollection()
       coll.addSeries(series)
@@ -385,35 +346,9 @@ trait RichChartingCollections {
       *   @inheritdoc
       */
     def toYIntervalSeriesCollection(autoSort: Boolean = true, allowDuplicateXValues: Boolean = true)
-      (implicit eva: A => Comparable[_], evb: B => Double, evc: C => Double, evd: D => Double, eve: E => Double): IntervalXYDataset = {
+      (implicit eva: A => Comparable[_], numb: Numeric[B], numc: Numeric[C], numd: Numeric[D], nume: Numeric[E]): IntervalXYDataset = {
 
       val seqop = (l: List[YIntervalSeries], catvals: (A,GenTraversableOnce[(B,C,D,E)])) => {
-        val (name,data) = catvals
-        data.toYIntervalSeries(name, autoSort, allowDuplicateXValues) :: l
-      }
-
-      DatasetConversions.ToIntervalXYDataset.CollOfYIntervalSeriesToIntervalXYDataset toDataset {
-        trav.aggregate(List[YIntervalSeries]())(seqop, _ ::: _).reverse
-      }
-    }
-
-  }
-
-  /** Enriches a collection of categorized mapped 3-tuples. */
-  implicit class RichCategorizedMappedTuple3s[A,B,C,D,E](trav: GenTraversableOnce[(A,GenTraversableOnce[(B,(C,D,E))])]) {
-
-    /** Converts this collection to a `YIntervalSeriesCollection`.
-      *
-      * @param autoSort $autoSort
-      * @param allowDuplicateXValues $allowDuplicateXValues
-      *
-      * @usecase def toYIntervalSeriesCollection(): YIntervalSeriesCollection
-      *   @inheritdoc
-      */
-    def toYIntervalSeriesCollection(autoSort: Boolean = true, allowDuplicateXValues: Boolean = true)
-      (implicit eva: A => Comparable[_], evb: B => Double, evc: C => Double, evd: D => Double, eve: E => Double): IntervalXYDataset = {
-
-      val seqop = (l: List[YIntervalSeries], catvals: (A,GenTraversableOnce[(B,(C,D,E))])) => {
         val (name,data) = catvals
         data.toYIntervalSeries(name, autoSort, allowDuplicateXValues) :: l
       }

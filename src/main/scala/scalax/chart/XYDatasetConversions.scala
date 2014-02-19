@@ -85,6 +85,12 @@ private[chart] trait XYDatasetConversions {
         coll addSeries series
         coll
       })
+
+    implicit def Tuple4sToIntervalXYDataset[A: Numeric, B: Numeric, C: Numeric, D: Numeric, CC[X] <: GenTraversableOnce[X]]: ToIntervalXYDataset[CC[(A,B,C,D)]] =
+      apply(_.toYIntervalSeriesCollection())
+
+    implicit def CategorizedTuple4sToIntervalXYDataset[A <% Comparable[A], B: Numeric, C: Numeric, D: Numeric, E: Numeric, CC[X] <: GenTraversableOnce[X], DD[X] <: GenTraversableOnce[X]]: ToIntervalXYDataset[CC[(A,DD[(B,C,D,E)])]] =
+      apply(_.toYIntervalSeriesCollection())
   }
 
 }

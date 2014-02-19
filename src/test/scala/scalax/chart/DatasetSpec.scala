@@ -72,6 +72,8 @@ class DatasetSpec extends Specification { def is = s2"""
     implicit conversion
       from YIntervalSeries                                                                $yisci1
       from Coll[YIntervalSeries]                                                          $yisci2
+      from Coll[(A,B,C,D)]                                                                $yisci3
+      from Coll[(A,Coll[(B,C,D,E)])]                                                      $yisci4
                                                                                                  """
   // -----------------------------------------------------------------------------------------------
   // tests
@@ -244,6 +246,16 @@ class DatasetSpec extends Specification { def is = s2"""
   def yisci2 = {
     val data = List((1,2,3,4)) toYIntervalSeries "series name"
     hasIXYD(List(data,data))
+  }
+
+  def yisci3 = {
+    val data = List((1,3,2,4))
+    hasIXYD(data)
+  }
+
+  def yisci4 = {
+    val data = List("series name" -> List((1,3,2,4)))
+    hasIXYD(data)
   }
 
   // -----------------------------------------------------------------------------------------------
