@@ -22,12 +22,10 @@ class DatasetSpec extends Specification { def is = s2"""
   CategoryDataset
     explicit conversion
       from Coll[(A,B)]                                                                    $cde1
-      from Coll[(A,B,C)]                                                                  $cde2
-      from Coll[(A,Coll[(B,C)])]                                                          $cde3
+      from Coll[(A,Coll[(B,C)])]                                                          $cde2
     implicit conversion
       from Coll[(A,B)]                                                                    $cdi1
-      from Coll[(A,B,C)]                                                                  $cdi2
-      from Coll[(A,Coll[(B,C)])]                                                          $cdi3
+      from Coll[(A,Coll[(B,C)])]                                                          $cdi2
 
   PieDataset
     explicit conversion
@@ -114,12 +112,6 @@ class DatasetSpec extends Specification { def is = s2"""
   }
 
   def cde2 = {
-    val data = List(("series","category",1))
-    val dataset = data.toCategoryDataset
-    dataset must beAnInstanceOf[CategoryDataset]
-  }
-
-  def cde3 = {
     val data = List("series" -> List("category" -> 1))
     val dataset = data.toCategoryDataset
     dataset must beAnInstanceOf[CategoryDataset]
@@ -131,11 +123,6 @@ class DatasetSpec extends Specification { def is = s2"""
   }
 
   def cdi2 = {
-    val data = List(("series","category",1))
-    hasICD(data)
-  }
-
-  def cdi3 = {
     val data = List("series" -> List("category" -> 1))
     hasICD(data)
   }

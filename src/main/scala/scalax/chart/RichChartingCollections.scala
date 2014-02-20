@@ -172,35 +172,6 @@ trait RichChartingCollections {
 
   }
 
-  /** Enriches a collection of data triples. */
-  implicit class RichTuple3s[A,B,C](trav: GenTraversableOnce[(A,B,C)]) {
-
-    /** Converts this collection to a `CategoryDataset`.
-      *
-      * @usecase def toCategoryDataset: CategoryDataset
-      *   @inheritdoc
-      */
-    def toCategoryDataset(implicit eva: A => Comparable[A], evb: B => Comparable[B], numc: Numeric[C]): CategoryDataset = {
-      trav.foldLeft(new DefaultCategoryDataset) { case (dataset,(series,category,value)) =>
-        dataset.addValue(value.toDouble, series, category)
-        dataset
-      }
-    }
-
-    /** Converts this collection to a `CategoryTableXYDataset`.
-      *
-      * @usecase def toCategoryTableXYDataset: CategoryTableXYDataset
-      *   @inheritdoc
-      */
-    def toCategoryTableXYDataset(implicit eva: A => String, numb: Numeric[B], numc: Numeric[C]): CategoryTableXYDataset = {
-      trav.foldLeft(new CategoryTableXYDataset) { case (dataset,(category,x,y)) =>
-        dataset.add(x.toDouble, y.toDouble, category, false)
-        dataset
-      }
-    }
-
-  }
-
   /** Enriches a collection of data 4-tuples. */
   implicit class RichTuple4s[A,B,C,D](trav: GenTraversableOnce[(A,B,C,D)]) {
 

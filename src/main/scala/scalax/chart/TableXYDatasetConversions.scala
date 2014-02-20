@@ -21,9 +21,6 @@ private[chart] trait TableXYDatasetConversions {
       def toDataset(a: A): X = f(a)
     }
 
-    implicit def Tuple3sToTableXYDataset[A <% String,B: Numeric, C: Numeric, CC[X] <: GenTraversableOnce[X]]: ToTableXYDataset[CC[(A,B,C)]] =
-      apply(_.toCategoryTableXYDataset)
-
     implicit def CategorizedTuple2sToTableXYDataset[A <% String,B: Numeric, C: Numeric, BB[X] <: GenTraversableOnce[X], CC[X] <: GenTraversableOnce[X]]: ToTableXYDataset[CC[(A,BB[(B,C)])]] =
       apply(_.toCategoryTableXYDataset)
 
