@@ -1,4 +1,4 @@
-package scalax.chart
+package org.example
 
 import language.implicitConversions
 

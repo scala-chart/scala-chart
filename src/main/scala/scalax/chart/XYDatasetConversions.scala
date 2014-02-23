@@ -4,7 +4,6 @@ package module
 import language.higherKinds
 
 import scala.collection.GenTraversableOnce
-import scala.math.Numeric.Implicits._
 
 import RichChartingCollections._
 import Imports._

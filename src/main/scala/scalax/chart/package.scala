@@ -10,7 +10,6 @@ import org.jfree.chart.plot.PlotOrientation
   * `javax.swing` package. The basic starting point is to use the following imports:
   *
   * {{{
-  * import scalax.chart._
   * import scalax.chart.api._
   * }}}
   *

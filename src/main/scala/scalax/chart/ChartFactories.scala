@@ -53,7 +53,8 @@ object ChartFactories extends ChartFactories
   * implicit val theme = org.jfree.chart.StandardChartTheme.createDarknessTheme
   * }}}
   */
-trait ChartFactories extends DatasetConversions with DocMacros {
+trait ChartFactories extends MultiplePieChartFactory with PieChartFactory with RingChartFactory
+    with DatasetConversions with DocMacros {
 
   // -----------------------------------------------------------------------------------------------
   // some small helpers

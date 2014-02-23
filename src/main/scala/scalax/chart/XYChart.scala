@@ -2,8 +2,6 @@ package scalax.chart
 
 import scala.swing.Orientable
 
-import org.jfree.chart.JFreeChart
-
 import module.Imports._
 
 /** Represents numeric data. */
@@ -58,6 +56,11 @@ abstract class XYChart protected () extends Chart[XYPlot] with Orientable with D
 
 }
 
+/** Low-level factory for ${chart}s.
+  *
+  * @define chart XY chart
+  * @define Chart XYChart
+  */
 object XYChart extends ChartCompanion[XYPlot,XYChart] {
   override final def fromPeer(jfree: JFreeChart): XYChart = new XYChart {
     override final val peer = jfree

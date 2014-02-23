@@ -12,6 +12,8 @@ abstract class ToDataset[A] protected () {
 abstract class ToDatasetCompanion[D <: Dataset, TD[X] <: ToDataset[X]] protected () {
   def apply[A,B <: D](f: A => B): TD[A]
 
+  @inline final def apply[A](implicit TD: TD[A]): TD[A] = TD
+
   final implicit def Identity[A <: D]: TD[A] =
-    apply(identity)
+    apply[A,A](identity)
 }

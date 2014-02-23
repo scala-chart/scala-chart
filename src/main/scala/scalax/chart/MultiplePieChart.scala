@@ -4,8 +4,8 @@ import org.jfree.chart._
 import org.jfree.chart.labels._
 import org.jfree.chart.plot.MultiplePiePlot
 import org.jfree.chart.title.TextTitle
-import org.jfree.ui._
-import org.jfree.util._
+import org.jfree.ui.RectangleEdge
+import org.jfree.util.TableOrder
 
 import module.Imports._
 
@@ -55,9 +55,6 @@ object MultiplePieChart extends ChartCompanion[MultiplePiePlot,MultiplePieChart]
     *
     * @usecase def apply(dataset: CategoryDataset): MultiplePieChart = ???
     *   @inheritdoc
-    *
-    * @usecase def apply(dataset: CategoryDataset, title: String, legend: Boolean, tooltips: Boolean): MultiplePieChart = ???
-    *   @inheritdoc
     */
   def apply[A: ToCategoryDataset](data: A, title: String = "", legend: Boolean = true, tooltips: Boolean = true)
     (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): MultiplePieChart = {
@@ -85,9 +82,6 @@ object MultiplePieChart extends ChartCompanion[MultiplePiePlot,MultiplePieChart]
     * @param theme    $theme
     *
     * @usecase def threeDimensional(dataset: CategoryDataset): MultiplePieChart = ???
-    *   @inheritdoc
-    *
-    * @usecase def threeDimensional(dataset: CategoryDataset, title: String, legend: Boolean, tooltips: Boolean): MultiplePieChart = ???
     *   @inheritdoc
     */
   def threeDimensional[A: ToCategoryDataset](data: A, title: String = "", legend: Boolean = true, tooltips: Boolean = true)

@@ -2,7 +2,7 @@ package scalax.chart
 
 import org.jfree.chart._
 import org.jfree.chart.labels._
-import org.jfree.ui._
+import org.jfree.ui.RectangleInsets
 
 import module.Imports._
 
@@ -31,9 +31,6 @@ object RingChart extends ChartCompanion[RingPlot,RingChart] with module.PieDatas
     * @param theme    $theme
     *
     * @usecase def apply(dataset: PieDataset): RingChart = ???
-    *   @inheritdoc
-    *
-    * @usecase def apply(dataset: PieDataset, title: String, legend: Boolean, tooltips: Boolean): RingChart = ???
     *   @inheritdoc
     */
   def apply[A: ToPieDataset](data: A, title: String = "", legend: Boolean = true, tooltips: Boolean = true)

@@ -2,7 +2,7 @@ package scalax.chart
 
 import org.jfree.chart._
 import org.jfree.chart.labels._
-import org.jfree.ui._
+import org.jfree.ui.RectangleInsets
 
 import module.Imports._
 
@@ -32,9 +32,6 @@ object PieChart extends ChartCompanion[PiePlot,PieChart] with module.PieDatasetC
     *
     * @usecase def apply(dataset: PieDataset): PieChart = ???
     *   @inheritdoc
-    *
-    * @usecase def apply(dataset: PieDataset, title: String, legend: Boolean, tooltips: Boolean): PieChart = ???
-    *   @inheritdoc
     */
   def apply[A: ToPieDataset](data: A, title: String = "", legend: Boolean = true, tooltips: Boolean = true)
     (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): PieChart = {
@@ -57,9 +54,6 @@ object PieChart extends ChartCompanion[PiePlot,PieChart] with module.PieDatasetC
     * @param theme    $theme
     *
     * @usecase def threeDimensional(dataset: PieDataset): PieChart = ???
-    *   @inheritdoc
-    *
-    * @usecase def threeDimensional(dataset: PieDataset, title: String, legend: Boolean, tooltips: Boolean): PieChart = ???
     *   @inheritdoc
     */
   def threeDimensional[A: ToPieDataset](data: A, title: String = "", legend: Boolean = true, tooltips: Boolean = true)

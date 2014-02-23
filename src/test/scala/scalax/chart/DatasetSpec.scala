@@ -1,4 +1,4 @@
-package scalax.chart
+package org.example
 
 import java.util.Date
 
@@ -272,12 +272,12 @@ class DatasetSpec extends Specification { def is = s2"""
   // -----------------------------------------------------------------------------------------------
 
   def hasICD[A: ToCategoryDataset](a: A) =
-    a.toDataset must beAnInstanceOf[CategoryDataset]
+    ToCategoryDataset[A].toDataset(a) must beAnInstanceOf[CategoryDataset]
 
   def hasIPD[A: ToPieDataset](a: A) =
-    a.toDataset must beAnInstanceOf[PieDataset]
+    ToPieDataset[A].toDataset(a) must beAnInstanceOf[PieDataset]
 
   def hasIXYD[A: ToIntervalXYDataset](a: A) =
-    a.toDataset must beAnInstanceOf[IntervalXYDataset]
+    ToIntervalXYDataset[A].toDataset(a) must beAnInstanceOf[IntervalXYDataset]
 
 }

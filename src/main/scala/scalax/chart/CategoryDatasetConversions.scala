@@ -4,9 +4,6 @@ package module
 import language.higherKinds
 
 import scala.collection.GenTraversableOnce
-import scala.math.Numeric.Implicits._
-
-import org.jfree.data.category.DefaultCategoryDataset
 
 import Imports._
 import RichChartingCollections._
