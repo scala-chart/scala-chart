@@ -25,7 +25,7 @@ Example Usage
 You can import all of the `scala-chart` functionality with the following lines:
 
     import scalax.chart._
-    import scalax.chart.Charting._
+    import scalax.chart.api._
 
 ### [Dataset Conversions](http://wookietreiber.github.io/scala-chart/latest/api/index.html#scalax.chart.RichChartingCollections)
 

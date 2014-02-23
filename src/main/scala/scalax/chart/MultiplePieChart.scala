@@ -7,7 +7,7 @@ import org.jfree.chart.title.TextTitle
 import org.jfree.ui._
 import org.jfree.util._
 
-import Imports._
+import module.Imports._
 
 /** Represents categorized numeric data with multiple pies. */
 abstract class MultiplePieChart protected () extends Chart[MultiplePiePlot]
@@ -39,7 +39,7 @@ abstract class MultiplePieChart protected () extends Chart[MultiplePiePlot]
   * @define chart multiple pie chart
   * @define Chart MultiplePieChart
   */
-object MultiplePieChart extends ChartCompanion[MultiplePiePlot,MultiplePieChart] with CategoryDatasetConversions {
+object MultiplePieChart extends ChartCompanion[MultiplePiePlot,MultiplePieChart] with module.CategoryDatasetConversions {
 
   override final def fromPeer(jfree: JFreeChart): MultiplePieChart = new MultiplePieChart {
     override final val peer = jfree

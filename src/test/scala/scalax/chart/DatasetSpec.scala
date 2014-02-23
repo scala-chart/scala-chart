@@ -2,7 +2,7 @@ package scalax.chart
 
 import java.util.Date
 
-import scalax.chart.Charting._
+import scalax.chart.api._
 
 import Implicits.jdate2jfree
 

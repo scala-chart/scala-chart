@@ -11,7 +11,7 @@ import org.jfree.chart.plot.PlotOrientation
   *
   * {{{
   * import scalax.chart._
-  * import scalax.chart.Charting._
+  * import scalax.chart.api._
   * }}}
   *
   * With these imports you can convert Scala collections to the datasets of JFreeChart and use chart
@@ -29,10 +29,10 @@ import org.jfree.chart.plot.PlotOrientation
   * these mix in a lot of others, so I recommended hitting '''Hide All''' and then iteratively
   * browse through the '''Inherited''' members):
   *
-  *  - [[RichChartingCollections]] how to convert data to create charts
-  *  - [[ChartFactories]] entry point for most chart factories
+  *  - [[module.RichChartingCollections]] how to convert data to create charts
+  *  - [[module.ChartFactories]] entry point for most chart factories
   *  - [[Chart]] as the base wrapper class
-  *  - [[Charting]] as the base import
+  *  - [[api]] as the base import
   */
 package object chart {
 

@@ -1,4 +1,5 @@
 package scalax.chart
+package module
 
 /** $ImportsInfo */
 object Imports extends Imports

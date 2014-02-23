@@ -10,7 +10,7 @@ import org.jfree.chart.title.Title
 
 import com.lowagie.text.pdf.{ DefaultFontMapper, FontMapper }
 
-import Imports._
+import module.Imports._
 
 /** Generic graphical representation of data.
   *

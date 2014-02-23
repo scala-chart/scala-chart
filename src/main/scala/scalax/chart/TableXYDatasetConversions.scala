@@ -1,4 +1,5 @@
 package scalax.chart
+package module
 
 import language.higherKinds
 

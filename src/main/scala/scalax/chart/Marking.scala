@@ -1,4 +1,5 @@
 package scalax.chart
+package module
 
 import language.reflectiveCalls
 
@@ -14,9 +15,6 @@ object Marking extends Marking
   * @define MarkingInfo [[Marking]] contains enrichments concerning the handling of markers in plots.
   *
   * {{{
-  * import scalax.chart._
-  * import scalax.chart.Charting._
-  *
   * val data = Seq((0,0),(1,1),(2,2)).toXYSeriesCollection("some data")
   * val chart = XYLineChart(data)
   *

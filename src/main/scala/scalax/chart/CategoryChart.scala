@@ -4,7 +4,7 @@ import scala.swing.Orientable
 
 import org.jfree.chart.JFreeChart
 
-import Imports._
+import module.Imports._
 
 /** Represents categorized numeric data. These charts have a domain axis that consists of the
   * categories and a numeric range axis.

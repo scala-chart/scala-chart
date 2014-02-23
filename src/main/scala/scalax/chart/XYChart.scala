@@ -4,7 +4,7 @@ import scala.swing.Orientable
 
 import org.jfree.chart.JFreeChart
 
-import Imports._
+import module.Imports._
 
 /** Represents numeric data. */
 abstract class XYChart protected () extends Chart[XYPlot] with Orientable with DomainAxis with RangeAxis

@@ -2,7 +2,7 @@ package scalax.chart
 
 import language.existentials
 
-import scalax.chart.Charting._
+import scalax.chart.api._
 import org.jfree.chart.plot._
 import org.jfree.chart.title.TextTitle
 

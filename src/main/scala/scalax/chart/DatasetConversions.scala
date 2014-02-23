@@ -1,4 +1,5 @@
 package scalax.chart
+package module
 
 object DatasetConversions extends DatasetConversions
 
