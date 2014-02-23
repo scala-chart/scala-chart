@@ -10,7 +10,9 @@ import scala.collection.GenTraversableOnce
 import RichChartingCollections._
 import Imports._
 
-private[chart] trait BoxAndWhiskerDatasetConversions {
+object BoxAndWhiskerDatasetConversions extends BoxAndWhiskerDatasetConversions
+
+trait BoxAndWhiskerDatasetConversions {
 
   abstract class ToBoxAndWhiskerCategoryDataset[A] protected () extends ToDataset[A] {
     type X <: BoxAndWhiskerCategoryDataset
@@ -22,7 +24,7 @@ private[chart] trait BoxAndWhiskerDatasetConversions {
       def toDataset(a: A): X = f(a)
     }
 
-    implicit def GenTraversableOnceToBoxAndWhiskerCategoryDataset[A <% Comparable[A],B: Numeric, BB <: Seq[B], CC[X] <: GenTraversableOnce[X]]: ToBoxAndWhiskerCategoryDataset[CC[(A,BB)]] =
+    implicit def CollToBoxAndWhiskerCategoryDataset[A <% Comparable[A], B: Numeric, BB <: Seq[B], CC[X] <: GenTraversableOnce[X]]: ToBoxAndWhiskerCategoryDataset[CC[(A,BB)]] =
       apply(_.toBoxAndWhiskerCategoryDataset())
   }
 
@@ -36,7 +38,7 @@ private[chart] trait BoxAndWhiskerDatasetConversions {
       def toDataset(a: A): X = f(a)
     }
 
-    implicit def GenTraversableOnceToBoxAndWhiskerXYDataset[A <% Date,B: Numeric, BB <: Seq[B], CC[X] <: GenTraversableOnce[X]]: ToBoxAndWhiskerXYDataset[CC[(A,BB)]] =
+    implicit def CollToBoxAndWhiskerXYDataset[A <% Date, B: Numeric, BB <: Seq[B], CC[X] <: GenTraversableOnce[X]]: ToBoxAndWhiskerXYDataset[CC[(A,BB)]] =
       apply(_.toBoxAndWhiskerXYDataset())
   }
 

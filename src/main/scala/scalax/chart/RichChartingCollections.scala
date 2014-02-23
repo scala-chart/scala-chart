@@ -314,17 +314,12 @@ trait RichChartingCollections {
       *   @inheritdoc
       */
     def toXYSeriesCollection(autoSort: Boolean = true, allowDuplicateXValues: Boolean = true)
-      (implicit eva: A => Comparable[A], numb: Numeric[B], numc: Numeric[C]): IntervalXYDataset = {
-
-      val seqop = (xs: List[XYSeries], catxys: (A,GenTraversableOnce[(B,C)])) => {
-        val (category,xys) = catxys
-        xys.toXYSeries(category, autoSort, allowDuplicateXValues) :: xs
+      (implicit eva: A => Comparable[A], numb: Numeric[B], numc: Numeric[C]): IntervalXYDataset =
+      trav.foldLeft(new XYSeriesCollection) { case (dataset,(name,data)) =>
+        val series = data.toXYSeries(name, autoSort, allowDuplicateXValues)
+        dataset.addSeries(series)
+        dataset
       }
-
-      DatasetConversions.ToIntervalXYDataset.CollOfXYSeriesToIntervalXYDataset toDataset {
-        trav.aggregate(List[XYSeries]())(seqop, _ ::: _).reverse
-      }
-    }
 
   }
 
@@ -340,17 +335,12 @@ trait RichChartingCollections {
       *   @inheritdoc
       */
     def toYIntervalSeriesCollection(autoSort: Boolean = true, allowDuplicateXValues: Boolean = true)
-      (implicit eva: A => Comparable[_], numb: Numeric[B], numc: Numeric[C], numd: Numeric[D], nume: Numeric[E]): IntervalXYDataset = {
-
-      val seqop = (l: List[YIntervalSeries], catvals: (A,GenTraversableOnce[(B,C,D,E)])) => {
-        val (name,data) = catvals
-        data.toYIntervalSeries(name, autoSort, allowDuplicateXValues) :: l
+      (implicit eva: A => Comparable[_], numb: Numeric[B], numc: Numeric[C], numd: Numeric[D], nume: Numeric[E]): IntervalXYDataset =
+      trav.foldLeft(new YIntervalSeriesCollection) { case (dataset,(name,data)) =>
+        val series = data.toYIntervalSeries(name, autoSort, allowDuplicateXValues)
+        dataset.addSeries(series)
+        dataset
       }
-
-      DatasetConversions.ToIntervalXYDataset.CollOfYIntervalSeriesToIntervalXYDataset toDataset {
-        trav.aggregate(List[YIntervalSeries]())(seqop, _ ::: _).reverse
-      }
-    }
 
   }
 

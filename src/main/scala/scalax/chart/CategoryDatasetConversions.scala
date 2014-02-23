@@ -8,7 +8,9 @@ import scala.collection.GenTraversableOnce
 import Imports._
 import RichChartingCollections._
 
-private[chart] trait CategoryDatasetConversions {
+object CategoryDatasetConversions extends CategoryDatasetConversions
+
+trait CategoryDatasetConversions {
 
   abstract class ToCategoryDataset[A] protected () extends ToDataset[A] {
     type X <: CategoryDataset
