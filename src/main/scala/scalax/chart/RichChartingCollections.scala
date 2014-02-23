@@ -1,7 +1,5 @@
 package scalax.chart
 
-import language.higherKinds
-
 import java.util.Date
 
 import scala.collection.JavaConverters.seqAsJavaListConverter
@@ -351,42 +349,6 @@ trait RichChartingCollections {
       DatasetConversions.ToIntervalXYDataset.CollOfYIntervalSeriesToIntervalXYDataset toDataset {
         trav.aggregate(List[YIntervalSeries]())(seqop, _ ::: _).reverse
       }
-    }
-
-  }
-
-  /** Enriches a collection of categorized categorized data pairs. */
-  implicit class RichCategorizedCategorizedTuple2s[A,B,C,D](trav: GenTraversableOnce[(A,GenTraversableOnce[(B,GenTraversableOnce[(C,D)])])]) {
-
-    import org.jfree.chart.JFreeChart
-    import org.jfree.chart.plot._
-
-    /** Converts this collection to a bar chart with a `CombinedDomainCategoryPlot`.
-      *
-      * @usecase def toCombinedDomainBarChart: CategoryChart
-      *   @inheritdoc
-      */
-    def toCombinedDomainBarChart(implicit eva: A => Comparable[A],
-                                          evb: B => Comparable[B],
-                                          evc: C => Comparable[C],
-                                          numd: Numeric[D]): CategoryChart = {
-
-      val seqop = (l: List[CategoryPlot], catmivs: (A,GenTraversableOnce[(B,GenTraversableOnce[(C,D)])])) => {
-        val (outer,miv) = catmivs
-        val dataset = miv.toCategoryDataset
-        val chart = ChartFactories.BarChart(dataset, title = outer.toString)
-
-        chart.plot :: l
-      }
-
-      val plots = trav.aggregate(List[CategoryPlot]())(seqop, _ ::: _).reverse
-
-      val combinedPlot = plots.foldLeft(new CombinedDomainCategoryPlot) { (combined,single) =>
-        combined add single
-        combined
-      }
-
-      CategoryChart.fromPeer(new JFreeChart(combinedPlot))
     }
 
   }
