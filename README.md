@@ -22,12 +22,14 @@ Example Usage
 
 ### Imports
 
-You can import all of the `scala-chart` functionality with the following lines:
+All high-level convenience can be imported with the *all-you-can-eat* import:
 
-    import scalax.chart._
-    import scalax.chart.Charting._
+    import scalax.chart.api._
 
-### [Dataset Conversions](http://wookietreiber.github.io/scala-chart/latest/api/index.html#scalax.chart.RichChartingCollections)
+For more and more *a la carte* imports, have a look at the [module package][modules] for various
+selfless traits.
+
+### [Dataset Conversions](http://wookietreiber.github.io/scala-chart/latest/api/index.html#scalax.chart.module.RichChartingCollections)
 
 You can use the conversions to convert from ordinary Scala collections to the datasets used by
 [JFreeChart][]:
@@ -35,7 +37,7 @@ You can use the conversions to convert from ordinary Scala collections to the da
     val data    = Seq((1,2),(2,4),(3,6),(4,8))
     val dataset = data.toXYSeriesCollection("some points")
 
-### [Chart Factories](http://wookietreiber.github.io/scala-chart/latest/api/index.html#scalax.chart.ChartFactories)
+### [Chart Factories](http://wookietreiber.github.io/scala-chart/latest/api/index.html#scalax.chart.module.ChartFactories)
 
 These datasets can be used by the chart factories, which differ from the [JFreeChart][] ones in the
 aspect, that they make heavy use of default arguments, so you have to type as less as possible:
@@ -74,6 +76,7 @@ You can also do some animations, i.e. perform live updates on your datasets:
 [API]: http://wookietreiber.github.com/scala-chart/latest/api/index.html
 [sbt]: http://www.scala-sbt.org/
 [maven]: http://maven.apache.org/
+[modules]: http://wookietreiber.github.io/scala-chart/latest/api/index.html#scalax.chart.module.package
 
 
 ---

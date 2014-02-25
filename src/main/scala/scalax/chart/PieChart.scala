@@ -2,9 +2,9 @@ package scalax.chart
 
 import org.jfree.chart._
 import org.jfree.chart.labels._
-import org.jfree.ui._
+import org.jfree.ui.RectangleInsets
 
-import Imports._
+import module.Imports._
 
 /** Represents categorized numeric data with a pie. */
 abstract class PieChart protected () extends Chart[PiePlot] with PieChartLike[PiePlot] {
@@ -16,7 +16,7 @@ abstract class PieChart protected () extends Chart[PiePlot] with PieChartLike[Pi
   * @define chart pie chart
   * @define Chart PieChart
   */
-object PieChart extends ChartCompanion[PiePlot,PieChart] with PieDatasetConversions with DocMacros {
+object PieChart extends ChartCompanion[PiePlot,PieChart] with module.PieDatasetConversions with DocMacros {
 
   override final def fromPeer(jfree: JFreeChart): PieChart = new PieChart {
     override final val peer = jfree
@@ -31,9 +31,6 @@ object PieChart extends ChartCompanion[PiePlot,PieChart] with PieDatasetConversi
     * @param theme    $theme
     *
     * @usecase def apply(dataset: PieDataset): PieChart = ???
-    *   @inheritdoc
-    *
-    * @usecase def apply(dataset: PieDataset, title: String, legend: Boolean, tooltips: Boolean): PieChart = ???
     *   @inheritdoc
     */
   def apply[A: ToPieDataset](data: A, title: String = "", legend: Boolean = true, tooltips: Boolean = true)
@@ -57,9 +54,6 @@ object PieChart extends ChartCompanion[PiePlot,PieChart] with PieDatasetConversi
     * @param theme    $theme
     *
     * @usecase def threeDimensional(dataset: PieDataset): PieChart = ???
-    *   @inheritdoc
-    *
-    * @usecase def threeDimensional(dataset: PieDataset, title: String, legend: Boolean, tooltips: Boolean): PieChart = ???
     *   @inheritdoc
     */
   def threeDimensional[A: ToPieDataset](data: A, title: String = "", legend: Boolean = true, tooltips: Boolean = true)

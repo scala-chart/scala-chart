@@ -1,9 +1,13 @@
 package scalax.chart
+package module
+
+import scala.collection.GenTraversableOnce
 
 import org.jfree.chart.ChartTheme
 import org.jfree.chart.StandardChartTheme
 import org.jfree.chart.axis._
 import org.jfree.chart.labels._
+import org.jfree.chart.plot.CombinedDomainCategoryPlot
 import org.jfree.chart.renderer.category._
 import org.jfree.chart.renderer.xy._
 import org.jfree.ui._
@@ -49,7 +53,8 @@ object ChartFactories extends ChartFactories
   * implicit val theme = org.jfree.chart.StandardChartTheme.createDarknessTheme
   * }}}
   */
-trait ChartFactories extends DatasetConversions with DocMacros {
+trait ChartFactories extends MultiplePieChartFactory with PieChartFactory with RingChartFactory
+    with DatasetConversions with DocMacros {
 
   // -----------------------------------------------------------------------------------------------
   // some small helpers
@@ -327,6 +332,54 @@ trait ChartFactories extends DatasetConversions with DocMacros {
       if (orientation == Orientation.Horizontal) plot.setColumnRenderingOrder(SortOrder.DESCENDING)
 
       CategoryChart(plot, title, legend, theme)
+    }
+
+    /** Creates a new chart that represents categorized numeric data with bars. The keys of the
+      * given collection will become the range axis label of the respective plot.
+      *
+      * {{{
+      * val d1 = List("series a" -> List("category a" -> 2, "category b" -> 3))
+      * val d2 = List("series b" -> List("category a" -> 1, "category b" -> 4))
+      * val data = Map("plot a" -> d1, "plot b" -> d2)
+      * val chart = BarChart.combinedDomain(data)
+      * }}}
+      *
+      * @param data            $data
+      * @param title           $title
+      * @param domainAxisLabel $domainAxisLabel
+      * @param legend          $legend
+      * @param tooltips        $tooltips
+      * @param theme           $theme
+      *
+      * @usecase def combinedDomain(data: Map[String,CategoryDataset]): CategoryChart = ???
+      *   @inheritdoc
+      */
+    def combinedDomain[A: ToCategoryDataset](data: GenTraversableOnce[(Comparable[_],A)],
+              title: String = "",
+              domainAxisLabel: String = "",
+              legend: Boolean = true,
+              tooltips: Boolean = false)
+             (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): CategoryChart = {
+
+      val tt = tooltips
+
+      def CategoryPlotOf(catdata: (Comparable[_],A)) = {
+        val category = catdata._1.toString
+        val data = catdata._2
+        val chart = BarChart(data, rangeAxisLabel = category, tooltips = tt)
+        chart.plot
+      }
+
+      val plots = data.aggregate(Vector[CategoryPlot]())(_ :+ CategoryPlotOf(_), _ ++ _)
+
+      val domainAxis = new CategoryAxis(domainAxisLabel)
+
+      val combinedPlot = plots.foldLeft(new CombinedDomainCategoryPlot(domainAxis)) { (combined,single) =>
+        combined add single
+        combined
+      }
+
+      CategoryChart(combinedPlot, title, legend, theme)
     }
 
   }

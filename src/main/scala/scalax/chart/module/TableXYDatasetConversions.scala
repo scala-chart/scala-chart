@@ -1,4 +1,5 @@
 package scalax.chart
+package module
 
 import language.higherKinds
 
@@ -9,7 +10,9 @@ import org.jfree.data.time.TimePeriod
 import Imports._
 import RichChartingCollections._
 
-private[chart] trait TableXYDatasetConversions {
+object TableXYDatasetConversions extends TableXYDatasetConversions
+
+trait TableXYDatasetConversions {
 
   abstract class ToTableXYDataset[A] protected () extends ToDataset[A] {
     type X <: TableXYDataset
@@ -21,10 +24,10 @@ private[chart] trait TableXYDatasetConversions {
       def toDataset(a: A): X = f(a)
     }
 
-    implicit def CategorizedTuple2sToTableXYDataset[A <% String,B: Numeric, C: Numeric, BB[X] <: GenTraversableOnce[X], CC[X] <: GenTraversableOnce[X]]: ToTableXYDataset[CC[(A,BB[(B,C)])]] =
+    implicit def CatTuple2sToTableXYDataset[A <% String, B: Numeric, C: Numeric, BB[X] <: GenTraversableOnce[X], CC[X] <: GenTraversableOnce[X]]: ToTableXYDataset[CC[(A,BB[(B,C)])]] =
       apply(_.toCategoryTableXYDataset)
 
-    implicit def CategorizedTimedValuesToTableXYDataset[A <% Comparable[A],B <% TimePeriod, C: Numeric, BB[X] <: GenTraversableOnce[X], CC[X] <: GenTraversableOnce[X]]: ToTableXYDataset[CC[(A,BB[(B,C)])]] =
+    implicit def CatTimeTuple2sToTableXYDataset[A <% Comparable[A], B <% TimePeriod, C: Numeric, BB[X] <: GenTraversableOnce[X], CC[X] <: GenTraversableOnce[X]]: ToTableXYDataset[CC[(A,BB[(B,C)])]] =
       apply(_.toTimeTable)
   }
 

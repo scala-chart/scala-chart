@@ -1,8 +1,8 @@
-package scalax.chart
+package org.example
 
 import java.util.Date
 
-import scalax.chart.Charting._
+import scalax.chart.api._
 
 import Implicits.jdate2jfree
 
@@ -84,15 +84,15 @@ class DatasetSpec extends Specification { def is = s2"""
   def bwcde1 = {
     implicit val IntNumeric = scala.math.Numeric.IntIsIntegral
 
-    val data = List((1,List(2)))
-    val dataset = data.toBoxAndWhiskerCategoryDataset()
+    val data = List("category" -> List(2))
+    val dataset = data.toBoxAndWhiskerCategoryDataset("series")
     dataset must beAnInstanceOf[BoxAndWhiskerCategoryDataset]
   }
 
   def bwcde2 = {
     implicit val IntNumeric = scala.math.Numeric.IntIsIntegral
 
-    val data = List((1,List((2,List(3)))))
+    val data = List("series" -> List("category" -> List(3)))
     val dataset = data.toBoxAndWhiskerCategoryDataset
     dataset must beAnInstanceOf[BoxAndWhiskerCategoryDataset]
   }
@@ -100,8 +100,8 @@ class DatasetSpec extends Specification { def is = s2"""
   def bwxyde1 = {
     implicit val IntNumeric = scala.math.Numeric.IntIsIntegral
 
-    val data = List((new Date,List(1)))
-    val dataset = data.toBoxAndWhiskerXYDataset()
+    val data = List(new Date -> List(1))
+    val dataset = data.toBoxAndWhiskerXYDataset("series")
     dataset must beAnInstanceOf[BoxAndWhiskerXYDataset]
   }
 
@@ -139,13 +139,13 @@ class DatasetSpec extends Specification { def is = s2"""
   }
 
   def tpv = {
-    val series = List((new Date,1)) toTimePeriodValues "series name"
+    val series = List((new Date,1)).toTimePeriodValues("series")
     series must beAnInstanceOf[TimePeriodValues]
   }
 
   def tpvce1 = {
     val data = List((new Date,1))
-    val dataset = data.toTimePeriodValuesCollection("series name")
+    val dataset = data.toTimePeriodValuesCollection("series")
     dataset must beAnInstanceOf[TimePeriodValuesCollection]
   }
 
@@ -156,50 +156,50 @@ class DatasetSpec extends Specification { def is = s2"""
   }
 
   def tpvci1 = {
-    val data = List((new Date,1)) toTimePeriodValues "series name"
-    hasIXYD(data)
+    val series = List((new Date,1)).toTimePeriodValues("series")
+    hasIXYD(series)
   }
 
   def tpvci2 = {
-    val data = List((new Date,1)) toTimePeriodValues "series name"
-    hasIXYD(List(data,data))
+    val series = List((new Date,1)).toTimePeriodValues("series")
+    hasIXYD(List(series,series))
   }
 
   def ts = {
-    val series = List((new Date,1)) toTimeSeries "series name"
+    val series = List((new Date,1)).toTimeSeries("series")
     series must beAnInstanceOf[TimeSeries]
   }
 
   def tsce1 = {
     val data = List((new Date,1))
-    val dataset = data.toTimeSeriesCollection("series name")
+    val dataset = data.toTimeSeriesCollection("series")
     dataset must beAnInstanceOf[TimeSeriesCollection]
   }
 
   def tsce2 = {
-    val data = List("series name" -> List((new Date,1)))
+    val data = List("series" -> List((new Date,1)))
     val dataset = data.toTimeSeriesCollection
     dataset must beAnInstanceOf[TimeSeriesCollection]
   }
 
   def tsci1 = {
-    val data = List((new Date,1)) toTimeSeries "series name"
-    hasIXYD(data)
+    val series = List((new Date,1)).toTimeSeries("series")
+    hasIXYD(series)
   }
 
   def tsci2 = {
-    val data = List((new Date,1)) toTimeSeries "series name"
-    hasIXYD(List(data,data))
+    val series = List((new Date,1)).toTimeSeries("series")
+    hasIXYD(List(series,series))
   }
 
   def xys = {
-    val series = List((1,2)) toXYSeries "series name"
+    val series = List((1,2)).toXYSeries("series")
     series must beAnInstanceOf[XYSeries]
   }
 
   def xysce1 = {
     val data = List((1,2))
-    val dataset = data.toXYSeriesCollection("series name")
+    val dataset = data.toXYSeriesCollection("series")
     dataset must beAnInstanceOf[XYSeriesCollection]
   }
 
@@ -210,14 +210,14 @@ class DatasetSpec extends Specification { def is = s2"""
   }
 
   def xysci1 = {
-    val data = List((1,2)) toXYSeries "series name"
-    hasIXYD(data)
+    val series = List((1,2)).toXYSeries("series")
+    hasIXYD(series)
   }
 
   def xysci2 = {
-    val s1 = List((1,2)) toXYSeries "series name 1"
-    val s2 = List((1,2)) toXYSeries "series name 2"
-    hasIXYD(List(s1,s2))
+    val series1 = List((1,2)).toXYSeries("series 1")
+    val series2 = List((1,2)).toXYSeries("series 2")
+    hasIXYD(List(series1,series2))
   }
 
   def xysci3 = {
@@ -231,30 +231,30 @@ class DatasetSpec extends Specification { def is = s2"""
   }
 
   def yis = {
-    val series = List((1,3,2,4)) toYIntervalSeries "series name"
+    val series = List((1,3,2,4)).toYIntervalSeries("series")
     series must beAnInstanceOf[YIntervalSeries]
   }
 
   def yisce1 = {
     val data = List((1,3,2,4))
-    val dataset = data.toYIntervalSeriesCollection()
+    val dataset = data.toYIntervalSeriesCollection("series")
     dataset must beAnInstanceOf[YIntervalSeriesCollection]
   }
 
   def yisce2 = {
-    val data = List("name" -> List((1,3,2,4)))
+    val data = List("series" -> List((1,3,2,4)))
     val dataset = data.toYIntervalSeriesCollection()
     dataset must beAnInstanceOf[YIntervalSeriesCollection]
   }
 
   def yisci1 = {
-    val data = List((1,2,3,4)) toYIntervalSeries "series name"
-    hasIXYD(data)
+    val series = List((1,2,3,4)).toYIntervalSeries("series")
+    hasIXYD(series)
   }
 
   def yisci2 = {
-    val data = List((1,2,3,4)) toYIntervalSeries "series name"
-    hasIXYD(List(data,data))
+    val series = List((1,2,3,4)).toYIntervalSeries("series")
+    hasIXYD(List(series,series))
   }
 
   def yisci3 = {
@@ -263,7 +263,7 @@ class DatasetSpec extends Specification { def is = s2"""
   }
 
   def yisci4 = {
-    val data = List("series name" -> List((1,3,2,4)))
+    val data = List("series" -> List((1,3,2,4)))
     hasIXYD(data)
   }
 
@@ -272,12 +272,12 @@ class DatasetSpec extends Specification { def is = s2"""
   // -----------------------------------------------------------------------------------------------
 
   def hasICD[A: ToCategoryDataset](a: A) =
-    a.toDataset must beAnInstanceOf[CategoryDataset]
+    ToCategoryDataset[A].toDataset(a) must beAnInstanceOf[CategoryDataset]
 
   def hasIPD[A: ToPieDataset](a: A) =
-    a.toDataset must beAnInstanceOf[PieDataset]
+    ToPieDataset[A].toDataset(a) must beAnInstanceOf[PieDataset]
 
   def hasIXYD[A: ToIntervalXYDataset](a: A) =
-    a.toDataset must beAnInstanceOf[IntervalXYDataset]
+    ToIntervalXYDataset[A].toDataset(a) must beAnInstanceOf[IntervalXYDataset]
 
 }

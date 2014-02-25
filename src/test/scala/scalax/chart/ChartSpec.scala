@@ -1,8 +1,9 @@
-package scalax.chart
+package org.example
 
 import language.existentials
 
-import scalax.chart.Charting._
+import scalax.chart.api._
+
 import org.jfree.chart.plot._
 import org.jfree.chart.title.TextTitle
 
@@ -105,7 +106,7 @@ class ChartSpec extends Specification { def is = s2"""
     chart.antiAlias === true
   }
 
-  def cstchart: Chart[_] = {
+  def cstchart = {
     val chart = AreaChart(categorydataset)
     chart.peer.clearSubtitles()
     chart

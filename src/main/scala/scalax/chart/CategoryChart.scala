@@ -2,9 +2,7 @@ package scalax.chart
 
 import scala.swing.Orientable
 
-import org.jfree.chart.JFreeChart
-
-import Imports._
+import module.Imports._
 
 /** Represents categorized numeric data. These charts have a domain axis that consists of the
   * categories and a numeric range axis.
@@ -62,6 +60,11 @@ abstract class CategoryChart protected () extends Chart[CategoryPlot] with Orien
 
 }
 
+/** Low-level factory for ${chart}s.
+  *
+  * @define chart category chart
+  * @define Chart CategoryChart
+  */
 object CategoryChart extends ChartCompanion[CategoryPlot,CategoryChart] {
   override final def fromPeer(jfree: JFreeChart): CategoryChart = new CategoryChart {
     override final val peer = jfree

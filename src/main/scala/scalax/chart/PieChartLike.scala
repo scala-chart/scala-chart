@@ -1,6 +1,6 @@
 package scalax.chart
 
-import Imports._
+import module.Imports._
 
 /** Template trait for pie charts. */
 private[chart] trait PieChartLike[P <: PiePlot]

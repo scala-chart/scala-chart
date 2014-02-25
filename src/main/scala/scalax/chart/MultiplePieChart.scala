@@ -4,10 +4,10 @@ import org.jfree.chart._
 import org.jfree.chart.labels._
 import org.jfree.chart.plot.MultiplePiePlot
 import org.jfree.chart.title.TextTitle
-import org.jfree.ui._
-import org.jfree.util._
+import org.jfree.ui.RectangleEdge
+import org.jfree.util.TableOrder
 
-import Imports._
+import module.Imports._
 
 /** Represents categorized numeric data with multiple pies. */
 abstract class MultiplePieChart protected () extends Chart[MultiplePiePlot]
@@ -39,7 +39,7 @@ abstract class MultiplePieChart protected () extends Chart[MultiplePiePlot]
   * @define chart multiple pie chart
   * @define Chart MultiplePieChart
   */
-object MultiplePieChart extends ChartCompanion[MultiplePiePlot,MultiplePieChart] with CategoryDatasetConversions {
+object MultiplePieChart extends ChartCompanion[MultiplePiePlot,MultiplePieChart] with module.CategoryDatasetConversions {
 
   override final def fromPeer(jfree: JFreeChart): MultiplePieChart = new MultiplePieChart {
     override final val peer = jfree
@@ -54,9 +54,6 @@ object MultiplePieChart extends ChartCompanion[MultiplePiePlot,MultiplePieChart]
     * @param theme    $theme
     *
     * @usecase def apply(dataset: CategoryDataset): MultiplePieChart = ???
-    *   @inheritdoc
-    *
-    * @usecase def apply(dataset: CategoryDataset, title: String, legend: Boolean, tooltips: Boolean): MultiplePieChart = ???
     *   @inheritdoc
     */
   def apply[A: ToCategoryDataset](data: A, title: String = "", legend: Boolean = true, tooltips: Boolean = true)
@@ -85,9 +82,6 @@ object MultiplePieChart extends ChartCompanion[MultiplePiePlot,MultiplePieChart]
     * @param theme    $theme
     *
     * @usecase def threeDimensional(dataset: CategoryDataset): MultiplePieChart = ???
-    *   @inheritdoc
-    *
-    * @usecase def threeDimensional(dataset: CategoryDataset, title: String, legend: Boolean, tooltips: Boolean): MultiplePieChart = ???
     *   @inheritdoc
     */
   def threeDimensional[A: ToCategoryDataset](data: A, title: String = "", legend: Boolean = true, tooltips: Boolean = true)

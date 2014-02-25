@@ -1,16 +1,16 @@
 package scalax.chart
+package module
 
 import language.higherKinds
 
 import scala.collection.GenTraversableOnce
-import scala.math.Numeric.Implicits._
-
-import org.jfree.data.category.DefaultCategoryDataset
 
 import Imports._
 import RichChartingCollections._
 
-private[chart] trait CategoryDatasetConversions {
+object CategoryDatasetConversions extends CategoryDatasetConversions
+
+trait CategoryDatasetConversions {
 
   abstract class ToCategoryDataset[A] protected () extends ToDataset[A] {
     type X <: CategoryDataset

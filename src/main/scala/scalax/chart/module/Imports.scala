@@ -1,4 +1,5 @@
 package scalax.chart
+package module
 
 /** $ImportsInfo */
 object Imports extends Imports
@@ -8,6 +9,8 @@ object Imports extends Imports
   * @define ImportsInfo Contains imports from foreign packages.
   */
 trait Imports {
+  type JFreeChart = org.jfree.chart.JFreeChart
+
   type Color = java.awt.Color
   type Paint = java.awt.Paint
 

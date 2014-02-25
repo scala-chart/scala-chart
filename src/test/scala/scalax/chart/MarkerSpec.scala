@@ -1,6 +1,6 @@
 package org.example
 
-import scalax.chart.Charting._
+import scalax.chart.api._
 
 import org.specs2._
 
