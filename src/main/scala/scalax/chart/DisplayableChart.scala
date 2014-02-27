@@ -3,6 +3,7 @@ package scalax.chart
 import event._
 
 import scala.swing._
+import scala.swing.event.{ MouseClicked, MouseMoved }
 import scala.swing.Swing._
 
 import org.jfree.{ chart => jchart }
@@ -90,9 +91,9 @@ private[chart] trait DisplayableChart {
   private def applyScalaSwingListenerTo(chartPanel: jchart.ChartPanel, source: UIElement, publisher: Publisher) = {
     chartPanel.addChartMouseListener(new jchart.ChartMouseListener {
       override final def chartMouseClicked(event: jchart.ChartMouseEvent): Unit =
-        publisher.publish(ChartMouseClicked(source, event.getTrigger, Option(event.getEntity)))
+        publisher.publish(ChartMouseClicked(new MouseClicked(event.getTrigger), Option(event.getEntity)))
       override final def chartMouseMoved(event: jchart.ChartMouseEvent): Unit =
-        publisher.publish(ChartMouseMoved(source, event.getTrigger, Option(event.getEntity)))
+        publisher.publish(ChartMouseMoved(new MouseMoved(event.getTrigger), Option(event.getEntity)))
     })
   }
 
