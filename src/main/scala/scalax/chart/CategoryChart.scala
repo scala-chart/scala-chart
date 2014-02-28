@@ -67,6 +67,6 @@ abstract class CategoryChart protected () extends Chart[CategoryPlot] with Orien
   */
 object CategoryChart extends ChartCompanion[CategoryPlot,CategoryChart] {
   override final def fromPeer(jfree: JFreeChart): CategoryChart = new CategoryChart {
-    override final val peer = jfree
+    override final lazy val peer = jfree
   }
 }

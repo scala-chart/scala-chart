@@ -19,7 +19,7 @@ abstract class RingChart protected () extends Chart[RingPlot] with PieChartLike[
 object RingChart extends ChartCompanion[RingPlot,RingChart] with module.PieDatasetConversions with DocMacros {
 
   override final def fromPeer(jfree: JFreeChart): RingChart = new RingChart {
-    override final val peer = jfree
+    override final lazy val peer = jfree
   }
 
   /** Creates a new $chart.
