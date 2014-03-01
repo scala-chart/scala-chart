@@ -10,9 +10,11 @@ import org.jfree.util.TableOrder
 import module.Imports._
 
 /** Represents categorized numeric data with multiple pies. */
-abstract class MultiplePieChart protected () extends Chart[MultiplePiePlot]
+abstract class MultiplePieChart protected () extends Chart
     with Labels[PieSectionLabelGenerator]
     with Tooltips[PieToolTipGenerator] {
+
+  type Plot = MultiplePiePlot
 
   final def underlying: PieChart = PieChart.fromPeer(plot.getPieChart)
 
@@ -34,7 +36,7 @@ abstract class MultiplePieChart protected () extends Chart[MultiplePiePlot]
   * @define chart multiple pie chart
   * @define Chart MultiplePieChart
   */
-object MultiplePieChart extends ChartCompanion[MultiplePiePlot,MultiplePieChart] with module.CategoryDatasetConversions {
+object MultiplePieChart extends ChartCompanion[MultiplePieChart] with module.CategoryDatasetConversions {
 
   override final def fromPeer(jfree: JFreeChart): MultiplePieChart = new MultiplePieChart {
     override final lazy val peer = jfree

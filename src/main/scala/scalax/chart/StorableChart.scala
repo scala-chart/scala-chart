@@ -26,7 +26,7 @@ import com.lowagie.text.pdf.FontMapper
   */
 private[chart] trait StorableChart extends WritableChart {
 
-  self: Chart[_] ⇒
+  self: Chart =>
 
   private def managed[R <: FileOutputStream](r: R)(f: R ⇒ Unit): Unit =
     try { f(r) } finally { r.close() }

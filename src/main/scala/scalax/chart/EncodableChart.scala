@@ -8,7 +8,7 @@ import org.jfree.chart.encoders.EncoderUtil
   */
 private[chart] trait EncodableChart {
 
-  self: Chart[_] ⇒
+  self: Chart =>
 
   /** Returns the chart as a byte encoded JPEG image.
     *

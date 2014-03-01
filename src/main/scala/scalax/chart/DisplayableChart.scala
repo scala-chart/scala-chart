@@ -45,7 +45,7 @@ import org.jfree.{ chart => jchart }
   */
 private[chart] trait DisplayableChart {
 
-  chart: Chart[_] =>
+  chart: Chart =>
 
   /** Shows the chart in a window.
     *

@@ -11,7 +11,7 @@ import com.lowagie.text.pdf.{ FontMapper, PdfWriter }
   */
 private[chart] trait WritableChart extends EncodableChart {
 
-  self: Chart[_] ⇒
+  self: Chart =>
 
   /** Writes the chart as a JPEG image to the output stream.
     *

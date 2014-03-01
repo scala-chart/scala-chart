@@ -9,7 +9,6 @@ import scala.swing.Publisher
 
 import org.jfree.chart.{ ChartPanel, JFreeChart }
 import org.jfree.chart.{ event => jevent }
-import org.jfree.chart.plot.Plot
 import org.jfree.chart.title.Title
 
 import com.lowagie.text.pdf.{ DefaultFontMapper, FontMapper }
@@ -25,16 +24,17 @@ import module.Imports._
   * == Saving Charts ==
   *
   * $StorableChartInfo
-  *
-  * @tparam P used plot type
   */
-abstract class Chart[P <: Plot] protected () extends DisplayableChart with StorableChart with Publisher {
+abstract class Chart protected () extends DisplayableChart with StorableChart with Publisher {
 
   /** Returns the underlying chart. */
   def peer: JFreeChart
 
-  /** Returns the plot. */
-  def plot: P
+  /** Returns the underlying plot type. */
+  type Plot <: org.jfree.chart.plot.Plot
+
+  /** Returns the underlying plot. */
+  def plot: Plot
 
   /** Returns true if this chart is drawn with anti-aliasing. */
   def antiAlias: Boolean =

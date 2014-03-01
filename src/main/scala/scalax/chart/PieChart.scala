@@ -7,7 +7,8 @@ import org.jfree.ui.RectangleInsets
 import module.Imports._
 
 /** Represents categorized numeric data with a pie. */
-abstract class PieChart protected () extends Chart[PiePlot] with PieChartLike[PiePlot] {
+abstract class PieChart protected () extends Chart with PieChartLike {
+  type Plot = PiePlot
   override def plot: PiePlot = peer.getPlot.asInstanceOf[PiePlot]
 }
 
@@ -16,7 +17,7 @@ abstract class PieChart protected () extends Chart[PiePlot] with PieChartLike[Pi
   * @define chart pie chart
   * @define Chart PieChart
   */
-object PieChart extends ChartCompanion[PiePlot,PieChart] with module.PieDatasetConversions with DocMacros {
+object PieChart extends ChartCompanion[PieChart] with module.PieDatasetConversions with DocMacros {
 
   override final def fromPeer(jfree: JFreeChart): PieChart = new PieChart {
     override final lazy val peer = jfree

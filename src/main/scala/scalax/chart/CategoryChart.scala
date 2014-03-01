@@ -7,9 +7,11 @@ import module.Imports._
 /** Represents categorized numeric data. These charts have a domain axis that consists of the
   * categories and a numeric range axis.
   */
-abstract class CategoryChart protected () extends Chart[CategoryPlot] with Orientable with DomainAxis with RangeAxis
+abstract class CategoryChart protected () extends Chart with Orientable with DomainAxis with RangeAxis
     with Labels[CategoryItemLabelGenerator]
     with Tooltips[CategoryToolTipGenerator] {
+
+  type Plot = CategoryPlot
 
   override def plot: CategoryPlot = peer.getCategoryPlot
 
@@ -65,7 +67,7 @@ abstract class CategoryChart protected () extends Chart[CategoryPlot] with Orien
   * @define chart category chart
   * @define Chart CategoryChart
   */
-object CategoryChart extends ChartCompanion[CategoryPlot,CategoryChart] {
+object CategoryChart extends ChartCompanion[CategoryChart] {
   override final def fromPeer(jfree: JFreeChart): CategoryChart = new CategoryChart {
     override final lazy val peer = jfree
   }

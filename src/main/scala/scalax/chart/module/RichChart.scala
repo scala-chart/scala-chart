@@ -20,8 +20,10 @@ object RichChart extends RichChart
 trait RichChart {
 
   /** Enriched `JFreeChart`. */
-  implicit class GenericRichChart(val peer: JFreeChart) extends Chart[Plot]
+  implicit class GenericRichChart(val peer: JFreeChart) extends Chart
       with Orientable with DomainAxis with RangeAxis {
+
+    type Plot = org.jfree.chart.plot.Plot
 
     override def plot: Plot = peer.getPlot
 

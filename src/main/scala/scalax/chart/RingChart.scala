@@ -7,7 +7,8 @@ import org.jfree.ui.RectangleInsets
 import module.Imports._
 
 /** Represents categorized numeric data with a ring. */
-abstract class RingChart protected () extends Chart[RingPlot] with PieChartLike[RingPlot] {
+abstract class RingChart protected () extends Chart with PieChartLike {
+  type Plot = RingPlot
   override def plot: RingPlot = peer.getPlot.asInstanceOf[RingPlot]
 }
 
@@ -16,7 +17,7 @@ abstract class RingChart protected () extends Chart[RingPlot] with PieChartLike[
   * @define chart ring chart
   * @define Chart RingChart
   */
-object RingChart extends ChartCompanion[RingPlot,RingChart] with module.PieDatasetConversions with DocMacros {
+object RingChart extends ChartCompanion[RingChart] with module.PieDatasetConversions with DocMacros {
 
   override final def fromPeer(jfree: JFreeChart): RingChart = new RingChart {
     override final lazy val peer = jfree

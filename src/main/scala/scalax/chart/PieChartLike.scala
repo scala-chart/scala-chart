@@ -3,11 +3,13 @@ package scalax.chart
 import module.Imports._
 
 /** Template trait for pie charts. */
-private[chart] trait PieChartLike[P <: PiePlot]
+private[chart] trait PieChartLike
     extends Labels[PieSectionLabelGenerator]
     with Tooltips[PieToolTipGenerator] {
 
-  self: Chart[P] ⇒
+  self: Chart {
+    type Plot <: PiePlot
+  } =>
 
   override def labelGenerator: Option[PieSectionLabelGenerator] = Option (
     plot.getLabelGenerator

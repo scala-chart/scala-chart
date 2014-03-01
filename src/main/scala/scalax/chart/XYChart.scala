@@ -5,9 +5,11 @@ import scala.swing.Orientable
 import module.Imports._
 
 /** Represents numeric data. */
-abstract class XYChart protected () extends Chart[XYPlot] with Orientable with DomainAxis with RangeAxis
+abstract class XYChart protected () extends Chart with Orientable with DomainAxis with RangeAxis
     with Labels[XYItemLabelGenerator]
     with Tooltips[XYToolTipGenerator] {
+
+  type Plot = XYPlot
 
   override def plot: XYPlot = peer.getXYPlot
 
@@ -61,7 +63,7 @@ abstract class XYChart protected () extends Chart[XYPlot] with Orientable with D
   * @define chart XY chart
   * @define Chart XYChart
   */
-object XYChart extends ChartCompanion[XYPlot,XYChart] {
+object XYChart extends ChartCompanion[XYChart] {
   override final def fromPeer(jfree: JFreeChart): XYChart = new XYChart {
     override final lazy val peer = jfree
   }
