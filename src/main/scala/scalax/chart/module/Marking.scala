@@ -33,6 +33,8 @@ trait Marking extends Imports {
 
   /** Contains default [[ToMarker]] instances. */
   object ToMarker {
+    @inline final def apply[A](implicit TM: ToMarker[A]): ToMarker[A] = TM
+
     implicit def MarkerToMarker[A <: Marker]: ToMarker[A] = new ToMarker[A] {
       type X = A
       def toMarker(a: A): X = a
@@ -62,6 +64,8 @@ trait Marking extends Imports {
 
   /** Contains default [[ToCategoryMarker]] instances. */
   object ToCategoryMarker {
+    @inline final def apply[A](implicit TM: ToCategoryMarker[A]): ToCategoryMarker[A] = TM
+
     implicit def MarkerToCategoryMarker[A <: CategoryMarker]: ToCategoryMarker[A] = new ToCategoryMarker[A] {
       type X = A
       def toMarker(a: A): X = a
@@ -77,8 +81,9 @@ trait Marking extends Imports {
   implicit class MarkableCategoryPlot(underlying: CategoryPlot) {
     object domain {
       object markers {
-        def +=[A: ToCategoryMarker](marker: A): this.type = {
-          underlying.addDomainMarker(implicitly[ToCategoryMarker[A]].toMarker(marker))
+        def +=[A: ToCategoryMarker](a: A): this.type = {
+          val marker = ToCategoryMarker[A].toMarker(a)
+          underlying.addDomainMarker(marker)
           this
         }
 
@@ -91,8 +96,9 @@ trait Marking extends Imports {
 
     object range {
       object markers {
-        def +=[A: ToMarker](marker: A): this.type = {
-          underlying.addRangeMarker(implicitly[ToMarker[A]].toMarker(marker))
+        def +=[A: ToMarker](a: A): this.type = {
+          val marker = ToMarker[A].toMarker(a)
+          underlying.addRangeMarker(marker)
           this
         }
 
@@ -108,8 +114,9 @@ trait Marking extends Imports {
   implicit class MarkableXYPlot(underlying: XYPlot) {
     object domain {
       object markers {
-        def +=[A: ToMarker](marker: A): this.type = {
-          underlying.addDomainMarker(implicitly[ToMarker[A]].toMarker(marker))
+        def +=[A: ToMarker](a: A): this.type = {
+          val marker = ToMarker[A].toMarker(a)
+          underlying.addDomainMarker(marker)
           this
         }
 
@@ -122,8 +129,9 @@ trait Marking extends Imports {
 
     object range {
       object markers {
-        def +=[A: ToMarker](marker: A): this.type = {
-          underlying.addRangeMarker(implicitly[ToMarker[A]].toMarker(marker))
+        def +=[A: ToMarker](a: A): this.type = {
+          val marker = ToMarker[A].toMarker(a)
+          underlying.addRangeMarker(marker)
           this
         }
 
