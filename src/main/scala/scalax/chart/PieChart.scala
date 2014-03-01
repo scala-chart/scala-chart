@@ -19,7 +19,7 @@ abstract class PieChart protected () extends Chart[PiePlot] with PieChartLike[Pi
 object PieChart extends ChartCompanion[PiePlot,PieChart] with module.PieDatasetConversions with DocMacros {
 
   override final def fromPeer(jfree: JFreeChart): PieChart = new PieChart {
-    override final val peer = jfree
+    override final lazy val peer = jfree
   }
 
   /** Creates a new $chart.

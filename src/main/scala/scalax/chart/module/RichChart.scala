@@ -4,7 +4,6 @@ package module
 import scala.swing.Orientable
 
 import org.jfree.chart._
-import org.jfree.chart.axis._
 import org.jfree.chart.plot._
 
 import Imports.Orientation

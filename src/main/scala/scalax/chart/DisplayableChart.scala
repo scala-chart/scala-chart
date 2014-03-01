@@ -1,28 +1,43 @@
 package scalax.chart
 
+import event._
+
 import scala.swing._
+import scala.swing.event.{ MouseClicked, MouseMoved }
 import scala.swing.Swing._
 
-import org.jfree.chart._
+import org.jfree.{ chart => jchart }
 
-/** @define DisplayableChartInfo This abstraction provides methods for integration with the
+/** @define DisplayableChartInfo This abstraction provides direct integration with the
   * [[http://www.scala-lang.org/api/current/index.html#scala.swing.package Scala Swing UI
   * framework]].
   *
   * {{{
   * val component = chart.toComponent
-  *
-  * val container = new FlowPanel
-  * container.contents += component
-  *
-  * val frame = chart.toFrame
+  * val frame = chart.toFrame()
   * }}}
   *
-  * There are also methods to immediately display the chart in a new GUI window. This is intended
-  * for interactive usage, e.g. when working with the Scala REPL. The simplest form is:
+  * There is also a way to immediately display the chart in a new GUI window. This is intended for
+  * interactive usage, e.g. when working with the Scala REPL. The simplest form is:
   *
   * {{{
   * chart.show()
+  * }}}
+  *
+  * Listen to UI mouse events:
+  *
+  * {{{
+  * import scalax.chart.event._
+  *
+  * val chart = ???
+  * val ui = chart.toComponent // or chart.toFrame()
+  * val reactor = ???
+  *
+  * reactor.listenTo(ui)
+  * reactor.reactions += {
+  *   case event: ChartMouseEvent =>
+  *     // do something with event
+  * }
   * }}}
   *
   * @define title      the title of the enclosing frame
@@ -30,12 +45,15 @@ import org.jfree.chart._
   */
 private[chart] trait DisplayableChart {
 
-  chart: Chart[_] ⇒
+  chart: Chart[_] =>
 
   /** Shows the chart in a window.
     *
     * @param title      $title
     * @param scrollable $scrollable
+    *
+    * @usecase def show(): Unit
+    *   @inheritdoc
     */
   def show(title: String = "", dim: (Int,Int) = Chart.Default.Resolution, scrollable: Boolean = false): Unit = Swing onEDT {
     val frame = toFrame(title, scrollable)
@@ -44,8 +62,12 @@ private[chart] trait DisplayableChart {
   }
 
   /** Wraps this chart in a swing component. */
-  def toComponent: Component =
-    Component wrap new ChartPanel(chart.peer)
+  def toComponent: Component = {
+    val peer = new jchart.ChartPanel(chart.peer)
+    val wrapped = Component.wrap(peer)
+    applyScalaSwingListenerTo(peer, source = wrapped, publisher = wrapped)
+    wrapped
+  }
 
   /** Wraps a frame around this chart.
     *
@@ -57,9 +79,22 @@ private[chart] trait DisplayableChart {
     */
   def toFrame(title: String = "", scrollable: Boolean = true): Frame = {
     val t = title
-    new Frame {
-      override lazy val peer = new ChartFrame(t, chart.peer, scrollable) with InterfaceMixin
+    val frame = new Frame {
+      override lazy val peer = new jchart.ChartFrame(t, chart.peer, scrollable) with InterfaceMixin
     }
+
+    applyScalaSwingListenerTo(frame.peer.getChartPanel, frame, frame)
+
+    frame
+  }
+
+  private def applyScalaSwingListenerTo(chartPanel: jchart.ChartPanel, source: UIElement, publisher: Publisher) = {
+    chartPanel.addChartMouseListener(new jchart.ChartMouseListener {
+      override final def chartMouseClicked(event: jchart.ChartMouseEvent): Unit =
+        publisher.publish(ChartMouseClicked(new MouseClicked(event.getTrigger), Option(event.getEntity)))
+      override final def chartMouseMoved(event: jchart.ChartMouseEvent): Unit =
+        publisher.publish(ChartMouseMoved(new MouseMoved(event.getTrigger), Option(event.getEntity)))
+    })
   }
 
 }

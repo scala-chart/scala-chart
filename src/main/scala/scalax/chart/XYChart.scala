@@ -63,6 +63,6 @@ abstract class XYChart protected () extends Chart[XYPlot] with Orientable with D
   */
 object XYChart extends ChartCompanion[XYPlot,XYChart] {
   override final def fromPeer(jfree: JFreeChart): XYChart = new XYChart {
-    override final val peer = jfree
+    override final lazy val peer = jfree
   }
 }

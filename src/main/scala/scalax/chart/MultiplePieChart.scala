@@ -14,12 +14,7 @@ abstract class MultiplePieChart protected () extends Chart[MultiplePiePlot]
     with Labels[PieSectionLabelGenerator]
     with Tooltips[PieToolTipGenerator] {
 
-  def underlying: PieChart = {
-    val u = plot.getPieChart
-    new PieChart {
-      override val peer = u
-    }
-  }
+  final def underlying: PieChart = PieChart.fromPeer(plot.getPieChart)
 
   override def plot: MultiplePiePlot = peer.getPlot.asInstanceOf[MultiplePiePlot]
 
@@ -42,7 +37,7 @@ abstract class MultiplePieChart protected () extends Chart[MultiplePiePlot]
 object MultiplePieChart extends ChartCompanion[MultiplePiePlot,MultiplePieChart] with module.CategoryDatasetConversions {
 
   override final def fromPeer(jfree: JFreeChart): MultiplePieChart = new MultiplePieChart {
-    override final val peer = jfree
+    override final lazy val peer = jfree
   }
 
   /** Creates a new $chart.
