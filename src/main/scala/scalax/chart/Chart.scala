@@ -1,10 +1,14 @@
 package scalax.chart
 
+import event._
+
 import scala.collection.JavaConverters._
 import scala.collection.Traversable
 import scala.collection.mutable.Buffer
+import scala.swing.Publisher
 
 import org.jfree.chart.{ ChartPanel, JFreeChart }
+import org.jfree.chart.{ event => jevent }
 import org.jfree.chart.plot.Plot
 import org.jfree.chart.title.Title
 
@@ -24,7 +28,7 @@ import module.Imports._
   *
   * @tparam P used plot type
   */
-abstract class Chart[P <: Plot] protected () extends DisplayableChart with StorableChart {
+abstract class Chart[P <: Plot] protected () extends DisplayableChart with StorableChart with Publisher {
 
   /** Returns the underlying chart. */
   def peer: JFreeChart
@@ -99,6 +103,22 @@ abstract class Chart[P <: Plot] protected () extends DisplayableChart with Stora
       peer.addSubtitle(n, newTitle)
     }
   }
+
+  peer.addChangeListener(new jevent.ChartChangeListener {
+    override def chartChanged(event: jevent.ChartChangeEvent): Unit = event match {
+      case event: jevent.PlotChangeEvent =>
+        publish(PlotChanged(Chart.this, event.getPlot))
+
+      case event: jevent.TitleChangeEvent =>
+        publish(TitleChanged(Chart.this, event.getTitle))
+
+      case event => event.getType match {
+        case jevent.ChartChangeEventType.GENERAL         => publish(ChartEvent.General(Chart.this))
+        case jevent.ChartChangeEventType.NEW_DATASET     => publish(ChartEvent.NewDataset(Chart.this))
+        case jevent.ChartChangeEventType.DATASET_UPDATED => publish(ChartEvent.DatasetUpdated(Chart.this))
+      }
+    }
+  })
 
 }
 
