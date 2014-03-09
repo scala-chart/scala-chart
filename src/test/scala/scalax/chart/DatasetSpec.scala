@@ -157,12 +157,13 @@ class DatasetSpec extends Specification { def is = s2"""
 
   def tpvci1 = {
     val series = List((new Date,1)).toTimePeriodValues("series")
-    hasIXYD(series)
+    hasIXYD(series) and hasXYD(series)
   }
 
   def tpvci2 = {
     val series = List((new Date,1)).toTimePeriodValues("series")
-    hasIXYD(List(series,series))
+    val dataset = List(series,series)
+    hasIXYD(dataset) and hasXYD(dataset)
   }
 
   def ts = {
@@ -184,12 +185,13 @@ class DatasetSpec extends Specification { def is = s2"""
 
   def tsci1 = {
     val series = List((new Date,1)).toTimeSeries("series")
-    hasIXYD(series)
+    hasIXYD(series) and hasXYD(series)
   }
 
   def tsci2 = {
     val series = List((new Date,1)).toTimeSeries("series")
-    hasIXYD(List(series,series))
+    val dataset = List(series,series)
+    hasIXYD(dataset) and hasXYD(dataset)
   }
 
   def xys = {
@@ -211,23 +213,24 @@ class DatasetSpec extends Specification { def is = s2"""
 
   def xysci1 = {
     val series = List((1,2)).toXYSeries("series")
-    hasIXYD(series)
+    hasIXYD(series) and hasXYD(series)
   }
 
   def xysci2 = {
     val series1 = List((1,2)).toXYSeries("series 1")
     val series2 = List((1,2)).toXYSeries("series 2")
-    hasIXYD(List(series1,series2))
+    val dataset = List(series1,series2)
+    hasIXYD(dataset) and hasXYD(dataset)
   }
 
   def xysci3 = {
     val data = List((1,2))
-    hasIXYD(data)
+    hasIXYD(data) and hasXYD(data)
   }
 
   def xysci4 = {
     val data = List("series" -> List((1,2)))
-    hasIXYD(data)
+    hasIXYD(data) and hasXYD(data)
   }
 
   def yis = {
@@ -249,22 +252,23 @@ class DatasetSpec extends Specification { def is = s2"""
 
   def yisci1 = {
     val series = List((1,2,3,4)).toYIntervalSeries("series")
-    hasIXYD(series)
+    hasIXYD(series) and hasXYD(series)
   }
 
   def yisci2 = {
     val series = List((1,2,3,4)).toYIntervalSeries("series")
-    hasIXYD(List(series,series))
+    val dataset = List(series,series)
+    hasIXYD(dataset) and hasXYD(dataset)
   }
 
   def yisci3 = {
     val data = List((1,3,2,4))
-    hasIXYD(data)
+    hasIXYD(data) and hasXYD(data)
   }
 
   def yisci4 = {
     val data = List("series" -> List((1,3,2,4)))
-    hasIXYD(data)
+    hasIXYD(data) and hasXYD(data)
   }
 
   // -----------------------------------------------------------------------------------------------
@@ -279,5 +283,8 @@ class DatasetSpec extends Specification { def is = s2"""
 
   def hasIXYD[A: ToIntervalXYDataset](a: A) =
     ToIntervalXYDataset[A].toDataset(a) must beAnInstanceOf[IntervalXYDataset]
+
+  def hasXYD[A: ToXYDataset](a: A) =
+    ToXYDataset[A].toDataset(a) must beAnInstanceOf[XYDataset]
 
 }
