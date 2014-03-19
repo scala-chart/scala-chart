@@ -71,6 +71,17 @@ You can also do some animations, i.e. perform live updates on your datasets:
       Thread.sleep(50)
     }
 
+### Projects Using Scala Chart
+
+The following list contains some projects where you can see this project in action. This list is
+included here because it is sometimes more useful to see how a library is used in more than simple
+examples.
+
+- [ckit](https://github.com/wookietreiber/ckit)
+- [eva4s](https://github.com/wookietreiber/eva4s)
+- [pretty-accounting](https://github.com/wookietreiber/pretty-accounting)
+- [scalameter](https://github.com/scalameter/scalameter)
+
 
 [JFreeChart]: http://jfree.org/jfreechart/
 [API]: http://wookietreiber.github.com/scala-chart/latest/api/index.html
