@@ -43,21 +43,22 @@ import org.jfree.{ chart => jchart }
   * @define title      the title of the enclosing frame
   * @define scrollable whether the enclosing panel is scrollable
   */
-private[chart] trait DisplayableChart {
+private[chart] trait DisplayableChart extends DocMacros {
 
   chart: Chart =>
 
   /** Shows the chart in a window.
     *
     * @param title      $title
+    * @param resolution $resolution
     * @param scrollable $scrollable
     *
     * @usecase def show(): Unit
     *   @inheritdoc
     */
-  def show(title: String = "", dim: (Int,Int) = Chart.Default.Resolution, scrollable: Boolean = false): Unit = Swing onEDT {
+  def show(title: String = "", resolution: (Int,Int) = Chart.Default.Resolution, scrollable: Boolean = false): Unit = Swing onEDT {
     val frame = toFrame(title, scrollable)
-    frame.size = dim
+    frame.size = resolution
     frame.visible = true
   }
 

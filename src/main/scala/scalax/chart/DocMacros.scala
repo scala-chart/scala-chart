@@ -19,6 +19,7 @@ package scalax.chart
   *  - '''`\$orientation`''' = $orientation
   *  - '''`\$peer`''' = $peer
   *  - '''`\$rangeAxisLabel`''' = $rangeAxisLabel
+  *  - '''`\$resolution`''' = $resolution
   *  - '''`\$theme`''' = $theme
   *  - '''`\$title`''' = $title
   *  - '''`\$tooltips`''' = $tooltips
@@ -32,8 +33,9 @@ package scalax.chart
   * @define orientation the orientation of the $chart
   * @define peer the underlying $chart
   * @define rangeAxisLabel the label for the range axis
+  * @define resolution dimension / geometry / width x height
   * @define theme the theme to apply to the $chart
   * @define title the title of the $chart
   * @define tooltips whether or not tooltips will be generated
   */
-trait DocMacros
+trait DocMacros extends Any

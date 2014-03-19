@@ -1,6 +1,10 @@
 package scalax.chart
 package module
 
+import language.implicitConversions
+
+import exporting._
+
 import scala.swing.Orientable
 
 import org.jfree.chart._
@@ -102,5 +106,14 @@ trait RichChart {
     }
 
   }
+
+  implicit def JFreeChartJPEGExporter(chart: JFreeChart) =
+    new JPEGExporter(chart)
+
+  implicit def JFreeChartPDFExporter(chart: JFreeChart) =
+    new PDFExporter(chart)
+
+  implicit def JFreeChartPNGExporter(chart: JFreeChart) =
+    new PNGExporter(chart)
 
 }

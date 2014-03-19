@@ -11,8 +11,6 @@ import org.jfree.chart.{ ChartPanel, JFreeChart }
 import org.jfree.chart.{ event => jevent }
 import org.jfree.chart.title.Title
 
-import com.lowagie.text.pdf.{ DefaultFontMapper, FontMapper }
-
 import module.Imports._
 
 /** Generic graphical representation of data.
@@ -21,11 +19,11 @@ import module.Imports._
   *
   * $DisplayableChartInfo
   *
-  * == Saving Charts ==
+  * == Exporting Charts ==
   *
-  * $StorableChartInfo
+  * See [[module.Exporting]] for more information.
   */
-abstract class Chart protected () extends DisplayableChart with StorableChart with Publisher {
+abstract class Chart protected () extends DisplayableChart with Publisher {
 
   /** Returns the underlying chart. */
   def peer: JFreeChart
@@ -129,8 +127,6 @@ object Chart {
     def Width: Int = ChartPanel.DEFAULT_WIDTH
 
     def Resolution: (Int,Int) = (Width,Height)
-
-    def FontMapper: FontMapper = new DefaultFontMapper
   }
 
 }
