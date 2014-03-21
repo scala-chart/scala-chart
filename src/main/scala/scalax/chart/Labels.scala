@@ -4,7 +4,7 @@ package scalax.chart
   *
   * @tparam G type of label generator
   */
-trait Labels[G] {
+private[chart] trait Labels[G] {
 
   /** Optionally returns this charts label generator. */
   def labelGenerator: Option[G]
@@ -13,8 +13,8 @@ trait Labels[G] {
   def labelGenerator_=(generator: Option[G]): Unit
 
   /** Sets this charts label generator. */
-  final def labelGenerator_=(generator: G) {
-    labelGenerator = Some(generator)
+  final def labelGenerator_=(generator: G): Unit = {
+    labelGenerator = Option(generator)
   }
 
 }

@@ -15,7 +15,7 @@ private[chart] trait PieChartLike
     plot.getLabelGenerator
   ) map { _.generateSectionLabel _ }
 
-  override def labelGenerator_=(generator: Option[PieSectionLabelGenerator]) {
+  override def labelGenerator_=(generator: Option[PieSectionLabelGenerator]): Unit = {
     plot.setLabelGenerator(generator.map( lg ⇒
       new org.jfree.chart.labels.PieSectionLabelGenerator {
         override def generateAttributedSectionLabel(dataset: PieDataset, key: Comparable[_]): java.text.AttributedString =
@@ -30,7 +30,7 @@ private[chart] trait PieChartLike
     plot.getToolTipGenerator
   ) map { _.generateToolTip _ }
 
-  override def tooltipGenerator_=(generator: Option[PieToolTipGenerator]) {
+  override def tooltipGenerator_=(generator: Option[PieToolTipGenerator]): Unit = {
     plot.setToolTipGenerator(generator.map( ttg ⇒
       new org.jfree.chart.labels.PieToolTipGenerator {
         override def generateToolTip(dataset: PieDataset, key: Comparable[_]): String =

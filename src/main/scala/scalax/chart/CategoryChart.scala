@@ -19,7 +19,7 @@ abstract class CategoryChart protected () extends Chart with Orientable
     plot.getRenderer.getBaseItemLabelGenerator
   ) map { _.generateLabel _ }
 
-  override def labelGenerator_=(generator: Option[CategoryItemLabelGenerator]) {
+  override def labelGenerator_=(generator: Option[CategoryItemLabelGenerator]): Unit = {
     val renderer = plot.getRenderer
     renderer.setBaseItemLabelsVisible(generator.isDefined)
     renderer.setBaseItemLabelGenerator(generator.map( gen ⇒
@@ -41,7 +41,7 @@ abstract class CategoryChart protected () extends Chart with Orientable
     plot.getRenderer.getBaseToolTipGenerator
   ) map { _.generateToolTip _ }
 
-  override def tooltipGenerator_=(generator: Option[CategoryToolTipGenerator]) {
+  override def tooltipGenerator_=(generator: Option[CategoryToolTipGenerator]): Unit = {
     plot.getRenderer.setBaseToolTipGenerator(generator.map( ttg ⇒
       new org.jfree.chart.labels.CategoryToolTipGenerator {
         override def generateToolTip(dataset: CategoryDataset, row: Int, col: Int): String =

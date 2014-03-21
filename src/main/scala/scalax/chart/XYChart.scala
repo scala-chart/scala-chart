@@ -17,7 +17,7 @@ abstract class XYChart protected () extends Chart with Orientable
     plot.getRenderer.getBaseItemLabelGenerator
   ) map { _.generateLabel _ }
 
-  override def labelGenerator_=(generator: Option[XYItemLabelGenerator]) {
+  override def labelGenerator_=(generator: Option[XYItemLabelGenerator]): Unit = {
     val renderer = plot.getRenderer
     renderer.setBaseItemLabelsVisible(generator.isDefined)
     renderer.setBaseItemLabelGenerator(generator.map( lg ⇒
@@ -37,7 +37,7 @@ abstract class XYChart protected () extends Chart with Orientable
     plot.getRenderer.getBaseToolTipGenerator
   ) map { _.generateToolTip _ }
 
-  override def tooltipGenerator_=(generator: Option[XYToolTipGenerator]) {
+  override def tooltipGenerator_=(generator: Option[XYToolTipGenerator]): Unit = {
     plot.getRenderer.setBaseToolTipGenerator(generator.map( ttg ⇒
       new org.jfree.chart.labels.XYToolTipGenerator {
         override def generateToolTip(dataset: XYDataset, series: Int, item: Int): String =

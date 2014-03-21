@@ -21,12 +21,12 @@ abstract class MultiplePieChart protected () extends Chart
   override def plot: MultiplePiePlot = peer.getPlot.asInstanceOf[MultiplePiePlot]
 
   override def labelGenerator: Option[PieSectionLabelGenerator] = underlying.labelGenerator
-  override def labelGenerator_=(generator: Option[PieSectionLabelGenerator]) {
+  override def labelGenerator_=(generator: Option[PieSectionLabelGenerator]): Unit = {
     underlying.labelGenerator = generator
   }
 
   override def tooltipGenerator: Option[PieToolTipGenerator] = underlying.tooltipGenerator
-  override def tooltipGenerator_=(generator: Option[PieToolTipGenerator]) {
+  override def tooltipGenerator_=(generator: Option[PieToolTipGenerator]): Unit = {
     underlying.tooltipGenerator = generator
   }
 }
