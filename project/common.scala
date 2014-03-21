@@ -6,9 +6,8 @@ import Keys._
 package object build {
   val commonSettings = Seq (
     organization := "com.github.wookietreiber",
-    version      := "0.4.0-SNAPSHOT",
     scalaVersion := "2.11.0-RC3",
-    crossScalaVersions := Seq("2.11.0-RC3", "2.10.3")
+    crossScalaVersions := Seq("2.11.0-RC3", "2.10.4")
   )
 
   val docURL = "https://github.com/wookietreiber/scala-chart/tree/develop€{FILE_PATH}.scala"
