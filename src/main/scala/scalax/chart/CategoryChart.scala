@@ -7,18 +7,13 @@ import module.Imports._
 /** Represents categorized numeric data. These charts have a domain axis that consists of the
   * categories and a numeric range axis.
   */
-abstract class CategoryChart protected () extends Chart with Orientable with DomainAxis with RangeAxis
+abstract class CategoryChart protected () extends Chart with Orientable
     with Labels[CategoryItemLabelGenerator]
     with Tooltips[CategoryToolTipGenerator] {
 
   type Plot = CategoryPlot
 
   override def plot: CategoryPlot = peer.getCategoryPlot
-
-  override def domainAxisLabel: Option[String] = Option(plot.getDomainAxis.getLabel) filterNot { _ == "" }
-  override def domainAxisLabel_=(label: Option[String]) {
-    plot.getDomainAxis.setLabel(label.getOrElse(""))
-  }
 
   override def labelGenerator: Option[CategoryItemLabelGenerator] = Option (
     plot.getRenderer.getBaseItemLabelGenerator
@@ -40,11 +35,6 @@ abstract class CategoryChart protected () extends Chart with Orientable with Dom
   override def orientation: Orientation = plot.getOrientation
   override def orientation_=(orientation: Orientation) {
     plot.setOrientation(orientation)
-  }
-
-  override def rangeAxisLabel: Option[String] = Option(plot.getRangeAxis.getLabel) filterNot { _ == "" }
-  override def rangeAxisLabel_=(label: Option[String]) {
-    plot.getRangeAxis.setLabel(label.getOrElse(""))
   }
 
   override def tooltipGenerator: Option[CategoryToolTipGenerator] = Option (

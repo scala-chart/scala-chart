@@ -64,6 +64,34 @@ trait RichPlot extends Marking {
     }
   }
 
+  implicit class RichFastScatterPlot(val plot: FastScatterPlot) {
+    object domain {
+      object axis {
+        def label: String = Option(plot.getDomainAxis.getLabel).getOrElse("")
+        def label_=(label: String): Unit =
+          plot.getDomainAxis.setLabel(label)
+      }
+    }
+
+    object range {
+      object axis {
+        def label: String = Option(plot.getRangeAxis.getLabel).getOrElse("")
+        def label_=(label: String): Unit =
+          plot.getRangeAxis.setLabel(label)
+      }
+    }
+  }
+
+  implicit class RichThermometerPlot(val plot: ThermometerPlot) {
+    object range {
+      object axis {
+        def label: String = Option(plot.getRangeAxis.getLabel).getOrElse("")
+        def label_=(label: String): Unit =
+          plot.getRangeAxis.setLabel(label)
+      }
+    }
+  }
+
   implicit class RichXYPlot(val plot: XYPlot) {
     object domain {
       object axis {

@@ -24,40 +24,11 @@ object RichChart extends RichChart
 trait RichChart {
 
   /** Enriched `JFreeChart`. */
-  implicit class GenericRichChart(val peer: JFreeChart) extends Chart
-      with Orientable with DomainAxis with RangeAxis {
+  implicit class GenericRichChart(val peer: JFreeChart) extends Chart with Orientable {
 
     type Plot = org.jfree.chart.plot.Plot
 
     override def plot: Plot = peer.getPlot
-
-    override def domainAxisLabel: Option[String] = {
-      val label = plot match {
-        case plot: CategoryPlot    ⇒ plot.getDomainAxis.getLabel
-        case plot: ContourPlot     ⇒ plot.getDomainAxis.getLabel
-        case plot: FastScatterPlot ⇒ plot.getDomainAxis.getLabel
-        case plot: XYPlot          ⇒ plot.getDomainAxis.getLabel
-        case plot ⇒ throw new UnsupportedOperationException (
-          s"""The underlying ${plot.getPlotType} has no domain axis."""
-        )
-      }
-
-      Option(label) filterNot { _ == "" }
-    }
-
-    override def domainAxisLabel_=(label: Option[String]) {
-      val l = label.getOrElse("")
-
-      plot match {
-        case plot: CategoryPlot    ⇒ plot.getDomainAxis.setLabel(l)
-        case plot: ContourPlot     ⇒ plot.getDomainAxis.setLabel(l)
-        case plot: FastScatterPlot ⇒ plot.getDomainAxis.setLabel(l)
-        case plot: XYPlot          ⇒ plot.getDomainAxis.setLabel(l)
-        case plot ⇒ throw new UnsupportedOperationException (
-          s"""The underlying ${plot.getPlotType} has no domain axis."""
-        )
-      }
-    }
 
     override def orientation: Orientation = plot match {
       case plot: CategoryPlot ⇒ plot.getOrientation
@@ -73,36 +44,6 @@ trait RichChart {
       case plot ⇒ throw new UnsupportedOperationException (
         s"""The underlying ${plot.getPlotType} is not orientable."""
       )
-    }
-
-    override def rangeAxisLabel: Option[String] = {
-      val label = plot match {
-        case plot: CategoryPlot    ⇒ plot.getRangeAxis.getLabel
-        case plot: ContourPlot     ⇒ plot.getRangeAxis.getLabel
-        case plot: FastScatterPlot ⇒ plot.getRangeAxis.getLabel
-        case plot: ThermometerPlot ⇒ plot.getRangeAxis.getLabel
-        case plot: XYPlot          ⇒ plot.getRangeAxis.getLabel
-        case plot ⇒ throw new UnsupportedOperationException (
-          s"""The underlying ${plot.getPlotType} has no range axis."""
-        )
-      }
-
-      Option(label) filterNot { _ == "" }
-    }
-
-    override def rangeAxisLabel_=(label: Option[String]) {
-      val l = label.getOrElse("")
-
-      plot match {
-        case plot: CategoryPlot    ⇒ plot.getRangeAxis.setLabel(l)
-        case plot: ContourPlot     ⇒ plot.getRangeAxis.setLabel(l)
-        case plot: FastScatterPlot ⇒ plot.getRangeAxis.setLabel(l)
-        case plot: ThermometerPlot ⇒ plot.getRangeAxis.setLabel(l)
-        case plot: XYPlot          ⇒ plot.getRangeAxis.setLabel(l)
-        case plot ⇒ throw new UnsupportedOperationException (
-          s"""The underlying ${plot.getPlotType} has no range axis."""
-        )
-      }
     }
 
   }

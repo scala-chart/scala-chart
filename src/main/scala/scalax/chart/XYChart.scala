@@ -5,18 +5,13 @@ import scala.swing.Orientable
 import module.Imports._
 
 /** Represents numeric data. */
-abstract class XYChart protected () extends Chart with Orientable with DomainAxis with RangeAxis
+abstract class XYChart protected () extends Chart with Orientable
     with Labels[XYItemLabelGenerator]
     with Tooltips[XYToolTipGenerator] {
 
   type Plot = XYPlot
 
   override def plot: XYPlot = peer.getXYPlot
-
-  override def domainAxisLabel: Option[String] = Option(plot.getDomainAxis.getLabel) filterNot { _ == "" }
-  override def domainAxisLabel_=(label: Option[String]) {
-    plot.getDomainAxis.setLabel(label.getOrElse(""))
-  }
 
   override def labelGenerator: Option[XYItemLabelGenerator] = Option (
     plot.getRenderer.getBaseItemLabelGenerator
@@ -36,11 +31,6 @@ abstract class XYChart protected () extends Chart with Orientable with DomainAxi
   override def orientation: Orientation = plot.getOrientation
   override def orientation_=(orientation: Orientation) {
     plot.setOrientation(orientation)
-  }
-
-  override def rangeAxisLabel: Option[String] = Option(plot.getRangeAxis.getLabel) filterNot { _ == "" }
-  override def rangeAxisLabel_=(label: Option[String]) {
-    plot.getRangeAxis.setLabel(label.getOrElse(""))
   }
 
   override def tooltipGenerator: Option[XYToolTipGenerator] = Option (
