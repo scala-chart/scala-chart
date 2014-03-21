@@ -1,12 +1,6 @@
 package scalax.chart
 package module
 
-import language.reflectiveCalls
-
-import scala.collection.JavaConverters.asScalaIteratorConverter
-
-import java.util.Collection
-
 /** $MarkingInfo */
 object Marking extends Marking
 
@@ -74,72 +68,6 @@ trait Marking extends Imports {
     implicit def ComparableToCategoryMarker[A <% Comparable[A]]: ToCategoryMarker[A] = new ToCategoryMarker[A] {
       type X = CategoryMarker
       def toMarker(a: A): X = new CategoryMarker(a)
-    }
-  }
-
-  /** Enriches a plot to handle marking on the domain and range axes. */
-  implicit class MarkableCategoryPlot(underlying: CategoryPlot) {
-    object domain {
-      object markers {
-        def +=[A: ToCategoryMarker](a: A): this.type = {
-          val marker = ToCategoryMarker[A].toMarker(a)
-          underlying.addDomainMarker(marker)
-          this
-        }
-
-        def iterator: Iterator[CategoryMarker] = {
-          val jcoll = underlying.getDomainMarkers(Layer.Foreground).asInstanceOf[Collection[CategoryMarker]]
-          jcoll.iterator.asScala
-        }
-      }
-    }
-
-    object range {
-      object markers {
-        def +=[A: ToMarker](a: A): this.type = {
-          val marker = ToMarker[A].toMarker(a)
-          underlying.addRangeMarker(marker)
-          this
-        }
-
-        def iterator: Iterator[Marker] = {
-          val jcoll = underlying.getRangeMarkers(Layer.Foreground).asInstanceOf[Collection[Marker]]
-          jcoll.iterator.asScala
-        }
-      }
-    }
-  }
-
-  /** Enriches a plot to handle marking on the domain and range axes. */
-  implicit class MarkableXYPlot(underlying: XYPlot) {
-    object domain {
-      object markers {
-        def +=[A: ToMarker](a: A): this.type = {
-          val marker = ToMarker[A].toMarker(a)
-          underlying.addDomainMarker(marker)
-          this
-        }
-
-        def iterator: Iterator[Marker] = {
-          val jcoll = underlying.getDomainMarkers(Layer.Foreground).asInstanceOf[Collection[Marker]]
-          jcoll.iterator.asScala
-        }
-      }
-    }
-
-    object range {
-      object markers {
-        def +=[A: ToMarker](a: A): this.type = {
-          val marker = ToMarker[A].toMarker(a)
-          underlying.addRangeMarker(marker)
-          this
-        }
-
-        def iterator: Iterator[Marker] = {
-          val jcoll = underlying.getRangeMarkers(Layer.Foreground).asInstanceOf[Collection[Marker]]
-          jcoll.iterator.asScala
-        }
-      }
     }
   }
 

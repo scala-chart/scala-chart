@@ -25,4 +25,4 @@ object Charting extends Charting
   * $MarkingInfo
   */
 trait Charting extends RichChartingCollections with ChartFactories with RichChart with Imports
-    with Marking with Exporting
+    with Marking with Exporting with RichPlot
