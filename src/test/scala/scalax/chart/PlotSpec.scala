@@ -34,7 +34,7 @@ class PlotSpec extends Specification { def is = s2"""
 
   def cpl1 = {
     val chart = UnlabeledCategoryChart
-    chart.plot.domain.axis.label === ""
+    chart.plot.domain.axis.label === None
   }
 
   def cpl2 = {
@@ -45,7 +45,7 @@ class PlotSpec extends Specification { def is = s2"""
 
   def cpl3 = {
     val chart = UnlabeledCategoryChart
-    chart.plot.range.axis.label === ""
+    chart.plot.range.axis.label === None
   }
 
   def cpl4 = {
@@ -56,7 +56,7 @@ class PlotSpec extends Specification { def is = s2"""
 
   def xypl1 = {
     val chart = UnlabeledXYChart
-    chart.plot.domain.axis.label === ""
+    chart.plot.domain.axis.label === None
   }
 
   def xypl2 = {
@@ -67,7 +67,7 @@ class PlotSpec extends Specification { def is = s2"""
 
   def xypl3 = {
     val chart = UnlabeledXYChart
-    chart.plot.range.axis.label === ""
+    chart.plot.range.axis.label === None
   }
 
   def xypl4 = {

@@ -22,10 +22,8 @@ trait RichPlot extends Marking {
 
   implicit class RichCategoryPlot(val plot: CategoryPlot) {
     object domain {
-      object axis {
-        def label: String = Option(plot.getDomainAxis.getLabel).getOrElse("")
-        def label_=(label: String): Unit =
-          plot.getDomainAxis.setLabel(label)
+      object axis extends Axis {
+        override def peer = plot.getDomainAxis
       }
 
       object markers {
@@ -43,10 +41,8 @@ trait RichPlot extends Marking {
     }
 
     object range {
-      object axis {
-        def label: String = Option(plot.getRangeAxis.getLabel).getOrElse("")
-        def label_=(label: String): Unit =
-          plot.getRangeAxis.setLabel(label)
+      object axis extends Axis {
+        override def peer = plot.getRangeAxis
       }
 
       object markers {
@@ -66,38 +62,30 @@ trait RichPlot extends Marking {
 
   implicit class RichFastScatterPlot(val plot: FastScatterPlot) {
     object domain {
-      object axis {
-        def label: String = Option(plot.getDomainAxis.getLabel).getOrElse("")
-        def label_=(label: String): Unit =
-          plot.getDomainAxis.setLabel(label)
+      object axis extends Axis {
+        override def peer = plot.getDomainAxis
       }
     }
 
     object range {
-      object axis {
-        def label: String = Option(plot.getRangeAxis.getLabel).getOrElse("")
-        def label_=(label: String): Unit =
-          plot.getRangeAxis.setLabel(label)
+      object axis extends Axis {
+        override def peer = plot.getRangeAxis
       }
     }
   }
 
   implicit class RichThermometerPlot(val plot: ThermometerPlot) {
     object range {
-      object axis {
-        def label: String = Option(plot.getRangeAxis.getLabel).getOrElse("")
-        def label_=(label: String): Unit =
-          plot.getRangeAxis.setLabel(label)
+      object axis extends Axis {
+        override def peer = plot.getRangeAxis
       }
     }
   }
 
   implicit class RichXYPlot(val plot: XYPlot) {
     object domain {
-      object axis {
-        def label: String = Option(plot.getDomainAxis.getLabel).getOrElse("")
-        def label_=(label: String): Unit =
-          plot.getDomainAxis.setLabel(label)
+      object axis extends Axis {
+        override def peer = plot.getDomainAxis
       }
 
       object markers {
@@ -115,10 +103,8 @@ trait RichPlot extends Marking {
     }
 
     object range {
-      object axis {
-        def label: String = Option(plot.getRangeAxis.getLabel).getOrElse("")
-        def label_=(label: String): Unit =
-          plot.getRangeAxis.setLabel(label)
+      object axis extends Axis {
+        override def peer = plot.getRangeAxis
       }
 
       object markers {
