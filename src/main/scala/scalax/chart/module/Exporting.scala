@@ -10,13 +10,26 @@ object Exporting extends Exporting
 
 /** $ExportingInfo
   *
-  * @define ExportingInfo Charts may be exported into the following formats:
+  * @define ExportingShortInfo [[Exporting]] contains enrichments to conveniently export charts to
+  * disk.
+  *
+  * {{{
+  * chart.saveAsPNG("/tmp/chart.png")
+  * }}}
+  *
+  * @define ExportingInfo '' '' $ExportingShortInfo
+  *
+  * == Supported Formats ==
+  *
+  * Charts may be exported into the following formats:
   *
   *  - JPEG
   *  - PNG
-  *  - PDF
+  *  - PDF, needs the optional dependency `com.lowagie.itext` on your class path
   *
-  * There are different ways in which charts may be exported: encoding, writing and the actual
+  * == Export Stages ==
+  *
+  * There are different stages in which charts may be exported: encoding, writing and the actual
   * saving of the file, which is demonstrated by the following code snippet:
   *
   * {{{

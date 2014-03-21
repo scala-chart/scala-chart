@@ -1,23 +1,46 @@
 package scalax.chart
 package module
 
-/** $MarkingInfo */
-object Marking extends Marking
+/** $MarkerConversionsInfo */
+object MarkerConversions extends MarkerConversions
 
-/** $MarkingInfo
+/** $MarkerConversionsInfo
   *
-  * @define MarkingInfo [[Marking]] contains enrichments concerning the handling of markers in plots.
+  * @define MarkerConversionsShortInfo [[MarkerConversions]] contains type class based conversions
+  * from certain types to `Marker` instances.
   *
   * {{{
-  * val data = Seq((0,0),(1,1),(2,2)).toXYSeriesCollection("some data")
-  * val chart = XYLineChart(data)
-  *
   * chart.plot.domain.markers += 1
+  * }}}
   *
-  * chart.show()
+  * @define MarkerConversionsInfo '' '' $MarkerConversionsShortInfo
+  *
+  * All numeric types and numeric ranges are supported to create simple value markers:
+  *
+  * {{{
+  * chart.plot.range.markers += 3
+  * chart.plot.range.markers += 3L
+  * chart.plot.range.markers += 3.0
+  * chart.plot.range.markers += ((1.0,2.0))
+  * }}}
+  *
+  * There is also an additional conversion type class for the domain of [[CategoryChart]]s you can
+  * use for `CategoryMarker`s, which support arbitrary `Comparable`s like `String`:
+  *
+  * {{{
+  * chart.plot.domain.markers += "category"
+  * }}}
+  *
+  * The legacy JFreeChart classes can still be used directly:
+  *
+  * {{{
+  * chart.plot.range.markers += new ValueMarker(3.0)
+  * chart.plot.range.markers += new IntervalMarker(1.0, 2.0)
+  *
+  * chart.plot.domain.markers += new CategoryMarker("category")
   * }}}
   */
-trait Marking extends Imports {
+trait MarkerConversions extends Imports {
 
   /** Converts some type `A` to a marker. */
   trait ToMarker[A] {

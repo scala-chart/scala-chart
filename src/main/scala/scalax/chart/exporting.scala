@@ -17,7 +17,10 @@ private[exporting] trait Exporter extends Any with DocMacros {
     try { f(r) } finally { r.close() }
 }
 
-/** Exports charts to JPEG images. */
+/** Exports charts to JPEG images.
+  *
+  * @see [[module.Exporting]]
+  */
 class JPEGExporter(val chart: Chart) extends AnyVal with Exporter {
 
   /** Saves the chart as a JPEG image.
@@ -57,6 +60,8 @@ class JPEGExporter(val chart: Chart) extends AnyVal with Exporter {
 }
 
 /** Exports charts to PDF documents.
+  *
+  * @see [[module.Exporting]]
   *
   * @define fontMapper handles mappings between Java AWT Fonts and PDF fonts
   */
@@ -112,7 +117,10 @@ class PDFExporter(val chart: Chart) extends AnyVal with Exporter {
 
 }
 
-/** Exports charts to PNG images. */
+/** Exports charts to PNG images.
+  *
+  * @see [[module.Exporting]]
+  */
 class PNGExporter(val chart: Chart) extends AnyVal with Exporter {
 
   /** Saves the chart as a PNG image.

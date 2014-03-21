@@ -20,9 +20,17 @@ object ChartFactories extends ChartFactories
 
 /** $ChartFactoriesInfo
   *
-  * @define ChartFactoriesInfo Contains various factories to conveniently create charts.
+  * @define ChartFactoriesShortInfo [[ChartFactories]] contains various factories to conveniently
+  * create charts.
   *
-  * == Usage ==
+  * {{{
+  * val data = for (i <- 1 to 5) yield (i,i)
+  * val chart = XYLineChart(data)
+  * }}}
+  *
+  * @define ChartFactoriesInfo '' '' $ChartFactoriesShortInfo
+  *
+  * == Creating Charts ==
   *
   * The only argument needed to create a chart is a dataset:
   *
@@ -43,7 +51,7 @@ object ChartFactories extends ChartFactories
   * val chart = XYLineChart(dataset, legend = false, domainAxisLabel = "some description")
   * }}}
   *
-  * == Chart Themes ==
+  * == Creating Charts with Themes ==
   *
   * The default theme used is the JFreeChart theme. To apply a different theme to the charts created
   * by the factories, simply define an implicit chart theme in scope, e.g. the darkness theme from
