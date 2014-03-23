@@ -66,7 +66,7 @@ private[chart] trait DisplayableChart extends DocMacros {
   def toComponent: Component = {
     val peer = new jchart.ChartPanel(chart.peer)
     val wrapped = Component.wrap(peer)
-    applyScalaSwingListenerTo(peer, source = wrapped, publisher = wrapped)
+    applyScalaSwingListenerTo(peer, publisher = wrapped)
     wrapped
   }
 
@@ -84,12 +84,12 @@ private[chart] trait DisplayableChart extends DocMacros {
       override lazy val peer = new jchart.ChartFrame(t, chart.peer, scrollable) with InterfaceMixin
     }
 
-    applyScalaSwingListenerTo(frame.peer.getChartPanel, frame, frame)
+    applyScalaSwingListenerTo(frame.peer.getChartPanel, frame)
 
     frame
   }
 
-  private def applyScalaSwingListenerTo(chartPanel: jchart.ChartPanel, source: UIElement, publisher: Publisher) = {
+  private def applyScalaSwingListenerTo(chartPanel: jchart.ChartPanel, publisher: Publisher) = {
     chartPanel.addChartMouseListener(new jchart.ChartMouseListener {
       override final def chartMouseClicked(event: jchart.ChartMouseEvent): Unit =
         publisher.publish(ChartMouseClicked(new MouseClicked(event.getTrigger), Option(event.getEntity)))
