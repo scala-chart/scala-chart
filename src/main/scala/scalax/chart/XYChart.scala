@@ -3,6 +3,7 @@ package scalax.chart
 import scala.swing.Orientable
 
 import module.Imports._
+import module.XYToolTipGenerators._
 
 /** Represents numeric data. */
 abstract class XYChart protected () extends Chart with Orientable
@@ -33,19 +34,16 @@ abstract class XYChart protected () extends Chart with Orientable
     plot.setOrientation(orientation)
   }
 
-  override def tooltipGenerator: Option[XYToolTipGenerator] = Option (
-    plot.getRenderer.getBaseToolTipGenerator
-  ) map { _.generateToolTip _ }
+  override def tooltipGenerator: Option[XYToolTipGenerator] = for {
+    jgenerator <- Option(plot.getRenderer.getBaseToolTipGenerator)
+    generator = XYToolTipGenerator.fromPeer(jgenerator)
+  } yield generator
 
   override def tooltipGenerator_=(generator: Option[XYToolTipGenerator]): Unit = {
-    plot.getRenderer.setBaseToolTipGenerator(generator.map( ttg ⇒
-      new org.jfree.chart.labels.XYToolTipGenerator {
-        override def generateToolTip(dataset: XYDataset, series: Int, item: Int): String =
-          ttg(dataset, series, item)
-      }
-    ).orNull)
+    plot.getRenderer.setBaseToolTipGenerator(
+      generator.map(XYToolTipGenerator.toPeer).orNull
+    )
   }
-
 }
 
 /** Low-level factory for ${chart}s.

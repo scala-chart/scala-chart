@@ -58,4 +58,7 @@ trait Imports {
   /** Function alias for creating tooltips for pie charts. */
   type PieToolTipGenerator = (PieDataset,Comparable[_]) => String
 
+  /** Function alias for creating tooltips for xy charts. */
+  type XYToolTipGenerator = (XYDataset,Comparable[_],Int) => String
+
 }

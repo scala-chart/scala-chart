@@ -48,9 +48,6 @@ package object chart {
   /** Function alias for creating item labels for xy charts. */
   type XYItemLabelGenerator = (org.jfree.data.xy.XYDataset,Int,Int) ⇒ String
 
-  /** Function alias for creating tooltips for xy charts. */
-  type XYToolTipGenerator = (org.jfree.data.xy.XYDataset,Int,Int) ⇒ String
-
   // -----------------------------------------------------------------------------------------------
   // implicit conversions between scala-chart and JFreeChart
   // -----------------------------------------------------------------------------------------------

@@ -23,5 +23,10 @@ object ToolTipGenerators extends ToolTipGenerators
   * == Tool Tips for Pie-like Charts ==
   *
   * $PieToolTipGeneratorsShortInfo
+  *
+  * == Tool Tips for XY Charts ==
+  *
+  * $XYToolTipGeneratorsShortInfo
   */
 trait ToolTipGenerators extends CategoryToolTipGenerators with PieToolTipGenerators
+    with XYToolTipGenerators
