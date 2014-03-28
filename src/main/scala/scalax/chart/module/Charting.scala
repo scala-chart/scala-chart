@@ -19,6 +19,10 @@ object Charting extends Charting
   * == Rich Plots ==
   *
   * $RichPlotShortInfo
+  *
+  * == Tool Tips ==
+  *
+  * $ToolTipGeneratorsShortInfo
   */
 trait Charting extends RichChartingCollections with ChartFactories with RichChart with Imports
-    with Exporting with RichPlot
+    with Exporting with RichPlot with ToolTipGenerators

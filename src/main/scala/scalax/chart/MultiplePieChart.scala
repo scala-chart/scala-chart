@@ -1,13 +1,13 @@
 package scalax.chart
 
 import org.jfree.chart._
-import org.jfree.chart.labels._
 import org.jfree.chart.plot.MultiplePiePlot
 import org.jfree.chart.title.TextTitle
 import org.jfree.ui.RectangleEdge
 import org.jfree.util.TableOrder
 
 import module.Imports._
+import module.PieToolTipGenerators._
 
 /** Represents categorized numeric data with multiple pies. */
 abstract class MultiplePieChart protected () extends Chart
@@ -62,12 +62,11 @@ object MultiplePieChart extends ChartCompanion[MultiplePieChart] with module.Cat
     plot.setBackgroundPaint(null)
     plot.setOutlineStroke(null)
 
-    if (tooltips) {
-      val pp = plot.getPieChart.getPlot.asInstanceOf[PiePlot]
-      pp.setToolTipGenerator(new StandardPieToolTipGenerator())
-    }
+    val chart = MultiplePieChart(plot, title, legend, theme)
 
-    MultiplePieChart(plot, title, legend, theme)
+    if (tooltips) chart.tooltipGenerator = PieToolTipGenerator.Default
+
+    chart
   }
 
   /** Creates a new $chart with three dimensional visualization.
@@ -91,7 +90,6 @@ object MultiplePieChart extends ChartCompanion[MultiplePieChart] with module.Cat
     plot.setOutlineStroke(null)
 
     val piePlot = new PiePlot3D()
-    if (tooltips) piePlot.setToolTipGenerator(new StandardPieToolTipGenerator())
 
     val pieChart = new JFreeChart(piePlot)
     pieChart.setTitle(new TextTitle("dummy title for setting edge"))
@@ -99,7 +97,11 @@ object MultiplePieChart extends ChartCompanion[MultiplePieChart] with module.Cat
     pieChart.removeLegend()
     plot.setPieChart(pieChart)
 
-    MultiplePieChart(plot, title, legend, theme)
+    val chart = MultiplePieChart(plot, title, legend, theme)
+
+    if (tooltips) chart.tooltipGenerator = PieToolTipGenerator.Default
+
+    chart
   }
 
 }

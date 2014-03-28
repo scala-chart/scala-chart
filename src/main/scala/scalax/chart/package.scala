@@ -48,9 +48,6 @@ package object chart {
   /** Function alias for creating item labels for pie charts. */
   type PieSectionLabelGenerator = (org.jfree.data.general.PieDataset,Comparable[_]) ⇒ String
 
-  /** Function alias for creating tooltips for pie charts. */
-  type PieToolTipGenerator = (org.jfree.data.general.PieDataset,Comparable[_]) ⇒ String
-
   /** Function alias for creating item labels for xy charts. */
   type XYItemLabelGenerator = (org.jfree.data.xy.XYDataset,Int,Int) ⇒ String
 

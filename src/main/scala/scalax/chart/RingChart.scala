@@ -1,10 +1,11 @@
 package scalax.chart
 
 import org.jfree.chart._
-import org.jfree.chart.labels._
+import org.jfree.chart.labels.StandardPieSectionLabelGenerator
 import org.jfree.ui.RectangleInsets
 
 import module.Imports._
+import module.PieToolTipGenerators._
 
 /** Represents categorized numeric data with a ring. */
 abstract class RingChart protected () extends Chart with PieChartLike {
@@ -41,9 +42,12 @@ object RingChart extends ChartCompanion[RingChart] with module.PieDatasetConvers
     val plot = new RingPlot(dataset)
     plot.setLabelGenerator(new StandardPieSectionLabelGenerator())
     plot.setInsets(new RectangleInsets(0.0, 5.0, 5.0, 5.0))
-    if (tooltips) plot.setToolTipGenerator(new StandardPieToolTipGenerator())
 
-    RingChart(plot, title, legend, theme)
+    val chart = RingChart(plot, title, legend, theme)
+
+    if (tooltips) chart.tooltipGenerator = PieToolTipGenerator.Default
+
+    chart
   }
 
 }

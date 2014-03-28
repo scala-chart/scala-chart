@@ -1,6 +1,7 @@
 package scalax.chart
 
 import module.Imports._
+import module.PieToolTipGenerators._
 
 /** Template trait for pie charts. */
 private[chart] trait PieChartLike
@@ -26,16 +27,14 @@ private[chart] trait PieChartLike
     ).orNull)
   }
 
-  override def tooltipGenerator: Option[PieToolTipGenerator] = Option (
-    plot.getToolTipGenerator
-  ) map { _.generateToolTip _ }
+  override def tooltipGenerator: Option[PieToolTipGenerator] = for {
+    jgenerator <- Option(plot.getToolTipGenerator)
+    generator = PieToolTipGenerator.fromPeer(jgenerator)
+  } yield generator
 
   override def tooltipGenerator_=(generator: Option[PieToolTipGenerator]): Unit = {
-    plot.setToolTipGenerator(generator.map( ttg ⇒
-      new org.jfree.chart.labels.PieToolTipGenerator {
-        override def generateToolTip(dataset: PieDataset, key: Comparable[_]): String =
-          ttg(dataset, key)
-      }
-    ).orNull)
+    plot.setToolTipGenerator(
+      generator.map(PieToolTipGenerator.toPeer).orNull
+    )
   }
 }

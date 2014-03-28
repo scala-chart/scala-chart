@@ -1,10 +1,11 @@
 package scalax.chart
 
 import org.jfree.chart._
-import org.jfree.chart.labels._
+import org.jfree.chart.labels.StandardPieSectionLabelGenerator
 import org.jfree.ui.RectangleInsets
 
 import module.Imports._
+import module.PieToolTipGenerators._
 
 /** Represents categorized numeric data with a pie. */
 abstract class PieChart protected () extends Chart with PieChartLike {
@@ -41,9 +42,12 @@ object PieChart extends ChartCompanion[PieChart] with module.PieDatasetConversio
     val plot = new PiePlot(dataset)
     plot.setLabelGenerator(new StandardPieSectionLabelGenerator())
     plot.setInsets(new RectangleInsets(0.0, 5.0, 5.0, 5.0))
-    if (tooltips) plot.setToolTipGenerator(new StandardPieToolTipGenerator())
 
-    PieChart(plot, title, legend, theme)
+    val chart = PieChart(plot, title, legend, theme)
+
+    if (tooltips) chart.tooltipGenerator = PieToolTipGenerator.Default
+
+    chart
   }
 
   /** Creates a new $chart with a three dimensional visualization.
@@ -63,9 +67,12 @@ object PieChart extends ChartCompanion[PieChart] with module.PieDatasetConversio
 
     val plot = new PiePlot3D(dataset)
     plot.setInsets(new RectangleInsets(0.0, 5.0, 5.0, 5.0))
-    if (tooltips) plot.setToolTipGenerator(new StandardPieToolTipGenerator())
 
-    PieChart(plot, title, legend, theme)
+    val chart = PieChart(plot, title, legend, theme)
+
+    if (tooltips) chart.tooltipGenerator = PieToolTipGenerator.Default
+
+    chart
   }
 
 }
