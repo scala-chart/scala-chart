@@ -42,9 +42,6 @@ package object chart {
   /** Function alias for creating item labels for category charts. */
   type CategoryItemLabelGenerator = (org.jfree.data.category.CategoryDataset,Int,Int) ⇒ String
 
-  /** Function alias for creating tooltips for category charts. */
-  type CategoryToolTipGenerator = (org.jfree.data.category.CategoryDataset,Int,Int) ⇒ String
-
   /** Function alias for creating item labels for pie charts. */
   type PieSectionLabelGenerator = (org.jfree.data.general.PieDataset,Comparable[_]) ⇒ String
 

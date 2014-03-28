@@ -52,6 +52,9 @@ trait Imports {
     val Background = org.jfree.ui.Layer.BACKGROUND
   }
 
+  /** Function alias for creating tooltips for category charts. */
+  type CategoryToolTipGenerator = (CategoryDataset,Comparable[_],Comparable[_]) => String
+
   /** Function alias for creating tooltips for pie charts. */
   type PieToolTipGenerator = (PieDataset,Comparable[_]) => String
 

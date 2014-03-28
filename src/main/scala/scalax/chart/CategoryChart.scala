@@ -3,6 +3,7 @@ package scalax.chart
 import scala.swing.Orientable
 
 import module.Imports._
+import module.CategoryToolTipGenerators._
 
 /** Represents categorized numeric data. These charts have a domain axis that consists of the
   * categories and a numeric range axis.
@@ -37,19 +38,16 @@ abstract class CategoryChart protected () extends Chart with Orientable
     plot.setOrientation(orientation)
   }
 
-  override def tooltipGenerator: Option[CategoryToolTipGenerator] = Option (
-    plot.getRenderer.getBaseToolTipGenerator
-  ) map { _.generateToolTip _ }
+  override def tooltipGenerator: Option[CategoryToolTipGenerator] = for {
+    jgenerator <- Option(plot.getRenderer.getBaseToolTipGenerator)
+    generator = CategoryToolTipGenerator.fromPeer(jgenerator)
+  } yield generator
 
   override def tooltipGenerator_=(generator: Option[CategoryToolTipGenerator]): Unit = {
-    plot.getRenderer.setBaseToolTipGenerator(generator.map( ttg ⇒
-      new org.jfree.chart.labels.CategoryToolTipGenerator {
-        override def generateToolTip(dataset: CategoryDataset, row: Int, col: Int): String =
-          ttg(dataset, row, col)
-      }
-    ).orNull)
+    plot.getRenderer.setBaseToolTipGenerator(
+      generator.map(CategoryToolTipGenerator.toPeer).orNull
+    )
   }
-
 }
 
 /** Low-level factory for ${chart}s.

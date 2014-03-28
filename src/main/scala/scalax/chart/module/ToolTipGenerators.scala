@@ -16,8 +16,12 @@ object ToolTipGenerators extends ToolTipGenerators
   *
   * @define ToolTipGeneratorsInfo '' '' $ToolTipGeneratorsShortInfo
   *
+  * == Tool Tips for Category Charts ==
+  *
+  * $CategoryToolTipGeneratorsShortInfo
+  *
   * == Tool Tips for Pie-like Charts ==
   *
   * $PieToolTipGeneratorsShortInfo
   */
-trait ToolTipGenerators extends PieToolTipGenerators
+trait ToolTipGenerators extends CategoryToolTipGenerators with PieToolTipGenerators
