@@ -1,8 +1,6 @@
 package scalax.chart
 package module
 
-import org.jfree.chart.ChartTheme
-import org.jfree.chart.StandardChartTheme
 import org.jfree.chart.axis._
 import org.jfree.chart.labels._
 import org.jfree.chart.renderer.category._
@@ -34,7 +32,7 @@ trait BoxAndWhiskerChartFactory extends BoxAndWhiskerDatasetConversions with Doc
               domainAxisLabel: String = "",
               rangeAxisLabel: String = "",
               legend: Boolean = true)
-             (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): CategoryChart = {
+             (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
 
       val dataset = data.toDataset
 
@@ -72,7 +70,7 @@ trait BoxAndWhiskerChartFactory extends BoxAndWhiskerDatasetConversions with Doc
               domainAxisLabel: String = "",
               rangeAxisLabel: String = "",
               legend: Boolean = false)
-             (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): XYChart = {
+             (implicit theme: ChartTheme = ChartTheme.Default): XYChart = {
 
       val dataset = data.toDataset
 

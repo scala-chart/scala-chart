@@ -3,15 +3,11 @@ package module
 
 import scala.collection.GenTraversableOnce
 
-import org.jfree.chart.ChartTheme
-import org.jfree.chart.StandardChartTheme
 import org.jfree.chart.axis._
-import org.jfree.chart.labels._
 import org.jfree.chart.plot.CombinedDomainCategoryPlot
 import org.jfree.chart.renderer.category._
 import org.jfree.chart.renderer.xy._
-import org.jfree.ui._
-import org.jfree.util._
+import org.jfree.util.SortOrder
 
 import Imports._
 
@@ -88,12 +84,6 @@ trait ChartFactories
     axis
   }
 
-  private def xyToolTipGenerator(dateAxis: Boolean) = if (dateAxis) {
-    StandardXYToolTipGenerator.getTimeSeriesInstance()
-  } else {
-    new StandardXYToolTipGenerator()
-  }
-
   // -----------------------------------------------------------------------------------------------
   // factories
   // -----------------------------------------------------------------------------------------------
@@ -109,7 +99,6 @@ trait ChartFactories
       * @param rangeAxisLabel  $rangeAxisLabel
       * @param orientation     $orientation
       * @param legend          $legend
-      * @param tooltips        $tooltips
       * @param theme           $theme
       *
       * @usecase def apply(data: CategoryDataset): CategoryChart = ???
@@ -120,9 +109,8 @@ trait ChartFactories
               domainAxisLabel: String = "",
               rangeAxisLabel: String = "",
               orientation: Orientation = Orientation.Vertical,
-              legend: Boolean = true,
-              tooltips: Boolean = false)
-             (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): CategoryChart = {
+              legend: Boolean = true)
+             (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
 
       val dataset = data.toDataset
 
@@ -132,7 +120,6 @@ trait ChartFactories
       val rangeAxis = new NumberAxis(rangeAxisLabel)
 
       val renderer = new AreaRenderer()
-      if (tooltips) renderer.setBaseToolTipGenerator(new StandardCategoryToolTipGenerator())
 
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
       plot.setOrientation(orientation)
@@ -148,7 +135,6 @@ trait ChartFactories
       * @param rangeAxisLabel  $rangeAxisLabel
       * @param orientation     $orientation
       * @param legend          $legend
-      * @param tooltips        $tooltips
       * @param theme           $theme
       *
       * @usecase def stacked(data: CategoryDataset): CategoryChart = ???
@@ -159,9 +145,8 @@ trait ChartFactories
                 domainAxisLabel: String = "",
                 rangeAxisLabel: String = "",
                 orientation: Orientation = Orientation.Vertical,
-                legend: Boolean = true,
-                tooltips: Boolean = false)
-               (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): CategoryChart = {
+                legend: Boolean = true)
+               (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
 
       val dataset = data.toDataset
 
@@ -171,7 +156,6 @@ trait ChartFactories
       val rangeAxis = new NumberAxis(rangeAxisLabel)
 
       val renderer = new StackedAreaRenderer()
-      if (tooltips) renderer.setBaseToolTipGenerator(new StandardCategoryToolTipGenerator())
 
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
       plot.setOrientation(orientation)
@@ -192,7 +176,6 @@ trait ChartFactories
       * @param rangeAxisLabel  $rangeAxisLabel
       * @param orientation     $orientation
       * @param legend          $legend
-      * @param tooltips        $tooltips
       * @param theme           $theme
       *
       * @usecase def apply(data: CategoryDataset): CategoryChart = ???
@@ -203,9 +186,8 @@ trait ChartFactories
               domainAxisLabel: String = "",
               rangeAxisLabel: String = "",
               orientation: Orientation = Orientation.Vertical,
-              legend: Boolean = true,
-              tooltips: Boolean = false)
-             (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): CategoryChart = {
+              legend: Boolean = true)
+             (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
 
       val dataset = data.toDataset
 
@@ -213,7 +195,10 @@ trait ChartFactories
       val rangeAxis = new NumberAxis(rangeAxisLabel)
 
       val renderer = new BarRenderer()
-      if (tooltips) renderer.setBaseToolTipGenerator(new StandardCategoryToolTipGenerator())
+
+      import org.jfree.chart.labels.{ ItemLabelAnchor, ItemLabelPosition }
+      import org.jfree.ui.TextAnchor
+
       val (p1,p2) = if (orientation == Orientation.Horizontal) {
         (new ItemLabelPosition(ItemLabelAnchor.OUTSIDE3, TextAnchor.CENTER_LEFT),
          new ItemLabelPosition(ItemLabelAnchor.OUTSIDE9, TextAnchor.CENTER_RIGHT))
@@ -238,7 +223,6 @@ trait ChartFactories
       * @param rangeAxisLabel  $rangeAxisLabel
       * @param orientation     $orientation
       * @param legend          $legend
-      * @param tooltips        $tooltips
       * @param theme           $theme
       *
       * @usecase def stacked(data: CategoryDataset): CategoryChart = ???
@@ -249,9 +233,8 @@ trait ChartFactories
                 domainAxisLabel: String = "",
                 rangeAxisLabel: String = "",
                 orientation: Orientation = Orientation.Vertical,
-                legend: Boolean = true,
-                tooltips: Boolean = false)
-               (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): CategoryChart = {
+                legend: Boolean = true)
+               (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
 
       val dataset = data.toDataset
 
@@ -259,7 +242,6 @@ trait ChartFactories
       val rangeAxis = new NumberAxis(rangeAxisLabel)
 
       val renderer = new StackedBarRenderer()
-      if (tooltips) renderer.setBaseToolTipGenerator(new StandardCategoryToolTipGenerator())
 
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
       plot.setOrientation(orientation)
@@ -275,7 +257,6 @@ trait ChartFactories
       * @param rangeAxisLabel  $rangeAxisLabel
       * @param orientation     $orientation
       * @param legend          $legend
-      * @param tooltips        $tooltips
       * @param theme           $theme
       *
       * @usecase def threeDimensional(data: CategoryDataset): CategoryChart = ???
@@ -286,9 +267,8 @@ trait ChartFactories
                          domainAxisLabel: String = "",
                          rangeAxisLabel: String = "",
                          orientation: Orientation = Orientation.Vertical,
-                         legend: Boolean = true,
-                         tooltips: Boolean = false)
-                        (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): CategoryChart = {
+                         legend: Boolean = true)
+                        (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
 
       val dataset = data.toDataset
 
@@ -296,7 +276,6 @@ trait ChartFactories
       val rangeAxis = new NumberAxis3D(rangeAxisLabel)
 
       val renderer = new BarRenderer3D()
-      if (tooltips) renderer.setBaseToolTipGenerator(new StandardCategoryToolTipGenerator())
 
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
       plot.setOrientation(orientation)
@@ -317,7 +296,6 @@ trait ChartFactories
       * @param rangeAxisLabel  $rangeAxisLabel
       * @param orientation     $orientation
       * @param legend          $legend
-      * @param tooltips        $tooltips
       * @param theme           $theme
       *
       * @usecase def threeDimensionalStacked(data: CategoryDataset): CategoryChart = ???
@@ -328,9 +306,8 @@ trait ChartFactories
                                 domainAxisLabel: String = "",
                                 rangeAxisLabel: String = "",
                                 orientation: Orientation = Orientation.Vertical,
-                                legend: Boolean = true,
-                                tooltips: Boolean = false)
-                               (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): CategoryChart = {
+                                legend: Boolean = true)
+                               (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
 
       val dataset = data.toDataset
 
@@ -338,7 +315,6 @@ trait ChartFactories
       val rangeAxis = new NumberAxis3D(rangeAxisLabel)
 
       val renderer = new StackedBarRenderer3D()
-      if (tooltips) renderer.setBaseToolTipGenerator(new StandardCategoryToolTipGenerator())
 
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
       plot.setOrientation(orientation)
@@ -361,7 +337,6 @@ trait ChartFactories
       * @param title           $title
       * @param domainAxisLabel $domainAxisLabel
       * @param legend          $legend
-      * @param tooltips        $tooltips
       * @param theme           $theme
       *
       * @usecase def combinedDomain(data: Map[String,CategoryDataset]): CategoryChart = ???
@@ -370,16 +345,13 @@ trait ChartFactories
     def combinedDomain[A: ToCategoryDataset](data: GenTraversableOnce[(Comparable[_],A)],
               title: String = "",
               domainAxisLabel: String = "",
-              legend: Boolean = true,
-              tooltips: Boolean = false)
-             (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): CategoryChart = {
-
-      val tt = tooltips
+              legend: Boolean = true)
+             (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
 
       def CategoryPlotOf(catdata: (Comparable[_],A)) = {
         val category = catdata._1.toString
         val data = catdata._2
-        val chart = BarChart(data, rangeAxisLabel = category, tooltips = tt)
+        val chart = BarChart(data, rangeAxisLabel = category)
         chart.plot
       }
 
@@ -408,7 +380,6 @@ trait ChartFactories
       * @param rangeAxisLabel  $rangeAxisLabel
       * @param orientation     $orientation
       * @param legend          $legend
-      * @param tooltips        $tooltips
       * @param theme           $theme
       *
       * @usecase def apply(data: CategoryDataset): CategoryChart = ???
@@ -419,9 +390,8 @@ trait ChartFactories
               domainAxisLabel: String = "",
               rangeAxisLabel: String = "",
               orientation: Orientation = Orientation.Vertical,
-              legend: Boolean = true,
-              tooltips: Boolean = false)
-             (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): CategoryChart = {
+              legend: Boolean = true)
+             (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
 
       val dataset = data.toDataset
 
@@ -429,7 +399,6 @@ trait ChartFactories
       val rangeAxis = new NumberAxis(rangeAxisLabel)
 
       val renderer = new LineAndShapeRenderer(true, false)
-      if (tooltips) renderer.setBaseToolTipGenerator(new StandardCategoryToolTipGenerator())
 
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
       plot.setOrientation(orientation)
@@ -446,7 +415,6 @@ trait ChartFactories
       * @param rangeAxisLabel  $rangeAxisLabel
       * @param orientation     $orientation
       * @param legend          $legend
-      * @param tooltips        $tooltips
       * @param theme           $theme
       *
       * @usecase def threeDimensional(data: CategoryDataset): CategoryChart = ???
@@ -457,9 +425,8 @@ trait ChartFactories
                          domainAxisLabel: String = "",
                          rangeAxisLabel: String = "",
                          orientation: Orientation = Orientation.Vertical,
-                         legend: Boolean = true,
-                         tooltips: Boolean = false)
-                        (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): CategoryChart = {
+                         legend: Boolean = true)
+                        (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
 
       val dataset = data.toDataset
 
@@ -467,7 +434,6 @@ trait ChartFactories
       val rangeAxis = new NumberAxis3D(rangeAxisLabel)
 
       val renderer = new LineRenderer3D()
-      if (tooltips) renderer.setBaseToolTipGenerator(new StandardCategoryToolTipGenerator())
 
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
       plot.setOrientation(orientation)
@@ -492,7 +458,6 @@ trait ChartFactories
       * @param rangeAxisLabel  $rangeAxisLabel
       * @param orientation     $orientation
       * @param legend          $legend
-      * @param tooltips        $tooltips
       * @param theme           $theme
       *
       * @usecase def apply(data: XYDataset): XYChart = ???
@@ -503,9 +468,8 @@ trait ChartFactories
               domainAxisLabel: String = "",
               rangeAxisLabel: String = "",
               orientation: Orientation = Orientation.Vertical,
-              legend: Boolean = true,
-              tooltips: Boolean = false)
-             (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): XYChart = {
+              legend: Boolean = true)
+             (implicit theme: ChartTheme = ChartTheme.Default): XYChart = {
 
       val dataset = data.toDataset
 
@@ -515,7 +479,6 @@ trait ChartFactories
       val rangeAxis = new NumberAxis(rangeAxisLabel)
 
       val renderer = new XYAreaRenderer()
-      if (tooltips) renderer.setBaseToolTipGenerator(xyToolTipGenerator(dateAxis))
 
       val plot = new XYPlot(dataset, domainAxis, rangeAxis, renderer)
       plot.setOrientation(orientation)
@@ -535,7 +498,6 @@ trait ChartFactories
       * @param rangeAxisLabel  $rangeAxisLabel
       * @param orientation     $orientation
       * @param legend          $legend
-      * @param tooltips        $tooltips
       * @param theme           $theme
       *
       * @usecase def stacked(data: TableXYDataset): XYChart = ???
@@ -546,9 +508,8 @@ trait ChartFactories
                 domainAxisLabel: String = "",
                 rangeAxisLabel: String = "",
                 orientation: Orientation = Orientation.Vertical,
-                legend: Boolean = true,
-                tooltips: Boolean = false)
-               (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): XYChart = {
+                legend: Boolean = true)
+               (implicit theme: ChartTheme = ChartTheme.Default): XYChart = {
 
       val dataset = data.toDataset
 
@@ -562,7 +523,6 @@ trait ChartFactories
 
       val renderer = new StackedXYAreaRenderer2()
       renderer.setOutline(true)
-      if (tooltips) renderer.setBaseToolTipGenerator(xyToolTipGenerator(dateAxis))
 
       val plot = new XYPlot(dataset, domainAxis, rangeAxis, renderer)
       plot.setOrientation(orientation)
@@ -583,7 +543,6 @@ trait ChartFactories
       * @param rangeAxisLabel  $rangeAxisLabel
       * @param orientation     $orientation
       * @param legend          $legend
-      * @param tooltips        $tooltips
       * @param theme           $theme
       *
       * @usecase def stepped(data: XYDataset): XYChart = ???
@@ -594,9 +553,8 @@ trait ChartFactories
                 domainAxisLabel: String = "",
                 rangeAxisLabel: String = "",
                 orientation: Orientation = Orientation.Vertical,
-                legend: Boolean = true,
-                tooltips: Boolean = false)
-               (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): XYChart = {
+                legend: Boolean = true)
+               (implicit theme: ChartTheme = ChartTheme.Default): XYChart = {
 
       val dataset = data.toDataset
 
@@ -606,7 +564,6 @@ trait ChartFactories
       val rangeAxis = new NumberAxis(rangeAxisLabel)
 
       val renderer = new XYStepAreaRenderer()
-      if (tooltips) renderer.setBaseToolTipGenerator(xyToolTipGenerator(dateAxis))
 
       val plot = new XYPlot(dataset, domainAxis, rangeAxis, renderer)
       plot.setOrientation(orientation)
@@ -633,7 +590,6 @@ trait ChartFactories
       * @param rangeAxisLabel  $rangeAxisLabel
       * @param orientation     $orientation
       * @param legend          $legend
-      * @param tooltips        $tooltips
       * @param theme           $theme
       *
       * @usecase def apply(data: IntervalXYDataset): XYChart = ???
@@ -644,9 +600,8 @@ trait ChartFactories
               domainAxisLabel: String = "",
               rangeAxisLabel: String = "",
               orientation: Orientation = Orientation.Vertical,
-              legend: Boolean = true,
-              tooltips: Boolean = false)
-             (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): XYChart = {
+              legend: Boolean = true)
+             (implicit theme: ChartTheme = ChartTheme.Default): XYChart = {
 
       val dataset = data.toDataset
 
@@ -656,7 +611,6 @@ trait ChartFactories
       val rangeAxis = new NumberAxis(rangeAxisLabel)
 
       val renderer = new XYBarRenderer()
-      if (tooltips) renderer.setBaseToolTipGenerator(xyToolTipGenerator(dateAxis))
 
       val plot = new XYPlot(dataset, domainAxis, rangeAxis, renderer)
       plot.setOrientation(orientation)
@@ -675,7 +629,6 @@ trait ChartFactories
       * @param rangeAxisLabel  $rangeAxisLabel
       * @param orientation     $orientation
       * @param legend          $legend
-      * @param tooltips        $tooltips
       * @param theme           $theme
       *
       * @usecase def stacked(data: TableXYDataset): XYChart = ???
@@ -686,9 +639,8 @@ trait ChartFactories
                 domainAxisLabel: String = "",
                 rangeAxisLabel: String = "",
                 orientation: Orientation = Orientation.Vertical,
-                legend: Boolean = true,
-                tooltips: Boolean = false)
-               (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): XYChart = {
+                legend: Boolean = true)
+               (implicit theme: ChartTheme = ChartTheme.Default): XYChart = {
 
       val dataset = data.toDataset
 
@@ -698,7 +650,6 @@ trait ChartFactories
       val rangeAxis = new NumberAxis(rangeAxisLabel)
 
       val renderer = new StackedXYBarRenderer()
-      if (tooltips) renderer.setBaseToolTipGenerator(xyToolTipGenerator(dateAxis))
 
       val plot = new XYPlot(dataset, domainAxis, rangeAxis, renderer)
       plot.setOrientation(orientation)
@@ -723,7 +674,6 @@ trait ChartFactories
       * @param rangeAxisLabel  $rangeAxisLabel
       * @param orientation     $orientation
       * @param legend          $legend
-      * @param tooltips        $tooltips
       * @param theme           $theme
       *
       * @usecase def apply(data: IntervalXYDataset): XYChart = ???
@@ -734,9 +684,8 @@ trait ChartFactories
               domainAxisLabel: String = "",
               rangeAxisLabel: String = "",
               orientation: Orientation = Orientation.Vertical,
-              legend: Boolean = true,
-              tooltips: Boolean = false)
-             (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): XYChart = {
+              legend: Boolean = true)
+             (implicit theme: ChartTheme = ChartTheme.Default): XYChart = {
 
       val dataset = data.toDataset
 
@@ -746,7 +695,6 @@ trait ChartFactories
       val rangeAxis = new NumberAxis(rangeAxisLabel)
 
       val renderer = new DeviationRenderer()
-      if (tooltips) renderer.setBaseToolTipGenerator(xyToolTipGenerator(dateAxis))
 
       val plot = new XYPlot(dataset, domainAxis, rangeAxis, renderer)
       plot.setOrientation(orientation)
@@ -771,7 +719,6 @@ trait ChartFactories
       * @param rangeAxisLabel  $rangeAxisLabel
       * @param orientation     $orientation
       * @param legend          $legend
-      * @param tooltips        $tooltips
       * @param theme           $theme
       *
       * @usecase def apply(data: XYDataset): XYChart = ???
@@ -782,9 +729,8 @@ trait ChartFactories
               domainAxisLabel: String = "",
               rangeAxisLabel: String = "",
               orientation: Orientation = Orientation.Vertical,
-              legend: Boolean = true,
-              tooltips: Boolean = false)
-             (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): XYChart = {
+              legend: Boolean = true)
+             (implicit theme: ChartTheme = ChartTheme.Default): XYChart = {
 
       val dataset = data.toDataset
 
@@ -794,7 +740,6 @@ trait ChartFactories
       val rangeAxis = new NumberAxis(rangeAxisLabel)
 
       val renderer = new XYLineAndShapeRenderer(true, false)
-      if (tooltips) renderer.setBaseToolTipGenerator(xyToolTipGenerator(dateAxis))
 
       val plot = new XYPlot(dataset, domainAxis, rangeAxis, renderer)
       plot.setOrientation(orientation)

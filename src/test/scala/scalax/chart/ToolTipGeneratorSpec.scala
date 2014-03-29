@@ -132,17 +132,17 @@ class ToolTipGeneratorSpec extends Specification { def is = s2"""
 
   def catchart = {
     val data = for (i <- 1 to 5) yield (i,i)
-    BarChart(data, tooltips = false)
+    BarChart(data)
   }
 
   def piechart = {
     val data = for (i <- 1 to 5) yield (i,i)
-    PieChart(data, tooltips = false)
+    PieChart(data)
   }
 
   def xychart = {
     val data = for (i <- 1 to 5) yield (i,i)
-    XYLineChart(data, tooltips = false)
+    XYLineChart(data)
   }
 
 }

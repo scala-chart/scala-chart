@@ -11,6 +11,11 @@ object Imports extends Imports
 trait Imports {
   type JFreeChart = org.jfree.chart.JFreeChart
 
+  type ChartTheme = org.jfree.chart.ChartTheme
+  object ChartTheme {
+    def Default = org.jfree.chart.StandardChartTheme.createJFreeTheme
+  }
+
   type Color = java.awt.Color
   type Paint = java.awt.Paint
 

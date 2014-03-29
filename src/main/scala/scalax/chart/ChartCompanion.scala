@@ -1,8 +1,6 @@
 package scalax.chart
 
-import org.jfree.chart.ChartTheme
-import org.jfree.chart.JFreeChart
-import org.jfree.chart.plot.Plot
+import module.Imports._
 
 /** A template class for companion objects of [[Chart]] classes. */
 abstract class ChartCompanion[C <: Chart] protected () extends DocMacros {
@@ -31,7 +29,7 @@ abstract class ChartCompanion[C <: Chart] protected () extends DocMacros {
     * @param theme $theme
     */
   final def apply(plot: C#Plot, title: String, legend: Boolean, theme: ChartTheme): C = {
-    val peer = new JFreeChart(title, JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
+    val peer = new JFreeChart(title, org.jfree.chart.JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
     fromPeer(peer, theme)
   }
 

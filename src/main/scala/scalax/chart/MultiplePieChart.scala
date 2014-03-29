@@ -1,13 +1,11 @@
 package scalax.chart
 
-import org.jfree.chart._
 import org.jfree.chart.plot.MultiplePiePlot
 import org.jfree.chart.title.TextTitle
 import org.jfree.ui.RectangleEdge
 import org.jfree.util.TableOrder
 
 import module.Imports._
-import module.PieToolTipGenerators._
 
 /** Represents categorized numeric data with multiple pies. */
 abstract class MultiplePieChart protected () extends Chart
@@ -44,17 +42,16 @@ object MultiplePieChart extends ChartCompanion[MultiplePieChart] with module.Cat
 
   /** Creates a new $chart.
     *
-    * @param dataset  $data
-    * @param title    $title
-    * @param legend   $legend
-    * @param tooltips $tooltips
-    * @param theme    $theme
+    * @param data   $data
+    * @param title  $title
+    * @param legend $legend
+    * @param theme  $theme
     *
-    * @usecase def apply(dataset: CategoryDataset): MultiplePieChart = ???
+    * @usecase def apply(data: CategoryDataset): MultiplePieChart = ???
     *   @inheritdoc
     */
-  def apply[A: ToCategoryDataset](data: A, title: String = "", legend: Boolean = true, tooltips: Boolean = true)
-    (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): MultiplePieChart = {
+  def apply[A: ToCategoryDataset](data: A, title: String = "", legend: Boolean = true)
+    (implicit theme: ChartTheme = ChartTheme.Default): MultiplePieChart = {
     val dataset = data.toDataset
 
     val plot = new MultiplePiePlot(dataset)
@@ -62,26 +59,21 @@ object MultiplePieChart extends ChartCompanion[MultiplePieChart] with module.Cat
     plot.setBackgroundPaint(null)
     plot.setOutlineStroke(null)
 
-    val chart = MultiplePieChart(plot, title, legend, theme)
-
-    if (tooltips) chart.tooltipGenerator = PieToolTipGenerator.Default
-
-    chart
+    MultiplePieChart(plot, title, legend, theme)
   }
 
   /** Creates a new $chart with three dimensional visualization.
     *
-    * @param dataset  $data
-    * @param title    $title
-    * @param legend   $legend
-    * @param tooltips $tooltips
-    * @param theme    $theme
+    * @param data   $data
+    * @param title  $title
+    * @param legend $legend
+    * @param theme  $theme
     *
-    * @usecase def threeDimensional(dataset: CategoryDataset): MultiplePieChart = ???
+    * @usecase def threeDimensional(data: CategoryDataset): MultiplePieChart = ???
     *   @inheritdoc
     */
-  def threeDimensional[A: ToCategoryDataset](data: A, title: String = "", legend: Boolean = true, tooltips: Boolean = true)
-    (implicit theme: ChartTheme = StandardChartTheme.createJFreeTheme): MultiplePieChart = {
+  def threeDimensional[A: ToCategoryDataset](data: A, title: String = "", legend: Boolean = true)
+    (implicit theme: ChartTheme = ChartTheme.Default): MultiplePieChart = {
     val dataset = data.toDataset
 
     val plot = new MultiplePiePlot(dataset)
@@ -97,11 +89,7 @@ object MultiplePieChart extends ChartCompanion[MultiplePieChart] with module.Cat
     pieChart.removeLegend()
     plot.setPieChart(pieChart)
 
-    val chart = MultiplePieChart(plot, title, legend, theme)
-
-    if (tooltips) chart.tooltipGenerator = PieToolTipGenerator.Default
-
-    chart
+    MultiplePieChart(plot, title, legend, theme)
   }
 
 }

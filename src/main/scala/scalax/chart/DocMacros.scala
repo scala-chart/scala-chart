@@ -22,7 +22,6 @@ package scalax.chart
   *  - '''`\$resolution`''' = $resolution
   *  - '''`\$theme`''' = $theme
   *  - '''`\$title`''' = $title
-  *  - '''`\$tooltips`''' = $tooltips
   *
   * @define chart chart
   * @define Chart Chart
@@ -36,6 +35,5 @@ package scalax.chart
   * @define resolution dimension / geometry / width x height
   * @define theme the theme to apply to the $chart
   * @define title the title of the $chart
-  * @define tooltips whether or not tooltips will be generated
   */
 trait DocMacros extends Any

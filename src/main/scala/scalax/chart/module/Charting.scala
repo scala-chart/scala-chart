@@ -16,6 +16,10 @@ object Charting extends Charting
   *
   * $ExportingShortInfo
   *
+  * == Labels ==
+  *
+  * $LabelGeneratorsShortInfo
+  *
   * == Rich Plots ==
   *
   * $RichPlotShortInfo
