@@ -2,7 +2,7 @@ package scalax.chart
 package module
 
 import org.jfree.chart.axis._
-import org.jfree.chart.labels._
+import org.jfree.chart.labels.BoxAndWhiskerToolTipGenerator
 import org.jfree.chart.renderer.category._
 import org.jfree.chart.renderer.xy._
 
@@ -17,27 +17,21 @@ trait BoxAndWhiskerChartFactory extends BoxAndWhiskerDatasetConversions with Doc
 
     /** Creates a new box and whisker chart.
       *
-      * @param data            $data
-      * @param title           $title
-      * @param domainAxisLabel $domainAxisLabel
-      * @param rangeAxisLabel  $rangeAxisLabel
-      * @param legend          $legend
-      * @param theme           $theme
+      * @param data $data
+      * @param title $title
+      * @param legend $legend
+      * @param theme $theme
       *
       * @usecase def apply(data: BoxAndWhiskerCategoryDataset): CategoryChart = ???
       *   @inheritdoc
       */
-    def apply[A: ToBoxAndWhiskerCategoryDataset](data: A,
-              title: String = "",
-              domainAxisLabel: String = "",
-              rangeAxisLabel: String = "",
-              legend: Boolean = true)
-             (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
+    def apply[A: ToBoxAndWhiskerCategoryDataset](data: A, title: String = "", legend: Boolean = true)
+      (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
 
       val dataset = data.toDataset
 
-      val domainAxis = new CategoryAxis(domainAxisLabel)
-      val rangeAxis = new NumberAxis(rangeAxisLabel)
+      val domainAxis = new CategoryAxis()
+      val rangeAxis = new NumberAxis()
       rangeAxis.setAutoRangeIncludesZero(false)
 
       val renderer = new BoxAndWhiskerRenderer()
@@ -55,27 +49,21 @@ trait BoxAndWhiskerChartFactory extends BoxAndWhiskerDatasetConversions with Doc
 
     /** Creates a new box and whisker chart.
       *
-      * @param data            $data
-      * @param title           $title
-      * @param domainAxisLabel $domainAxisLabel
-      * @param rangeAxisLabel  $rangeAxisLabel
-      * @param legend          $legend
-      * @param theme           $theme
+      * @param data $data
+      * @param title $title
+      * @param legend $legend
+      * @param theme $theme
       *
       * @usecase def apply(data: BoxAndWhiskerXYDataset): XYChart = ???
       *   @inheritdoc
       */
-    def apply[A: ToBoxAndWhiskerXYDataset](data: A,
-              title: String = "",
-              domainAxisLabel: String = "",
-              rangeAxisLabel: String = "",
-              legend: Boolean = false)
-             (implicit theme: ChartTheme = ChartTheme.Default): XYChart = {
+    def apply[A: ToBoxAndWhiskerXYDataset](data: A, title: String = "", legend: Boolean = false)
+      (implicit theme: ChartTheme = ChartTheme.Default): XYChart = {
 
       val dataset = data.toDataset
 
-      val domainAxis = new DateAxis(domainAxisLabel)
-      val rangeAxis = new NumberAxis(rangeAxisLabel)
+      val domainAxis = new DateAxis()
+      val rangeAxis = new NumberAxis()
       rangeAxis.setAutoRangeIncludesZero(false)
 
       val renderer = new XYBoxAndWhiskerRenderer(10.0)

@@ -44,7 +44,7 @@ object ChartFactories extends ChartFactories
   * For better readability of your own code, you should name all other arguments:
   *
   * {{{
-  * val chart = XYLineChart(dataset, legend = false, domainAxisLabel = "some description")
+  * val chart = XYLineChart(dataset, legend = false)
   * }}}
   *
   * == Creating Charts with Themes ==
@@ -76,10 +76,10 @@ trait ChartFactories
     case _                             ⇒ false
   }
 
-  private def xyDomainAxis(label: String, dateAxis: Boolean) = if (dateAxis) {
-    new DateAxis(label)
+  private def XYDomainAxis(dateAxis: Boolean) = if (dateAxis) {
+    new DateAxis()
   } else {
-    val axis = new NumberAxis(label)
+    val axis = new NumberAxis()
     axis.setAutoRangeIncludesZero(false)
     axis
   }
@@ -93,31 +93,27 @@ trait ChartFactories
 
     /** Creates a new chart that represents categorized numeric data with an area.
       *
-      * @param data            $data
-      * @param title           $title
-      * @param domainAxisLabel $domainAxisLabel
-      * @param rangeAxisLabel  $rangeAxisLabel
-      * @param orientation     $orientation
-      * @param legend          $legend
-      * @param theme           $theme
+      * @param data        $data
+      * @param title       $title
+      * @param orientation $orientation
+      * @param legend      $legend
+      * @param theme       $theme
       *
       * @usecase def apply(data: CategoryDataset): CategoryChart = ???
       *   @inheritdoc
       */
     def apply[A: ToCategoryDataset](data: A,
               title: String = "",
-              domainAxisLabel: String = "",
-              rangeAxisLabel: String = "",
               orientation: Orientation = Orientation.Vertical,
               legend: Boolean = true)
              (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
 
       val dataset = data.toDataset
 
-      val domainAxis = new CategoryAxis(domainAxisLabel)
+      val domainAxis = new CategoryAxis()
       domainAxis.setCategoryMargin(0.0)
 
-      val rangeAxis = new NumberAxis(rangeAxisLabel)
+      val rangeAxis = new NumberAxis()
 
       val renderer = new AreaRenderer()
 
@@ -129,31 +125,27 @@ trait ChartFactories
 
     /** Creates a new chart that represents categorized numeric data with stacked areas.
       *
-      * @param data            $data
-      * @param title           $title
-      * @param domainAxisLabel $domainAxisLabel
-      * @param rangeAxisLabel  $rangeAxisLabel
-      * @param orientation     $orientation
-      * @param legend          $legend
-      * @param theme           $theme
+      * @param data        $data
+      * @param title       $title
+      * @param orientation $orientation
+      * @param legend      $legend
+      * @param theme       $theme
       *
       * @usecase def stacked(data: CategoryDataset): CategoryChart = ???
       *   @inheritdoc
       */
     def stacked[A: ToCategoryDataset](data: A,
                 title: String = "",
-                domainAxisLabel: String = "",
-                rangeAxisLabel: String = "",
                 orientation: Orientation = Orientation.Vertical,
                 legend: Boolean = true)
                (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
 
       val dataset = data.toDataset
 
-      val domainAxis = new CategoryAxis(domainAxisLabel)
+      val domainAxis = new CategoryAxis()
       domainAxis.setCategoryMargin(0.0)
 
-      val rangeAxis = new NumberAxis(rangeAxisLabel)
+      val rangeAxis = new NumberAxis()
 
       val renderer = new StackedAreaRenderer()
 
@@ -170,29 +162,25 @@ trait ChartFactories
 
     /** Creates a new chart that represents categorized numeric data with bars.
       *
-      * @param data            $data
-      * @param title           $title
-      * @param domainAxisLabel $domainAxisLabel
-      * @param rangeAxisLabel  $rangeAxisLabel
-      * @param orientation     $orientation
-      * @param legend          $legend
-      * @param theme           $theme
+      * @param data        $data
+      * @param title       $title
+      * @param orientation $orientation
+      * @param legend      $legend
+      * @param theme       $theme
       *
       * @usecase def apply(data: CategoryDataset): CategoryChart = ???
       *   @inheritdoc
       */
     def apply[A: ToCategoryDataset](data: A,
               title: String = "",
-              domainAxisLabel: String = "",
-              rangeAxisLabel: String = "",
               orientation: Orientation = Orientation.Vertical,
               legend: Boolean = true)
              (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
 
       val dataset = data.toDataset
 
-      val domainAxis = new CategoryAxis(domainAxisLabel)
-      val rangeAxis = new NumberAxis(rangeAxisLabel)
+      val domainAxis = new CategoryAxis()
+      val rangeAxis = new NumberAxis()
 
       val renderer = new BarRenderer()
 
@@ -217,29 +205,25 @@ trait ChartFactories
 
     /** Creates a new chart that represents categorized numeric data with stacked bars.
       *
-      * @param data            $data
-      * @param title           $title
-      * @param domainAxisLabel $domainAxisLabel
-      * @param rangeAxisLabel  $rangeAxisLabel
-      * @param orientation     $orientation
-      * @param legend          $legend
-      * @param theme           $theme
+      * @param data        $data
+      * @param title       $title
+      * @param orientation $orientation
+      * @param legend      $legend
+      * @param theme       $theme
       *
       * @usecase def stacked(data: CategoryDataset): CategoryChart = ???
       *   @inheritdoc
       */
     def stacked[A: ToCategoryDataset](data: A,
                 title: String = "",
-                domainAxisLabel: String = "",
-                rangeAxisLabel: String = "",
                 orientation: Orientation = Orientation.Vertical,
                 legend: Boolean = true)
                (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
 
       val dataset = data.toDataset
 
-      val domainAxis = new CategoryAxis(domainAxisLabel)
-      val rangeAxis = new NumberAxis(rangeAxisLabel)
+      val domainAxis = new CategoryAxis()
+      val rangeAxis = new NumberAxis()
 
       val renderer = new StackedBarRenderer()
 
@@ -251,29 +235,25 @@ trait ChartFactories
 
     /** Creates a new chart that represents categorized numeric data with three dimensional bars.
       *
-      * @param data            $data
-      * @param title           $title
-      * @param domainAxisLabel $domainAxisLabel
-      * @param rangeAxisLabel  $rangeAxisLabel
-      * @param orientation     $orientation
-      * @param legend          $legend
-      * @param theme           $theme
+      * @param data        $data
+      * @param title       $title
+      * @param orientation $orientation
+      * @param legend      $legend
+      * @param theme       $theme
       *
       * @usecase def threeDimensional(data: CategoryDataset): CategoryChart = ???
       *   @inheritdoc
       */
     def threeDimensional[A: ToCategoryDataset](data: A,
                          title: String = "",
-                         domainAxisLabel: String = "",
-                         rangeAxisLabel: String = "",
                          orientation: Orientation = Orientation.Vertical,
                          legend: Boolean = true)
                         (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
 
       val dataset = data.toDataset
 
-      val domainAxis = new CategoryAxis3D(domainAxisLabel)
-      val rangeAxis = new NumberAxis3D(rangeAxisLabel)
+      val domainAxis = new CategoryAxis3D()
+      val rangeAxis = new NumberAxis3D()
 
       val renderer = new BarRenderer3D()
 
@@ -290,29 +270,25 @@ trait ChartFactories
 
     /** Creates a new chart that represents categorized numeric data with three dimensional bars.
       *
-      * @param data            $data
-      * @param title           $title
-      * @param domainAxisLabel $domainAxisLabel
-      * @param rangeAxisLabel  $rangeAxisLabel
-      * @param orientation     $orientation
-      * @param legend          $legend
-      * @param theme           $theme
+      * @param data        $data
+      * @param title       $title
+      * @param orientation $orientation
+      * @param legend      $legend
+      * @param theme       $theme
       *
       * @usecase def threeDimensionalStacked(data: CategoryDataset): CategoryChart = ???
       *   @inheritdoc
       */
     def threeDimensionalStacked[A: ToCategoryDataset](data: A,
                                 title: String = "",
-                                domainAxisLabel: String = "",
-                                rangeAxisLabel: String = "",
                                 orientation: Orientation = Orientation.Vertical,
                                 legend: Boolean = true)
                                (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
 
       val dataset = data.toDataset
 
-      val domainAxis = new CategoryAxis3D(domainAxisLabel)
-      val rangeAxis = new NumberAxis3D(rangeAxisLabel)
+      val domainAxis = new CategoryAxis3D()
+      val rangeAxis = new NumberAxis3D()
 
       val renderer = new StackedBarRenderer3D()
 
@@ -333,31 +309,32 @@ trait ChartFactories
       * val chart = BarChart.combinedDomain(data)
       * }}}
       *
-      * @param data            $data
-      * @param title           $title
-      * @param domainAxisLabel $domainAxisLabel
-      * @param legend          $legend
-      * @param theme           $theme
+      * @param data $data
+      * @param title $title
+      * @param legend $legend
+      * @param theme $theme
       *
       * @usecase def combinedDomain(data: Map[String,CategoryDataset]): CategoryChart = ???
       *   @inheritdoc
       */
     def combinedDomain[A: ToCategoryDataset](data: GenTraversableOnce[(Comparable[_],A)],
               title: String = "",
-              domainAxisLabel: String = "",
               legend: Boolean = true)
              (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
+
+      import RichPlot._
 
       def CategoryPlotOf(catdata: (Comparable[_],A)): CategoryPlot = {
         val category = catdata._1.toString
         val data = catdata._2
-        val chart = BarChart(data, rangeAxisLabel = category)
-        chart.plot
+        val plot = BarChart(data).plot
+        plot.range.axis.label = category
+        plot
       }
 
       val plots = data.aggregate(Vector[CategoryPlot]())(_ :+ CategoryPlotOf(_), _ ++ _)
 
-      val domainAxis = new CategoryAxis(domainAxisLabel)
+      val domainAxis = new CategoryAxis()
 
       val combinedPlot = plots.foldLeft(new CombinedDomainCategoryPlot(domainAxis)) { (combined,single) =>
         combined add single
@@ -374,29 +351,25 @@ trait ChartFactories
 
     /** Creates a new chart that represents categorized numeric values with a line.
       *
-      * @param data            $data
-      * @param title           $title
-      * @param domainAxisLabel $domainAxisLabel
-      * @param rangeAxisLabel  $rangeAxisLabel
-      * @param orientation     $orientation
-      * @param legend          $legend
-      * @param theme           $theme
+      * @param data        $data
+      * @param title       $title
+      * @param orientation $orientation
+      * @param legend      $legend
+      * @param theme       $theme
       *
       * @usecase def apply(data: CategoryDataset): CategoryChart = ???
       *   @inheritdoc
       */
     def apply[A: ToCategoryDataset](data: A,
               title: String = "",
-              domainAxisLabel: String = "",
-              rangeAxisLabel: String = "",
               orientation: Orientation = Orientation.Vertical,
               legend: Boolean = true)
              (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
 
       val dataset = data.toDataset
 
-      val domainAxis = new CategoryAxis(domainAxisLabel)
-      val rangeAxis = new NumberAxis(rangeAxisLabel)
+      val domainAxis = new CategoryAxis()
+      val rangeAxis = new NumberAxis()
 
       val renderer = new LineAndShapeRenderer(true, false)
 
@@ -409,29 +382,25 @@ trait ChartFactories
     /** Creates a new chart that represents categorized numeric values with three dimensional a
       * line.
       *
-      * @param data            $data
-      * @param title           $title
-      * @param domainAxisLabel $domainAxisLabel
-      * @param rangeAxisLabel  $rangeAxisLabel
-      * @param orientation     $orientation
-      * @param legend          $legend
-      * @param theme           $theme
+      * @param data        $data
+      * @param title       $title
+      * @param orientation $orientation
+      * @param legend      $legend
+      * @param theme       $theme
       *
       * @usecase def threeDimensional(data: CategoryDataset): CategoryChart = ???
       *   @inheritdoc
       */
     def threeDimensional[A: ToCategoryDataset](data: A,
                          title: String = "",
-                         domainAxisLabel: String = "",
-                         rangeAxisLabel: String = "",
                          orientation: Orientation = Orientation.Vertical,
                          legend: Boolean = true)
                         (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
 
       val dataset = data.toDataset
 
-      val domainAxis = new CategoryAxis3D(domainAxisLabel)
-      val rangeAxis = new NumberAxis3D(rangeAxisLabel)
+      val domainAxis = new CategoryAxis3D()
+      val rangeAxis = new NumberAxis3D()
 
       val renderer = new LineRenderer3D()
 
@@ -452,21 +421,17 @@ trait ChartFactories
       * `TimeSeriesCollection` or `TimeTableXYDataset` the domain axis will correctly be set to a
       * `DateAxis`.
       *
-      * @param data            $data
-      * @param title           $title
-      * @param domainAxisLabel $domainAxisLabel
-      * @param rangeAxisLabel  $rangeAxisLabel
-      * @param orientation     $orientation
-      * @param legend          $legend
-      * @param theme           $theme
+      * @param data        $data
+      * @param title       $title
+      * @param orientation $orientation
+      * @param legend      $legend
+      * @param theme       $theme
       *
       * @usecase def apply(data: XYDataset): XYChart = ???
       *   @inheritdoc
       */
     def apply[A: ToXYDataset](data: A,
               title: String = "",
-              domainAxisLabel: String = "",
-              rangeAxisLabel: String = "",
               orientation: Orientation = Orientation.Vertical,
               legend: Boolean = true)
              (implicit theme: ChartTheme = ChartTheme.Default): XYChart = {
@@ -475,8 +440,8 @@ trait ChartFactories
 
       val dateAxis = needsDateAxis(dataset)
 
-      val domainAxis = xyDomainAxis(domainAxisLabel, dateAxis)
-      val rangeAxis = new NumberAxis(rangeAxisLabel)
+      val domainAxis = XYDomainAxis(dateAxis)
+      val rangeAxis = new NumberAxis()
 
       val renderer = new XYAreaRenderer()
 
@@ -492,21 +457,17 @@ trait ChartFactories
       * If the input dataset is an instance of a `TimeTableXYDataset` the domain axis will correctly
       * be set to a `DateAxis`.
       *
-      * @param data            $data
-      * @param title           $title
-      * @param domainAxisLabel $domainAxisLabel
-      * @param rangeAxisLabel  $rangeAxisLabel
-      * @param orientation     $orientation
-      * @param legend          $legend
-      * @param theme           $theme
+      * @param data        $data
+      * @param title       $title
+      * @param orientation $orientation
+      * @param legend      $legend
+      * @param theme       $theme
       *
       * @usecase def stacked(data: TableXYDataset): XYChart = ???
       *   @inheritdoc
       */
     def stacked[A: ToTableXYDataset](data: A,
                 title: String = "",
-                domainAxisLabel: String = "",
-                rangeAxisLabel: String = "",
                 orientation: Orientation = Orientation.Vertical,
                 legend: Boolean = true)
                (implicit theme: ChartTheme = ChartTheme.Default): XYChart = {
@@ -515,11 +476,11 @@ trait ChartFactories
 
       val dateAxis = needsDateAxis(dataset)
 
-      val domainAxis = xyDomainAxis(domainAxisLabel, dateAxis)
+      val domainAxis = XYDomainAxis(dateAxis)
       domainAxis.setLowerMargin(0.0)
       domainAxis.setUpperMargin(0.0)
 
-      val rangeAxis = new NumberAxis(rangeAxisLabel)
+      val rangeAxis = new NumberAxis()
 
       val renderer = new StackedXYAreaRenderer2()
       renderer.setOutline(true)
@@ -537,21 +498,17 @@ trait ChartFactories
       * `TimeSeriesCollection` or `TimeTableXYDataset` the domain axis will correctly be set to a
       * `DateAxis`.
       *
-      * @param data            $data
-      * @param title           $title
-      * @param domainAxisLabel $domainAxisLabel
-      * @param rangeAxisLabel  $rangeAxisLabel
-      * @param orientation     $orientation
-      * @param legend          $legend
-      * @param theme           $theme
+      * @param data        $data
+      * @param title       $title
+      * @param orientation $orientation
+      * @param legend      $legend
+      * @param theme       $theme
       *
       * @usecase def stepped(data: XYDataset): XYChart = ???
       *   @inheritdoc
       */
     def stepped[A: ToXYDataset](data: A,
                 title: String = "",
-                domainAxisLabel: String = "",
-                rangeAxisLabel: String = "",
                 orientation: Orientation = Orientation.Vertical,
                 legend: Boolean = true)
                (implicit theme: ChartTheme = ChartTheme.Default): XYChart = {
@@ -560,8 +517,8 @@ trait ChartFactories
 
       val dateAxis = needsDateAxis(dataset)
 
-      val domainAxis = xyDomainAxis(domainAxisLabel, dateAxis)
-      val rangeAxis = new NumberAxis(rangeAxisLabel)
+      val domainAxis = XYDomainAxis(dateAxis)
+      val rangeAxis = new NumberAxis()
 
       val renderer = new XYStepAreaRenderer()
 
@@ -584,21 +541,17 @@ trait ChartFactories
       * `TimeSeriesCollection` or `TimeTableXYDataset` the domain axis will correctly be set to a
       * `DateAxis`.
       *
-      * @param data            $data
-      * @param title           $title
-      * @param domainAxisLabel $domainAxisLabel
-      * @param rangeAxisLabel  $rangeAxisLabel
-      * @param orientation     $orientation
-      * @param legend          $legend
-      * @param theme           $theme
+      * @param data        $data
+      * @param title       $title
+      * @param orientation $orientation
+      * @param legend      $legend
+      * @param theme       $theme
       *
       * @usecase def apply(data: IntervalXYDataset): XYChart = ???
       *   @inheritdoc
       */
     def apply[A: ToIntervalXYDataset](data: A,
               title: String = "",
-              domainAxisLabel: String = "",
-              rangeAxisLabel: String = "",
               orientation: Orientation = Orientation.Vertical,
               legend: Boolean = true)
              (implicit theme: ChartTheme = ChartTheme.Default): XYChart = {
@@ -607,8 +560,8 @@ trait ChartFactories
 
       val dateAxis = needsDateAxis(dataset)
 
-      val domainAxis = xyDomainAxis(domainAxisLabel, dateAxis)
-      val rangeAxis = new NumberAxis(rangeAxisLabel)
+      val domainAxis = XYDomainAxis(dateAxis)
+      val rangeAxis = new NumberAxis()
 
       val renderer = new XYBarRenderer()
 
@@ -623,21 +576,17 @@ trait ChartFactories
       * If the input dataset is an instance of a `TimeTableXYDataset` the domain axis will correctly
       * be set to a `DateAxis`.
       *
-      * @param data            $data
-      * @param title           $title
-      * @param domainAxisLabel $domainAxisLabel
-      * @param rangeAxisLabel  $rangeAxisLabel
-      * @param orientation     $orientation
-      * @param legend          $legend
-      * @param theme           $theme
+      * @param data        $data
+      * @param title       $title
+      * @param orientation $orientation
+      * @param legend      $legend
+      * @param theme       $theme
       *
       * @usecase def stacked(data: TableXYDataset): XYChart = ???
       *   @inheritdoc
       */
     def stacked[A: ToTableXYDataset](data: A,
                 title: String = "",
-                domainAxisLabel: String = "",
-                rangeAxisLabel: String = "",
                 orientation: Orientation = Orientation.Vertical,
                 legend: Boolean = true)
                (implicit theme: ChartTheme = ChartTheme.Default): XYChart = {
@@ -646,8 +595,8 @@ trait ChartFactories
 
       val dateAxis = needsDateAxis(dataset)
 
-      val domainAxis = xyDomainAxis(domainAxisLabel, dateAxis)
-      val rangeAxis = new NumberAxis(rangeAxisLabel)
+      val domainAxis = XYDomainAxis(dateAxis)
+      val rangeAxis = new NumberAxis()
 
       val renderer = new StackedXYBarRenderer()
 
@@ -668,21 +617,17 @@ trait ChartFactories
       * `TimeSeriesCollection` or `TimeTableXYDataset` the domain axis will correctly be set to a
       * `DateAxis`.
       *
-      * @param data            $data
-      * @param title           $title
-      * @param domainAxisLabel $domainAxisLabel
-      * @param rangeAxisLabel  $rangeAxisLabel
-      * @param orientation     $orientation
-      * @param legend          $legend
-      * @param theme           $theme
+      * @param data        $data
+      * @param title       $title
+      * @param orientation $orientation
+      * @param legend      $legend
+      * @param theme       $theme
       *
       * @usecase def apply(data: IntervalXYDataset): XYChart = ???
       *   @inheritdoc
       */
     def apply[A: ToIntervalXYDataset](data: A,
               title: String = "",
-              domainAxisLabel: String = "",
-              rangeAxisLabel: String = "",
               orientation: Orientation = Orientation.Vertical,
               legend: Boolean = true)
              (implicit theme: ChartTheme = ChartTheme.Default): XYChart = {
@@ -691,8 +636,8 @@ trait ChartFactories
 
       val dateAxis = needsDateAxis(dataset)
 
-      val domainAxis = xyDomainAxis(domainAxisLabel, dateAxis)
-      val rangeAxis = new NumberAxis(rangeAxisLabel)
+      val domainAxis = XYDomainAxis(dateAxis)
+      val rangeAxis = new NumberAxis()
 
       val renderer = new DeviationRenderer()
 
@@ -713,21 +658,17 @@ trait ChartFactories
       * `TimeSeriesCollection` or `TimeTableXYDataset` the domain axis will correctly be set to a
       * `DateAxis`.
       *
-      * @param data            $data
-      * @param title           $title
-      * @param domainAxisLabel $domainAxisLabel
-      * @param rangeAxisLabel  $rangeAxisLabel
-      * @param orientation     $orientation
-      * @param legend          $legend
-      * @param theme           $theme
+      * @param data        $data
+      * @param title       $title
+      * @param orientation $orientation
+      * @param legend      $legend
+      * @param theme       $theme
       *
       * @usecase def apply(data: XYDataset): XYChart = ???
       *   @inheritdoc
       */
     def apply[A: ToXYDataset](data: A,
               title: String = "",
-              domainAxisLabel: String = "",
-              rangeAxisLabel: String = "",
               orientation: Orientation = Orientation.Vertical,
               legend: Boolean = true)
              (implicit theme: ChartTheme = ChartTheme.Default): XYChart = {
@@ -736,8 +677,8 @@ trait ChartFactories
 
       val dateAxis = needsDateAxis(dataset)
 
-      val domainAxis = xyDomainAxis(domainAxisLabel, dateAxis)
-      val rangeAxis = new NumberAxis(rangeAxisLabel)
+      val domainAxis = XYDomainAxis(dateAxis)
+      val rangeAxis = new NumberAxis()
 
       val renderer = new XYLineAndShapeRenderer(true, false)
 
