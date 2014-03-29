@@ -42,13 +42,13 @@ object Exporting extends Exporting
   */
 trait Exporting {
 
-  implicit def ChartJPEGExporter(chart: Chart) =
+  implicit def ChartJPEGExporter(chart: Chart): JPEGExporter =
     new JPEGExporter(chart)
 
-  implicit def ChartPDFExporter(chart: Chart) =
+  implicit def ChartPDFExporter(chart: Chart): PDFExporter =
     new PDFExporter(chart)
 
-  implicit def ChartPNGExporter(chart: Chart) =
+  implicit def ChartPNGExporter(chart: Chart): PNGExporter =
     new PNGExporter(chart)
 
 }

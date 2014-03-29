@@ -5,7 +5,6 @@ import java.util.Collection
 
 import scala.collection.JavaConverters.asScalaIteratorConverter
 
-import org.jfree.chart._
 import org.jfree.chart.plot._
 
 /** $RichPlotInfo */

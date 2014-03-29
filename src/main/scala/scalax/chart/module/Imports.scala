@@ -13,7 +13,7 @@ trait Imports {
 
   type ChartTheme = org.jfree.chart.ChartTheme
   object ChartTheme {
-    def Default = org.jfree.chart.StandardChartTheme.createJFreeTheme
+    def Default: ChartTheme = org.jfree.chart.StandardChartTheme.createJFreeTheme
   }
 
   type Color = java.awt.Color

@@ -48,13 +48,13 @@ trait RichChart {
 
   }
 
-  implicit def JFreeChartJPEGExporter(chart: JFreeChart) =
+  implicit def JFreeChartJPEGExporter(chart: JFreeChart): JPEGExporter =
     new JPEGExporter(chart)
 
-  implicit def JFreeChartPDFExporter(chart: JFreeChart) =
+  implicit def JFreeChartPDFExporter(chart: JFreeChart): PDFExporter =
     new PDFExporter(chart)
 
-  implicit def JFreeChartPNGExporter(chart: JFreeChart) =
+  implicit def JFreeChartPNGExporter(chart: JFreeChart): PNGExporter =
     new PNGExporter(chart)
 
 }

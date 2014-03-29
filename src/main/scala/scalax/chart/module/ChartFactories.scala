@@ -348,7 +348,7 @@ trait ChartFactories
               legend: Boolean = true)
              (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
 
-      def CategoryPlotOf(catdata: (Comparable[_],A)) = {
+      def CategoryPlotOf(catdata: (Comparable[_],A)): CategoryPlot = {
         val category = catdata._1.toString
         val data = catdata._2
         val chart = BarChart(data, rangeAxisLabel = category)
