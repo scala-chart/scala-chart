@@ -7,31 +7,34 @@ import org.jfree.chart.plot.PlotOrientation
 
 /** This package contains a library for creating and working with charts. It wraps
   * [[http://www.jfree.org/jfreechart/ JFreeChart]], much like `scala.swing` does with the original
-  * `javax.swing` package. The basic starting point is to use the following imports:
+  * `javax.swing` package.
+  *
+  * == Getting Started ==
+  *
+  * There is an all-you-can-eat import providing all the high-level functionality of this library:
   *
   * {{{
   * import scalax.chart.api._
+  *
+  * val data = for (i <- 1 to 5) yield (i,i)
+  * val chart = XYLineChart(data)
+  * chart.saveAsPNG("/tmp/chart.png")
   * }}}
   *
-  * With these imports you can convert Scala collections to the datasets of JFreeChart and use chart
-  * factories:
+  * All of The functionality of the [[api]] object is also contained by [[module.Charting]], which
+  * you can either import or use as a mixin:
   *
   * {{{
-  * val data = Seq((1,2),(2,4),(3,6),(4,8))
-  * val dataset = data.toXYSeriesCollection("some points")
-  * val chart = XYLineChart(dataset, title = "My Chart of Some Points")
+  * object MyChartApp extends App with scalax.chart.module.Charting {
+  *   val data = for (i <- 1 to 5) yield (i,i)
+  *   val chart = XYLineChart(data)
+  *   chart.saveAsPNG("/tmp/chart.png")
+  * }
   * }}}
   *
-  * == API Getting To Know Starting Points ==
-  *
-  * If you would like to get into this API you should start with the following members (generally,
-  * these mix in a lot of others, so I recommended hitting '''Hide All''' and then iteratively
-  * browse through the '''Inherited''' members):
-  *
-  *  - [[module.RichChartingCollections]] how to convert data to create charts
-  *  - [[module.ChartFactories]] entry point for most chart factories
-  *  - [[Chart]] as the base wrapper class
-  *  - [[api]] as the base import
+  * The [[module]] package provides a la carte imports, which you can import or mix in for only
+  * parts of the API. To find out more about the modules in detail, have a look at the documentation
+  * of the [[module.Charting]] module. From there on you can discover the modules one by one.
   */
 package object chart {
 
