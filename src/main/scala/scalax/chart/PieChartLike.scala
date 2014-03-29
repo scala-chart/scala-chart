@@ -1,30 +1,27 @@
 package scalax.chart
 
 import module.Imports._
+import module.PieLabelGenerators._
 import module.PieToolTipGenerators._
 
 /** Template trait for pie charts. */
 private[chart] trait PieChartLike
-    extends Labels[PieSectionLabelGenerator]
+    extends Labels[PieLabelGenerator]
     with Tooltips[PieToolTipGenerator] {
 
   self: Chart {
     type Plot <: PiePlot
   } =>
 
-  override def labelGenerator: Option[PieSectionLabelGenerator] = Option (
-    plot.getLabelGenerator
-  ) map { _.generateSectionLabel _ }
+  override def labelGenerator: Option[PieLabelGenerator] = for {
+    jgenerator <- Option(plot.getLabelGenerator)
+    generator = PieLabelGenerator.fromPeer(jgenerator)
+  } yield generator
 
-  override def labelGenerator_=(generator: Option[PieSectionLabelGenerator]): Unit = {
-    plot.setLabelGenerator(generator.map( lg ⇒
-      new org.jfree.chart.labels.PieSectionLabelGenerator {
-        override def generateAttributedSectionLabel(dataset: PieDataset, key: Comparable[_]): java.text.AttributedString =
-          null
-        override def generateSectionLabel(dataset: PieDataset, key: Comparable[_]): String =
-          lg(dataset, key)
-      }
-    ).orNull)
+  override def labelGenerator_=(generator: Option[PieLabelGenerator]): Unit = {
+    plot.setLabelGenerator(
+      generator.map(PieLabelGenerator.toPeer).orNull
+    )
   }
 
   override def tooltipGenerator: Option[PieToolTipGenerator] = for {

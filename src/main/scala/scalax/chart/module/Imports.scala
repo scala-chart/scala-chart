@@ -61,4 +61,13 @@ trait Imports {
   /** Function alias for creating tooltips for xy charts. */
   type XYToolTipGenerator = (XYDataset,Comparable[_],Int) => String
 
+  /** Function alias for creating item labels for category charts. */
+  type CategoryLabelGenerator = (CategoryDataset,Comparable[_],Comparable[_]) => String
+
+  /** Function alias for creating item labels for pie charts. */
+  type PieLabelGenerator = (PieDataset,Comparable[_]) => String
+
+  /** Function alias for creating item labels for xy charts. */
+  type XYLabelGenerator = (XYDataset,Comparable[_],Int) => String
+
 }

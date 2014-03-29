@@ -11,7 +11,7 @@ import module.PieToolTipGenerators._
 
 /** Represents categorized numeric data with multiple pies. */
 abstract class MultiplePieChart protected () extends Chart
-    with Labels[PieSectionLabelGenerator]
+    with Labels[PieLabelGenerator]
     with Tooltips[PieToolTipGenerator] {
 
   type Plot = MultiplePiePlot
@@ -20,8 +20,8 @@ abstract class MultiplePieChart protected () extends Chart
 
   override def plot: MultiplePiePlot = peer.getPlot.asInstanceOf[MultiplePiePlot]
 
-  override def labelGenerator: Option[PieSectionLabelGenerator] = underlying.labelGenerator
-  override def labelGenerator_=(generator: Option[PieSectionLabelGenerator]): Unit = {
+  override def labelGenerator: Option[PieLabelGenerator] = underlying.labelGenerator
+  override def labelGenerator_=(generator: Option[PieLabelGenerator]): Unit = {
     underlying.labelGenerator = generator
   }
 
