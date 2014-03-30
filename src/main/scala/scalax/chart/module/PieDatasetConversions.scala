@@ -3,26 +3,29 @@ package module
 
 import language.higherKinds
 
-import scala.collection.GenTraversableOnce
+import scala.collection.{ GenTraversableOnce => Coll }
 
-import Imports._
-import RichChartingCollections._
-
+/** $PieDatasetConversionsInfo */
 object PieDatasetConversions extends PieDatasetConversions
 
-trait PieDatasetConversions {
+/** $PieDatasetConversionsInfo
+  *
+  * @define PieDatasetConversionsInfo Provides converters for datasets used for pie charts and ring
+  * charts.
+  */
+trait PieDatasetConversions extends Converting with RichChartingCollections {
 
-  abstract class ToPieDataset[A] protected () extends ToDataset[A] {
+  abstract class ToPieDataset[A] protected () extends Converter[A] {
     type X <: PieDataset
   }
 
-  object ToPieDataset extends ToDatasetCompanion[PieDataset,ToPieDataset] {
-    def apply[A,B <: PieDataset](f: A => B): ToPieDataset[A] = new ToPieDataset[A] {
-      type X = B
-      def toDataset(a: A): X = f(a)
+  object ToPieDataset extends ConverterCompanion[PieDataset,ToPieDataset] {
+    final def apply[A,B <: PieDataset](f: A => B): ToPieDataset[A] = new ToPieDataset[A] {
+      override final type X = B
+      override final def convert(a: A): X = f(a)
     }
 
-    implicit def Tuple2sToPieDataset[A <% Comparable[A], B: Numeric, CC[X] <: GenTraversableOnce[X]]: ToPieDataset[CC[(A,B)]] =
+    implicit def FromTuple2s[A <% Comparable[A], B: Numeric, CC[X] <: Coll[X]]: ToPieDataset[CC[(A,B)]] =
       apply(_.toPieDataset)
   }
 

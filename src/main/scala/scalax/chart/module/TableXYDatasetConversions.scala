@@ -3,31 +3,33 @@ package module
 
 import language.higherKinds
 
-import scala.collection.GenTraversableOnce
+import scala.collection.{ GenTraversableOnce => Coll }
 
 import org.jfree.data.time.TimePeriod
 
-import Imports._
-import RichChartingCollections._
-
+/** $TableXYDatasetConversionsInfo */
 object TableXYDatasetConversions extends TableXYDatasetConversions
 
-trait TableXYDatasetConversions {
+/** $TableXYDatasetConversionsInfo
+  *
+  * @define TableXYDatasetConversionsInfo Provides converters for `TableXYDatasets`.
+  */
+trait TableXYDatasetConversions extends Converting with RichChartingCollections {
 
-  abstract class ToTableXYDataset[A] protected () extends ToDataset[A] {
+  abstract class ToTableXYDataset[A] protected () extends Converter[A] {
     type X <: TableXYDataset
   }
 
-  object ToTableXYDataset extends ToDatasetCompanion[TableXYDataset,ToTableXYDataset] {
-    def apply[A,B <: TableXYDataset](f: A => B): ToTableXYDataset[A] = new ToTableXYDataset[A] {
+  object ToTableXYDataset extends ConverterCompanion[TableXYDataset,ToTableXYDataset] {
+    final def apply[A,B <: TableXYDataset](f: A => B): ToTableXYDataset[A] = new ToTableXYDataset[A] {
       type X = B
-      def toDataset(a: A): X = f(a)
+      override final def convert(a: A): X = f(a)
     }
 
-    implicit def CatTuple2sToTableXYDataset[A <% String, B: Numeric, C: Numeric, BB[X] <: GenTraversableOnce[X], CC[X] <: GenTraversableOnce[X]]: ToTableXYDataset[CC[(A,BB[(B,C)])]] =
+    implicit def FromCategorizedTuple2s[A <% String, B: Numeric, C: Numeric, BB[X] <: Coll[X], CC[X] <: Coll[X]]: ToTableXYDataset[CC[(A,BB[(B,C)])]] =
       apply(_.toCategoryTableXYDataset)
 
-    implicit def CatTimeTuple2sToTableXYDataset[A <% Comparable[A], B <% TimePeriod, C: Numeric, BB[X] <: GenTraversableOnce[X], CC[X] <: GenTraversableOnce[X]]: ToTableXYDataset[CC[(A,BB[(B,C)])]] =
+    implicit def FromCategorizedTimeTuple2s[A <% Comparable[A], B <% TimePeriod, C: Numeric, BB[X] <: Coll[X], CC[X] <: Coll[X]]: ToTableXYDataset[CC[(A,BB[(B,C)])]] =
       apply(_.toTimeTable)
   }
 

@@ -17,7 +17,7 @@ object RichPlot extends RichPlot
   *
   * {{{
   * chart.plot.domain.axis.label = "my label"
-  * chart.plot.range.markers += (1,1)
+  * chart.plot.range.markers += ((1,1))
   * }}}
   *
   * @define RichPlotInfo '' '' $RichPlotShortInfo
@@ -28,7 +28,7 @@ object RichPlot extends RichPlot
   *
   * {{{
   * chart.plot.domain.markers += 1
-  * chart.plot.range.markers += (1,1)
+  * chart.plot.range.markers += ((1,1))
   *
   * for (marker <- chart.plot.range.markers) {
   *   // do something with marker
@@ -41,15 +41,11 @@ object RichPlot extends RichPlot
   */
 trait RichPlot extends MarkerConversions {
 
-  /** Enriches a generic `Plot`. */
-  implicit class GenericRichPlot(val peer: Plot) {
-  }
-
   /** Enriches a `CategoryPlot`. */
   implicit class RichCategoryPlot(val peer: CategoryPlot) {
     object domain {
       object axis extends Axis {
-        override def peer = RichCategoryPlot.this.peer.getDomainAxis
+        override final def peer = RichCategoryPlot.this.peer.getDomainAxis
       }
 
       object markers {
@@ -68,7 +64,7 @@ trait RichPlot extends MarkerConversions {
 
     object range {
       object axis extends Axis {
-        override def peer = RichCategoryPlot.this.peer.getRangeAxis
+        override final def peer = RichCategoryPlot.this.peer.getRangeAxis
       }
 
       object markers {
@@ -90,13 +86,13 @@ trait RichPlot extends MarkerConversions {
   implicit class RichFastScatterPlot(val peer: FastScatterPlot) {
     object domain {
       object axis extends Axis {
-        override def peer = RichFastScatterPlot.this.peer.getDomainAxis
+        override final def peer = RichFastScatterPlot.this.peer.getDomainAxis
       }
     }
 
     object range {
       object axis extends Axis {
-        override def peer = RichFastScatterPlot.this.peer.getRangeAxis
+        override final def peer = RichFastScatterPlot.this.peer.getRangeAxis
       }
     }
   }
@@ -105,7 +101,7 @@ trait RichPlot extends MarkerConversions {
   implicit class RichThermometerPlot(val peer: ThermometerPlot) {
     object range {
       object axis extends Axis {
-        override def peer = RichThermometerPlot.this.peer.getRangeAxis
+        override final def peer = RichThermometerPlot.this.peer.getRangeAxis
       }
     }
   }
@@ -114,7 +110,7 @@ trait RichPlot extends MarkerConversions {
   implicit class RichXYPlot(val peer: XYPlot) {
     object domain {
       object axis extends Axis {
-        override def peer = RichXYPlot.this.peer.getDomainAxis
+        override final def peer = RichXYPlot.this.peer.getDomainAxis
       }
 
       object markers {
@@ -133,7 +129,7 @@ trait RichPlot extends MarkerConversions {
 
     object range {
       object axis extends Axis {
-        override def peer = RichXYPlot.this.peer.getRangeAxis
+        override final def peer = RichXYPlot.this.peer.getRangeAxis
       }
 
       object markers {

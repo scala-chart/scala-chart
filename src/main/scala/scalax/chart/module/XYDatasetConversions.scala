@@ -3,122 +3,124 @@ package module
 
 import language.higherKinds
 
-import scala.collection.GenTraversableOnce
+import scala.collection.{ GenTraversableOnce => Coll }
 
-import RichChartingCollections._
-import Imports._
-
+/** $XYDatasetConversionsInfo */
 object XYDatasetConversions extends XYDatasetConversions
 
-trait XYDatasetConversions {
+/** $XYDatasetConversionsInfo
+  *
+  * @define XYDatasetConversionsInfo Provides converters for datasets used for xy charts.
+  */
+trait XYDatasetConversions extends Converting with RichChartingCollections {
 
-  abstract class ToXYDataset[A] protected () extends ToDataset[A] {
+  abstract class ToXYDataset[A] protected () extends Converter[A] {
     type X <: XYDataset
   }
 
-  object ToXYDataset extends ToDatasetCompanion[XYDataset,ToXYDataset] {
+  object ToXYDataset extends ConverterCompanion[XYDataset,ToXYDataset] {
     def apply[A,B <: XYDataset](f: A => B): ToXYDataset[A] = new ToXYDataset[A] {
       type X = B
-      def toDataset(a: A): X = f(a)
+      def convert(a: A): X = f(a)
     }
 
-    implicit val SeriesToXYDataset: ToXYDataset[XYSeries] =
-      ToIntervalXYDataset.SeriesToIntervalXYDataset
+    implicit val FromXYSeries: ToXYDataset[XYSeries] =
+      ToIntervalXYDataset.FromXYSeries
 
-    implicit def CollSeriesToXYDataset[CC[X] <: GenTraversableOnce[X]]: ToXYDataset[CC[XYSeries]] =
-      ToIntervalXYDataset.CollSeriesToIntervalXYDataset
+    implicit def FromCollXYSeries[CC[X] <: Coll[X]]: ToXYDataset[CC[XYSeries]] =
+      ToIntervalXYDataset.FromCollXYSeries
 
-    implicit def Tuple2sToXYDataset[A: Numeric, B: Numeric, CC[X] <: GenTraversableOnce[X]]: ToXYDataset[CC[(A,B)]] =
-      ToIntervalXYDataset.Tuple2sToIntervalXYDataset
+    implicit def FromTuple2s[A: Numeric, B: Numeric, CC[X] <: Coll[X]]: ToXYDataset[CC[(A,B)]] =
+      ToIntervalXYDataset.FromTuple2s
 
-    implicit def CatTuple2sToXYDataset[A <% Comparable[A], B: Numeric, C: Numeric, CC[X] <: GenTraversableOnce[X], DD[X] <: GenTraversableOnce[X]]: ToXYDataset[CC[(A,DD[(B,C)])]] =
-      ToIntervalXYDataset.CatTuple2sToIntervalXYDataset
+    implicit def FromCategorizedTuple2s[A <% Comparable[A], B: Numeric, C: Numeric, CC[X] <: Coll[X], DD[X] <: Coll[X]]: ToXYDataset[CC[(A,DD[(B,C)])]] =
+      ToIntervalXYDataset.FromCategorizedTuple2s
 
-    implicit val TimePeriodValuesToXYDataset: ToXYDataset[TimePeriodValues] =
-      ToIntervalXYDataset.TimePeriodValuesToIntervalXYDataset
+    implicit val FromTimePeriodValues: ToXYDataset[TimePeriodValues] =
+      ToIntervalXYDataset.FromTimePeriodValues
 
-    implicit def CollTimePeriodValuesToXYDataset[CC[X] <: GenTraversableOnce[X]]: ToXYDataset[CC[TimePeriodValues]] =
-      ToIntervalXYDataset.CollTimePeriodValuesToIntervalXYDataset
+    implicit def FromCollTimePeriodValues[CC[X] <: Coll[X]]: ToXYDataset[CC[TimePeriodValues]] =
+      ToIntervalXYDataset.FromCollTimePeriodValues
 
-    implicit val TimeSeriesToXYDataset: ToXYDataset[TimeSeries] =
-      ToIntervalXYDataset.TimeSeriesToIntervalXYDataset
+    implicit val FromTimeSeries: ToXYDataset[TimeSeries] =
+      ToIntervalXYDataset.FromTimeSeries
 
-    implicit def CollTimeSeriesToXYDataset[CC[X] <: GenTraversableOnce[X]]: ToXYDataset[CC[TimeSeries]] =
-      ToIntervalXYDataset.CollTimeSeriesToIntervalXYDataset
+    implicit def FromCollTimeSeries[CC[X] <: Coll[X]]: ToXYDataset[CC[TimeSeries]] =
+      ToIntervalXYDataset.FromCollTimeSeries
 
-    implicit val YIntervalSeriesToXYDataset: ToXYDataset[YIntervalSeries] =
-      ToIntervalXYDataset.YIntervalSeriesToIntervalXYDataset
+    implicit val FromYIntervalSeries: ToXYDataset[YIntervalSeries] =
+      ToIntervalXYDataset.FromYIntervalSeries
 
-    implicit def CollYIntervalSeriesToXYDataset[CC[X] <: GenTraversableOnce[X]]: ToXYDataset[CC[YIntervalSeries]] =
-      ToIntervalXYDataset.CollYIntervalSeriesToIntervalXYDataset
+    implicit def FromCollYIntervalSeries[CC[X] <: Coll[X]]: ToXYDataset[CC[YIntervalSeries]] =
+      ToIntervalXYDataset.FromCollYIntervalSeries
 
-    implicit def Tuple4sToXYDataset[A: Numeric, B: Numeric, C: Numeric, D: Numeric, CC[X] <: GenTraversableOnce[X]]: ToXYDataset[CC[(A,B,C,D)]] =
-      ToIntervalXYDataset.Tuple4sToIntervalXYDataset
+    implicit def FromTuple4s[A: Numeric, B: Numeric, C: Numeric, D: Numeric, CC[X] <: Coll[X]]: ToXYDataset[CC[(A,B,C,D)]] =
+      ToIntervalXYDataset.FromTuple4s
 
-    implicit def CatTuple4sToXYDataset[A <% Comparable[A], B: Numeric, C: Numeric, D: Numeric, E: Numeric, CC[X] <: GenTraversableOnce[X], DD[X] <: GenTraversableOnce[X]]: ToXYDataset[CC[(A,DD[(B,C,D,E)])]] =
-      ToIntervalXYDataset.CatTuple4sToIntervalXYDataset
+    implicit def FromCategorizedTuple4s[A <% Comparable[A], B: Numeric, C: Numeric, D: Numeric, E: Numeric, CC[X] <: Coll[X], DD[X] <: Coll[X]]: ToXYDataset[CC[(A,DD[(B,C,D,E)])]] =
+      ToIntervalXYDataset.FromCategorizedTuple4s
   }
 
   abstract class ToIntervalXYDataset[A] protected () extends ToXYDataset[A] {
     type X <: IntervalXYDataset
   }
 
-  object ToIntervalXYDataset extends ToDatasetCompanion[IntervalXYDataset,ToIntervalXYDataset] {
+  object ToIntervalXYDataset extends ConverterCompanion[IntervalXYDataset,ToIntervalXYDataset] {
     def apply[A,B <: IntervalXYDataset](f: A => B): ToIntervalXYDataset[A] = new ToIntervalXYDataset[A] {
       type X = B
-      def toDataset(a: A): X = f(a)
+      def convert(a: A): X = f(a)
     }
 
-    implicit val SeriesToIntervalXYDataset: ToIntervalXYDataset[XYSeries] =
+    implicit val FromXYSeries: ToIntervalXYDataset[XYSeries] =
       apply(new XYSeriesCollection(_))
 
-    implicit def CollSeriesToIntervalXYDataset[CC[X] <: GenTraversableOnce[X]]: ToIntervalXYDataset[CC[XYSeries]] =
+    implicit def FromCollXYSeries[CC[X] <: Coll[X]]: ToIntervalXYDataset[CC[XYSeries]] =
       apply(_.foldLeft(new XYSeriesCollection) { (coll, series) =>
         coll addSeries series
         coll
       })
 
-    implicit def Tuple2sToIntervalXYDataset[A: Numeric, B: Numeric, CC[X] <: GenTraversableOnce[X]]: ToIntervalXYDataset[CC[(A,B)]] =
+    implicit def FromTuple2s[A: Numeric, B: Numeric, CC[X] <: Coll[X]]: ToIntervalXYDataset[CC[(A,B)]] =
       apply(_.toXYSeriesCollection())
 
-    implicit def CatTuple2sToIntervalXYDataset[A <% Comparable[A], B: Numeric, C: Numeric, CC[X] <: GenTraversableOnce[X], DD[X] <: GenTraversableOnce[X]]: ToIntervalXYDataset[CC[(A,DD[(B,C)])]] =
+    implicit def FromCategorizedTuple2s[A <% Comparable[A], B: Numeric, C: Numeric, CC[X] <: Coll[X], DD[X] <: Coll[X]]: ToIntervalXYDataset[CC[(A,DD[(B,C)])]] =
       apply(_.toXYSeriesCollection())
 
-    implicit val TimePeriodValuesToIntervalXYDataset: ToIntervalXYDataset[TimePeriodValues] =
+    implicit val FromTimePeriodValues: ToIntervalXYDataset[TimePeriodValues] =
       apply(new TimePeriodValuesCollection(_))
 
-    implicit def CollTimePeriodValuesToIntervalXYDataset[CC[X] <: GenTraversableOnce[X]]: ToIntervalXYDataset[CC[TimePeriodValues]] =
+    implicit def FromCollTimePeriodValues[CC[X] <: Coll[X]]: ToIntervalXYDataset[CC[TimePeriodValues]] =
       apply(_.foldLeft(new TimePeriodValuesCollection) { (dataset,series) =>
         dataset addSeries series
         dataset
       })
 
-    implicit val TimeSeriesToIntervalXYDataset: ToIntervalXYDataset[TimeSeries] =
+    implicit val FromTimeSeries: ToIntervalXYDataset[TimeSeries] =
       apply(new TimeSeriesCollection(_))
 
-    implicit def CollTimeSeriesToIntervalXYDataset[CC[X] <: GenTraversableOnce[X]]: ToIntervalXYDataset[CC[TimeSeries]] =
+    implicit def FromCollTimeSeries[CC[X] <: Coll[X]]: ToIntervalXYDataset[CC[TimeSeries]] =
       apply(_.foldLeft(new TimeSeriesCollection) { (dataset, series) =>
         dataset addSeries series
         dataset
       })
 
-    implicit val YIntervalSeriesToIntervalXYDataset: ToIntervalXYDataset[YIntervalSeries] =
+    implicit val FromYIntervalSeries: ToIntervalXYDataset[YIntervalSeries] =
       apply { a =>
         val dataset = new YIntervalSeriesCollection
         dataset addSeries a
         dataset
       }
 
-    implicit def CollYIntervalSeriesToIntervalXYDataset[CC[X] <: GenTraversableOnce[X]]: ToIntervalXYDataset[CC[YIntervalSeries]] =
+    implicit def FromCollYIntervalSeries[CC[X] <: Coll[X]]: ToIntervalXYDataset[CC[YIntervalSeries]] =
       apply(_.foldLeft(new YIntervalSeriesCollection) { (coll, series) =>
         coll addSeries series
         coll
       })
 
-    implicit def Tuple4sToIntervalXYDataset[A: Numeric, B: Numeric, C: Numeric, D: Numeric, CC[X] <: GenTraversableOnce[X]]: ToIntervalXYDataset[CC[(A,B,C,D)]] =
+    implicit def FromTuple4s[A: Numeric, B: Numeric, C: Numeric, D: Numeric, CC[X] <: Coll[X]]: ToIntervalXYDataset[CC[(A,B,C,D)]] =
       apply(_.toYIntervalSeriesCollection())
 
-    implicit def CatTuple4sToIntervalXYDataset[A <% Comparable[A], B: Numeric, C: Numeric, D: Numeric, E: Numeric, CC[X] <: GenTraversableOnce[X], DD[X] <: GenTraversableOnce[X]]: ToIntervalXYDataset[CC[(A,DD[(B,C,D,E)])]] =
+    implicit def FromCategorizedTuple4s[A <% Comparable[A], B: Numeric, C: Numeric, D: Numeric, E: Numeric, CC[X] <: Coll[X], DD[X] <: Coll[X]]: ToIntervalXYDataset[CC[(A,DD[(B,C,D,E)])]] =
       apply(_.toYIntervalSeriesCollection())
   }
 

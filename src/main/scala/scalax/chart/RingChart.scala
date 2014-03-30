@@ -2,7 +2,7 @@ package scalax.chart
 
 import org.jfree.ui.RectangleInsets
 
-import module.Imports._
+import module.PieDatasetConversions._
 
 /** Represents categorized numeric data with a ring. */
 abstract class RingChart protected () extends Chart with PieChartLike {
@@ -15,7 +15,7 @@ abstract class RingChart protected () extends Chart with PieChartLike {
   * @define chart ring chart
   * @define Chart RingChart
   */
-object RingChart extends ChartCompanion[RingChart] with module.PieDatasetConversions with DocMacros {
+object RingChart extends ChartCompanion[RingChart] {
 
   override final def fromPeer(jfree: JFreeChart): RingChart = new RingChart {
     override final lazy val peer = jfree
@@ -33,7 +33,7 @@ object RingChart extends ChartCompanion[RingChart] with module.PieDatasetConvers
     */
   def apply[A: ToPieDataset](data: A, title: String = "", legend: Boolean = true)
     (implicit theme: ChartTheme = ChartTheme.Default): RingChart = {
-    val dataset = data.toDataset
+    val dataset = ToPieDataset[A].convert(data)
 
     val plot = new RingPlot(dataset)
     plot.setInsets(new RectangleInsets(0.0, 5.0, 5.0, 5.0))

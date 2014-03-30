@@ -28,5 +28,5 @@ object Charting extends Charting
   *
   * $ToolTipGeneratorsShortInfo
   */
-trait Charting extends RichChartingCollections with ChartFactories with RichChart with Imports
-    with Exporting with RichPlot with LabelGenerators with ToolTipGenerators
+trait Charting extends ChartFactories with DatasetConversions with Exporting
+    with RichPlot with LabelGenerators with ToolTipGenerators

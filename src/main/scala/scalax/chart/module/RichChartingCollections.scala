@@ -4,14 +4,14 @@ package module
 import java.util.Date
 
 import scala.collection.JavaConverters.seqAsJavaListConverter
-import scala.collection.GenTraversableOnce
+import scala.collection.{ GenTraversableOnce => Coll }
 import scala.math.Numeric.Implicits._
 
-import org.jfree.data.category._
-import org.jfree.data.general._
+import org.jfree.data.category.DefaultCategoryDataset
+import org.jfree.data.general.DefaultPieDataset
 import org.jfree.data.statistics._
 import org.jfree.data.time._
-import org.jfree.data.xy._
+import org.jfree.data.xy.CategoryTableXYDataset
 
 /** $RichChartingCollectionsInfo */
 object RichChartingCollections extends RichChartingCollections
@@ -27,13 +27,13 @@ object RichChartingCollections extends RichChartingCollections
   *
   * @define allowDuplicateXValues whether or not duplicate x-values are allowed
   */
-trait RichChartingCollections {
+trait RichChartingCollections extends Imports {
 
   protected[chart] def calculateBoxAndWhiskerStatistics[A: Numeric](xs: Seq[A]) =
     BoxAndWhiskerCalculator.calculateBoxAndWhiskerStatistics(xs.asJava)
 
   /** Enriches a collection of data pairs. */
-  implicit class RichTuple2s[A,B](trav: GenTraversableOnce[(A,B)]) {
+  implicit class RichTuple2s[A,B](trav: Coll[(A,B)]) {
 
     /** Converts this collection to a `BoxAndWhiskerCategoryDataset`.
       *
@@ -172,7 +172,7 @@ trait RichChartingCollections {
   }
 
   /** Enriches a collection of data 4-tuples. */
-  implicit class RichTuple4s[A,B,C,D](trav: GenTraversableOnce[(A,B,C,D)]) {
+  implicit class RichTuple4s[A,B,C,D](trav: Coll[(A,B,C,D)]) {
 
     /** Converts this collection to a `YIntervalSeries`.
       *
@@ -211,7 +211,7 @@ trait RichChartingCollections {
   }
 
   /** Enriches a collection of categorized data pairs. */
-  implicit class RichCategorizedTuple2s[A,B,C](trav: GenTraversableOnce[(A,GenTraversableOnce[(B,C)])]) {
+  implicit class RichCategorizedTuple2s[A,B,C](trav: Coll[(A,Coll[(B,C)])]) {
 
     /** Converts this collection to a `BoxAndWhiskerCategoryDataset`.
       *
@@ -324,7 +324,7 @@ trait RichChartingCollections {
   }
 
   /** Enriches a collection of categorized 4-tuples. */
-  implicit class RichCategorizedTuple4s[A,B,C,D,E](trav: GenTraversableOnce[(A,GenTraversableOnce[(B,C,D,E)])]) {
+  implicit class RichCategorizedTuple4s[A,B,C,D,E](trav: Coll[(A,Coll[(B,C,D,E)])]) {
 
     /** Converts this collection to a `YIntervalSeriesCollection`.
       *

@@ -276,15 +276,15 @@ class DatasetSpec extends Specification { def is = s2"""
   // -----------------------------------------------------------------------------------------------
 
   def hasICD[A: ToCategoryDataset](a: A) =
-    ToCategoryDataset[A].toDataset(a) must beAnInstanceOf[CategoryDataset]
+    ToCategoryDataset[A].convert(a) must beAnInstanceOf[CategoryDataset]
 
   def hasIPD[A: ToPieDataset](a: A) =
-    ToPieDataset[A].toDataset(a) must beAnInstanceOf[PieDataset]
+    ToPieDataset[A].convert(a) must beAnInstanceOf[PieDataset]
 
   def hasIXYD[A: ToIntervalXYDataset](a: A) =
-    ToIntervalXYDataset[A].toDataset(a) must beAnInstanceOf[IntervalXYDataset]
+    ToIntervalXYDataset[A].convert(a) must beAnInstanceOf[IntervalXYDataset]
 
   def hasXYD[A: ToXYDataset](a: A) =
-    ToXYDataset[A].toDataset(a) must beAnInstanceOf[XYDataset]
+    ToXYDataset[A].convert(a) must beAnInstanceOf[XYDataset]
 
 }

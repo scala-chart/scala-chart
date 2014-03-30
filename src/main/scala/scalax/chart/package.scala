@@ -21,7 +21,7 @@ import org.jfree.chart.plot.PlotOrientation
   * chart.saveAsPNG("/tmp/chart.png")
   * }}}
   *
-  * All of The functionality of the [[api]] object is also contained by [[module.Charting]], which
+  * All of the functionality of the [[api]] object is also contained by [[module.Charting]], which
   * you can either import or use as a mixin:
   *
   * {{{
@@ -46,11 +46,6 @@ package object chart {
   private[chart] implicit def orientation2plotOrientation(o: Orientation.Value): PlotOrientation = o match {
     case Orientation.Horizontal ⇒ PlotOrientation.HORIZONTAL
     case Orientation.Vertical   ⇒ PlotOrientation.VERTICAL
-  }
-
-  private[chart] implicit class ToDatasetOps[A](underlying: A) {
-    def toDataset(implicit converter: ToDataset[A]): converter.X =
-      converter.toDataset(underlying)
   }
 
 }

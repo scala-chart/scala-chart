@@ -1,11 +1,10 @@
 package scalax.chart
 
-import org.jfree.chart.plot.MultiplePiePlot
 import org.jfree.chart.title.TextTitle
 import org.jfree.ui.RectangleEdge
 import org.jfree.util.TableOrder
 
-import module.Imports._
+import module.CategoryDatasetConversions._
 
 /** Represents categorized numeric data with multiple pies. */
 abstract class MultiplePieChart protected () extends Chart
@@ -34,7 +33,7 @@ abstract class MultiplePieChart protected () extends Chart
   * @define chart multiple pie chart
   * @define Chart MultiplePieChart
   */
-object MultiplePieChart extends ChartCompanion[MultiplePieChart] with module.CategoryDatasetConversions {
+object MultiplePieChart extends ChartCompanion[MultiplePieChart] {
 
   override final def fromPeer(jfree: JFreeChart): MultiplePieChart = new MultiplePieChart {
     override final lazy val peer = jfree
@@ -52,7 +51,7 @@ object MultiplePieChart extends ChartCompanion[MultiplePieChart] with module.Cat
     */
   def apply[A: ToCategoryDataset](data: A, title: String = "", legend: Boolean = true)
     (implicit theme: ChartTheme = ChartTheme.Default): MultiplePieChart = {
-    val dataset = data.toDataset
+    val dataset = ToCategoryDataset[A].convert(data)
 
     val plot = new MultiplePiePlot(dataset)
     plot.setDataExtractOrder(TableOrder.BY_COLUMN)
@@ -74,7 +73,7 @@ object MultiplePieChart extends ChartCompanion[MultiplePieChart] with module.Cat
     */
   def threeDimensional[A: ToCategoryDataset](data: A, title: String = "", legend: Boolean = true)
     (implicit theme: ChartTheme = ChartTheme.Default): MultiplePieChart = {
-    val dataset = data.toDataset
+    val dataset = ToCategoryDataset[A].convert(data)
 
     val plot = new MultiplePiePlot(dataset)
     plot.setDataExtractOrder(TableOrder.BY_COLUMN)

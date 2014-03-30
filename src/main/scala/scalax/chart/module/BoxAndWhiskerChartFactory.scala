@@ -3,14 +3,17 @@ package module
 
 import org.jfree.chart.axis._
 import org.jfree.chart.labels.BoxAndWhiskerToolTipGenerator
-import org.jfree.chart.renderer.category._
-import org.jfree.chart.renderer.xy._
+import org.jfree.chart.renderer.category.BoxAndWhiskerRenderer
+import org.jfree.chart.renderer.xy.XYBoxAndWhiskerRenderer
 
-import Imports._
+/** $BoxChartFactoriesInfo */
+object BoxAndWhiskerChartFactories extends BoxAndWhiskerChartFactories
 
-object BoxAndWhiskerChartFactory extends BoxAndWhiskerChartFactory
-
-trait BoxAndWhiskerChartFactory extends BoxAndWhiskerDatasetConversions with DocMacros {
+/** $BoxChartFactoriesInfo
+  *
+  * @define BoxChartFactoriesInfo Contains factories to create box charts.
+  */
+trait BoxAndWhiskerChartFactories extends BoxAndWhiskerDatasetConversions with DocMacros {
 
   /** Factory for box and whisker charts. */
   object BoxAndWhiskerChart {
@@ -28,7 +31,7 @@ trait BoxAndWhiskerChartFactory extends BoxAndWhiskerDatasetConversions with Doc
     def apply[A: ToBoxAndWhiskerCategoryDataset](data: A, title: String = "", legend: Boolean = true)
       (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
 
-      val dataset = data.toDataset
+      val dataset = ToBoxAndWhiskerCategoryDataset[A].convert(data)
 
       val domainAxis = new CategoryAxis()
       val rangeAxis = new NumberAxis()
@@ -60,7 +63,7 @@ trait BoxAndWhiskerChartFactory extends BoxAndWhiskerDatasetConversions with Doc
     def apply[A: ToBoxAndWhiskerXYDataset](data: A, title: String = "", legend: Boolean = false)
       (implicit theme: ChartTheme = ChartTheme.Default): XYChart = {
 
-      val dataset = data.toDataset
+      val dataset = ToBoxAndWhiskerXYDataset[A].convert(data)
 
       val domainAxis = new DateAxis()
       val rangeAxis = new NumberAxis()

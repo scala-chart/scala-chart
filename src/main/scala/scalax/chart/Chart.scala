@@ -5,9 +5,9 @@ import event._
 import scala.collection.JavaConverters._
 import scala.collection.Traversable
 import scala.collection.mutable.Buffer
+
 import scala.swing.Publisher
 
-import org.jfree.chart.{ ChartPanel, JFreeChart }
 import org.jfree.chart.{ event => jevent }
 import org.jfree.chart.title.Title
 
@@ -120,13 +120,28 @@ abstract class Chart protected () extends DisplayableChart with Publisher {
 
 }
 
-object Chart {
+/** Provides a very basic factory to turn any `JFreeChart` into a `Chart` and contains default settings. */
+object Chart extends ChartCompanion[Chart] {
 
+  override final def fromPeer(jfree: JFreeChart): Chart = new Chart {
+    type Plot = org.jfree.chart.plot.Plot
+
+    override final lazy val peer = jfree
+    override def plot: Plot = peer.getPlot
+  }
+
+  /** Contains default settings. */
   object Default {
-    def Height: Int = ChartPanel.DEFAULT_HEIGHT
-    def Width: Int = ChartPanel.DEFAULT_WIDTH
 
+    /** Returns the default chart height. */
+    def Height: Int = org.jfree.chart.ChartPanel.DEFAULT_HEIGHT
+
+    /** Returns the default chart width. */
+    def Width: Int = org.jfree.chart.ChartPanel.DEFAULT_WIDTH
+
+    /** Returns the default chart resolution. */
     def Resolution: (Int,Int) = (Width,Height)
+
   }
 
 }

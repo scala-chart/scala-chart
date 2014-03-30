@@ -9,15 +9,13 @@ import org.jfree.chart.renderer.category._
 import org.jfree.chart.renderer.xy._
 import org.jfree.util.SortOrder
 
-import Imports._
-
 /** $ChartFactoriesInfo */
 object ChartFactories extends ChartFactories
 
 /** $ChartFactoriesInfo
   *
-  * @define ChartFactoriesShortInfo [[ChartFactories]] contains various factories to conveniently
-  * create charts.
+  * @define ChartFactoriesShortInfo [[ChartFactories]] contains all high-level factories to
+  * conveniently create charts.
   *
   * {{{
   * val data = for (i <- 1 to 5) yield (i,i)
@@ -31,7 +29,7 @@ object ChartFactories extends ChartFactories
   * The only argument needed to create a chart is a dataset:
   *
   * {{{
-  * val data = Seq((0,0),(1,1),(2,2))
+  * val data = for (i <- 1 to 5) yield (i,i)
   * val dataset = data.toXYSeriesCollection("some data")
   * }}}
   *
@@ -58,10 +56,8 @@ object ChartFactories extends ChartFactories
   * }}}
   */
 trait ChartFactories
-    extends BoxAndWhiskerChartFactory
-    with MultiplePieChartFactory
-    with PieChartFactory
-    with RingChartFactory
+    extends BoxAndWhiskerChartFactories
+    with PieChartFactories
     with DatasetConversions
     with DocMacros {
 
@@ -108,7 +104,7 @@ trait ChartFactories
               legend: Boolean = true)
              (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
 
-      val dataset = data.toDataset
+      val dataset = ToCategoryDataset[A].convert(data)
 
       val domainAxis = new CategoryAxis()
       domainAxis.setCategoryMargin(0.0)
@@ -140,7 +136,7 @@ trait ChartFactories
                 legend: Boolean = true)
                (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
 
-      val dataset = data.toDataset
+      val dataset = ToCategoryDataset[A].convert(data)
 
       val domainAxis = new CategoryAxis()
       domainAxis.setCategoryMargin(0.0)
@@ -177,7 +173,7 @@ trait ChartFactories
               legend: Boolean = true)
              (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
 
-      val dataset = data.toDataset
+      val dataset = ToCategoryDataset[A].convert(data)
 
       val domainAxis = new CategoryAxis()
       val rangeAxis = new NumberAxis()
@@ -220,7 +216,7 @@ trait ChartFactories
                 legend: Boolean = true)
                (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
 
-      val dataset = data.toDataset
+      val dataset = ToCategoryDataset[A].convert(data)
 
       val domainAxis = new CategoryAxis()
       val rangeAxis = new NumberAxis()
@@ -250,7 +246,7 @@ trait ChartFactories
                          legend: Boolean = true)
                         (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
 
-      val dataset = data.toDataset
+      val dataset = ToCategoryDataset[A].convert(data)
 
       val domainAxis = new CategoryAxis3D()
       val rangeAxis = new NumberAxis3D()
@@ -285,7 +281,7 @@ trait ChartFactories
                                 legend: Boolean = true)
                                (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
 
-      val dataset = data.toDataset
+      val dataset = ToCategoryDataset[A].convert(data)
 
       val domainAxis = new CategoryAxis3D()
       val rangeAxis = new NumberAxis3D()
@@ -322,7 +318,7 @@ trait ChartFactories
               legend: Boolean = true)
              (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
 
-      import RichPlot._
+      import RichPlot.{ CategoryPlot => _, _ }
 
       def CategoryPlotOf(catdata: (Comparable[_],A)): CategoryPlot = {
         val category = catdata._1.toString
@@ -366,7 +362,7 @@ trait ChartFactories
               legend: Boolean = true)
              (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
 
-      val dataset = data.toDataset
+      val dataset = ToCategoryDataset[A].convert(data)
 
       val domainAxis = new CategoryAxis()
       val rangeAxis = new NumberAxis()
@@ -397,7 +393,7 @@ trait ChartFactories
                          legend: Boolean = true)
                         (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
 
-      val dataset = data.toDataset
+      val dataset = ToCategoryDataset[A].convert(data)
 
       val domainAxis = new CategoryAxis3D()
       val rangeAxis = new NumberAxis3D()
@@ -436,7 +432,7 @@ trait ChartFactories
               legend: Boolean = true)
              (implicit theme: ChartTheme = ChartTheme.Default): XYChart = {
 
-      val dataset = data.toDataset
+      val dataset = ToXYDataset[A].convert(data)
 
       val dateAxis = needsDateAxis(dataset)
 
@@ -472,7 +468,7 @@ trait ChartFactories
                 legend: Boolean = true)
                (implicit theme: ChartTheme = ChartTheme.Default): XYChart = {
 
-      val dataset = data.toDataset
+      val dataset = ToTableXYDataset[A].convert(data)
 
       val dateAxis = needsDateAxis(dataset)
 
@@ -513,7 +509,7 @@ trait ChartFactories
                 legend: Boolean = true)
                (implicit theme: ChartTheme = ChartTheme.Default): XYChart = {
 
-      val dataset = data.toDataset
+      val dataset = ToXYDataset[A].convert(data)
 
       val dateAxis = needsDateAxis(dataset)
 
@@ -556,7 +552,7 @@ trait ChartFactories
               legend: Boolean = true)
              (implicit theme: ChartTheme = ChartTheme.Default): XYChart = {
 
-      val dataset = data.toDataset
+      val dataset = ToIntervalXYDataset[A].convert(data)
 
       val dateAxis = needsDateAxis(dataset)
 
@@ -591,7 +587,7 @@ trait ChartFactories
                 legend: Boolean = true)
                (implicit theme: ChartTheme = ChartTheme.Default): XYChart = {
 
-      val dataset = data.toDataset
+      val dataset = ToTableXYDataset[A].convert(data)
 
       val dateAxis = needsDateAxis(dataset)
 
@@ -632,7 +628,7 @@ trait ChartFactories
               legend: Boolean = true)
              (implicit theme: ChartTheme = ChartTheme.Default): XYChart = {
 
-      val dataset = data.toDataset
+      val dataset = ToIntervalXYDataset[A].convert(data)
 
       val dateAxis = needsDateAxis(dataset)
 
@@ -673,7 +669,7 @@ trait ChartFactories
               legend: Boolean = true)
              (implicit theme: ChartTheme = ChartTheme.Default): XYChart = {
 
-      val dataset = data.toDataset
+      val dataset = ToXYDataset[A].convert(data)
 
       val dateAxis = needsDateAxis(dataset)
 

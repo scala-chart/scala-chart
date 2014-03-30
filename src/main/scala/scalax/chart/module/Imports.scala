@@ -6,7 +6,8 @@ object Imports extends Imports
 
 /** $ImportsInfo
   *
-  * @define ImportsInfo Contains imports from foreign packages.
+  * @define ImportsInfo Contains imports from other libraries, most notably
+  * [[http://www.jfree.org/jfreechart/ JFreeChart]].
   */
 trait Imports {
   type JFreeChart = org.jfree.chart.JFreeChart

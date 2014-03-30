@@ -2,7 +2,7 @@ package scalax.chart
 
 import org.jfree.ui.RectangleInsets
 
-import module.Imports._
+import module.PieDatasetConversions._
 
 /** Represents categorized numeric data with a pie. */
 abstract class PieChart protected () extends Chart with PieChartLike {
@@ -15,7 +15,7 @@ abstract class PieChart protected () extends Chart with PieChartLike {
   * @define chart pie chart
   * @define Chart PieChart
   */
-object PieChart extends ChartCompanion[PieChart] with module.PieDatasetConversions with DocMacros {
+object PieChart extends ChartCompanion[PieChart] {
 
   override final def fromPeer(jfree: JFreeChart): PieChart = new PieChart {
     override final lazy val peer = jfree
@@ -33,7 +33,7 @@ object PieChart extends ChartCompanion[PieChart] with module.PieDatasetConversio
     */
   def apply[A: ToPieDataset](data: A, title: String = "", legend: Boolean = true)
     (implicit theme: ChartTheme = ChartTheme.Default): PieChart = {
-    val dataset = data.toDataset
+    val dataset = ToPieDataset[A].convert(data)
 
     val plot = new PiePlot(dataset)
     plot.setInsets(new RectangleInsets(0.0, 5.0, 5.0, 5.0))
@@ -53,7 +53,7 @@ object PieChart extends ChartCompanion[PieChart] with module.PieDatasetConversio
     */
   def threeDimensional[A: ToPieDataset](data: A, title: String = "", legend: Boolean = true)
     (implicit theme: ChartTheme = ChartTheme.Default): PieChart = {
-    val dataset = data.toDataset
+    val dataset = ToPieDataset[A].convert(data)
 
     val plot = new PiePlot3D(dataset)
     plot.setInsets(new RectangleInsets(0.0, 5.0, 5.0, 5.0))
