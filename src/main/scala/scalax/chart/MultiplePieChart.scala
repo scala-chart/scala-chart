@@ -35,8 +35,12 @@ abstract class MultiplePieChart protected () extends Chart
   */
 object MultiplePieChart extends ChartCompanion[MultiplePieChart] {
 
-  override final def fromPeer(jfree: JFreeChart): MultiplePieChart = new MultiplePieChart {
-    override final lazy val peer = jfree
+  override final def fromPeer(jfree: JFreeChart): MultiplePieChart = {
+    require(jfree.getPlot.isInstanceOf[Plot], "Illegal peer plot type.")
+
+    new MultiplePieChart {
+      override final lazy val peer = jfree
+    }
   }
 
   /** Creates a new $chart.

@@ -17,8 +17,12 @@ abstract class PieChart protected () extends Chart with PieChartLike {
   */
 object PieChart extends ChartCompanion[PieChart] {
 
-  override final def fromPeer(jfree: JFreeChart): PieChart = new PieChart {
-    override final lazy val peer = jfree
+  override final def fromPeer(jfree: JFreeChart): PieChart = {
+    require(jfree.getPlot.isInstanceOf[Plot], "Illegal peer plot type.")
+
+    new PieChart {
+      override final lazy val peer = jfree
+    }
   }
 
   /** Creates a new $chart.

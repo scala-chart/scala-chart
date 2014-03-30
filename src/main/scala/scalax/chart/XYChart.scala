@@ -51,7 +51,11 @@ abstract class XYChart protected () extends Chart with Orientable
   * @define Chart XYChart
   */
 object XYChart extends ChartCompanion[XYChart] {
-  override final def fromPeer(jfree: JFreeChart): XYChart = new XYChart {
-    override final lazy val peer = jfree
+  override final def fromPeer(jfree: JFreeChart): XYChart = {
+    require(jfree.getPlot.isInstanceOf[Plot], "Illegal peer plot type.")
+
+    new XYChart {
+      override final lazy val peer = jfree
+    }
   }
 }
