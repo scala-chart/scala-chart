@@ -1,0 +1,64 @@
+`scala-chart` version 0.4.0 includes the following changes in the API:
+
+-   new *all you can eat* import:
+
+        import scalax.chart.api._
+
+    mixin for chart apps:
+
+        object MyChartApp extends App with scalax.chart.module.Charting {
+          val data = for (i <- 1 to 5) yield (i,i)
+          val chart = XYLineChart(data)
+          chart.saveAsPNG("/tmp/chart.png")
+        }
+
+    more fine grained / *a la carte* imports in the module package (see API)
+
+-   the `views` package has been dropped, instead, there is now a type class based approach for
+    converting arbitrary data into the supported datasets, which are used by all high-level chart
+    factories:
+
+        val data = for (i <- 1 to 5) yield (i,i)
+        val chart = XYLineChart(data)
+
+-   the inversion in creating category datasets has now been fixed, i.e. the series or outer
+    category is now correctly on the outside, e.g.:
+
+        val data = List (
+          "Series 1" -> List("bin1" -> 1, "bin2" -> 2),
+          "Series 2" -> List("bin1" -> 3, "bin2" -> 4)
+        )
+        
+        val dataset = data.toCategoryDataset
+
+-   support for markers on the domain and range axes:
+
+        chart.plot.range.markers += 3.0
+
+-   the `itext` dependency is now optional which is required for exporting to PDF, so you now have
+    to include it explicitly as a dependency if you want to export to PDF:
+
+        libraryDependencies += "com.lowagie" % "itext" % "4.2.1"
+
+-   support for chart events based on `Publisher` / `Reactor` of `scala-swing`
+
+-   revamped `ToolTipGenerator` and `Label` support, e.g.:
+
+        pieChart.labelGenerator = PieLabelGenerator(value => value.toString)
+
+-   builds are available for the latest stable `2.10.4` and `2.11.0-RC3`; there will be a `2.11.0`
+    release as soon as it gets out
+
+
+Some of these changes and especially the cleanup of *the old ways* introduce source-incompatible
+changes. I hope this can be excused in the name of moving forward.
+
+
+Please let me know, if you are using this library and have some particular legacy Java / JFreeChart
+code you want to turn into nice Scala-idiomatic code. I would be happy to take a look at it and try
+to support it in `scala-chart`.
+
+
+For more information about `scala-chart` usage have a look at the
+[README](https://github.com/wookietreiber/scala-chart#readme) and at the
+[API](http://wookietreiber.github.com/scala-chart/latest/api/index.html).

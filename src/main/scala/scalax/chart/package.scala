@@ -11,7 +11,8 @@ import org.jfree.chart.plot.PlotOrientation
   *
   * == Getting Started ==
   *
-  * There is an all-you-can-eat import providing all the high-level functionality of this library:
+  * There is an ''all you can eat'' import providing all the high-level functionality of this
+  * library:
   *
   * {{{
   * import scalax.chart.api._
