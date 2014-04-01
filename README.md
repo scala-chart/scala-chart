@@ -10,66 +10,80 @@ Example Usage
 
 ### [sbt][]
 
-    libraryDependencies += "com.github.wookietreiber" %% "scala-chart" % "latest.integration"
+    libraryDependencies += "com.github.wookietreiber" %% "scala-chart" % "0.4.0"
 
 ### [maven][]
 
     <dependency>
        <groupId>com.github.wookietreiber</groupId>
        <artifactId>scala-chart_${scala.version}</artifactId>
-       <version>latest.integration</version>
+       <version>0.4.0</version>
     </dependency>
 
 ### Imports
 
-All high-level convenience can be imported with the *all-you-can-eat* import:
+All high-level convenience can be imported with the *all you can eat* import:
 
     import scalax.chart.api._
 
 For more and more *a la carte* imports, have a look at the [module package][modules] for various
-selfless traits.
+selfless traits. There is also a module containing everything the `api` import does which can be
+used in applications directly:
 
-### [Dataset Conversions](http://wookietreiber.github.io/scala-chart/latest/api/index.html#scalax.chart.module.RichChartingCollections)
+```scala
+object MyChartApp extends App with scalax.chart.module.Charting {
+  val data = for (i <- 1 to 5) yield (i,i)
+  val chart = XYLineChart(data)
+  chart.saveAsPNG("/tmp/chart.png")
+}
+```
 
-You can use the conversions to convert from ordinary Scala collections to the datasets used by
-[JFreeChart][]:
+### Creating Charts
 
-    val data    = Seq((1,2),(2,4),(3,6),(4,8))
-    val dataset = data.toXYSeriesCollection("some points")
+Creating charts is as simple as using one of the many chart factories, which differ from the
+[JFreeChart][] ones in the aspect, that they make heavy use of default arguments, so you have to
+type as less as possible:
 
-### [Chart Factories](http://wookietreiber.github.io/scala-chart/latest/api/index.html#scalax.chart.module.ChartFactories)
-
-These datasets can be used by the chart factories, which differ from the [JFreeChart][] ones in the
-aspect, that they make heavy use of default arguments, so you have to type as less as possible:
-
-    val chart = XYLineChart(dataset)
+```scala
+val data = for (i <- 1 to 5) yield (i,i)
+val chart = XYLineChart(data)
+```
 
 The first argument is always the dataset which is the only required argument. For better readability
 of your own code, you should name the other arguments:
 
-    val chart = XYLineChart(dataset, title = "My Chart of Some Points")
+```scala
+val chart = XYLineChart(data, title = "My Chart of Some Points")
+```
 
 There are also some enrichments for the charts themselves to display them in a window or save them
 to disk:
 
-    chart.show()
-    chart.saveAsPNG(new java.io.File("/tmp/chart.png"), (1024,768))
-    chart.saveAsJPEG(new java.io.File("/tmp/chart.jpg"), (1024,768))
-    chart.saveAsPDF(new java.io.File("/tmp/chart.pdf"), (1024,768))
+```scala
+chart.show()
+```
+
+```scala
+chart.saveAsPNG("/tmp/chart.png")
+chart.saveAsJPEG("/tmp/chart.jpg")
+chart.saveAsPDF("/tmp/chart.pdf")
+```
 
 ### Animations / Live Chart Updates
 
 You can also do some animations, i.e. perform live updates on your datasets:
 
-    val series = Seq[(Int,Int)]() toXYSeries "f(x) = sin(x)"
-    val chart = XYLineChart(series)
-    chart.show()
-    for (x <- -4.0 to 4 by 0.1) {
-      swing.Swing onEDT {
-        series.add(x,math.sin(x))
-      }
-      Thread.sleep(50)
-    }
+```scala
+val series = Seq[(Int,Int)]() toXYSeries "f(x) = sin(x)"
+val chart = XYLineChart(series)
+chart.show()
+for (x <- -4.0 to 4 by 0.1) {
+  swing.Swing onEDT {
+    series.add(x,math.sin(x))
+  }
+  Thread.sleep(50)
+}
+```
 
 ### Projects Using Scala Chart
 
@@ -77,10 +91,10 @@ The following list contains some projects where you can see this project in acti
 included here because it is sometimes more useful to see how a library is used in more than simple
 examples.
 
+- [scalameter](https://github.com/scalameter/scalameter)
 - [ckit](https://github.com/wookietreiber/ckit)
 - [eva4s](https://github.com/wookietreiber/eva4s)
 - [pretty-accounting](https://github.com/wookietreiber/pretty-accounting)
-- [scalameter](https://github.com/scalameter/scalameter)
 
 
 [JFreeChart]: http://jfree.org/jfreechart/
