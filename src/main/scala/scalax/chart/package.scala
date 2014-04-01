@@ -1,27 +1,3 @@
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- *                                                                                               *
- *  Copyright © 2012-2013 Christian Krause                                                       *
- *                                                                                               *
- *  Christian Krause <kizkizzbangbang@googlemail.com>                                            *
- *                                                                                               *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- *                                                                                               *
- *  This file is part of 'scala-chart'.                                                          *
- *                                                                                               *
- *  This project is free software: you can redistribute it and/or modify it under the terms      *
- *  of the GNU Lesser General Public License as published by the Free Software Foundation,       *
- *  either version 3 of the License, or any later version.                                       *
- *                                                                                               *
- *  This project is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;    *
- *  without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.    *
- *  See the GNU Lesser General Public License for more details.                                  *
- *                                                                                               *
- *  You should have received a copy of the GNU Lesser General Public License along with this     *
- *  project. If not, see <http://www.gnu.org/licenses/>.                                         *
- *                                                                                               *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
-
 package scalax
 
 import language.implicitConversions
@@ -31,52 +7,37 @@ import org.jfree.chart.plot.PlotOrientation
 
 /** This package contains a library for creating and working with charts. It wraps
   * [[http://www.jfree.org/jfreechart/ JFreeChart]], much like `scala.swing` does with the original
-  * `javax.swing` package. The basic starting point is to use the following imports:
+  * `javax.swing` package.
+  *
+  * == Getting Started ==
+  *
+  * There is an ''all you can eat'' import providing all the high-level functionality of this
+  * library:
   *
   * {{{
-  * import scalax.chart._
-  * import scalax.chart.Charting._
+  * import scalax.chart.api._
+  *
+  * val data = for (i <- 1 to 5) yield (i,i)
+  * val chart = XYLineChart(data)
+  * chart.saveAsPNG("/tmp/chart.png")
   * }}}
   *
-  * With these imports you can convert Scala collections to the datasets of JFreeChart and use chart
-  * factories:
+  * All of the functionality of the [[api]] object is also contained by [[module.Charting]], which
+  * you can either import or use as a mixin:
   *
   * {{{
-  * val data = Seq((1,2),(2,4),(3,6),(4,8))
-  * val dataset = data.toXYSeriesCollection("some points")
-  * val chart = XYLineChart(dataset, title = "My Chart of Some Points")
+  * object MyChartApp extends App with scalax.chart.module.Charting {
+  *   val data = for (i <- 1 to 5) yield (i,i)
+  *   val chart = XYLineChart(data)
+  *   chart.saveAsPNG("/tmp/chart.png")
+  * }
   * }}}
   *
-  * There are also implicit conversions / views available in the [[views]] package, but they are not
-  * contained by [[Charting]], because of ambiguity issues with implicit conversions.
+  * The [[module]] package provides a la carte imports, which you can import or mix in for only
+  * parts of the API. To find out more about the modules in detail, have a look at the documentation
+  * of the [[module.Charting]] module. From there on you can discover the modules one by one.
   */
 package object chart {
-
-  // -----------------------------------------------------------------------------------------------
-  // more meaningful function aliases
-  // -----------------------------------------------------------------------------------------------
-
-  /** Function alias for creating item labels for [[CategoryChart]]s. */
-  type CategoryItemLabelGenerator = (org.jfree.data.category.CategoryDataset,Int,Int) ⇒ String
-
-  /** Function alias for creating tooltips for [[CategoryChart]]s. */
-  type CategoryToolTipGenerator = (org.jfree.data.category.CategoryDataset,Int,Int) ⇒ String
-
-  /** Function alias for creating item labels for [[PieChartLike]] charts. */
-  type PieSectionLabelGenerator = (org.jfree.data.general.PieDataset,Comparable[_]) ⇒ String
-
-  /** Function alias for creating tooltips for [[PieChartLike]] charts. */
-  type PieToolTipGenerator = (org.jfree.data.general.PieDataset,Comparable[_]) ⇒ String
-
-  /** Function alias for creating item labels for [[XYChart]]s. */
-  type XYItemLabelGenerator = (org.jfree.data.xy.XYDataset,Int,Int) ⇒ String
-
-  /** Function alias for creating tooltips for [[XYChart]]s. */
-  type XYToolTipGenerator = (org.jfree.data.xy.XYDataset,Int,Int) ⇒ String
-
-  // -----------------------------------------------------------------------------------------------
-  // implicit conversions between scala-chart and JFreeChart
-  // -----------------------------------------------------------------------------------------------
 
   private[chart] implicit def plotOrientation2orientation(o: PlotOrientation): Orientation.Value = o match {
     case PlotOrientation.HORIZONTAL ⇒ Orientation.Horizontal

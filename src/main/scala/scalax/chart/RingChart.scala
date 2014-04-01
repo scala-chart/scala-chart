@@ -1,32 +1,48 @@
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- *                                                                                               *
- *  Copyright © 2012-2013 Christian Krause                                                       *
- *                                                                                               *
- *  Christian Krause <kizkizzbangbang@googlemail.com>                                            *
- *                                                                                               *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- *                                                                                               *
- *  This file is part of 'scala-chart'.                                                          *
- *                                                                                               *
- *  This project is free software: you can redistribute it and/or modify it under the terms      *
- *  of the GNU Lesser General Public License as published by the Free Software Foundation,       *
- *  either version 3 of the License, or any later version.                                       *
- *                                                                                               *
- *  This project is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;    *
- *  without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.    *
- *  See the GNU Lesser General Public License for more details.                                  *
- *                                                                                               *
- *  You should have received a copy of the GNU Lesser General Public License along with this     *
- *  project. If not, see <http://www.gnu.org/licenses/>.                                         *
- *                                                                                               *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
-
 package scalax.chart
 
-import org.jfree.chart.plot.RingPlot
+import org.jfree.ui.RectangleInsets
+
+import module.PieDatasetConversions._
 
 /** Represents categorized numeric data with a ring. */
-trait RingChart extends Chart[RingPlot] with PieChartLike[RingPlot] {
+abstract class RingChart protected () extends Chart with PieChartLike {
+  type Plot = RingPlot
   override def plot: RingPlot = peer.getPlot.asInstanceOf[RingPlot]
+}
+
+/** Factory for ${chart}s.
+  *
+  * @define chart ring chart
+  * @define Chart RingChart
+  */
+object RingChart extends ChartCompanion[RingChart] {
+
+  override final def fromPeer(jfree: JFreeChart): RingChart = {
+    require(jfree.getPlot.isInstanceOf[Plot], "Illegal peer plot type.")
+
+    new RingChart {
+      override final lazy val peer = jfree
+    }
+  }
+
+  /** Creates a new $chart.
+    *
+    * @param data   $data
+    * @param title  $title
+    * @param legend $legend
+    * @param theme  $theme
+    *
+    * @usecase def apply(data: PieDataset): RingChart = ???
+    *   @inheritdoc
+    */
+  def apply[A: ToPieDataset](data: A, title: String = "", legend: Boolean = true)
+    (implicit theme: ChartTheme = ChartTheme.Default): RingChart = {
+    val dataset = ToPieDataset[A].convert(data)
+
+    val plot = new RingPlot(dataset)
+    plot.setInsets(new RectangleInsets(0.0, 5.0, 5.0, 5.0))
+
+    RingChart(plot, title, legend, theme)
+  }
+
 }

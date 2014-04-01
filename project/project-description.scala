@@ -17,6 +17,7 @@ object ProjectDescription {
       "scm:git:git://github.com/wookietreiber/scala-chart.git",
       Some("scm:git:https://github.com/wookietreiber/scala-chart.git")
     )),
+    apiURL := Some(url("http://wookietreiber.github.io/scala-chart/latest/api/")),
     pomExtra := (
       <developers>
         <developer>

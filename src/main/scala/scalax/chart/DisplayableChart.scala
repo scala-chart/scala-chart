@@ -1,75 +1,101 @@
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- *                                                                                               *
- *  Copyright © 2012-2013 Christian Krause                                                       *
- *                                                                                               *
- *  Christian Krause <kizkizzbangbang@googlemail.com>                                            *
- *                                                                                               *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- *                                                                                               *
- *  This file is part of 'scala-chart'.                                                          *
- *                                                                                               *
- *  This project is free software: you can redistribute it and/or modify it under the terms      *
- *  of the GNU Lesser General Public License as published by the Free Software Foundation,       *
- *  either version 3 of the License, or any later version.                                       *
- *                                                                                               *
- *  This project is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;    *
- *  without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.    *
- *  See the GNU Lesser General Public License for more details.                                  *
- *                                                                                               *
- *  You should have received a copy of the GNU Lesser General Public License along with this     *
- *  project. If not, see <http://www.gnu.org/licenses/>.                                         *
- *                                                                                               *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
-
 package scalax.chart
 
+import event._
+
 import scala.swing._
+import scala.swing.event.{ MouseClicked, MouseMoved }
 import scala.swing.Swing._
 
-import org.jfree.chart._
-import org.jfree.chart.ChartPanel.{ DEFAULT_WIDTH, DEFAULT_HEIGHT }
+import org.jfree.{ chart => jchart }
 
-/** Provides methods for both displaying a chart and integrating it into the
+/** @define DisplayableChartInfo This abstraction provides direct integration with the
   * [[http://www.scala-lang.org/api/current/index.html#scala.swing.package Scala Swing UI
   * framework]].
+  *
+  * {{{
+  * val component = chart.toComponent
+  * val frame = chart.toFrame()
+  * }}}
+  *
+  * There is also a way to immediately display the chart in a new GUI window. This is intended for
+  * interactive usage, e.g. when working with the Scala REPL. The simplest form is:
+  *
+  * {{{
+  * chart.show()
+  * }}}
+  *
+  * Listen to UI mouse events:
+  *
+  * {{{
+  * import scalax.chart.event._
+  *
+  * val chart = ???
+  * val ui = chart.toComponent // or chart.toFrame()
+  * val reactor = ???
+  *
+  * reactor.listenTo(ui)
+  * reactor.reactions += {
+  *   case event: ChartMouseEvent =>
+  *     // do something with event
+  * }
+  * }}}
   *
   * @define title      the title of the enclosing frame
   * @define scrollable whether the enclosing panel is scrollable
   */
-trait DisplayableChart {
+private[chart] trait DisplayableChart extends DocMacros {
 
-  chart: Chart[_] ⇒
-
-  /** Shows the chart in a window. */
-  def show: Unit = show()
+  chart: Chart =>
 
   /** Shows the chart in a window.
     *
     * @param title      $title
+    * @param resolution $resolution
     * @param scrollable $scrollable
+    *
+    * @usecase def show(): Unit
+    *   @inheritdoc
     */
-  def show(title: String = "", dim: (Int,Int) = (DEFAULT_WIDTH,DEFAULT_HEIGHT), scrollable: Boolean = false): Unit = Swing onEDT {
+  def show(title: String = "", resolution: (Int,Int) = Chart.Default.Resolution, scrollable: Boolean = false): Unit = Swing onEDT {
     val frame = toFrame(title, scrollable)
-    frame.size = dim
+    frame.size = resolution
     frame.visible = true
   }
 
-  /** Wraps a panel around this chart. */
-  def toPanel: Panel = new FlowPanel {
-    override lazy val peer = new ChartPanel(chart.peer)
+  /** Wraps this chart in a swing component. */
+  def toComponent: Component = {
+    val peer = new jchart.ChartPanel(chart.peer)
+    val wrapped = Component.wrap(peer)
+    applyScalaSwingListenerTo(peer, publisher = wrapped)
+    wrapped
   }
 
   /** Wraps a frame around this chart.
     *
     * @param title      $title
     * @param scrollable $scrollable
+    *
+    * @usecase def toFrame(): Frame
+    *   @inheritdoc
     */
   def toFrame(title: String = "", scrollable: Boolean = true): Frame = {
     val t = title
-    new Frame {
-      override lazy val peer = new ChartFrame(t, chart.peer, scrollable) with InterfaceMixin
+    val frame = new Frame {
+      override lazy val peer = new jchart.ChartFrame(t, chart.peer, scrollable) with InterfaceMixin
     }
+
+    applyScalaSwingListenerTo(frame.peer.getChartPanel, frame)
+
+    frame
+  }
+
+  private def applyScalaSwingListenerTo(chartPanel: jchart.ChartPanel, publisher: Publisher) = {
+    chartPanel.addChartMouseListener(new jchart.ChartMouseListener {
+      override final def chartMouseClicked(event: jchart.ChartMouseEvent): Unit =
+        publisher.publish(ChartMouseClicked(new MouseClicked(event.getTrigger), Option(event.getEntity)))
+      override final def chartMouseMoved(event: jchart.ChartMouseEvent): Unit =
+        publisher.publish(ChartMouseMoved(new MouseMoved(event.getTrigger), Option(event.getEntity)))
+    })
   }
 
 }

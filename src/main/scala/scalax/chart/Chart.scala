@@ -1,49 +1,38 @@
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- *                                                                                               *
- *  Copyright © 2012-2013 Christian Krause                                                       *
- *                                                                                               *
- *  Christian Krause <kizkizzbangbang@googlemail.com>                                            *
- *                                                                                               *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- *                                                                                               *
- *  This file is part of 'scala-chart'.                                                          *
- *                                                                                               *
- *  This project is free software: you can redistribute it and/or modify it under the terms      *
- *  of the GNU Lesser General Public License as published by the Free Software Foundation,       *
- *  either version 3 of the License, or any later version.                                       *
- *                                                                                               *
- *  This project is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;    *
- *  without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.    *
- *  See the GNU Lesser General Public License for more details.                                  *
- *                                                                                               *
- *  You should have received a copy of the GNU Lesser General Public License along with this     *
- *  project. If not, see <http://www.gnu.org/licenses/>.                                         *
- *                                                                                               *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
-
 package scalax.chart
 
+import event._
+
+import scala.collection.JavaConverters._
 import scala.collection.Traversable
 import scala.collection.mutable.Buffer
 
-import org.jfree.chart.JFreeChart
-import org.jfree.chart.plot.Plot
+import scala.swing.Publisher
+
+import org.jfree.chart.{ event => jevent }
 import org.jfree.chart.title.Title
 
-import Imports._
+import module.Imports._
 
 /** Generic graphical representation of data.
   *
-  * @tparam P used plot type
+  * == Swing Integration ==
+  *
+  * $DisplayableChartInfo
+  *
+  * == Exporting Charts ==
+  *
+  * See [[module.Exporting]] for more information.
   */
-trait Chart[P <: Plot] extends DisplayableChart with StorableChart {
+abstract class Chart protected () extends DisplayableChart with Publisher {
 
   /** Returns the underlying chart. */
   def peer: JFreeChart
 
-  /** Returns the plot. */
-  def plot: P
+  /** Returns the underlying plot type. */
+  type Plot <: org.jfree.chart.plot.Plot
+
+  /** Returns the underlying plot. */
+  def plot: Plot
 
   /** Returns true if this chart is drawn with anti-aliasing. */
   def antiAlias: Boolean =
@@ -95,15 +84,8 @@ trait Chart[P <: Plot] extends DisplayableChart with StorableChart {
       }
     }
 
-    override def iterator: Iterator[Title] = new Iterator[Title] {
-      private var current = 0
-      override def hasNext: Boolean = subtitles.size > current
-      override def next: Title = {
-        val subtitle = subtitles(current)
-        current += 1
-        subtitle
-      }
-    }
+    override def iterator: Iterator[Title] =
+      peer.getSubtitles.iterator.asScala.map(_.asInstanceOf[Title])
 
     override def length: Int =
       peer.getSubtitleCount
@@ -118,6 +100,48 @@ trait Chart[P <: Plot] extends DisplayableChart with StorableChart {
       remove(n)
       peer.addSubtitle(n, newTitle)
     }
+  }
+
+  peer.addChangeListener(new jevent.ChartChangeListener {
+    override def chartChanged(event: jevent.ChartChangeEvent): Unit = event match {
+      case event: jevent.PlotChangeEvent =>
+        publish(PlotChanged(Chart.this, event.getPlot))
+
+      case event: jevent.TitleChangeEvent =>
+        publish(TitleChanged(Chart.this, event.getTitle))
+
+      case event => event.getType match {
+        case jevent.ChartChangeEventType.GENERAL         => publish(ChartEvent.General(Chart.this))
+        case jevent.ChartChangeEventType.NEW_DATASET     => publish(ChartEvent.NewDataset(Chart.this))
+        case jevent.ChartChangeEventType.DATASET_UPDATED => publish(ChartEvent.DatasetUpdated(Chart.this))
+      }
+    }
+  })
+
+}
+
+/** Provides a very basic factory to turn any `JFreeChart` into a `Chart` and contains default settings. */
+object Chart extends ChartCompanion[Chart] {
+
+  override final def fromPeer(jfree: JFreeChart): Chart = new Chart {
+    type Plot = org.jfree.chart.plot.Plot
+
+    override final lazy val peer = jfree
+    override def plot: Plot = peer.getPlot
+  }
+
+  /** Contains default settings. */
+  object Default {
+
+    /** Returns the default chart height. */
+    def Height: Int = org.jfree.chart.ChartPanel.DEFAULT_HEIGHT
+
+    /** Returns the default chart width. */
+    def Width: Int = org.jfree.chart.ChartPanel.DEFAULT_WIDTH
+
+    /** Returns the default chart resolution. */
+    def Resolution: (Int,Int) = (Width,Height)
+
   }
 
 }

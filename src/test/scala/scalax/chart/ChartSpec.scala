@@ -1,8 +1,9 @@
-package scalax.chart
+package org.example
 
 import language.existentials
 
-import scalax.chart.Charting._
+import scalax.chart.api._
+
 import org.jfree.chart.plot._
 import org.jfree.chart.title.TextTitle
 
@@ -105,7 +106,7 @@ class ChartSpec extends Specification { def is = s2"""
     chart.antiAlias === true
   }
 
-  def cstchart: Chart[_] = {
+  def cstchart = {
     val chart = AreaChart(categorydataset)
     chart.peer.clearSubtitles()
     chart
@@ -364,12 +365,15 @@ class ChartSpec extends Specification { def is = s2"""
   // -----------------------------------------------------------------------------------------------
 
   def points = Vector.tabulate(2)(i ⇒ (i,i))
+  def catpoints = Vector("foo" -> points)
 
-  def bwcategorydataset = Vector.tabulate(2)(i ⇒ (i,i to i)).toBoxAndWhiskerCategoryDataset
-  def bwxydataset = Vector.tabulate(1)(i ⇒ (new java.util.Date(i.toLong * 1000),i to i)).toBoxAndWhiskerXYDataset()
-  def categorydataset = points.toCategoryDataset
-  def piedataset = points.toPieDataset
-  def tablexydataset = (for { category ← 'a' to 'b' } yield category.toString → points).toCategoryTableXYDataset
-  def xydataset = points.toXYSeriesCollection()
+  implicit val IntNumeric = Numeric.IntIsIntegral
+
+  def bwcategorydataset = Vector.tabulate(2)(i => (i,i to i))
+  def bwxydataset = Vector.tabulate(1)(i => (new java.util.Date(i.toLong * 1000),i to i))
+  def categorydataset = catpoints
+  def piedataset = points
+  def tablexydataset = catpoints
+  def xydataset = points
 
 }
