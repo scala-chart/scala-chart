@@ -10,7 +10,7 @@ Example Usage
 
 ### [sbt][]
 
-    libraryDependencies += "com.github.wookietreiber" %% "scala-chart" % "0.4.0"
+    libraryDependencies += "com.github.wookietreiber" %% "scala-chart" % "latest.integration"
 
 ### [maven][]
 
