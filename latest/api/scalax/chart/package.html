@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!DOCTYPE html >
 <html>
         <head>
           <title>chart - scalax.chart</title>
@@ -9,6 +8,11 @@
           
       <link href="../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
       <link href="../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../../lib/jquery.js" id="jquery-js"></script>
+      <script type="text/javascript" src="../../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../../lib/template.js"></script>
+      <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
+      <script type="text/javascript" src="../../lib/modernizr.custom.js"></script><script type="text/javascript" src="../../lib/diagrams.js" id="diagrams-js"></script>
       <script type="text/javascript">
          if(top === self) {
             var url = '../../index.html';
@@ -41,16 +45,27 @@
       
           <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>This package contains a library for creating and working with charts. It wraps
 <a href="http://www.jfree.org/jfreechart/" target="_blank">JFreeChart</a>, much like <code>scala.swing</code> does with the original
-<code>javax.swing</code> package. The basic starting point is to use the following imports:</p><pre><span class="kw">import</span> scalax.chart._
-<span class="kw">import</span> scalax.chart.Charting._</pre><p>With these imports you can convert Scala collections to the datasets of JFreeChart and use chart
-factories:</p><pre><span class="kw">val</span> data = <span class="std">Seq</span>((<span class="num">1</span>,<span class="num">2</span>),(<span class="num">2</span>,<span class="num">4</span>),(<span class="num">3</span>,<span class="num">6</span>),(<span class="num">4</span>,<span class="num">8</span>))
-<span class="kw">val</span> dataset = data.toXYSeriesCollection(<span class="lit">"some points"</span>)
-<span class="kw">val</span> chart = XYLineChart(dataset, title = <span class="lit">"My Chart of Some Points"</span>)</pre><p>There are also implicit conversions / views available in the <a href="views/package.html" class="extype" name="scalax.chart.views">views</a> package, but they are not
-contained by <a href="Charting.html" class="extype" name="scalax.chart.Charting">Charting</a>, because of ambiguity issues with implicit conversions.
+<code>javax.swing</code> package.</p><h4> Getting Started </h4><p>There is an <i>all you can eat</i> import providing all the high-level functionality of this
+library:</p><pre><span class="kw">import</span> scalax.chart.api._
+
+<span class="kw">val</span> data = <span class="kw">for</span> (i <span class="kw">&lt;-</span> <span class="num">1</span> to <span class="num">5</span>) <span class="kw">yield</span> (i,i)
+<span class="kw">val</span> chart = XYLineChart(data)
+chart.saveAsPNG(<span class="lit">"/tmp/chart.png"</span>)</pre><p>All of the functionality of the <a href="api$.html" class="extype" name="scalax.chart.api">api</a> object is also contained by <a href="module/Charting.html" class="extype" name="scalax.chart.module.Charting">module.Charting</a>, which
+you can either import or use as a mixin:</p><pre><span class="kw">object</span> MyChartApp <span class="kw">extends</span> <span class="std">App</span> <span class="kw">with</span> scalax.chart.module.Charting {
+<span class="kw">val</span> data = <span class="kw">for</span> (i <span class="kw">&lt;-</span> <span class="num">1</span> to <span class="num">5</span>) <span class="kw">yield</span> (i,i)
+<span class="kw">val</span> chart = XYLineChart(data)
+chart.saveAsPNG(<span class="lit">"/tmp/chart.png"</span>)
+}</pre><p>The <a href="module/package.html" class="extype" name="scalax.chart.module">module</a> package provides a la carte imports, which you can import or mix in for only
+parts of the API. To find out more about the modules in detail, have a look at the documentation
+of the <a href="module/Charting.html" class="extype" name="scalax.chart.module.Charting">module.Charting</a> module. From there on you can discover the modules one by one.
 </p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/wookietreiber/scala-chart/tree/develop/src/main/scala/scalax/chart/package.scala" target="_blank">package.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
-        </div></div>
+        </div><div class="toggleContainer block diagram-container" id="content-diagram-container">
+                <span class="toggle diagram-link">Content Hierarchy</span>
+                <a href="http://docs.scala-lang.org/overviews/scaladoc/usage.html#diagrams" target="_blank" class="diagram-help">Learn more about scaladoc diagrams</a>
+                <div class="diagram" id="content-diagram"><svg class="package-diagram" id="graph1" viewBox="0.00 0.00 967.00 158.00" height="158pt" width="967pt" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"><g transform="scale(1 1) rotate(0) translate(4 154)" class="graph" id="graph0"><polygon points="-4,4 -4,-154 963,-154 963,4 -4,4" stroke="none" fill="white"></polygon><!-- node0 --><g class="node object" id="graph1_0"><g id="a_object|graph1_0"><a xlink:title="scalax.chart.XYChart" xlink:href="XYChart$.html#inheritance-diagram"><polygon points="82.25,-26 -0.25,-26 -0.25,-0 82.25,-0 82.25,-26" stroke="#102966" fill="#3556a7"></polygon><image xlink:href="../../lib/object_diagram.png" y="-19" x="12" preserveAspectRatio="xMinYMin meet" height="12px" width="12px"></image><text fill="#ffffff" font-size="10.00" font-family="Arial" y="-10.5" x="32" text-anchor="start">XYChart</text></a></g></g><!-- node1 --><g class="node class" id="graph1_1"><g id="a_class|graph1_1"><a xlink:title="scalax.chart.XYChart" xlink:href="XYChart.html#inheritance-diagram"><polygon points="480.25,-88 397.75,-88 397.75,-62 480.25,-62 480.25,-88" stroke="#115f3b" fill="#0a955b"></polygon><image xlink:href="../../lib/class_diagram.png" y="-81" x="410" preserveAspectRatio="xMinYMin meet" height="12px" width="12px"></image><text fill="#ffffff" font-size="10.00" font-family="Arial" y="-72.5" x="430" text-anchor="start">XYChart</text></a></g></g><!-- node2 --><g class="node object" id="graph1_2"><g id="a_object|graph1_2"><a xlink:title="scalax.chart.RingChart" xlink:href="RingChart$.html#inheritance-diagram"><polygon points="191,-26 101,-26 101,-0 191,-0 191,-26" stroke="#102966" fill="#3556a7"></polygon><image xlink:href="../../lib/object_diagram.png" y="-19" x="113" preserveAspectRatio="xMinYMin meet" height="12px" width="12px"></image><text fill="#ffffff" font-size="10.00" font-family="Arial" y="-10.5" x="133" text-anchor="start">RingChart</text></a></g></g><!-- node3 --><g class="node class" id="graph1_3"><g id="a_class|graph1_3"><a xlink:title="scalax.chart.RingChart" xlink:href="RingChart.html#inheritance-diagram"><polygon points="589,-88 499,-88 499,-62 589,-62 589,-88" stroke="#115f3b" fill="#0a955b"></polygon><image xlink:href="../../lib/class_diagram.png" y="-81" x="511" preserveAspectRatio="xMinYMin meet" height="12px" width="12px"></image><text fill="#ffffff" font-size="10.00" font-family="Arial" y="-72.5" x="531" text-anchor="start">RingChart</text></a></g></g><!-- node4 --><g class="node object" id="graph1_4"><g id="a_object|graph1_4"><a xlink:title="scalax.chart.PieChart" xlink:href="PieChart$.html#inheritance-diagram"><polygon points="294.25,-26 209.75,-26 209.75,-0 294.25,-0 294.25,-26" stroke="#102966" fill="#3556a7"></polygon><image xlink:href="../../lib/object_diagram.png" y="-19" x="222" preserveAspectRatio="xMinYMin meet" height="12px" width="12px"></image><text fill="#ffffff" font-size="10.00" font-family="Arial" y="-10.5" x="242" text-anchor="start">PieChart</text></a></g></g><!-- node5 --><g class="node class" id="graph1_5"><g id="a_class|graph1_5"><a xlink:title="scalax.chart.PieChart" xlink:href="PieChart.html#inheritance-diagram"><polygon points="692.25,-88 607.75,-88 607.75,-62 692.25,-62 692.25,-88" stroke="#115f3b" fill="#0a955b"></polygon><image xlink:href="../../lib/class_diagram.png" y="-81" x="620" preserveAspectRatio="xMinYMin meet" height="12px" width="12px"></image><text fill="#ffffff" font-size="10.00" font-family="Arial" y="-72.5" x="640" text-anchor="start">PieChart</text></a></g></g><!-- node6 --><g class="node object" id="graph1_6"><g id="a_object|graph1_6"><a xlink:title="scalax.chart.MultiplePieChart" xlink:href="MultiplePieChart$.html#inheritance-diagram"><polygon points="431,-26 313,-26 313,-0 431,-0 431,-26" stroke="#102966" fill="#3556a7"></polygon><image xlink:href="../../lib/object_diagram.png" y="-19" x="325" preserveAspectRatio="xMinYMin meet" height="12px" width="12px"></image><text fill="#ffffff" font-size="10.00" font-family="Arial" y="-10.5" x="345" text-anchor="start">MultiplePieChart</text></a></g></g><!-- node7 --><g class="node class" id="graph1_7"><g id="a_class|graph1_7"><a xlink:title="scalax.chart.MultiplePieChart" xlink:href="MultiplePieChart.html#inheritance-diagram"><polygon points="829,-88 711,-88 711,-62 829,-62 829,-88" stroke="#115f3b" fill="#0a955b"></polygon><image xlink:href="../../lib/class_diagram.png" y="-81" x="723" preserveAspectRatio="xMinYMin meet" height="12px" width="12px"></image><text fill="#ffffff" font-size="10.00" font-family="Arial" y="-72.5" x="743" text-anchor="start">MultiplePieChart</text></a></g></g><!-- node8 --><g class="node trait" id="graph1_8"><g id="a_trait|graph1_8"><a xlink:title="scalax.chart.DocMacros" xlink:href="DocMacros.html#inheritance-diagram"><polygon points="360.5,-150 263.5,-150 263.5,-124 360.5,-124 360.5,-150" stroke="#37657d" fill="#498aad"></polygon><image xlink:href="../../lib/trait_diagram.png" y="-143" x="275" preserveAspectRatio="xMinYMin meet" height="12px" width="12px"></image><text fill="#ffffff" font-size="10.00" font-family="Arial" y="-134.5" x="295" text-anchor="start">DocMacros</text></a></g></g><!-- node9 --><g class="node class" id="graph1_9"><g id="a_class|graph1_9"><a xlink:title="scalax.chart.ChartCompanion" xlink:href="ChartCompanion.html#inheritance-diagram"><polygon points="379.25,-88 244.75,-88 244.75,-62 379.25,-62 379.25,-88" stroke="#115f3b" fill="#0a955b"></polygon><image xlink:href="../../lib/class_diagram.png" y="-81" x="257" preserveAspectRatio="xMinYMin meet" height="12px" width="12px"></image><text fill="#ffffff" font-size="10.00" font-family="Arial" y="-72.5" x="277" text-anchor="start">ChartCompanion[C]</text></a></g></g><!-- node8&#45;&gt;node9 --><g class="edge inheritance" id="graph1_8_9"><g id="a_inheritance|graph1_8_9"><a xlink:title="ChartCompanion[C] is a subtype of DocMacros"><path d="M312,-118.683C312,-108.896 312,-96.9026 312,-88.1238" stroke="#d4d4d4" fill="none"></path><polygon points="310.25,-118.858 312,-123.858 313.75,-118.858 310.25,-118.858" stroke="#d4d4d4" fill="none"></polygon></a></g></g><!-- node9&#45;&gt;node0 --><g class="edge inheritance" id="graph1_9_0"><g id="a_inheritance|graph1_9_0"><a xlink:title="XYChart is a subtype of ChartCompanion[C]"><path d="M250.396,-60.8396C206.255,-51.3414 145.414,-38.1101 92,-26 88.8952,-25.2961 85.6861,-24.5603 82.4592,-23.8146" stroke="#d4d4d4" fill="none"></path><polygon points="250.168,-62.5805 255.424,-61.9209 250.904,-59.1587 250.168,-62.5805" stroke="#d4d4d4" fill="none"></polygon></a></g></g><!-- node9&#45;&gt;node2 --><g class="edge inheritance" id="graph1_9_2"><g id="a_inheritance|graph1_9_2"><a xlink:title="RingChart is a subtype of ChartCompanion[C]"><path d="M273.558,-60.1054C245.016,-49.7889 206.482,-35.8609 179.259,-26.0213" stroke="#d4d4d4" fill="none"></path><polygon points="273.11,-61.8042 278.407,-61.8581 274.3,-58.5126 273.11,-61.8042" stroke="#d4d4d4" fill="none"></polygon></a></g></g><!-- node9&#45;&gt;node4 --><g class="edge inheritance" id="graph1_9_4"><g id="a_inheritance|graph1_9_4"><a xlink:title="PieChart is a subtype of ChartCompanion[C]"><path d="M296.292,-58.2924C286.239,-48.2386 273.39,-35.3904 264.124,-26.1238" stroke="#d4d4d4" fill="none"></path><polygon points="295.085,-59.56 299.858,-61.8581 297.56,-57.0851 295.085,-59.56" stroke="#d4d4d4" fill="none"></polygon></a></g></g><!-- node9&#45;&gt;node6 --><g class="edge inheritance" id="graph1_9_6"><g id="a_inheritance|graph1_9_6"><a xlink:title="MultiplePieChart is a subtype of ChartCompanion[C]"><path d="M327.708,-58.2924C337.761,-48.2386 350.61,-35.3904 359.876,-26.1238" stroke="#d4d4d4" fill="none"></path><polygon points="326.44,-57.0851 324.142,-61.8581 328.915,-59.56 326.44,-57.0851" stroke="#d4d4d4" fill="none"></polygon></a></g></g><!-- node10 --><g class="node object" id="graph1_10"><g id="a_object|graph1_10"><a xlink:title="scalax.chart.Chart" xlink:href="Chart$.html#inheritance-diagram"><polygon points="519,-26 449,-26 449,-0 519,-0 519,-26" stroke="#102966" fill="#3556a7"></polygon><image xlink:href="../../lib/object_diagram.png" y="-19" x="461" preserveAspectRatio="xMinYMin meet" height="12px" width="12px"></image><text fill="#ffffff" font-size="10.00" font-family="Arial" y="-10.5" x="481" text-anchor="start">Chart</text></a></g></g><!-- node9&#45;&gt;node10 --><g class="edge inheritance" id="graph1_9_10"><g id="a_inheritance|graph1_9_10"><a xlink:title="Chart is a subtype of ChartCompanion[C]"><path d="M351.831,-60.1054C381.405,-49.7889 421.332,-35.8609 449.539,-26.0213" stroke="#d4d4d4" fill="none"></path><polygon points="350.951,-58.5588 346.807,-61.8581 352.104,-61.8635 350.951,-58.5588" stroke="#d4d4d4" fill="none"></polygon></a></g></g><!-- node12 --><g class="node object" id="graph1_12"><g id="a_object|graph1_12"><a xlink:title="scalax.chart.CategoryChart" xlink:href="CategoryChart$.html#inheritance-diagram"><polygon points="648.5,-26 537.5,-26 537.5,-0 648.5,-0 648.5,-26" stroke="#102966" fill="#3556a7"></polygon><image xlink:href="../../lib/object_diagram.png" y="-19" x="549" preserveAspectRatio="xMinYMin meet" height="12px" width="12px"></image><text fill="#ffffff" font-size="10.00" font-family="Arial" y="-10.5" x="569" text-anchor="start">CategoryChart</text></a></g></g><!-- node9&#45;&gt;node12 --><g class="edge inheritance" id="graph1_9_12"><g id="a_inheritance|graph1_9_12"><a xlink:title="CategoryChart is a subtype of ChartCompanion[C]"><path d="M373.481,-60.8723C422.233,-50.4628 489.793,-36.0371 537.044,-25.948" stroke="#d4d4d4" fill="none"></path><polygon points="373.051,-59.1747 368.527,-61.9303 373.782,-62.5975 373.051,-59.1747" stroke="#d4d4d4" fill="none"></polygon></a></g></g><!-- node11 --><g class="node class" id="graph1_11"><g id="a_class|graph1_11"><a xlink:title="scalax.chart.Chart" xlink:href="Chart.html#inheritance-diagram"><polygon points="685,-150 615,-150 615,-124 685,-124 685,-150" stroke="#115f3b" fill="#0a955b"></polygon><image xlink:href="../../lib/class_diagram.png" y="-143" x="627" preserveAspectRatio="xMinYMin meet" height="12px" width="12px"></image><text fill="#ffffff" font-size="10.00" font-family="Arial" y="-134.5" x="647" text-anchor="start">Chart</text></a></g></g><!-- node11&#45;&gt;node1 --><g class="edge inheritance" id="graph1_11_1"><g id="a_inheritance|graph1_11_1"><a xlink:title="XYChart is a subtype of Chart"><path d="M609.806,-124.571C572.78,-114.042 518.065,-98.4829 480.599,-87.8292" stroke="#d4d4d4" fill="none"></path><polygon points="609.395,-126.273 614.683,-125.957 610.353,-122.906 609.395,-126.273" stroke="#d4d4d4" fill="none"></polygon></a></g></g><!-- node11&#45;&gt;node3 --><g class="edge inheritance" id="graph1_11_3"><g id="a_inheritance|graph1_11_3"><a xlink:title="RingChart is a subtype of Chart"><path d="M624.101,-121.34C606.089,-111.145 582.364,-97.7155 565.419,-88.1238" stroke="#d4d4d4" fill="none"></path><polygon points="623.336,-122.918 628.549,-123.858 625.06,-119.872 623.336,-122.918" stroke="#d4d4d4" fill="none"></polygon></a></g></g><!-- node11&#45;&gt;node5 --><g class="edge inheritance" id="graph1_11_5"><g id="a_inheritance|graph1_11_5"><a xlink:title="PieChart is a subtype of Chart"><path d="M650,-118.683C650,-108.896 650,-96.9026 650,-88.1238" stroke="#d4d4d4" fill="none"></path><polygon points="648.25,-118.858 650,-123.858 651.75,-118.858 648.25,-118.858" stroke="#d4d4d4" fill="none"></polygon></a></g></g><!-- node11&#45;&gt;node7 --><g class="edge inheritance" id="graph1_11_7"><g id="a_inheritance|graph1_11_7"><a xlink:title="MultiplePieChart is a subtype of Chart"><path d="M678.803,-121.599C699.255,-111.373 726.406,-97.7968 745.752,-88.1238" stroke="#d4d4d4" fill="none"></path><polygon points="677.973,-120.057 674.284,-123.858 679.539,-123.187 677.973,-120.057" stroke="#d4d4d4" fill="none"></polygon></a></g></g><!-- node13 --><g class="node class" id="graph1_13"><g id="a_class|graph1_13"><a xlink:title="scalax.chart.CategoryChart" xlink:href="CategoryChart.html#inheritance-diagram"><polygon points="958.5,-88 847.5,-88 847.5,-62 958.5,-62 958.5,-88" stroke="#115f3b" fill="#0a955b"></polygon><image xlink:href="../../lib/class_diagram.png" y="-81" x="859" preserveAspectRatio="xMinYMin meet" height="12px" width="12px"></image><text fill="#ffffff" font-size="10.00" font-family="Arial" y="-72.5" x="879" text-anchor="start">CategoryChart</text></a></g></g><!-- node11&#45;&gt;node13 --><g class="edge inheritance" id="graph1_11_13"><g id="a_inheritance|graph1_11_13"><a xlink:title="CategoryChart is a subtype of Chart"><path d="M690.124,-126.484C733.942,-116.093 804.227,-99.4245 851.944,-88.108" stroke="#d4d4d4" fill="none"></path><polygon points="689.64,-124.801 685.179,-127.657 690.447,-128.206 689.64,-124.801" stroke="#d4d4d4" fill="none"></polygon></a></g></g></g></svg></div>
+              </div></div>
         
 
       <div id="mbrsel">
@@ -89,374 +104,123 @@ contained by <a href="Charting.html" class="extype" name="scalax.chart.Charting"
 
         <div id="types" class="types members">
               <h3>Type Members</h3>
-              <ol><li name="scalax.chart.CategoryChart" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="CategoryChartextendsChart[scalax.chart.Imports.CategoryPlot]withOrientablewithDomainAxiswithRangeAxiswithLabels[(org.jfree.data.category.CategoryDataset,Int,Int)=&gt;String]withTooltips[(org.jfree.data.category.CategoryDataset,Int,Int)=&gt;String]"></a>
+              <ol><li name="scalax.chart.Axis" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="AxisextendsAnyRef"></a>
+      <a id="Axis:Axis"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="Axis.html"><span class="name">Axis</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <p class="comment cmt">Represents a line of reference.</p>
+    </li><li name="scalax.chart.CategoryChart" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="CategoryChartextendsChartwithOrientablewithLabels[scalax.chart.module.CategoryToolTipGenerators.CategoryLabelGenerator]withTooltips[scalax.chart.module.CategoryToolTipGenerators.CategoryToolTipGenerator]"></a>
       <a id="CategoryChart:CategoryChart"></a>
       <h4 class="signature">
       <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">trait</span>
+        <span class="modifier">abstract </span>
+        <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <a href="CategoryChart.html"><span class="name">CategoryChart</span></a><span class="result"> extends <a href="Chart.html" class="extype" name="scalax.chart.Chart">Chart</a>[<a href="Imports$.html#CategoryPlot=org.jfree.chart.plot.CategoryPlot" class="extmbr" name="scalax.chart.Imports.CategoryPlot">chart.Imports.CategoryPlot</a>] with <span class="extype" name="scala.swing.Orientable">Orientable</span> with <a href="DomainAxis.html" class="extype" name="scalax.chart.DomainAxis">DomainAxis</a> with <a href="RangeAxis.html" class="extype" name="scalax.chart.RangeAxis">RangeAxis</a> with <a href="Labels.html" class="extype" name="scalax.chart.Labels">Labels</a>[(<span class="extype" name="org.jfree.data.category.CategoryDataset">CategoryDataset</span>, <span class="extype" name="scala.Int">Int</span>, <span class="extype" name="scala.Int">Int</span>) ⇒ <span class="extype" name="scala.Predef.String">String</span>] with <a href="Tooltips.html" class="extype" name="scalax.chart.Tooltips">Tooltips</a>[(<span class="extype" name="org.jfree.data.category.CategoryDataset">CategoryDataset</span>, <span class="extype" name="scala.Int">Int</span>, <span class="extype" name="scala.Int">Int</span>) ⇒ <span class="extype" name="scala.Predef.String">String</span>]</span>
+        <a href="CategoryChart.html"><span class="name">CategoryChart</span></a><span class="result"> extends <a href="Chart.html" class="extype" name="scalax.chart.Chart">Chart</a> with <span class="extype" name="scala.swing.Orientable">Orientable</span> with <span class="extype" name="scalax.chart.Labels">Labels</span>[<a href="module/CategoryToolTipGenerators$.html#CategoryLabelGenerator=(Imports.this.CategoryDataset,Comparable[_],Comparable[_])=&gt;String" class="extmbr" name="scalax.chart.module.CategoryToolTipGenerators.CategoryLabelGenerator">chart.module.CategoryToolTipGenerators.CategoryLabelGenerator</a>] with <span class="extype" name="scalax.chart.Tooltips">Tooltips</span>[<a href="module/CategoryToolTipGenerators$.html#CategoryToolTipGenerator=(Imports.this.CategoryDataset,Comparable[_],Comparable[_])=&gt;String" class="extmbr" name="scalax.chart.module.CategoryToolTipGenerators.CategoryToolTipGenerator">chart.module.CategoryToolTipGenerators.CategoryToolTipGenerator</a>]</span>
       </span>
       </h4>
       <p class="comment cmt">Represents categorized numeric data.</p>
-    </li><li name="scalax.chart.CategoryItemLabelGenerator" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="CategoryItemLabelGenerator=(org.jfree.data.category.CategoryDataset,Int,Int)=&gt;String"></a>
-      <a id="CategoryItemLabelGenerator:(CategoryDataset,Int,Int)⇒String"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">type</span>
-      </span>
-      <span class="symbol">
-        <span class="name">CategoryItemLabelGenerator</span><span class="result"> = (<span class="extype" name="org.jfree.data.category.CategoryDataset">CategoryDataset</span>, <span class="extype" name="scala.Int">Int</span>, <span class="extype" name="scala.Int">Int</span>) ⇒ <span class="extype" name="scala.Predef.String">String</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Function alias for creating item labels for <a href="CategoryChart.html" class="extype" name="scalax.chart.CategoryChart">CategoryChart</a>s.</p>
-    </li><li name="scalax.chart.CategoryToolTipGenerator" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="CategoryToolTipGenerator=(org.jfree.data.category.CategoryDataset,Int,Int)=&gt;String"></a>
-      <a id="CategoryToolTipGenerator:(CategoryDataset,Int,Int)⇒String"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">type</span>
-      </span>
-      <span class="symbol">
-        <span class="name">CategoryToolTipGenerator</span><span class="result"> = (<span class="extype" name="org.jfree.data.category.CategoryDataset">CategoryDataset</span>, <span class="extype" name="scala.Int">Int</span>, <span class="extype" name="scala.Int">Int</span>) ⇒ <span class="extype" name="scala.Predef.String">String</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Function alias for creating tooltips for <a href="CategoryChart.html" class="extype" name="scalax.chart.CategoryChart">CategoryChart</a>s.</p>
     </li><li name="scalax.chart.Chart" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="Chart[P&lt;:org.jfree.chart.plot.Plot]extendsDisplayableChartwithStorableChart"></a>
-      <a id="Chart[P&lt;:Plot]:Chart[P]"></a>
+      <a id="ChartextendsDisplayableChartwithPublisher"></a>
+      <a id="Chart:Chart"></a>
       <h4 class="signature">
       <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">trait</span>
+        <span class="modifier">abstract </span>
+        <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <a href="Chart.html"><span class="name">Chart</span></a><span class="tparams">[<span name="P">P &lt;: <span class="extype" name="org.jfree.chart.plot.Plot">Plot</span></span>]</span><span class="result"> extends <a href="DisplayableChart.html" class="extype" name="scalax.chart.DisplayableChart">DisplayableChart</a> with <a href="StorableChart.html" class="extype" name="scalax.chart.StorableChart">StorableChart</a></span>
+        <a href="Chart.html"><span class="name">Chart</span></a><span class="result"> extends <span class="extype" name="scalax.chart.DisplayableChart">DisplayableChart</span> with <span class="extype" name="scala.swing.Publisher">Publisher</span></span>
       </span>
       </h4>
       <p class="comment cmt">Generic graphical representation of data.</p>
-    </li><li name="scalax.chart.ChartFactories" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="ChartFactoriesextendsAnyRef"></a>
-      <a id="ChartFactories:ChartFactories"></a>
+    </li><li name="scalax.chart.ChartCompanion" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="ChartCompanion[C&lt;:scalax.chart.Chart]extendsDocMacros"></a>
+      <a id="ChartCompanion[C&lt;:Chart]:ChartCompanion[C]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="ChartCompanion.html"><span class="name">ChartCompanion</span></a><span class="tparams">[<span name="C">C &lt;: <a href="Chart.html" class="extype" name="scalax.chart.Chart">Chart</a></span>]</span><span class="result"> extends <a href="DocMacros.html" class="extype" name="scalax.chart.DocMacros">DocMacros</a></span>
+      </span>
+      </h4>
+      <p class="comment cmt">A template class for companion objects of <a href="Chart.html" class="extype" name="scalax.chart.Chart">Chart</a> classes.</p>
+    </li><li name="scalax.chart.DocMacros" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="DocMacrosextendsAny"></a>
+      <a id="DocMacros:DocMacros"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">trait</span>
       </span>
       <span class="symbol">
-        <a href="ChartFactories.html"><span class="name">ChartFactories</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+        <a href="DocMacros.html"><span class="name">DocMacros</span></a><span class="result"> extends <span class="extype" name="scala.Any">Any</span></span>
       </span>
       </h4>
-      <p class="comment cmt">Contains various factories to conveniently create charts.</p>
-    </li><li name="scalax.chart.Charting" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="ChartingextendsRichChartingCollectionswithChartFactorieswithRichChartwithImports"></a>
-      <a id="Charting:Charting"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">trait</span>
-      </span>
-      <span class="symbol">
-        <a href="Charting.html"><span class="name">Charting</span></a><span class="result"> extends <a href="RichChartingCollections.html" class="extype" name="scalax.chart.RichChartingCollections">RichChartingCollections</a> with <a href="ChartFactories.html" class="extype" name="scalax.chart.ChartFactories">ChartFactories</a> with <a href="RichChart.html" class="extype" name="scalax.chart.RichChart">RichChart</a> with <a href="Imports.html" class="extype" name="scalax.chart.Imports">Imports</a></span>
-      </span>
-      </h4>
-      <p class="comment cmt">Contains all enrichments.</p>
-    </li><li name="scalax.chart.DisplayableChart" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="DisplayableChartextendsAnyRef"></a>
-      <a id="DisplayableChart:DisplayableChart"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">trait</span>
-      </span>
-      <span class="symbol">
-        <a href="DisplayableChart.html"><span class="name">DisplayableChart</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
-      </span>
-      </h4>
-      <p class="comment cmt">Provides methods for both displaying a chart and integrating it into the
-<a href="http://www.scala-lang.org/api/current/index.html#scala.swing.package" target="_blank">Scala Swing UI
-framework</a>.</p>
-    </li><li name="scalax.chart.DomainAxis" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="DomainAxisextendsAnyRef"></a>
-      <a id="DomainAxis:DomainAxis"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">trait</span>
-      </span>
-      <span class="symbol">
-        <a href="DomainAxis.html"><span class="name">DomainAxis</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
-      </span>
-      </h4>
-      <p class="comment cmt">Mixin for charts with a domain axis.</p>
-    </li><li name="scalax.chart.EncodableChart" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="EncodableChartextendsAnyRef"></a>
-      <a id="EncodableChart:EncodableChart"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">trait</span>
-      </span>
-      <span class="symbol">
-        <a href="EncodableChart.html"><span class="name">EncodableChart</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
-      </span>
-      </h4>
-      <p class="comment cmt">Provides methods for encoding a chart.</p>
-    </li><li name="scalax.chart.Imports" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="ImportsextendsTypeImportswithStaticForwarderImports"></a>
-      <a id="Imports:Imports"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">trait</span>
-      </span>
-      <span class="symbol">
-        <a href="Imports.html"><span class="name">Imports</span></a><span class="result"> extends <a href="TypeImports.html" class="extype" name="scalax.chart.TypeImports">TypeImports</a> with <a href="StaticForwarderImports.html" class="extype" name="scalax.chart.StaticForwarderImports">StaticForwarderImports</a></span>
-      </span>
-      </h4>
-      <p class="comment cmt">Contains imports from foreign packages.</p>
-    </li><li name="scalax.chart.Labels" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="Labels[G]extendsAnyRef"></a>
-      <a id="Labels[G]:Labels[G]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">trait</span>
-      </span>
-      <span class="symbol">
-        <a href="Labels.html"><span class="name">Labels</span></a><span class="tparams">[<span name="G">G</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
-      </span>
-      </h4>
-      <p class="comment cmt">Mixin for charts which may display labels.</p>
+      <p class="comment cmt">Mixin solely for the purpose of providing common documentation macros.</p>
     </li><li name="scalax.chart.MultiplePieChart" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="MultiplePieChartextendsChart[org.jfree.chart.plot.MultiplePiePlot]withLabels[(org.jfree.data.general.PieDataset,Comparable[_])=&gt;String]withTooltips[(org.jfree.data.general.PieDataset,Comparable[_])=&gt;String]"></a>
+      <a id="MultiplePieChartextendsChartwithLabels[scalax.chart.module.CategoryDatasetConversions.PieLabelGenerator]withTooltips[scalax.chart.module.CategoryDatasetConversions.PieToolTipGenerator]"></a>
       <a id="MultiplePieChart:MultiplePieChart"></a>
       <h4 class="signature">
       <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">trait</span>
+        <span class="modifier">abstract </span>
+        <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <a href="MultiplePieChart.html"><span class="name">MultiplePieChart</span></a><span class="result"> extends <a href="Chart.html" class="extype" name="scalax.chart.Chart">Chart</a>[<span class="extype" name="org.jfree.chart.plot.MultiplePiePlot">MultiplePiePlot</span>] with <a href="Labels.html" class="extype" name="scalax.chart.Labels">Labels</a>[(<span class="extype" name="org.jfree.data.general.PieDataset">PieDataset</span>, <span class="extype" name="java.lang.Comparable">Comparable</span>[_]) ⇒ <span class="extype" name="scala.Predef.String">String</span>] with <a href="Tooltips.html" class="extype" name="scalax.chart.Tooltips">Tooltips</a>[(<span class="extype" name="org.jfree.data.general.PieDataset">PieDataset</span>, <span class="extype" name="java.lang.Comparable">Comparable</span>[_]) ⇒ <span class="extype" name="scala.Predef.String">String</span>]</span>
+        <a href="MultiplePieChart.html"><span class="name">MultiplePieChart</span></a><span class="result"> extends <a href="Chart.html" class="extype" name="scalax.chart.Chart">Chart</a> with <span class="extype" name="scalax.chart.Labels">Labels</span>[<a href="module/CategoryDatasetConversions$.html#PieLabelGenerator=(Imports.this.PieDataset,Comparable[_])=&gt;String" class="extmbr" name="scalax.chart.module.CategoryDatasetConversions.PieLabelGenerator">chart.module.CategoryDatasetConversions.PieLabelGenerator</a>] with <span class="extype" name="scalax.chart.Tooltips">Tooltips</span>[<a href="module/CategoryDatasetConversions$.html#PieToolTipGenerator=(Imports.this.PieDataset,Comparable[_])=&gt;String" class="extmbr" name="scalax.chart.module.CategoryDatasetConversions.PieToolTipGenerator">chart.module.CategoryDatasetConversions.PieToolTipGenerator</a>]</span>
       </span>
       </h4>
       <p class="comment cmt">Represents categorized numeric data with multiple pies.</p>
     </li><li name="scalax.chart.PieChart" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="PieChartextendsChart[scalax.chart.Imports.PiePlot]withPieChartLike[scalax.chart.Imports.PiePlot]"></a>
+      <a id="PieChartextendsChartwithPieChartLike"></a>
       <a id="PieChart:PieChart"></a>
       <h4 class="signature">
       <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">trait</span>
+        <span class="modifier">abstract </span>
+        <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <a href="PieChart.html"><span class="name">PieChart</span></a><span class="result"> extends <a href="Chart.html" class="extype" name="scalax.chart.Chart">Chart</a>[<a href="Imports$.html#PiePlot=org.jfree.chart.plot.PiePlot" class="extmbr" name="scalax.chart.Imports.PiePlot">chart.Imports.PiePlot</a>] with <a href="PieChartLike.html" class="extype" name="scalax.chart.PieChartLike">PieChartLike</a>[<a href="Imports$.html#PiePlot=org.jfree.chart.plot.PiePlot" class="extmbr" name="scalax.chart.Imports.PiePlot">chart.Imports.PiePlot</a>]</span>
+        <a href="PieChart.html"><span class="name">PieChart</span></a><span class="result"> extends <a href="Chart.html" class="extype" name="scalax.chart.Chart">Chart</a> with <span class="extype" name="scalax.chart.PieChartLike">PieChartLike</span></span>
       </span>
       </h4>
       <p class="comment cmt">Represents categorized numeric data with a pie.</p>
-    </li><li name="scalax.chart.PieChartLike" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="PieChartLike[P&lt;:scalax.chart.Imports.PiePlot]extendsLabels[(org.jfree.data.general.PieDataset,Comparable[_])=&gt;String]withTooltips[(org.jfree.data.general.PieDataset,Comparable[_])=&gt;String]"></a>
-      <a id="PieChartLike[P&lt;:chart.Imports.PiePlot]:PieChartLike[P]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">trait</span>
-      </span>
-      <span class="symbol">
-        <a href="PieChartLike.html"><span class="name">PieChartLike</span></a><span class="tparams">[<span name="P">P &lt;: <a href="Imports$.html#PiePlot=org.jfree.chart.plot.PiePlot" class="extmbr" name="scalax.chart.Imports.PiePlot">chart.Imports.PiePlot</a></span>]</span><span class="result"> extends <a href="Labels.html" class="extype" name="scalax.chart.Labels">Labels</a>[(<span class="extype" name="org.jfree.data.general.PieDataset">PieDataset</span>, <span class="extype" name="java.lang.Comparable">Comparable</span>[_]) ⇒ <span class="extype" name="scala.Predef.String">String</span>] with <a href="Tooltips.html" class="extype" name="scalax.chart.Tooltips">Tooltips</a>[(<span class="extype" name="org.jfree.data.general.PieDataset">PieDataset</span>, <span class="extype" name="java.lang.Comparable">Comparable</span>[_]) ⇒ <span class="extype" name="scala.Predef.String">String</span>]</span>
-      </span>
-      </h4>
-      <p class="comment cmt">Template trait for pie charts.</p>
-    </li><li name="scalax.chart.PieSectionLabelGenerator" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="PieSectionLabelGenerator=(org.jfree.data.general.PieDataset,Comparable[_])=&gt;String"></a>
-      <a id="PieSectionLabelGenerator:(PieDataset,Comparable[_])⇒String"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">type</span>
-      </span>
-      <span class="symbol">
-        <span class="name">PieSectionLabelGenerator</span><span class="result"> = (<span class="extype" name="org.jfree.data.general.PieDataset">PieDataset</span>, <span class="extype" name="java.lang.Comparable">Comparable</span>[_]) ⇒ <span class="extype" name="scala.Predef.String">String</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Function alias for creating item labels for <a href="PieChartLike.html" class="extype" name="scalax.chart.PieChartLike">PieChartLike</a> charts.</p>
-    </li><li name="scalax.chart.PieToolTipGenerator" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="PieToolTipGenerator=(org.jfree.data.general.PieDataset,Comparable[_])=&gt;String"></a>
-      <a id="PieToolTipGenerator:(PieDataset,Comparable[_])⇒String"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">type</span>
-      </span>
-      <span class="symbol">
-        <span class="name">PieToolTipGenerator</span><span class="result"> = (<span class="extype" name="org.jfree.data.general.PieDataset">PieDataset</span>, <span class="extype" name="java.lang.Comparable">Comparable</span>[_]) ⇒ <span class="extype" name="scala.Predef.String">String</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Function alias for creating tooltips for <a href="PieChartLike.html" class="extype" name="scalax.chart.PieChartLike">PieChartLike</a> charts.</p>
-    </li><li name="scalax.chart.RangeAxis" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="RangeAxisextendsAnyRef"></a>
-      <a id="RangeAxis:RangeAxis"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">trait</span>
-      </span>
-      <span class="symbol">
-        <a href="RangeAxis.html"><span class="name">RangeAxis</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
-      </span>
-      </h4>
-      <p class="comment cmt">Mixin for charts with a range axis.</p>
-    </li><li name="scalax.chart.RichChart" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="RichChartextendsAnyRef"></a>
-      <a id="RichChart:RichChart"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">trait</span>
-      </span>
-      <span class="symbol">
-        <a href="RichChart.html"><span class="name">RichChart</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
-      </span>
-      </h4>
-      <p class="comment cmt">Contains an enriched <code>JFreeChart</code> that provides convenient access to
-e.</p>
-    </li><li name="scalax.chart.RichChartingCollections" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="RichChartingCollectionsextendsAnyRef"></a>
-      <a id="RichChartingCollections:RichChartingCollections"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">trait</span>
-      </span>
-      <span class="symbol">
-        <a href="RichChartingCollections.html"><span class="name">RichChartingCollections</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
-      </span>
-      </h4>
-      <p class="comment cmt">Contains enrichments for collections for conversions to
-datasets.</p>
     </li><li name="scalax.chart.RingChart" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="RingChartextendsChart[org.jfree.chart.plot.RingPlot]withPieChartLike[org.jfree.chart.plot.RingPlot]"></a>
+      <a id="RingChartextendsChartwithPieChartLike"></a>
       <a id="RingChart:RingChart"></a>
       <h4 class="signature">
       <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">trait</span>
+        <span class="modifier">abstract </span>
+        <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <a href="RingChart.html"><span class="name">RingChart</span></a><span class="result"> extends <a href="Chart.html" class="extype" name="scalax.chart.Chart">Chart</a>[<span class="extype" name="org.jfree.chart.plot.RingPlot">RingPlot</span>] with <a href="PieChartLike.html" class="extype" name="scalax.chart.PieChartLike">PieChartLike</a>[<span class="extype" name="org.jfree.chart.plot.RingPlot">RingPlot</span>]</span>
+        <a href="RingChart.html"><span class="name">RingChart</span></a><span class="result"> extends <a href="Chart.html" class="extype" name="scalax.chart.Chart">Chart</a> with <span class="extype" name="scalax.chart.PieChartLike">PieChartLike</span></span>
       </span>
       </h4>
       <p class="comment cmt">Represents categorized numeric data with a ring.</p>
-    </li><li name="scalax.chart.StaticForwarderImports" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="StaticForwarderImportsextendsAnyRef"></a>
-      <a id="StaticForwarderImports:StaticForwarderImports"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">trait</span>
-      </span>
-      <span class="symbol">
-        <a href="StaticForwarderImports.html"><span class="name">StaticForwarderImports</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
-      </span>
-      </h4>
-      <p class="comment cmt">Contains only the static forwarder imports from foreign packages.</p>
-    </li><li name="scalax.chart.StorableChart" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="StorableChartextendsWritableChart"></a>
-      <a id="StorableChart:StorableChart"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">trait</span>
-      </span>
-      <span class="symbol">
-        <a href="StorableChart.html"><span class="name">StorableChart</span></a><span class="result"> extends <a href="WritableChart.html" class="extype" name="scalax.chart.WritableChart">WritableChart</a></span>
-      </span>
-      </h4>
-      <p class="comment cmt">Provides methods for saving a chart.</p>
-    </li><li name="scalax.chart.Tooltips" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="Tooltips[G]extendsAnyRef"></a>
-      <a id="Tooltips[G]:Tooltips[G]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">trait</span>
-      </span>
-      <span class="symbol">
-        <a href="Tooltips.html"><span class="name">Tooltips</span></a><span class="tparams">[<span name="G">G</span>]</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
-      </span>
-      </h4>
-      <p class="comment cmt">Mixin for charts which may display tooltips.</p>
-    </li><li name="scalax.chart.TypeImports" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="TypeImportsextendsAnyRef"></a>
-      <a id="TypeImports:TypeImports"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">trait</span>
-      </span>
-      <span class="symbol">
-        <a href="TypeImports.html"><span class="name">TypeImports</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
-      </span>
-      </h4>
-      <p class="comment cmt">Contains only the type imports from foreign packages.</p>
-    </li><li name="scalax.chart.WritableChart" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="WritableChartextendsEncodableChart"></a>
-      <a id="WritableChart:WritableChart"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">trait</span>
-      </span>
-      <span class="symbol">
-        <a href="WritableChart.html"><span class="name">WritableChart</span></a><span class="result"> extends <a href="EncodableChart.html" class="extype" name="scalax.chart.EncodableChart">EncodableChart</a></span>
-      </span>
-      </h4>
-      <p class="comment cmt">Provides methods for writing a chart to an <code>OutputStream</code>.</p>
     </li><li name="scalax.chart.XYChart" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="XYChartextendsChart[scalax.chart.Imports.XYPlot]withOrientablewithDomainAxiswithRangeAxiswithLabels[(org.jfree.data.xy.XYDataset,Int,Int)=&gt;String]withTooltips[(org.jfree.data.xy.XYDataset,Int,Int)=&gt;String]"></a>
+      <a id="XYChartextendsChartwithOrientablewithLabels[scalax.chart.module.XYToolTipGenerators.XYLabelGenerator]withTooltips[scalax.chart.module.XYToolTipGenerators.XYToolTipGenerator]"></a>
       <a id="XYChart:XYChart"></a>
       <h4 class="signature">
       <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">trait</span>
+        <span class="modifier">abstract </span>
+        <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <a href="XYChart.html"><span class="name">XYChart</span></a><span class="result"> extends <a href="Chart.html" class="extype" name="scalax.chart.Chart">Chart</a>[<a href="Imports$.html#XYPlot=org.jfree.chart.plot.XYPlot" class="extmbr" name="scalax.chart.Imports.XYPlot">chart.Imports.XYPlot</a>] with <span class="extype" name="scala.swing.Orientable">Orientable</span> with <a href="DomainAxis.html" class="extype" name="scalax.chart.DomainAxis">DomainAxis</a> with <a href="RangeAxis.html" class="extype" name="scalax.chart.RangeAxis">RangeAxis</a> with <a href="Labels.html" class="extype" name="scalax.chart.Labels">Labels</a>[(<span class="extype" name="org.jfree.data.xy.XYDataset">XYDataset</span>, <span class="extype" name="scala.Int">Int</span>, <span class="extype" name="scala.Int">Int</span>) ⇒ <span class="extype" name="scala.Predef.String">String</span>] with <a href="Tooltips.html" class="extype" name="scalax.chart.Tooltips">Tooltips</a>[(<span class="extype" name="org.jfree.data.xy.XYDataset">XYDataset</span>, <span class="extype" name="scala.Int">Int</span>, <span class="extype" name="scala.Int">Int</span>) ⇒ <span class="extype" name="scala.Predef.String">String</span>]</span>
+        <a href="XYChart.html"><span class="name">XYChart</span></a><span class="result"> extends <a href="Chart.html" class="extype" name="scalax.chart.Chart">Chart</a> with <span class="extype" name="scala.swing.Orientable">Orientable</span> with <span class="extype" name="scalax.chart.Labels">Labels</span>[<a href="module/XYToolTipGenerators$.html#XYLabelGenerator=(Imports.this.XYDataset,Comparable[_],Int)=&gt;String" class="extmbr" name="scalax.chart.module.XYToolTipGenerators.XYLabelGenerator">chart.module.XYToolTipGenerators.XYLabelGenerator</a>] with <span class="extype" name="scalax.chart.Tooltips">Tooltips</span>[<a href="module/XYToolTipGenerators$.html#XYToolTipGenerator=(Imports.this.XYDataset,Comparable[_],Int)=&gt;String" class="extmbr" name="scalax.chart.module.XYToolTipGenerators.XYToolTipGenerator">chart.module.XYToolTipGenerators.XYToolTipGenerator</a>]</span>
       </span>
       </h4>
       <p class="comment cmt">Represents numeric data.</p>
-    </li><li name="scalax.chart.XYItemLabelGenerator" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="XYItemLabelGenerator=(org.jfree.data.xy.XYDataset,Int,Int)=&gt;String"></a>
-      <a id="XYItemLabelGenerator:(XYDataset,Int,Int)⇒String"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">type</span>
-      </span>
-      <span class="symbol">
-        <span class="name">XYItemLabelGenerator</span><span class="result"> = (<span class="extype" name="org.jfree.data.xy.XYDataset">XYDataset</span>, <span class="extype" name="scala.Int">Int</span>, <span class="extype" name="scala.Int">Int</span>) ⇒ <span class="extype" name="scala.Predef.String">String</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Function alias for creating item labels for <a href="XYChart.html" class="extype" name="scalax.chart.XYChart">XYChart</a>s.</p>
-    </li><li name="scalax.chart.XYToolTipGenerator" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="XYToolTipGenerator=(org.jfree.data.xy.XYDataset,Int,Int)=&gt;String"></a>
-      <a id="XYToolTipGenerator:(XYDataset,Int,Int)⇒String"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">type</span>
-      </span>
-      <span class="symbol">
-        <span class="name">XYToolTipGenerator</span><span class="result"> = (<span class="extype" name="org.jfree.data.xy.XYDataset">XYDataset</span>, <span class="extype" name="scala.Int">Int</span>, <span class="extype" name="scala.Int">Int</span>) ⇒ <span class="extype" name="scala.Predef.String">String</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Function alias for creating tooltips for <a href="XYChart.html" class="extype" name="scalax.chart.XYChart">XYChart</a>s.</p>
     </li></ol>
             </div>
 
@@ -464,112 +228,136 @@ datasets.</p>
 
         <div id="values" class="values members">
               <h3>Value Members</h3>
-              <ol><li name="scalax.chart.ChartFactories" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="ChartFactories"></a>
-      <a id="ChartFactories:ChartFactories"></a>
+              <ol><li name="scalax.chart.CategoryChart" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="CategoryChart"></a>
+      <a id="CategoryChart:CategoryChart"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="ChartFactories$.html"><span class="name">ChartFactories</span></a><span class="result"> extends <a href="ChartFactories.html" class="extype" name="scalax.chart.ChartFactories">ChartFactories</a></span>
+        <a href="CategoryChart$.html"><span class="name">CategoryChart</span></a><span class="result"> extends <a href="ChartCompanion.html" class="extype" name="scalax.chart.ChartCompanion">ChartCompanion</a>[<a href="CategoryChart.html" class="extype" name="scalax.chart.CategoryChart">CategoryChart</a>]</span>
       </span>
       </h4>
-      <p class="comment cmt">Contains various factories to conveniently create charts.</p>
-    </li><li name="scalax.chart.Charting" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="Charting"></a>
-      <a id="Charting:Charting"></a>
+      <p class="comment cmt">Low-level factory for category charts.</p>
+    </li><li name="scalax.chart.Chart" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Chart"></a>
+      <a id="Chart:Chart"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="Charting$.html"><span class="name">Charting</span></a><span class="result"> extends <a href="Charting.html" class="extype" name="scalax.chart.Charting">Charting</a></span>
+        <a href="Chart$.html"><span class="name">Chart</span></a><span class="result"> extends <a href="ChartCompanion.html" class="extype" name="scalax.chart.ChartCompanion">ChartCompanion</a>[<a href="Chart.html" class="extype" name="scalax.chart.Chart">Chart</a>]</span>
       </span>
       </h4>
-      <p class="comment cmt">Contains all enrichments.</p>
-    </li><li name="scalax.chart.Imports" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="Imports"></a>
-      <a id="Imports:Imports"></a>
+      <p class="comment cmt">Provides a very basic factory to turn any <code>JFreeChart</code> into a <code>Chart</code> and contains default settings.</p>
+    </li><li name="scalax.chart.MultiplePieChart" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="MultiplePieChart"></a>
+      <a id="MultiplePieChart:MultiplePieChart"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="Imports$.html"><span class="name">Imports</span></a><span class="result"> extends <a href="Imports.html" class="extype" name="scalax.chart.Imports">Imports</a></span>
+        <a href="MultiplePieChart$.html"><span class="name">MultiplePieChart</span></a><span class="result"> extends <a href="ChartCompanion.html" class="extype" name="scalax.chart.ChartCompanion">ChartCompanion</a>[<a href="MultiplePieChart.html" class="extype" name="scalax.chart.MultiplePieChart">MultiplePieChart</a>]</span>
       </span>
       </h4>
-      <p class="comment cmt">Contains imports from foreign packages.</p>
-    </li><li name="scalax.chart.RichChart" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="RichChart"></a>
-      <a id="RichChart:RichChart"></a>
+      <p class="comment cmt">Factory for multiple pie charts.</p>
+    </li><li name="scalax.chart.PieChart" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="PieChart"></a>
+      <a id="PieChart:PieChart"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="RichChart$.html"><span class="name">RichChart</span></a><span class="result"> extends <a href="RichChart.html" class="extype" name="scalax.chart.RichChart">RichChart</a></span>
+        <a href="PieChart$.html"><span class="name">PieChart</span></a><span class="result"> extends <a href="ChartCompanion.html" class="extype" name="scalax.chart.ChartCompanion">ChartCompanion</a>[<a href="PieChart.html" class="extype" name="scalax.chart.PieChart">PieChart</a>]</span>
       </span>
       </h4>
-      <p class="comment cmt">Contains an enriched <code>JFreeChart</code> that provides convenient access to
-e.</p>
-    </li><li name="scalax.chart.RichChartingCollections" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="RichChartingCollections"></a>
-      <a id="RichChartingCollections:RichChartingCollections"></a>
+      <p class="comment cmt">Factory for pie charts.</p>
+    </li><li name="scalax.chart.RingChart" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="RingChart"></a>
+      <a id="RingChart:RingChart"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="RichChartingCollections$.html"><span class="name">RichChartingCollections</span></a><span class="result"> extends <a href="RichChartingCollections.html" class="extype" name="scalax.chart.RichChartingCollections">RichChartingCollections</a></span>
+        <a href="RingChart$.html"><span class="name">RingChart</span></a><span class="result"> extends <a href="ChartCompanion.html" class="extype" name="scalax.chart.ChartCompanion">ChartCompanion</a>[<a href="RingChart.html" class="extype" name="scalax.chart.RingChart">RingChart</a>]</span>
       </span>
       </h4>
-      <p class="comment cmt">Contains enrichments for collections for conversions to
-datasets.</p>
-    </li><li name="scalax.chart.StaticForwarderImports" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="StaticForwarderImports"></a>
-      <a id="StaticForwarderImports:StaticForwarderImports"></a>
+      <p class="comment cmt">Factory for ring charts.</p>
+    </li><li name="scalax.chart.XYChart" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="XYChart"></a>
+      <a id="XYChart:XYChart"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="StaticForwarderImports$.html"><span class="name">StaticForwarderImports</span></a><span class="result"> extends <a href="StaticForwarderImports.html" class="extype" name="scalax.chart.StaticForwarderImports">StaticForwarderImports</a></span>
+        <a href="XYChart$.html"><span class="name">XYChart</span></a><span class="result"> extends <a href="ChartCompanion.html" class="extype" name="scalax.chart.ChartCompanion">ChartCompanion</a>[<a href="XYChart.html" class="extype" name="scalax.chart.XYChart">XYChart</a>]</span>
       </span>
       </h4>
-      <p class="comment cmt">Contains only the static forwarder imports from foreign packages.</p>
-    </li><li name="scalax.chart.TypeImports" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="TypeImports"></a>
-      <a id="TypeImports:TypeImports"></a>
+      <p class="comment cmt">Low-level factory for XY charts.</p>
+    </li><li name="scalax.chart.api" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="api"></a>
+      <a id="api:api"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="TypeImports$.html"><span class="name">TypeImports</span></a><span class="result"> extends <a href="TypeImports.html" class="extype" name="scalax.chart.TypeImports">TypeImports</a></span>
+        <a href="api$.html"><span class="name">api</span></a><span class="result"> extends <a href="module/Charting.html" class="extype" name="scalax.chart.module.Charting">Charting</a></span>
       </span>
       </h4>
-      <p class="comment cmt">Contains only the type imports from foreign packages.</p>
-    </li><li name="scalax.chart.views" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="views"></a>
-      <a id="views:views"></a>
+      <p class="comment cmt">All-you-can-eat import providing all the high-level functionality of this library.</p>
+    </li><li name="scalax.chart.event" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="event"></a>
+      <a id="event:event"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">package</span>
       </span>
       <span class="symbol">
-        <a href="views/package.html"><span class="name">views</span></a>
+        <a href="event/package.html"><span class="name">event</span></a>
       </span>
       </h4>
-      <p class="comment cmt">This package contains implicit views / implicit conversions.</p>
+      
+    </li><li name="scalax.chart.exporting" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="exporting"></a>
+      <a id="exporting:exporting"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a href="exporting/package.html"><span class="name">exporting</span></a>
+      </span>
+      </h4>
+      
+    </li><li name="scalax.chart.module" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="module"></a>
+      <a id="module:module"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a href="module/package.html"><span class="name">module</span></a>
+      </span>
+      </h4>
+      <p class="comment cmt">This package provides a la carte imports.</p>
     </li></ol>
             </div>
 
@@ -599,6 +387,7 @@ datasets.</p>
       <div id="tooltip"></div>
 
       <div id="footer">  </div>
-      <script defer="defer" type="text/javascript" id="jquery-js" src="../../lib/jquery.js"></script><script defer="defer" type="text/javascript" id="jquery-ui-js" src="../../lib/jquery-ui.js"></script><script defer="defer" type="text/javascript" id="tools-tooltip-js" src="../../lib/tools.tooltip.js"></script><script defer="defer" type="text/javascript" id="template-js" src="../../lib/template.js"></script>
+
+
     </body>
       </html>

@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!DOCTYPE html >
 <html>
         <head>
           <title>Chart - scalax.chart.Chart</title>
@@ -9,6 +8,11 @@
           
       <link href="../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
       <link href="../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../../lib/jquery.js" id="jquery-js"></script>
+      <script type="text/javascript" src="../../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../../lib/template.js"></script>
+      <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
+      <script type="text/javascript" src="../../lib/modernizr.custom.js"></script><script type="text/javascript" src="../../lib/diagrams.js" id="diagrams-js"></script>
       <script type="text/javascript">
          if(top === self) {
             var url = '../../index.html';
@@ -24,30 +28,47 @@
         </head>
         <body class="type">
       <div id="definition">
-        <img src="../../lib/trait_big.png" />
+        <a href="Chart$.html" title="Go to companion"><img src="../../lib/class_to_object_big.png" /></a>
         <p id="owner"><a href="../package.html" class="extype" name="scalax">scalax</a>.<a href="package.html" class="extype" name="scalax.chart">chart</a></p>
-        <h1>Chart</h1>
+        <h1><a href="Chart$.html" title="Go to companion">Chart</a></h1>
       </div>
 
       <h4 id="signature" class="signature">
       <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">trait</span>
+        <span class="modifier">abstract </span>
+        <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <span class="name">Chart</span><span class="tparams">[<span name="P">P &lt;: <span class="extype" name="org.jfree.chart.plot.Plot">Plot</span></span>]</span><span class="result"> extends <a href="DisplayableChart.html" class="extype" name="scalax.chart.DisplayableChart">DisplayableChart</a> with <a href="StorableChart.html" class="extype" name="scalax.chart.StorableChart">StorableChart</a></span>
+        <span class="name">Chart</span><span class="result"> extends <span class="extype" name="scalax.chart.DisplayableChart">DisplayableChart</span> with <span class="extype" name="scala.swing.Publisher">Publisher</span></span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Generic graphical representation of data.
-</p></div><dl class="paramcmts block"><dt class="tparam">P</dt><dd class="cmt"><p>used plot type
-</p></dd></dl><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/wookietreiber/scala-chart/tree/develop/src/main/scala/scalax/chart/Chart.scala" target="_blank">Chart.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Generic graphical representation of data.</p><h4> Swing Integration </h4><p>This abstraction provides direct integration with the
+<a href="http://www.scala-lang.org/api/current/index.html#scala.swing.package" target="_blank">Scala Swing UI
+framework</a>.</p><pre><span class="kw">val</span> component = chart.toComponent
+<span class="kw">val</span> frame = chart.toFrame()</pre><p>There is also a way to immediately display the chart in a new GUI window. This is intended for
+interactive usage, e.g. when working with the Scala REPL. The simplest form is:</p><pre>chart.show()</pre><p>Listen to UI mouse events:</p><pre><span class="kw">import</span> scalax.chart.event._
+
+<span class="kw">val</span> chart = ???
+<span class="kw">val</span> ui = chart.toComponent <span class="cmt">// or chart.toFrame()</span>
+<span class="kw">val</span> reactor = ???
+
+reactor.listenTo(ui)
+reactor.reactions += {
+  <span class="kw">case</span> event: ChartMouseEvent <span class="kw">=&gt;</span>
+    <span class="cmt">// do something with event</span>
+}</pre><h4> Exporting Charts </h4><p>See <a href="module/Exporting.html" class="extype" name="scalax.chart.module.Exporting">module.Exporting</a> for more information.
+</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/wookietreiber/scala-chart/tree/develop/src/main/scala/scalax/chart/Chart.scala" target="_blank">Chart.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
-          <div class="superTypes hiddenContent"><a href="StorableChart.html" class="extype" name="scalax.chart.StorableChart">StorableChart</a>, <a href="WritableChart.html" class="extype" name="scalax.chart.WritableChart">WritableChart</a>, <a href="EncodableChart.html" class="extype" name="scalax.chart.EncodableChart">EncodableChart</a>, <a href="DisplayableChart.html" class="extype" name="scalax.chart.DisplayableChart">DisplayableChart</a>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+          <div class="superTypes hiddenContent"><span class="extype" name="scala.swing.Publisher">Publisher</span>, <span class="extype" name="scala.swing.Reactor">Reactor</span>, <span class="extype" name="scalax.chart.DisplayableChart">DisplayableChart</span>, <a href="DocMacros.html" class="extype" name="scalax.chart.DocMacros">DocMacros</a>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div><div class="toggleContainer block">
-          <span class="toggle">Known Subclasses</span>
-          <div class="subClasses hiddenContent"><a href="CategoryChart.html" class="extype" name="scalax.chart.CategoryChart">CategoryChart</a>, <a href="RichChart$GenericRichChart.html" class="extype" name="scalax.chart.RichChart.GenericRichChart">GenericRichChart</a>, <a href="MultiplePieChart.html" class="extype" name="scalax.chart.MultiplePieChart">MultiplePieChart</a>, <a href="PieChart.html" class="extype" name="scalax.chart.PieChart">PieChart</a>, <a href="RingChart.html" class="extype" name="scalax.chart.RingChart">RingChart</a>, <a href="XYChart.html" class="extype" name="scalax.chart.XYChart">XYChart</a></div>
-        </div></div>
+            <span class="toggle">Known Subclasses</span>
+            <div class="subClasses hiddenContent"><a href="CategoryChart.html" class="extype" name="scalax.chart.CategoryChart">CategoryChart</a>, <a href="MultiplePieChart.html" class="extype" name="scalax.chart.MultiplePieChart">MultiplePieChart</a>, <a href="PieChart.html" class="extype" name="scalax.chart.PieChart">PieChart</a>, <a href="RingChart.html" class="extype" name="scalax.chart.RingChart">RingChart</a>, <a href="XYChart.html" class="extype" name="scalax.chart.XYChart">XYChart</a></div>
+          </div><div class="toggleContainer block diagram-container" id="inheritance-diagram-container">
+                <span class="toggle diagram-link">Type Hierarchy</span>
+                <a href="http://docs.scala-lang.org/overviews/scaladoc/usage.html#diagrams" target="_blank" class="diagram-help">Learn more about scaladoc diagrams</a>
+                <div class="diagram" id="inheritance-diagram"><svg class="class-diagram" id="graph75" viewBox="0.00 0.00 569.00 158.00" height="158pt" width="569pt" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"><g transform="scale(1 1) rotate(0) translate(4 154)" class="graph" id="graph0"><polygon points="-4,4 -4,-154 565,-154 565,4 -4,4" stroke="none" fill="white"></polygon><g class="cluster" id="clust1"></g><g class="cluster" id="clust2"></g><!-- node0 --><g class="node this class" id="graph75_0"><g id="a_this class|graph75_0"><a xlink:title="scalax.chart.Chart (this class)" xlink:href="#inheritance-diagram"><polygon points="344,-88 274,-88 274,-62 344,-62 344,-88" stroke="#115f3b" fill="#0a955b"></polygon><text fill="#ffffff" font-size="10.00" font-family="Arial" y="-72.5" x="306" text-anchor="start">Chart</text></a></g></g><!-- node1 --><g class="node class" id="graph75_1"><g id="a_class|graph75_1"><a xlink:title="scalax.chart.CategoryChart" xlink:href="CategoryChart.html#inheritance-diagram"><polygon points="111.5,-26 0.5,-26 0.5,-0 111.5,-0 111.5,-26" stroke="#115f3b" fill="#0a955b"></polygon><text fill="#ffffff" font-size="10.00" font-family="Arial" y="-10.5" x="32" text-anchor="start">CategoryChart</text></a></g></g><!-- node0&#45;&gt;node1 --><g class="edge inheritance" id="graph75_0_1"><g id="a_inheritance|graph75_0_1"><a xlink:title="CategoryChart is a subtype of Chart"><path d="M268.876,-64.4844C225.058,-54.0928 154.773,-37.4245 107.056,-26.108" stroke="#d4d4d4" fill="none"></path><polygon points="268.553,-66.2062 273.821,-65.6573 269.36,-62.8006 268.553,-66.2062" stroke="#d4d4d4" fill="none"></polygon></a></g></g><!-- node2 --><g class="node class" id="graph75_2"><g id="a_class|graph75_2"><a xlink:title="scalax.chart.MultiplePieChart" xlink:href="MultiplePieChart.html#inheritance-diagram"><polygon points="248,-26 130,-26 130,-0 248,-0 248,-26" stroke="#115f3b" fill="#0a955b"></polygon><text fill="#ffffff" font-size="10.00" font-family="Arial" y="-10.5" x="162" text-anchor="start">MultiplePieChart</text></a></g></g><!-- node0&#45;&gt;node2 --><g class="edge inheritance" id="graph75_0_2"><g id="a_inheritance|graph75_0_2"><a xlink:title="MultiplePieChart is a subtype of Chart"><path d="M280.197,-59.5985C259.745,-49.3726 232.594,-35.7968 213.248,-26.1238" stroke="#d4d4d4" fill="none"></path><polygon points="279.461,-61.1872 284.716,-61.8581 281.027,-58.0567 279.461,-61.1872" stroke="#d4d4d4" fill="none"></polygon></a></g></g><!-- node3 --><g class="node class" id="graph75_3"><g id="a_class|graph75_3"><a xlink:title="scalax.chart.PieChart" xlink:href="PieChart.html#inheritance-diagram"><polygon points="351.25,-26 266.75,-26 266.75,-0 351.25,-0 351.25,-26" stroke="#115f3b" fill="#0a955b"></polygon><text fill="#ffffff" font-size="10.00" font-family="Arial" y="-10.5" x="299" text-anchor="start">PieChart</text></a></g></g><!-- node0&#45;&gt;node3 --><g class="edge inheritance" id="graph75_0_3"><g id="a_inheritance|graph75_0_3"><a xlink:title="PieChart is a subtype of Chart"><path d="M309,-56.6826C309,-46.8961 309,-34.9026 309,-26.1238" stroke="#d4d4d4" fill="none"></path><polygon points="307.25,-56.8581 309,-61.8581 310.75,-56.8581 307.25,-56.8581" stroke="#d4d4d4" fill="none"></polygon></a></g></g><!-- node4 --><g class="node class" id="graph75_4"><g id="a_class|graph75_4"><a xlink:title="scalax.chart.RingChart" xlink:href="RingChart.html#inheritance-diagram"><polygon points="460,-26 370,-26 370,-0 460,-0 460,-26" stroke="#115f3b" fill="#0a955b"></polygon><text fill="#ffffff" font-size="10.00" font-family="Arial" y="-10.5" x="402" text-anchor="start">RingChart</text></a></g></g><!-- node0&#45;&gt;node4 --><g class="edge inheritance" id="graph75_0_4"><g id="a_inheritance|graph75_0_4"><a xlink:title="RingChart is a subtype of Chart"><path d="M334.899,-59.34C352.911,-49.1447 376.636,-35.7155 393.581,-26.1238" stroke="#d4d4d4" fill="none"></path><polygon points="333.94,-57.8721 330.451,-61.8581 335.664,-60.918 333.94,-57.8721" stroke="#d4d4d4" fill="none"></polygon></a></g></g><!-- node5 --><g class="node class" id="graph75_5"><g id="a_class|graph75_5"><a xlink:title="scalax.chart.XYChart" xlink:href="XYChart.html#inheritance-diagram"><polygon points="561.25,-26 478.75,-26 478.75,-0 561.25,-0 561.25,-26" stroke="#115f3b" fill="#0a955b"></polygon><text fill="#ffffff" font-size="10.00" font-family="Arial" y="-10.5" x="511" text-anchor="start">XYChart</text></a></g></g><!-- node0&#45;&gt;node5 --><g class="edge inheritance" id="graph75_0_5"><g id="a_inheritance|graph75_0_5"><a xlink:title="XYChart is a subtype of Chart"><path d="M349.194,-62.5705C386.22,-52.0418 440.935,-36.4829 478.401,-25.8292" stroke="#d4d4d4" fill="none"></path><polygon points="348.647,-60.9064 344.317,-63.9573 349.605,-64.273 348.647,-60.9064" stroke="#d4d4d4" fill="none"></polygon></a></g></g><!-- node6 --><g class="node trait" id="graph75_6"><g id="a_trait|graph75_6"><a xlink:title="scalax.chart.DisplayableChart"><polygon points="309.25,-150 186.75,-150 186.75,-124 309.25,-124 309.25,-150" stroke="#37657d" fill="#498aad"></polygon><image xlink:href="../../lib/trait_diagram.png" y="-143" x="199" preserveAspectRatio="xMinYMin meet" height="12px" width="12px"></image><text fill="#ffffff" font-size="10.00" font-family="Arial" y="-134.5" x="219" text-anchor="start">DisplayableChart</text></a></g></g><!-- node6&#45;&gt;node0 --><g class="edge inheritance" id="graph75_6_0"><g id="a_inheritance|graph75_6_0"><a xlink:title="Chart is a subtype of DisplayableChart"><path d="M263.969,-120.292C274.191,-110.239 287.253,-97.3904 296.674,-88.1238" stroke="#d4d4d4" fill="none"></path><polygon points="262.682,-119.104 260.344,-123.858 265.136,-121.6 262.682,-119.104" stroke="#d4d4d4" fill="none"></polygon></a></g></g><!-- node7 --><g class="node trait" id="graph75_7"><g id="a_trait|graph75_7"><a xlink:title="scala.swing.Publisher"><polygon points="414.25,-150 327.75,-150 327.75,-124 414.25,-124 414.25,-150" stroke="#37657d" fill="#498aad"></polygon><image xlink:href="../../lib/trait_diagram.png" y="-143" x="340" preserveAspectRatio="xMinYMin meet" height="12px" width="12px"></image><text fill="#ffffff" font-size="10.00" font-family="Arial" y="-134.5" x="360" text-anchor="start">Publisher</text></a></g></g><!-- node7&#45;&gt;node0 --><g class="edge inheritance" id="graph75_7_0"><g id="a_inheritance|graph75_7_0"><a xlink:title="Chart is a subtype of Publisher"><path d="M354.769,-120.292C344.38,-110.239 331.103,-97.3904 321.528,-88.1238" stroke="#d4d4d4" fill="none"></path><polygon points="353.643,-121.639 358.453,-123.858 356.077,-119.123 353.643,-121.639" stroke="#d4d4d4" fill="none"></polygon></a></g></g></g></svg></div>
+              </div></div>
         
 
       <div id="mbrsel">
@@ -64,12 +85,12 @@
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="scalax.chart.Chart"><span>Chart</span></li><li class="in" name="scalax.chart.StorableChart"><span>StorableChart</span></li><li class="in" name="scalax.chart.WritableChart"><span>WritableChart</span></li><li class="in" name="scalax.chart.EncodableChart"><span>EncodableChart</span></li><li class="in" name="scalax.chart.DisplayableChart"><span>DisplayableChart</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="scalax.chart.Chart"><span>Chart</span></li><li class="in" name="scala.swing.Publisher"><span>Publisher</span></li><li class="in" name="scala.swing.Reactor"><span>Reactor</span></li><li class="in" name="scalax.chart.DisplayableChart"><span>DisplayableChart</span></li><li class="in" name="scalax.chart.DocMacros"><span>DocMacros</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
                 <span class="filtertype">Implicitly<br />
                 </span>
-                <ol id="implicits"> <li class="in" name="scala.Predef.any2stringadd" data-hidden="true"><span>by any2stringadd</span></li><li class="in" name="scala.Predef.any2stringfmt" data-hidden="true"><span>by any2stringfmt</span></li><li class="in" name="scala.Predef.any2ArrowAssoc" data-hidden="true"><span>by any2ArrowAssoc</span></li><li class="in" name="scala.Predef.any2Ensuring" data-hidden="true"><span>by any2Ensuring</span></li>
+                <ol id="implicits"> <li class="in" name="scala.Predef.any2stringadd" data-hidden="true"><span>by any2stringadd</span></li><li class="in" name="scala.Predef.StringFormat" data-hidden="true"><span>by StringFormat</span></li><li class="in" name="scala.Predef.Ensuring" data-hidden="true"><span>by Ensuring</span></li><li class="in" name="scala.Predef.ArrowAssoc" data-hidden="true"><span>by ArrowAssoc</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -87,57 +108,76 @@
 
       <div id="template">
         <div id="allMembers">
-        
+        <div id="constructors" class="members">
+              <h3>Instance Constructors</h3>
+              <ol><li name="scalax.chart.Chart#&lt;init&gt;" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="&lt;init&gt;():scalax.chart.Chart"></a>
+      <a id="&lt;init&gt;:Chart"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">new</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Chart</span><span class="params">()</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd></dl></div>
+    </li></ol>
+            </div>
 
-        
+        <div id="types" class="types members">
+              <h3>Type Members</h3>
+              <ol><li name="scalax.chart.Chart.Plot" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="Plot&lt;:org.jfree.chart.plot.Plot"></a>
+      <a id="Plot:Plot"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Plot</span><span class="result"> &lt;: <span class="extype" name="org.jfree.chart.plot.Plot">org.jfree.chart.plot.Plot</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Returns the underlying plot type.</p>
+    </li></ol>
+            </div>
 
         <div id="values" class="values members">
               <h3>Abstract Value Members</h3>
               <ol><li name="scalax.chart.Chart#peer" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="peer:org.jfree.chart.JFreeChart"></a>
-      <a id="peer:JFreeChart"></a>
+      <a id="peer:scalax.chart.module.Imports.JFreeChart"></a>
+      <a id="peer:module.Imports.JFreeChart"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">abstract </span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">peer</span><span class="result">: <span class="extype" name="org.jfree.chart.JFreeChart">JFreeChart</span></span>
+        <span class="name">peer</span><span class="result">: <a href="module/Imports$.html#JFreeChart=org.jfree.chart.JFreeChart" class="extmbr" name="scalax.chart.module.Imports.JFreeChart">module.Imports.JFreeChart</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Returns the underlying chart.</p>
     </li><li name="scalax.chart.Chart#plot" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="plot:P"></a>
-      <a id="plot:P"></a>
+      <a id="plot:Chart.this.Plot"></a>
+      <a id="plot:Plot"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier">abstract </span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">plot</span><span class="result">: <span class="extype" name="scalax.chart.Chart.P">P</span></span>
+        <span class="name">plot</span><span class="result">: <a href="#Plot&lt;:org.jfree.chart.plot.Plot" class="extmbr" name="scalax.chart.Chart.Plot">Plot</a></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Returns the plot.</p>
+      <p class="shortcomment cmt">Returns the underlying plot.</p>
     </li></ol>
             </div>
 
         <div id="values" class="values members">
               <h3>Concrete Value Members</h3>
               <ol><li name="scala.AnyRef#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="!=(x$1:AnyRef):Boolean"></a>
-      <a id="!=(AnyRef):Boolean"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">final </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
-      </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.Any#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="!=(x$1:Any):Boolean"></a>
       <a id="!=(Any):Boolean"></a>
       <h4 class="signature">
@@ -146,10 +186,10 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="scala.AnyRef###" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="##():Int"></a>
       <a id="##():Int"></a>
@@ -159,7 +199,7 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span title="gt4s: $hash$hash" class="name">##</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+        <span title="gt4s: $hash$hash" class="name">##</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Int" class="extype" target="_top">Int</a></span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
@@ -172,48 +212,35 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span title="gt4s: $plus" class="implicit">+</span><span class="params">(<span name="other">other: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+        <span title="gt4s: $plus" class="implicit">+</span><span class="params">(<span name="other">other: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt class="implicit">Implicit information</dt><dd>
-            This member is added by an implicit conversion from <a href="" class="extype" name="scalax.chart.Chart">Chart</a>[<span class="extype" name="scalax.chart.Chart.P">P</span>] to
-            <span class="extype" name="scala.runtime.StringAdd">StringAdd</span> performed by method any2stringadd in scala.Predef.
+            This member is added by an implicit conversion from <a href="" class="extype" name="scalax.chart.Chart">Chart</a> to
+            <span class="extype" name="scala.Predef.any2stringadd">any2stringadd</span>[<a href="" class="extype" name="scalax.chart.Chart">Chart</a>] performed by method any2stringadd in scala.Predef.
             
-          </dd><dt>Definition Classes</dt><dd>StringAdd</dd></dl></div>
-    </li><li name="scala.Predef.any2ArrowAssoc#-&gt;" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+          </dd><dt>Definition Classes</dt><dd>any2stringadd</dd></dl></div>
+    </li><li name="scala.Predef.ArrowAssoc#-&gt;" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="-&gt;[B](y:B):(A,B)"></a>
-      <a id="-&gt;[B](B):(Chart[P],B)"></a>
+      <a id="-&gt;[B](B):(Chart,B)"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span title="gt4s: $minus$greater" class="implicit">-&gt;</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="y">y: <span class="extype" name="scala.Predef.ArrowAssoc.-&gt;.B">B</span></span>)</span><span class="result">: (<a href="" class="extype" name="scalax.chart.Chart">Chart</a>[<span class="extype" name="scalax.chart.Chart.P">P</span>], <span class="extype" name="scala.Predef.ArrowAssoc.-&gt;.B">B</span>)</span>
+        <span title="gt4s: $minus$greater" class="implicit">-&gt;</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="y">y: <span class="extype" name="scala.Predef.ArrowAssoc.-&gt;.B">B</span></span>)</span><span class="result">: (<a href="" class="extype" name="scalax.chart.Chart">Chart</a>, <span class="extype" name="scala.Predef.ArrowAssoc.-&gt;.B">B</span>)</span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt class="implicit">Implicit information</dt><dd>
-            This member is added by an implicit conversion from <a href="" class="extype" name="scalax.chart.Chart">Chart</a>[<span class="extype" name="scalax.chart.Chart.P">P</span>] to
-            <span class="extype" name="scala.Predef.ArrowAssoc">ArrowAssoc</span>[<a href="" class="extype" name="scalax.chart.Chart">Chart</a>[<span class="extype" name="scalax.chart.Chart.P">P</span>]] performed by method any2ArrowAssoc in scala.Predef.
+            This member is added by an implicit conversion from <a href="" class="extype" name="scalax.chart.Chart">Chart</a> to
+            <span class="extype" name="scala.Predef.ArrowAssoc">ArrowAssoc</span>[<a href="" class="extype" name="scalax.chart.Chart">Chart</a>] performed by method ArrowAssoc in scala.Predef.
             
           </dd><dt>Definition Classes</dt><dd>ArrowAssoc</dd><dt>Annotations</dt><dd>
                 <span class="name">@inline</span><span class="args">()</span>
               
         </dd></dl></div>
     </li><li name="scala.AnyRef#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="==(x$1:AnyRef):Boolean"></a>
-      <a id="==(AnyRef):Boolean"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">final </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
-      </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.Any#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="==(x$1:Any):Boolean"></a>
       <a id="==(Any):Boolean"></a>
       <h4 class="signature">
@@ -222,10 +249,10 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="scalax.chart.Chart#antiAlias" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="antiAlias:Boolean"></a>
       <a id="antiAlias:Boolean"></a>
@@ -235,7 +262,7 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">antiAlias</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name">antiAlias</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Returns true if this chart is drawn with anti-aliasing.</p>
@@ -248,7 +275,7 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span title="gt4s: antiAlias_$eq" class="name">antiAlias_=</span><span class="params">(<span name="a">a: <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span title="gt4s: antiAlias_$eq" class="name">antiAlias_=</span><span class="params">(<span name="a">a: <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Sets whether or not this chart is drawn with anti-aliasing.</p>
@@ -266,28 +293,28 @@
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
     </li><li name="scalax.chart.Chart#backgroundPaint" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="backgroundPaint:scalax.chart.Imports.Paint"></a>
-      <a id="backgroundPaint:Imports.Paint"></a>
+      <a id="backgroundPaint:scalax.chart.module.Imports.Paint"></a>
+      <a id="backgroundPaint:module.Imports.Paint"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">backgroundPaint</span><span class="result">: <a href="Imports$.html#Paint=java.awt.Paint" class="extmbr" name="scalax.chart.Imports.Paint">Imports.Paint</a></span>
+        <span class="name">backgroundPaint</span><span class="result">: <a href="module/Imports$.html#Paint=java.awt.Paint" class="extmbr" name="scalax.chart.module.Imports.Paint">module.Imports.Paint</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Returns the paint used for the chart background.</p>
     </li><li name="scalax.chart.Chart#backgroundPaint_=" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="backgroundPaint_=(p:scalax.chart.Imports.Paint):Unit"></a>
-      <a id="backgroundPaint_=(Imports.Paint):Unit"></a>
+      <a id="backgroundPaint_=(p:scalax.chart.module.Imports.Paint):Unit"></a>
+      <a id="backgroundPaint_=(module.Imports.Paint):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span title="gt4s: backgroundPaint_$eq" class="name">backgroundPaint_=</span><span class="params">(<span name="p">p: <a href="Imports$.html#Paint=java.awt.Paint" class="extmbr" name="scalax.chart.Imports.Paint">Imports.Paint</a></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span title="gt4s: backgroundPaint_$eq" class="name">backgroundPaint_=</span><span class="params">(<span name="p">p: <a href="module/Imports$.html#Paint=java.awt.Paint" class="extmbr" name="scalax.chart.module.Imports.Paint">module.Imports.Paint</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Sets the paint used for the chart background.</p>
@@ -310,102 +337,85 @@
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="scalax.chart.EncodableChart#encodeAsJPEG" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="encodeAsJPEG(dim:(Int,Int)):Array[Byte]"></a>
-      <a id="encodeAsJPEG((Int,Int)):Array[Byte]"></a>
+    </li><li name="scala.swing.Reactor#deafTo" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="deafTo(ps:scala.swing.Publisher*):Unit"></a>
+      <a id="deafTo(Publisher*):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">encodeAsJPEG</span><span class="params">(<span name="dim">dim: (<span class="extype" name="scala.Int">Int</span>, <span class="extype" name="scala.Int">Int</span>)</span>)</span><span class="result">: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Byte">Byte</span>]</span>
+        <span class="name">deafTo</span><span class="params">(<span name="ps">ps: <span class="extype" name="scala.swing.Publisher">Publisher</span>*</span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Returns the chart as a byte encoded JPEG image.</p><div class="fullcomment"><div class="comment cmt"><p>Returns the chart as a byte encoded JPEG image.
-</p></div><dl class="paramcmts block"><dt class="param">dim</dt><dd class="cmt"><p>dimension / geometry / width x height of the output
-</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="EncodableChart.html" class="extype" name="scalax.chart.EncodableChart">EncodableChart</a></dd></dl></div>
-    </li><li name="scalax.chart.EncodableChart#encodeAsPNG" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="encodeAsPNG(dim:(Int,Int)):Array[Byte]"></a>
-      <a id="encodeAsPNG((Int,Int)):Array[Byte]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">encodeAsPNG</span><span class="params">(<span name="dim">dim: (<span class="extype" name="scala.Int">Int</span>, <span class="extype" name="scala.Int">Int</span>)</span>)</span><span class="result">: <span class="extype" name="scala.Array">Array</span>[<span class="extype" name="scala.Byte">Byte</span>]</span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Returns the chart as a byte encoded PNG image.</p><div class="fullcomment"><div class="comment cmt"><p>Returns the chart as a byte encoded PNG image.
-</p></div><dl class="paramcmts block"><dt class="param">dim</dt><dd class="cmt"><p>dimension / geometry / width x height of the output
-</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="EncodableChart.html" class="extype" name="scalax.chart.EncodableChart">EncodableChart</a></dd></dl></div>
-    </li><li name="scala.Predef.any2Ensuring#ensuring" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Reactor</dd></dl></div>
+    </li><li name="scala.Predef.Ensuring#ensuring" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ensuring(cond:A=&gt;Boolean,msg:=&gt;Any):A"></a>
-      <a id="ensuring((Chart[P])⇒Boolean,⇒Any):Chart[P]"></a>
+      <a id="ensuring((Chart)⇒Boolean,⇒Any):Chart"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="implicit">ensuring</span><span class="params">(<span name="cond">cond: (<a href="" class="extype" name="scalax.chart.Chart">Chart</a>[<span class="extype" name="scalax.chart.Chart.P">P</span>]) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>, <span name="msg">msg: ⇒ <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <a href="" class="extype" name="scalax.chart.Chart">Chart</a>[<span class="extype" name="scalax.chart.Chart.P">P</span>]</span>
+        <span class="implicit">ensuring</span><span class="params">(<span name="cond">cond: (<a href="" class="extype" name="scalax.chart.Chart">Chart</a>) ⇒ <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>, <span name="msg">msg: ⇒ <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <a href="" class="extype" name="scalax.chart.Chart">Chart</a></span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt class="implicit">Implicit information</dt><dd>
-            This member is added by an implicit conversion from <a href="" class="extype" name="scalax.chart.Chart">Chart</a>[<span class="extype" name="scalax.chart.Chart.P">P</span>] to
-            <span class="extype" name="scala.Predef.Ensuring">Ensuring</span>[<a href="" class="extype" name="scalax.chart.Chart">Chart</a>[<span class="extype" name="scalax.chart.Chart.P">P</span>]] performed by method any2Ensuring in scala.Predef.
+            This member is added by an implicit conversion from <a href="" class="extype" name="scalax.chart.Chart">Chart</a> to
+            <span class="extype" name="scala.Predef.Ensuring">Ensuring</span>[<a href="" class="extype" name="scalax.chart.Chart">Chart</a>] performed by method Ensuring in scala.Predef.
             
           </dd><dt>Definition Classes</dt><dd>Ensuring</dd></dl></div>
-    </li><li name="scala.Predef.any2Ensuring#ensuring" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+    </li><li name="scala.Predef.Ensuring#ensuring" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ensuring(cond:A=&gt;Boolean):A"></a>
-      <a id="ensuring((Chart[P])⇒Boolean):Chart[P]"></a>
+      <a id="ensuring((Chart)⇒Boolean):Chart"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="implicit">ensuring</span><span class="params">(<span name="cond">cond: (<a href="" class="extype" name="scalax.chart.Chart">Chart</a>[<span class="extype" name="scalax.chart.Chart.P">P</span>]) ⇒ <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <a href="" class="extype" name="scalax.chart.Chart">Chart</a>[<span class="extype" name="scalax.chart.Chart.P">P</span>]</span>
+        <span class="implicit">ensuring</span><span class="params">(<span name="cond">cond: (<a href="" class="extype" name="scalax.chart.Chart">Chart</a>) ⇒ <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>)</span><span class="result">: <a href="" class="extype" name="scalax.chart.Chart">Chart</a></span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt class="implicit">Implicit information</dt><dd>
-            This member is added by an implicit conversion from <a href="" class="extype" name="scalax.chart.Chart">Chart</a>[<span class="extype" name="scalax.chart.Chart.P">P</span>] to
-            <span class="extype" name="scala.Predef.Ensuring">Ensuring</span>[<a href="" class="extype" name="scalax.chart.Chart">Chart</a>[<span class="extype" name="scalax.chart.Chart.P">P</span>]] performed by method any2Ensuring in scala.Predef.
+            This member is added by an implicit conversion from <a href="" class="extype" name="scalax.chart.Chart">Chart</a> to
+            <span class="extype" name="scala.Predef.Ensuring">Ensuring</span>[<a href="" class="extype" name="scalax.chart.Chart">Chart</a>] performed by method Ensuring in scala.Predef.
             
           </dd><dt>Definition Classes</dt><dd>Ensuring</dd></dl></div>
-    </li><li name="scala.Predef.any2Ensuring#ensuring" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+    </li><li name="scala.Predef.Ensuring#ensuring" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ensuring(cond:Boolean,msg:=&gt;Any):A"></a>
-      <a id="ensuring(Boolean,⇒Any):Chart[P]"></a>
+      <a id="ensuring(Boolean,⇒Any):Chart"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="implicit">ensuring</span><span class="params">(<span name="cond">cond: <span class="extype" name="scala.Boolean">Boolean</span></span>, <span name="msg">msg: ⇒ <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <a href="" class="extype" name="scalax.chart.Chart">Chart</a>[<span class="extype" name="scalax.chart.Chart.P">P</span>]</span>
+        <span class="implicit">ensuring</span><span class="params">(<span name="cond">cond: <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>, <span name="msg">msg: ⇒ <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <a href="" class="extype" name="scalax.chart.Chart">Chart</a></span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt class="implicit">Implicit information</dt><dd>
-            This member is added by an implicit conversion from <a href="" class="extype" name="scalax.chart.Chart">Chart</a>[<span class="extype" name="scalax.chart.Chart.P">P</span>] to
-            <span class="extype" name="scala.Predef.Ensuring">Ensuring</span>[<a href="" class="extype" name="scalax.chart.Chart">Chart</a>[<span class="extype" name="scalax.chart.Chart.P">P</span>]] performed by method any2Ensuring in scala.Predef.
+            This member is added by an implicit conversion from <a href="" class="extype" name="scalax.chart.Chart">Chart</a> to
+            <span class="extype" name="scala.Predef.Ensuring">Ensuring</span>[<a href="" class="extype" name="scalax.chart.Chart">Chart</a>] performed by method Ensuring in scala.Predef.
             
           </dd><dt>Definition Classes</dt><dd>Ensuring</dd></dl></div>
-    </li><li name="scala.Predef.any2Ensuring#ensuring" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+    </li><li name="scala.Predef.Ensuring#ensuring" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ensuring(cond:Boolean):A"></a>
-      <a id="ensuring(Boolean):Chart[P]"></a>
+      <a id="ensuring(Boolean):Chart"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="implicit">ensuring</span><span class="params">(<span name="cond">cond: <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <a href="" class="extype" name="scalax.chart.Chart">Chart</a>[<span class="extype" name="scalax.chart.Chart.P">P</span>]</span>
+        <span class="implicit">ensuring</span><span class="params">(<span name="cond">cond: <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>)</span><span class="result">: <a href="" class="extype" name="scalax.chart.Chart">Chart</a></span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt class="implicit">Implicit information</dt><dd>
-            This member is added by an implicit conversion from <a href="" class="extype" name="scalax.chart.Chart">Chart</a>[<span class="extype" name="scalax.chart.Chart.P">P</span>] to
-            <span class="extype" name="scala.Predef.Ensuring">Ensuring</span>[<a href="" class="extype" name="scalax.chart.Chart">Chart</a>[<span class="extype" name="scalax.chart.Chart.P">P</span>]] performed by method any2Ensuring in scala.Predef.
+            This member is added by an implicit conversion from <a href="" class="extype" name="scalax.chart.Chart">Chart</a> to
+            <span class="extype" name="scala.Predef.Ensuring">Ensuring</span>[<a href="" class="extype" name="scalax.chart.Chart">Chart</a>] performed by method Ensuring in scala.Predef.
             
           </dd><dt>Definition Classes</dt><dd>Ensuring</dd></dl></div>
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
@@ -417,7 +427,7 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">eq</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name">eq</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
@@ -430,7 +440,7 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
@@ -443,7 +453,7 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">finalize</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">finalize</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
@@ -453,7 +463,7 @@
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="scala.Predef.any2stringfmt#formatted" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+    </li><li name="scala.Predef.StringFormat#formatted" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="formatted(fmtstr:String):String"></a>
       <a id="formatted(String):String"></a>
       <h4 class="signature">
@@ -466,8 +476,8 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt class="implicit">Implicit information</dt><dd>
-            This member is added by an implicit conversion from <a href="" class="extype" name="scalax.chart.Chart">Chart</a>[<span class="extype" name="scalax.chart.Chart.P">P</span>] to
-            <span class="extype" name="scala.runtime.StringFormat">StringFormat</span> performed by method any2stringfmt in scala.Predef.
+            This member is added by an implicit conversion from <a href="" class="extype" name="scalax.chart.Chart">Chart</a> to
+            <span class="extype" name="scala.Predef.StringFormat">StringFormat</span>[<a href="" class="extype" name="scalax.chart.Chart">Chart</a>] performed by method StringFormat in scala.Predef.
             
           </dd><dt>Definition Classes</dt><dd>StringFormat</dd><dt>Annotations</dt><dd>
                 <span class="name">@inline</span><span class="args">()</span>
@@ -495,7 +505,7 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">hashCode</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
+        <span class="name">hashCode</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Int" class="extype" target="_top">Int</a></span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
@@ -508,10 +518,36 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name">isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="scala.swing.Reactor#listenTo" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="listenTo(ps:scala.swing.Publisher*):Unit"></a>
+      <a id="listenTo(Publisher*):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">listenTo</span><span class="params">(<span name="ps">ps: <span class="extype" name="scala.swing.Publisher">Publisher</span>*</span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Reactor</dd></dl></div>
+    </li><li name="scala.swing.Publisher#listeners" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="listeners:scala.swing.RefSet[scala.swing.Reactions.Reaction]{valunderlying:scala.collection.mutable.HashSet[scala.ref.Reference[scala.swing.Reactions.Reaction]]}"></a>
+      <a id="listeners:RefSet[Reaction]{valunderlying:scala.collection.mutable.HashSet[scala.ref.Reference[scala.swing.Reactions.Reaction]]}"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">listeners</span><span class="result">: <span class="extype" name="scala.swing.RefSet">RefSet</span>[<span class="extype" name="scala.swing.Reactions.Reaction">Reaction</span>] { val underlying: scala.collection.mutable.HashSet[scala.ref.Reference[scala.swing.Reactions.Reaction]] }</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd>Publisher</dd></dl></div>
     </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ne(x$1:AnyRef):Boolean"></a>
       <a id="ne(AnyRef):Boolean"></a>
@@ -521,7 +557,7 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">ne</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
+        <span class="name">ne</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
@@ -534,7 +570,7 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">notify</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">notify</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
@@ -547,83 +583,60 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">notifyAll</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">notifyAll</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scalax.chart.StorableChart#saveAsJPEG" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="saveAsJPEG(file:String,dim:(Int,Int)):Unit"></a>
-      <a id="saveAsJPEG(String,(Int,Int)):Unit"></a>
+    </li><li name="scala.swing.Publisher#publish" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="publish(e:scala.swing.event.Event):Unit"></a>
+      <a id="publish(Event):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">saveAsJPEG</span><span class="params">(<span name="file">file: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="dim">dim: (<span class="extype" name="scala.Int">Int</span>, <span class="extype" name="scala.Int">Int</span>)</span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">publish</span><span class="params">(<span name="e">e: <span class="extype" name="scala.swing.event.Event">Event</span></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Saves the chart as a JPEG image.</p><div class="fullcomment"><div class="comment cmt"><p>Saves the chart as a JPEG image.
-</p></div><dl class="paramcmts block"><dt class="param">file</dt><dd class="cmt"><p>the output file</p></dd><dt class="param">dim</dt><dd class="cmt"><p>dimension / geometry / width x height of the output
-</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="StorableChart.html" class="extype" name="scalax.chart.StorableChart">StorableChart</a></dd></dl></div>
-    </li><li name="scalax.chart.StorableChart#saveAsPDF" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="saveAsPDF(file:String,dim:(Int,Int),fontMapper:com.lowagie.text.pdf.FontMapper):Unit"></a>
-      <a id="saveAsPDF(String,(Int,Int),FontMapper):Unit"></a>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Publisher</dd></dl></div>
+    </li><li name="scala.swing.Reactor#reactions" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="reactions:scala.swing.Reactions"></a>
+      <a id="reactions:Reactions"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
-        <span class="kind">def</span>
+        <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">saveAsPDF</span><span class="params">(<span name="file">file: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="dim">dim: (<span class="extype" name="scala.Int">Int</span>, <span class="extype" name="scala.Int">Int</span>)</span>, <span name="fontMapper">fontMapper: <span class="extype" name="com.lowagie.text.pdf.FontMapper">FontMapper</span> = <span class="symbol">new DefaultFontMapper</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">reactions</span><span class="result">: <span class="extype" name="scala.swing.Reactions">Reactions</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Saves the chart as a PDF.</p><div class="fullcomment"><div class="comment cmt"><p>Saves the chart as a PDF.
-</p></div><dl class="paramcmts block"><dt class="param">file</dt><dd class="cmt"><p>the output file</p></dd><dt class="param">dim</dt><dd class="cmt"><p>dimension / geometry / width x height of the output</p></dd><dt class="param">fontMapper</dt><dd class="cmt"><p>handles mappings between Java AWT Fonts and PDF fonts
-</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="StorableChart.html" class="extype" name="scalax.chart.StorableChart">StorableChart</a></dd></dl></div>
-    </li><li name="scalax.chart.StorableChart#saveAsPNG" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="saveAsPNG(file:String,dim:(Int,Int)):Unit"></a>
-      <a id="saveAsPNG(String,(Int,Int)):Unit"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">saveAsPNG</span><span class="params">(<span name="file">file: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="dim">dim: (<span class="extype" name="scala.Int">Int</span>, <span class="extype" name="scala.Int">Int</span>)</span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Saves the chart as a PNG image.</p><div class="fullcomment"><div class="comment cmt"><p>Saves the chart as a PNG image.
-</p></div><dl class="paramcmts block"><dt class="param">file</dt><dd class="cmt"><p>the output file</p></dd><dt class="param">dim</dt><dd class="cmt"><p>dimension / geometry / width x height of the output
-</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="StorableChart.html" class="extype" name="scalax.chart.StorableChart">StorableChart</a></dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Reactor</dd></dl></div>
     </li><li name="scalax.chart.DisplayableChart#show" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="show(title:String,dim:(Int,Int),scrollable:Boolean):Unit"></a>
-      <a id="show(String,(Int,Int),Boolean):Unit"></a>
+      <a id="show():Unit"></a>
+      <a id="show():Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">show</span><span class="params">(<span name="title">title: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;&quot;</span></span>, <span name="dim">dim: (<span class="extype" name="scala.Int">Int</span>, <span class="extype" name="scala.Int">Int</span>) = <span class="symbol">(DEFAULT_WIDTH,DEFAULT_HEIGHT)</span></span>, <span name="scrollable">scrollable: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">false</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">show</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Shows the chart in a window.</p><div class="fullcomment"><div class="comment cmt"><p>Shows the chart in a window.
-</p></div><dl class="paramcmts block"><dt class="param">title</dt><dd class="cmt"><p>the title of the enclosing frame</p></dd><dt class="param">scrollable</dt><dd class="cmt"><p>whether the enclosing panel is scrollable
-</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="DisplayableChart.html" class="extype" name="scalax.chart.DisplayableChart">DisplayableChart</a></dd></dl></div>
-    </li><li name="scalax.chart.DisplayableChart#show" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="show:Unit"></a>
-      <a id="show:Unit"></a>
-      <h4 class="signature">
+      <p class="shortcomment cmt">[use case]  Shows the chart in a window.</p><div class="fullcomment">[use case] <div class="comment cmt"><p> Shows the chart in a window.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd>DisplayableChart</dd><div class="full-signature-block toggleContainer">
+            <span class="toggle">Full Signature</span>
+            <div class="hiddenContent full-signature-usecase"><h4 id="signature" class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">show</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">show</span><span class="params">(<span name="title">title: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;&quot;</span></span>, <span name="resolution">resolution: (<a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Int" class="extype" target="_top">Int</a>, <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Int" class="extype" target="_top">Int</a>) = <span class="symbol"><span class="name"><a href="Chart$.html">Chart.Default.Resolution</a></span></span></span>, <span name="scrollable">scrollable: <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Boolean" class="extype" target="_top">Boolean</a> = <span class="symbol">false</span></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
       </span>
-      </h4>
-      <p class="shortcomment cmt">Shows the chart in a window.</p><div class="fullcomment"><div class="comment cmt"><p>Shows the chart in a window.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="DisplayableChart.html" class="extype" name="scalax.chart.DisplayableChart">DisplayableChart</a></dd></dl></div>
+      </h4></div>
+          </div></dl></div>
     </li><li name="scalax.chart.Chart.subtitles" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="subtitles"></a>
       <a id="subtitles:subtitles"></a>
@@ -633,7 +646,7 @@
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="Chart$subtitles$.html"><span class="name">subtitles</span></a><span class="result"> extends <span class="extype" name="scala.collection.mutable.Buffer">Buffer</span>[<span class="extype" name="org.jfree.chart.title.Title">Title</span>]</span>
+        <a href="Chart$subtitles$.html"><span class="name">subtitles</span></a><span class="result"> extends <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.collection.mutable.Buffer" class="extype" target="_top">Buffer</a>[<span class="extype" name="org.jfree.chart.title.Title">Title</span>]</span>
       </span>
       </h4>
       <p class="comment cmt">Contains this charts subtitles and legends.</p>
@@ -672,38 +685,47 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span title="gt4s: title_$eq" class="name">title_=</span><span class="params">(<span name="title">title: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span title="gt4s: title_$eq" class="name">title_=</span><span class="params">(<span name="title">title: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
       </span>
       </h4>
       <p class="shortcomment cmt">Sets the title of this chart.</p>
+    </li><li name="scalax.chart.DisplayableChart#toComponent" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="toComponent:scala.swing.Component"></a>
+      <a id="toComponent:Component"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">toComponent</span><span class="result">: <span class="extype" name="scala.swing.Component">Component</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Wraps this chart in a swing component.</p><div class="fullcomment"><div class="comment cmt"><p>Wraps this chart in a swing component.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd>DisplayableChart</dd></dl></div>
     </li><li name="scalax.chart.DisplayableChart#toFrame" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="toFrame(title:String,scrollable:Boolean):scala.swing.Frame"></a>
-      <a id="toFrame(String,Boolean):Frame"></a>
+      <a id="toFrame():scala.swing.Frame"></a>
+      <a id="toFrame():Frame"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">toFrame</span><span class="params">(<span name="title">title: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;&quot;</span></span>, <span name="scrollable">scrollable: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">true</span></span>)</span><span class="result">: <span class="extype" name="scala.swing.Frame">Frame</span></span>
+        <span class="name">toFrame</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.swing.Frame">Frame</span></span>
       </span>
       </h4>
-      <p class="shortcomment cmt">Wraps a frame around this chart.</p><div class="fullcomment"><div class="comment cmt"><p>Wraps a frame around this chart.
-</p></div><dl class="paramcmts block"><dt class="param">title</dt><dd class="cmt"><p>the title of the enclosing frame</p></dd><dt class="param">scrollable</dt><dd class="cmt"><p>whether the enclosing panel is scrollable
-</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="DisplayableChart.html" class="extype" name="scalax.chart.DisplayableChart">DisplayableChart</a></dd></dl></div>
-    </li><li name="scalax.chart.DisplayableChart#toPanel" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="toPanel:scala.swing.Panel"></a>
-      <a id="toPanel:Panel"></a>
-      <h4 class="signature">
+      <p class="shortcomment cmt">[use case]  Wraps a frame around this chart.</p><div class="fullcomment">[use case] <div class="comment cmt"><p> Wraps a frame around this chart.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd>DisplayableChart</dd><div class="full-signature-block toggleContainer">
+            <span class="toggle">Full Signature</span>
+            <div class="hiddenContent full-signature-usecase"><h4 id="signature" class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">toPanel</span><span class="result">: <span class="extype" name="scala.swing.Panel">Panel</span></span>
+        <span class="name">toFrame</span><span class="params">(<span name="title">title: <span class="extype" name="scala.Predef.String">String</span> = <span class="symbol">&quot;&quot;</span></span>, <span name="scrollable">scrollable: <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Boolean" class="extype" target="_top">Boolean</a> = <span class="symbol">true</span></span>)</span><span class="result">: <span class="extype" name="scala.swing.Frame">Frame</span></span>
       </span>
-      </h4>
-      <p class="shortcomment cmt">Wraps a panel around this chart.</p><div class="fullcomment"><div class="comment cmt"><p>Wraps a panel around this chart.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="DisplayableChart.html" class="extype" name="scalax.chart.DisplayableChart">DisplayableChart</a></dd></dl></div>
+      </h4></div>
+          </div></dl></div>
     </li><li name="scala.AnyRef#toString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="toString():String"></a>
       <a id="toString():String"></a>
@@ -726,7 +748,7 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">wait</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">wait</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
@@ -745,7 +767,7 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>, <span name="arg1">arg1: <span class="extype" name="scala.Int">Int</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Long" class="extype" target="_top">Long</a></span>, <span name="arg1">arg1: <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Int" class="extype" target="_top">Int</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
@@ -764,7 +786,7 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Long">Long</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Long" class="extype" target="_top">Long</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
@@ -774,165 +796,40 @@
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="scalax.chart.WritableChart#writeAsJPEG" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="writeAsJPEG(os:java.io.OutputStream,dim:(Int,Int)):Unit"></a>
-      <a id="writeAsJPEG(OutputStream,(Int,Int)):Unit"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">writeAsJPEG</span><span class="params">(<span name="os">os: <span class="extype" name="java.io.OutputStream">OutputStream</span></span>, <span name="dim">dim: (<span class="extype" name="scala.Int">Int</span>, <span class="extype" name="scala.Int">Int</span>)</span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Writes the chart as a JPEG to an output stream.</p><div class="fullcomment"><div class="comment cmt"><p>Writes the chart as a JPEG to an output stream.
-</p></div><dl class="paramcmts block"><dt class="param">os</dt><dd class="cmt"><p>stream to where will be written</p></dd><dt class="param">dim</dt><dd class="cmt"><p>dimension / geometry / width x height of the output
-</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="WritableChart.html" class="extype" name="scalax.chart.WritableChart">WritableChart</a></dd></dl></div>
-    </li><li name="scalax.chart.WritableChart#writeAsPDF" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="writeAsPDF(os:java.io.OutputStream,dim:(Int,Int),fontMapper:com.lowagie.text.pdf.FontMapper):Unit"></a>
-      <a id="writeAsPDF(OutputStream,(Int,Int),FontMapper):Unit"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">writeAsPDF</span><span class="params">(<span name="os">os: <span class="extype" name="java.io.OutputStream">OutputStream</span></span>, <span name="dim">dim: (<span class="extype" name="scala.Int">Int</span>, <span class="extype" name="scala.Int">Int</span>)</span>, <span name="fontMapper">fontMapper: <span class="extype" name="com.lowagie.text.pdf.FontMapper">FontMapper</span> = <span class="symbol">new DefaultFontMapper</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Writes the chart as a PDF to an output stream.</p><div class="fullcomment"><div class="comment cmt"><p>Writes the chart as a PDF to an output stream.
-</p></div><dl class="paramcmts block"><dt class="param">os</dt><dd class="cmt"><p>stream to where will be written</p></dd><dt class="param">dim</dt><dd class="cmt"><p>dimension / geometry / width x height of the output</p></dd><dt class="param">fontMapper</dt><dd class="cmt"><p>handles mappings between Java AWT Fonts and PDF fonts
-</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="WritableChart.html" class="extype" name="scalax.chart.WritableChart">WritableChart</a></dd></dl></div>
-    </li><li name="scalax.chart.WritableChart#writeAsPNG" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="writeAsPNG(os:java.io.OutputStream,dim:(Int,Int)):Unit"></a>
-      <a id="writeAsPNG(OutputStream,(Int,Int)):Unit"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">writeAsPNG</span><span class="params">(<span name="os">os: <span class="extype" name="java.io.OutputStream">OutputStream</span></span>, <span name="dim">dim: (<span class="extype" name="scala.Int">Int</span>, <span class="extype" name="scala.Int">Int</span>)</span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
-      </span>
-      </h4>
-      <p class="shortcomment cmt">Writes the chart as a PNG to an output stream.</p><div class="fullcomment"><div class="comment cmt"><p>Writes the chart as a PNG to an output stream.
-</p></div><dl class="paramcmts block"><dt class="param">os</dt><dd class="cmt"><p>stream to where will be written</p></dd><dt class="param">dim</dt><dd class="cmt"><p>dimension / geometry / width x height of the output
-</p></dd></dl><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="WritableChart.html" class="extype" name="scalax.chart.WritableChart">WritableChart</a></dd></dl></div>
-    </li><li name="scala.Predef.any2ArrowAssoc#→" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+    </li><li name="scala.Predef.ArrowAssoc#→" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="→[B](y:B):(A,B)"></a>
-      <a id="→[B](B):(Chart[P],B)"></a>
+      <a id="→[B](B):(Chart,B)"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span title="gt4s: $u2192" class="implicit">→</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="y">y: <span class="extype" name="scala.Predef.ArrowAssoc.→.B">B</span></span>)</span><span class="result">: (<a href="" class="extype" name="scalax.chart.Chart">Chart</a>[<span class="extype" name="scalax.chart.Chart.P">P</span>], <span class="extype" name="scala.Predef.ArrowAssoc.→.B">B</span>)</span>
+        <span title="gt4s: $u2192" class="implicit">→</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="y">y: <span class="extype" name="scala.Predef.ArrowAssoc.→.B">B</span></span>)</span><span class="result">: (<a href="" class="extype" name="scalax.chart.Chart">Chart</a>, <span class="extype" name="scala.Predef.ArrowAssoc.→.B">B</span>)</span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt class="implicit">Implicit information</dt><dd>
-            This member is added by an implicit conversion from <a href="" class="extype" name="scalax.chart.Chart">Chart</a>[<span class="extype" name="scalax.chart.Chart.P">P</span>] to
-            <span class="extype" name="scala.Predef.ArrowAssoc">ArrowAssoc</span>[<a href="" class="extype" name="scalax.chart.Chart">Chart</a>[<span class="extype" name="scalax.chart.Chart.P">P</span>]] performed by method any2ArrowAssoc in scala.Predef.
+            This member is added by an implicit conversion from <a href="" class="extype" name="scalax.chart.Chart">Chart</a> to
+            <span class="extype" name="scala.Predef.ArrowAssoc">ArrowAssoc</span>[<a href="" class="extype" name="scalax.chart.Chart">Chart</a>] performed by method ArrowAssoc in scala.Predef.
             
           </dd><dt>Definition Classes</dt><dd>ArrowAssoc</dd></dl></div>
     </li></ol>
             </div>
 
-        <div id="values" class="values members">
-              <h3>Shadowed Implicit Value Members</h3>
-              <ol><li name="scala.Predef.any2stringadd#self" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="self:Any"></a>
-      <a id="self:Any"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="implicit shadowed">self</span><span class="result">: <span class="extype" name="scala.Any">Any</span></span>
-      </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt class="implicit">Implicit information</dt><dd>
-            This member is added by an implicit conversion from <a href="" class="extype" name="scalax.chart.Chart">Chart</a>[<span class="extype" name="scalax.chart.Chart.P">P</span>] to
-            <span class="extype" name="scala.runtime.StringAdd">StringAdd</span> performed by method any2stringadd in scala.Predef.
-            
-          </dd><dt class="implicit">Shadowing</dt><dd>This implicitly inherited member is ambiguous. One or more implicitly inherited members have similar signatures, so calling this member may produce an ambiguous implicit conversion compiler error.<br />To access this member you can use a <a href="http://stackoverflow.com/questions/2087250/what-is-the-purpose-of-type-ascription-in-scala" target="_blank">type ascription</a>:<br /><div class="cmt"><pre>(chart: StringAdd).self</pre></div></dd><dt>Definition Classes</dt><dd>StringAdd</dd></dl></div>
-    </li><li name="scala.Predef.any2stringfmt#self" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="self:Any"></a>
-      <a id="self:Any"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">val</span>
-      </span>
-      <span class="symbol">
-        <span class="implicit shadowed">self</span><span class="result">: <span class="extype" name="scala.Any">Any</span></span>
-      </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt class="implicit">Implicit information</dt><dd>
-            This member is added by an implicit conversion from <a href="" class="extype" name="scalax.chart.Chart">Chart</a>[<span class="extype" name="scalax.chart.Chart.P">P</span>] to
-            <span class="extype" name="scala.runtime.StringFormat">StringFormat</span> performed by method any2stringfmt in scala.Predef.
-            
-          </dd><dt class="implicit">Shadowing</dt><dd>This implicitly inherited member is ambiguous. One or more implicitly inherited members have similar signatures, so calling this member may produce an ambiguous implicit conversion compiler error.<br />To access this member you can use a <a href="http://stackoverflow.com/questions/2087250/what-is-the-purpose-of-type-ascription-in-scala" target="_blank">type ascription</a>:<br /><div class="cmt"><pre>(chart: StringFormat).self</pre></div></dd><dt>Definition Classes</dt><dd>StringFormat</dd></dl></div>
-    </li></ol>
-            </div>
+        
 
-        <div id="values" class="values members">
-              <h3>Deprecated Value Members</h3>
-              <ol><li name="scala.Predef.any2ArrowAssoc#x" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="x:A"></a>
-      <a id="x:Chart[P]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="implicit shadowed deprecated" title="Deprecated: (Since version 2.10.0) Use leftOfArrow instead">x</span><span class="result">: <a href="" class="extype" name="scalax.chart.Chart">Chart</a>[<span class="extype" name="scalax.chart.Chart.P">P</span>]</span>
-      </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt class="implicit">Implicit information</dt><dd>
-            This member is added by an implicit conversion from <a href="" class="extype" name="scalax.chart.Chart">Chart</a>[<span class="extype" name="scalax.chart.Chart.P">P</span>] to
-            <span class="extype" name="scala.Predef.ArrowAssoc">ArrowAssoc</span>[<a href="" class="extype" name="scalax.chart.Chart">Chart</a>[<span class="extype" name="scalax.chart.Chart.P">P</span>]] performed by method any2ArrowAssoc in scala.Predef.
-            
-          </dd><dt class="implicit">Shadowing</dt><dd>This implicitly inherited member is ambiguous. One or more implicitly inherited members have similar signatures, so calling this member may produce an ambiguous implicit conversion compiler error.<br />To access this member you can use a <a href="http://stackoverflow.com/questions/2087250/what-is-the-purpose-of-type-ascription-in-scala" target="_blank">type ascription</a>:<br /><div class="cmt"><pre>(chart: ArrowAssoc[Chart[P]]).x</pre></div></dd><dt>Definition Classes</dt><dd>ArrowAssoc</dd><dt>Annotations</dt><dd>
-                <span class="name">@deprecated</span>
-              
-        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 2.10.0)</i> Use <code><u>leftOfArrow<code> instead</code></u></code></p></dd></dl></div>
-    </li><li name="scala.Predef.any2Ensuring#x" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="x:A"></a>
-      <a id="x:Chart[P]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="implicit shadowed deprecated" title="Deprecated: (Since version 2.10.0) Use resultOfEnsuring instead">x</span><span class="result">: <a href="" class="extype" name="scalax.chart.Chart">Chart</a>[<span class="extype" name="scalax.chart.Chart.P">P</span>]</span>
-      </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt class="implicit">Implicit information</dt><dd>
-            This member is added by an implicit conversion from <a href="" class="extype" name="scalax.chart.Chart">Chart</a>[<span class="extype" name="scalax.chart.Chart.P">P</span>] to
-            <span class="extype" name="scala.Predef.Ensuring">Ensuring</span>[<a href="" class="extype" name="scalax.chart.Chart">Chart</a>[<span class="extype" name="scalax.chart.Chart.P">P</span>]] performed by method any2Ensuring in scala.Predef.
-            
-          </dd><dt class="implicit">Shadowing</dt><dd>This implicitly inherited member is ambiguous. One or more implicitly inherited members have similar signatures, so calling this member may produce an ambiguous implicit conversion compiler error.<br />To access this member you can use a <a href="http://stackoverflow.com/questions/2087250/what-is-the-purpose-of-type-ascription-in-scala" target="_blank">type ascription</a>:<br /><div class="cmt"><pre>(chart: Ensuring[Chart[P]]).x</pre></div></dd><dt>Definition Classes</dt><dd>Ensuring</dd><dt>Annotations</dt><dd>
-                <span class="name">@deprecated</span>
-              
-        </dd><dt>Deprecated</dt><dd class="cmt"><p><i>(Since version 2.10.0)</i> Use <code><u>resultOfEnsuring<code> instead</code></u></code></p></dd></dl></div>
-    </li></ol>
-            </div>
+        
         </div>
 
         <div id="inheritedMembers">
-        <div class="parent" name="scalax.chart.StorableChart">
-              <h3>Inherited from <a href="StorableChart.html" class="extype" name="scalax.chart.StorableChart">StorableChart</a></h3>
-            </div><div class="parent" name="scalax.chart.WritableChart">
-              <h3>Inherited from <a href="WritableChart.html" class="extype" name="scalax.chart.WritableChart">WritableChart</a></h3>
-            </div><div class="parent" name="scalax.chart.EncodableChart">
-              <h3>Inherited from <a href="EncodableChart.html" class="extype" name="scalax.chart.EncodableChart">EncodableChart</a></h3>
+        <div class="parent" name="scala.swing.Publisher">
+              <h3>Inherited from <span class="extype" name="scala.swing.Publisher">Publisher</span></h3>
+            </div><div class="parent" name="scala.swing.Reactor">
+              <h3>Inherited from <span class="extype" name="scala.swing.Reactor">Reactor</span></h3>
             </div><div class="parent" name="scalax.chart.DisplayableChart">
-              <h3>Inherited from <a href="DisplayableChart.html" class="extype" name="scalax.chart.DisplayableChart">DisplayableChart</a></h3>
+              <h3>Inherited from <span class="extype" name="scalax.chart.DisplayableChart">DisplayableChart</span></h3>
+            </div><div class="parent" name="scalax.chart.DocMacros">
+              <h3>Inherited from <a href="DocMacros.html" class="extype" name="scalax.chart.DocMacros">DocMacros</a></h3>
             </div><div class="parent" name="scala.AnyRef">
               <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
             </div><div class="parent" name="scala.Any">
@@ -940,19 +837,19 @@
             </div>
         <div class="conversion" name="scala.Predef.any2stringadd">
               <h3>Inherited by implicit conversion any2stringadd from
-                <a href="" class="extype" name="scalax.chart.Chart">Chart</a>[<span class="extype" name="scalax.chart.Chart.P">P</span>] to <span class="extype" name="scala.runtime.StringAdd">StringAdd</span>
+                <a href="" class="extype" name="scalax.chart.Chart">Chart</a> to <span class="extype" name="scala.Predef.any2stringadd">any2stringadd</span>[<a href="" class="extype" name="scalax.chart.Chart">Chart</a>]
               </h3>
-            </div><div class="conversion" name="scala.Predef.any2stringfmt">
-              <h3>Inherited by implicit conversion any2stringfmt from
-                <a href="" class="extype" name="scalax.chart.Chart">Chart</a>[<span class="extype" name="scalax.chart.Chart.P">P</span>] to <span class="extype" name="scala.runtime.StringFormat">StringFormat</span>
+            </div><div class="conversion" name="scala.Predef.StringFormat">
+              <h3>Inherited by implicit conversion StringFormat from
+                <a href="" class="extype" name="scalax.chart.Chart">Chart</a> to <span class="extype" name="scala.Predef.StringFormat">StringFormat</span>[<a href="" class="extype" name="scalax.chart.Chart">Chart</a>]
               </h3>
-            </div><div class="conversion" name="scala.Predef.any2ArrowAssoc">
-              <h3>Inherited by implicit conversion any2ArrowAssoc from
-                <a href="" class="extype" name="scalax.chart.Chart">Chart</a>[<span class="extype" name="scalax.chart.Chart.P">P</span>] to <span class="extype" name="scala.Predef.ArrowAssoc">ArrowAssoc</span>[<a href="" class="extype" name="scalax.chart.Chart">Chart</a>[<span class="extype" name="scalax.chart.Chart.P">P</span>]]
+            </div><div class="conversion" name="scala.Predef.Ensuring">
+              <h3>Inherited by implicit conversion Ensuring from
+                <a href="" class="extype" name="scalax.chart.Chart">Chart</a> to <span class="extype" name="scala.Predef.Ensuring">Ensuring</span>[<a href="" class="extype" name="scalax.chart.Chart">Chart</a>]
               </h3>
-            </div><div class="conversion" name="scala.Predef.any2Ensuring">
-              <h3>Inherited by implicit conversion any2Ensuring from
-                <a href="" class="extype" name="scalax.chart.Chart">Chart</a>[<span class="extype" name="scalax.chart.Chart.P">P</span>] to <span class="extype" name="scala.Predef.Ensuring">Ensuring</span>[<a href="" class="extype" name="scalax.chart.Chart">Chart</a>[<span class="extype" name="scalax.chart.Chart.P">P</span>]]
+            </div><div class="conversion" name="scala.Predef.ArrowAssoc">
+              <h3>Inherited by implicit conversion ArrowAssoc from
+                <a href="" class="extype" name="scalax.chart.Chart">Chart</a> to <span class="extype" name="scala.Predef.ArrowAssoc">ArrowAssoc</span>[<a href="" class="extype" name="scalax.chart.Chart">Chart</a>]
               </h3>
             </div>
         </div>
@@ -969,6 +866,7 @@
       <div id="tooltip"></div>
 
       <div id="footer">  </div>
-      <script defer="defer" type="text/javascript" id="jquery-js" src="../../lib/jquery.js"></script><script defer="defer" type="text/javascript" id="jquery-ui-js" src="../../lib/jquery-ui.js"></script><script defer="defer" type="text/javascript" id="tools-tooltip-js" src="../../lib/tools.tooltip.js"></script><script defer="defer" type="text/javascript" id="template-js" src="../../lib/template.js"></script>
+
+
     </body>
       </html>

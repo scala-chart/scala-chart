@@ -1,0 +1,1108 @@
+<!DOCTYPE html >
+<html>
+        <head>
+          <title>Imports - scalax.chart.module.Imports</title>
+          <meta name="description" content="Imports - scalax.chart.module.Imports" />
+          <meta name="keywords" content="Imports scalax.chart.module.Imports" />
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+          
+      <link href="../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../../../lib/jquery.js" id="jquery-js"></script>
+      <script type="text/javascript" src="../../../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../../../lib/template.js"></script>
+      <script type="text/javascript" src="../../../lib/tools.tooltip.js"></script>
+      <script type="text/javascript" src="../../../lib/modernizr.custom.js"></script><script type="text/javascript" src="../../../lib/diagrams.js" id="diagrams-js"></script>
+      <script type="text/javascript">
+         if(top === self) {
+            var url = '../../../index.html';
+            var hash = 'scalax.chart.module.Imports';
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
+         }
+   	  </script>
+    
+        </head>
+        <body class="type">
+      <div id="definition">
+        <a href="Imports$.html" title="Go to companion"><img src="../../../lib/trait_to_object_big.png" /></a>
+        <p id="owner"><a href="../../package.html" class="extype" name="scalax">scalax</a>.<a href="../package.html" class="extype" name="scalax.chart">chart</a>.<a href="package.html" class="extype" name="scalax.chart.module">module</a></p>
+        <h1><a href="Imports$.html" title="Go to companion">Imports</a></h1>
+      </div>
+
+      <h4 id="signature" class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Imports</span><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Contains imports from other libraries, most notably
+<a href="http://www.jfree.org/jfreechart/" target="_blank">JFreeChart</a>.</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/wookietreiber/scala-chart/tree/develop/src/main/scala/scalax/chart/module/Imports.scala" target="_blank">Imports.scala</a></dd></dl><div class="toggleContainer block">
+          <span class="toggle">Linear Supertypes</span>
+          <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+        </div><div class="toggleContainer block">
+            <span class="toggle">Known Subclasses</span>
+            <div class="subClasses hiddenContent"><a href="BoxAndWhiskerChartFactories.html" class="extype" name="scalax.chart.module.BoxAndWhiskerChartFactories">BoxAndWhiskerChartFactories</a>, <a href="BoxAndWhiskerChartFactories$.html" class="extype" name="scalax.chart.module.BoxAndWhiskerChartFactories">BoxAndWhiskerChartFactories</a>, <a href="BoxAndWhiskerDatasetConversions$.html" class="extype" name="scalax.chart.module.BoxAndWhiskerDatasetConversions">BoxAndWhiskerDatasetConversions</a>, <a href="BoxAndWhiskerDatasetConversions.html" class="extype" name="scalax.chart.module.BoxAndWhiskerDatasetConversions">BoxAndWhiskerDatasetConversions</a>, <a href="CategoryDatasetConversions$.html" class="extype" name="scalax.chart.module.CategoryDatasetConversions">CategoryDatasetConversions</a>, <a href="CategoryDatasetConversions.html" class="extype" name="scalax.chart.module.CategoryDatasetConversions">CategoryDatasetConversions</a>, <a href="CategoryLabelGenerators$.html" class="extype" name="scalax.chart.module.CategoryLabelGenerators">CategoryLabelGenerators</a>, <a href="CategoryLabelGenerators.html" class="extype" name="scalax.chart.module.CategoryLabelGenerators">CategoryLabelGenerators</a>, <a href="CategoryToolTipGenerators.html" class="extype" name="scalax.chart.module.CategoryToolTipGenerators">CategoryToolTipGenerators</a>, <a href="CategoryToolTipGenerators$.html" class="extype" name="scalax.chart.module.CategoryToolTipGenerators">CategoryToolTipGenerators</a>, <a href="ChartFactories.html" class="extype" name="scalax.chart.module.ChartFactories">ChartFactories</a>, <a href="ChartFactories$.html" class="extype" name="scalax.chart.module.ChartFactories">ChartFactories</a>, <a href="Charting$.html" class="extype" name="scalax.chart.module.Charting">Charting</a>, <a href="Charting.html" class="extype" name="scalax.chart.module.Charting">Charting</a>, <a href="DatasetConversions$.html" class="extype" name="scalax.chart.module.DatasetConversions">DatasetConversions</a>, <a href="DatasetConversions.html" class="extype" name="scalax.chart.module.DatasetConversions">DatasetConversions</a>, <a href="Imports$.html" class="extype" name="scalax.chart.module.Imports">Imports</a>, <a href="LabelGenerators.html" class="extype" name="scalax.chart.module.LabelGenerators">LabelGenerators</a>, <a href="LabelGenerators$.html" class="extype" name="scalax.chart.module.LabelGenerators">LabelGenerators</a>, <a href="MarkerConversions$.html" class="extype" name="scalax.chart.module.MarkerConversions">MarkerConversions</a>, <a href="MarkerConversions.html" class="extype" name="scalax.chart.module.MarkerConversions">MarkerConversions</a>, <a href="PieDatasetConversions.html" class="extype" name="scalax.chart.module.PieDatasetConversions">PieDatasetConversions</a>, <a href="PieDatasetConversions$.html" class="extype" name="scalax.chart.module.PieDatasetConversions">PieDatasetConversions</a>, <a href="PieLabelGenerators$.html" class="extype" name="scalax.chart.module.PieLabelGenerators">PieLabelGenerators</a>, <a href="PieLabelGenerators.html" class="extype" name="scalax.chart.module.PieLabelGenerators">PieLabelGenerators</a>, <a href="PieToolTipGenerators.html" class="extype" name="scalax.chart.module.PieToolTipGenerators">PieToolTipGenerators</a>, <a href="PieToolTipGenerators$.html" class="extype" name="scalax.chart.module.PieToolTipGenerators">PieToolTipGenerators</a>, <a href="RichChartingCollections.html" class="extype" name="scalax.chart.module.RichChartingCollections">RichChartingCollections</a>, <a href="RichChartingCollections$.html" class="extype" name="scalax.chart.module.RichChartingCollections">RichChartingCollections</a>, <a href="RichPlot.html" class="extype" name="scalax.chart.module.RichPlot">RichPlot</a>, <a href="RichPlot$.html" class="extype" name="scalax.chart.module.RichPlot">RichPlot</a>, <a href="TableXYDatasetConversions.html" class="extype" name="scalax.chart.module.TableXYDatasetConversions">TableXYDatasetConversions</a>, <a href="TableXYDatasetConversions$.html" class="extype" name="scalax.chart.module.TableXYDatasetConversions">TableXYDatasetConversions</a>, <a href="ToolTipGenerators.html" class="extype" name="scalax.chart.module.ToolTipGenerators">ToolTipGenerators</a>, <a href="ToolTipGenerators$.html" class="extype" name="scalax.chart.module.ToolTipGenerators">ToolTipGenerators</a>, <a href="XYDatasetConversions.html" class="extype" name="scalax.chart.module.XYDatasetConversions">XYDatasetConversions</a>, <a href="XYDatasetConversions$.html" class="extype" name="scalax.chart.module.XYDatasetConversions">XYDatasetConversions</a>, <a href="XYLabelGenerators$.html" class="extype" name="scalax.chart.module.XYLabelGenerators">XYLabelGenerators</a>, <a href="XYLabelGenerators.html" class="extype" name="scalax.chart.module.XYLabelGenerators">XYLabelGenerators</a>, <a href="XYToolTipGenerators.html" class="extype" name="scalax.chart.module.XYToolTipGenerators">XYToolTipGenerators</a>, <a href="XYToolTipGenerators$.html" class="extype" name="scalax.chart.module.XYToolTipGenerators">XYToolTipGenerators</a>, <a href="../api$.html" class="extype" name="scalax.chart.api">api</a></div>
+          </div><div class="toggleContainer block diagram-container" id="inheritance-diagram-container">
+                <span class="toggle diagram-link">Type Hierarchy</span>
+                <a href="http://docs.scala-lang.org/overviews/scaladoc/usage.html#diagrams" target="_blank" class="diagram-help">Learn more about scaladoc diagrams</a>
+                <div class="diagram" id="inheritance-diagram"><svg class="class-diagram" id="graph35" viewBox="0.00 0.00 1421.00 158.00" height="158pt" width="1421pt" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"><g transform="scale(1 1) rotate(0) translate(4 154)" class="graph" id="graph0"><polygon points="-4,4 -4,-154 1417,-154 1417,4 -4,4" stroke="none" fill="white"></polygon><g class="cluster" id="clust1"></g><g class="cluster" id="clust2"></g><!-- node0 --><g class="node this trait" id="graph35_0"><g id="a_this trait|graph35_0"><a xlink:title="scalax.chart.module.Imports (this trait)" xlink:href="#inheritance-diagram"><polygon points="729,-88 651,-88 651,-62 729,-62 729,-88" stroke="#37657d" fill="#498aad"></polygon><image xlink:href="../../../lib/trait_diagram.png" y="-81" x="663" preserveAspectRatio="xMinYMin meet" height="12px" width="12px"></image><text fill="#ffffff" font-size="10.00" font-family="Arial" y="-72.5" x="683" text-anchor="start">Imports</text></a></g></g><!-- node1 --><g class="node trait" id="graph35_1"><g id="a_trait|graph35_1"><a xlink:title="scalax.chart.module.CategoryLabelGenerators" xlink:href="CategoryLabelGenerators.html#inheritance-diagram"><polygon points="162.25,-26 -0.25,-26 -0.25,-0 162.25,-0 162.25,-26" stroke="#37657d" fill="#498aad"></polygon><image xlink:href="../../../lib/trait_diagram.png" y="-19" x="12" preserveAspectRatio="xMinYMin meet" height="12px" width="12px"></image><text fill="#ffffff" font-size="10.00" font-family="Arial" y="-10.5" x="32" text-anchor="start">CategoryLabelGenerators</text></a></g></g><!-- node0&#45;&gt;node1 --><g class="edge inheritance" id="graph35_0_1"><g id="a_inheritance|graph35_0_1"><a xlink:title="CategoryLabelGenerators is a subtype of Imports"><path d="M645.663,-70.5061C555.935,-63.3015 346.442,-45.8009 171,-26 168.181,-25.6818 165.313,-25.349 162.417,-25.0052" stroke="#d4d4d4" fill="none"></path><polygon points="645.757,-72.2692 650.881,-70.9244 646.037,-68.7804 645.757,-72.2692" stroke="#d4d4d4" fill="none"></polygon></a></g></g><!-- node2 --><g class="node trait" id="graph35_2"><g id="a_trait|graph35_2"><a xlink:title="scalax.chart.module.CategoryToolTipGenerators" xlink:href="CategoryToolTipGenerators.html#inheritance-diagram"><polygon points="355.25,-26 180.75,-26 180.75,-0 355.25,-0 355.25,-26" stroke="#37657d" fill="#498aad"></polygon><image xlink:href="../../../lib/trait_diagram.png" y="-19" x="193" preserveAspectRatio="xMinYMin meet" height="12px" width="12px"></image><text fill="#ffffff" font-size="10.00" font-family="Arial" y="-10.5" x="213" text-anchor="start">CategoryToolTipGenerators</text></a></g></g><!-- node0&#45;&gt;node2 --><g class="edge inheritance" id="graph35_0_2"><g id="a_inheritance|graph35_0_2"><a xlink:title="CategoryToolTipGenerators is a subtype of Imports"><path d="M645.39,-67.6573C575.988,-57.7897 440.979,-38.5941 352.679,-26.0397" stroke="#d4d4d4" fill="none"></path><polygon points="645.482,-69.4379 650.678,-68.4092 645.974,-65.9727 645.482,-69.4379" stroke="#d4d4d4" fill="none"></polygon></a></g></g><!-- node3 --><g class="node object" id="graph35_3"><g id="a_object|graph35_3"><a xlink:title="scalax.chart.module.Imports" xlink:href="Imports$.html#inheritance-diagram"><polygon points="452,-26 374,-26 374,-0 452,-0 452,-26" stroke="#102966" fill="#3556a7"></polygon><image xlink:href="../../../lib/object_diagram.png" y="-19" x="386" preserveAspectRatio="xMinYMin meet" height="12px" width="12px"></image><text fill="#ffffff" font-size="10.00" font-family="Arial" y="-10.5" x="406" text-anchor="start">Imports</text></a></g></g><!-- node0&#45;&gt;node3 --><g class="edge inheritance" id="graph35_0_3"><g id="a_inheritance|graph35_0_3"><a xlink:title="Imports is a subtype of Imports"><path d="M645.657,-65.23C599.445,-55.9677 524.982,-40.6975 461,-26 458.07,-25.3269 455.044,-24.6136 452.003,-23.8836" stroke="#d4d4d4" fill="none"></path><polygon points="645.348,-66.9528 650.594,-66.2183 646.035,-63.5209 645.348,-66.9528" stroke="#d4d4d4" fill="none"></polygon></a></g></g><!-- node4 --><g class="node trait" id="graph35_4"><g id="a_trait|graph35_4"><a xlink:title="scalax.chart.module.MarkerConversions" xlink:href="MarkerConversions.html#inheritance-diagram"><polygon points="604,-26 470,-26 470,-0 604,-0 604,-26" stroke="#37657d" fill="#498aad"></polygon><image xlink:href="../../../lib/trait_diagram.png" y="-19" x="482" preserveAspectRatio="xMinYMin meet" height="12px" width="12px"></image><text fill="#ffffff" font-size="10.00" font-family="Arial" y="-10.5" x="502" text-anchor="start">MarkerConversions</text></a></g></g><!-- node0&#45;&gt;node4 --><g class="edge inheritance" id="graph35_0_4"><g id="a_inheritance|graph35_0_4"><a xlink:title="MarkerConversions is a subtype of Imports"><path d="M654.242,-59.9773C627.968,-49.6739 592.642,-35.8202 567.654,-26.0213" stroke="#d4d4d4" fill="none"></path><polygon points="653.744,-61.6618 659.038,-61.8581 655.022,-58.4034 653.744,-61.6618" stroke="#d4d4d4" fill="none"></polygon></a></g></g><!-- node5 --><g class="node trait" id="graph35_5"><g id="a_trait|graph35_5"><a xlink:title="scalax.chart.module.PieLabelGenerators" xlink:href="PieLabelGenerators.html#inheritance-diagram"><polygon points="758,-26 622,-26 622,-0 758,-0 758,-26" stroke="#37657d" fill="#498aad"></polygon><image xlink:href="../../../lib/trait_diagram.png" y="-19" x="634" preserveAspectRatio="xMinYMin meet" height="12px" width="12px"></image><text fill="#ffffff" font-size="10.00" font-family="Arial" y="-10.5" x="654" text-anchor="start">PieLabelGenerators</text></a></g></g><!-- node0&#45;&gt;node5 --><g class="edge inheritance" id="graph35_0_5"><g id="a_inheritance|graph35_0_5"><a xlink:title="PieLabelGenerators is a subtype of Imports"><path d="M690,-56.6826C690,-46.8961 690,-34.9026 690,-26.1238" stroke="#d4d4d4" fill="none"></path><polygon points="688.25,-56.8581 690,-61.8581 691.75,-56.8581 688.25,-56.8581" stroke="#d4d4d4" fill="none"></polygon></a></g></g><!-- node6 --><g class="node trait" id="graph35_6"><g id="a_trait|graph35_6"><a xlink:title="scalax.chart.module.PieToolTipGenerators" xlink:href="PieToolTipGenerators.html#inheritance-diagram"><polygon points="924,-26 776,-26 776,-0 924,-0 924,-26" stroke="#37657d" fill="#498aad"></polygon><image xlink:href="../../../lib/trait_diagram.png" y="-19" x="788" preserveAspectRatio="xMinYMin meet" height="12px" width="12px"></image><text fill="#ffffff" font-size="10.00" font-family="Arial" y="-10.5" x="808" text-anchor="start">PieToolTipGenerators</text></a></g></g><!-- node0&#45;&gt;node6 --><g class="edge inheritance" id="graph35_0_6"><g id="a_inheritance|graph35_0_6"><a xlink:title="PieToolTipGenerators is a subtype of Imports"><path d="M727.394,-59.9773C754.87,-49.6739 791.813,-35.8202 817.943,-26.0213" stroke="#d4d4d4" fill="none"></path><polygon points="726.446,-58.4638 722.378,-61.8581 727.675,-61.741 726.446,-58.4638" stroke="#d4d4d4" fill="none"></polygon></a></g></g><!-- node7 --><g class="node trait" id="graph35_7"><g id="a_trait|graph35_7"><a xlink:title="scalax.chart.module.RichChartingCollections" xlink:href="RichChartingCollections.html#inheritance-diagram"><polygon points="1095.25,-26 942.75,-26 942.75,-0 1095.25,-0 1095.25,-26" stroke="#37657d" fill="#498aad"></polygon><image xlink:href="../../../lib/trait_diagram.png" y="-19" x="955" preserveAspectRatio="xMinYMin meet" height="12px" width="12px"></image><text fill="#ffffff" font-size="10.00" font-family="Arial" y="-10.5" x="975" text-anchor="start">RichChartingCollections</text></a></g></g><!-- node0&#45;&gt;node7 --><g class="edge inheritance" id="graph35_0_7"><g id="a_inheritance|graph35_0_7"><a xlink:title="RichChartingCollections is a subtype of Imports"><path d="M734.005,-65.9748C790.196,-55.7273 887.929,-37.9036 953.042,-26.0289" stroke="#d4d4d4" fill="none"></path><polygon points="733.637,-64.2629 729.033,-66.8816 734.265,-67.7061 733.637,-64.2629" stroke="#d4d4d4" fill="none"></polygon></a></g></g><!-- node8 --><g class="node trait" id="graph35_8"><g id="a_trait|graph35_8"><a xlink:title="scalax.chart.module.XYLabelGenerators" xlink:href="XYLabelGenerators.html#inheritance-diagram"><polygon points="1248.25,-26 1113.75,-26 1113.75,-0 1248.25,-0 1248.25,-26" stroke="#37657d" fill="#498aad"></polygon><image xlink:href="../../../lib/trait_diagram.png" y="-19" x="1126" preserveAspectRatio="xMinYMin meet" height="12px" width="12px"></image><text fill="#ffffff" font-size="10.00" font-family="Arial" y="-10.5" x="1146" text-anchor="start">XYLabelGenerators</text></a></g></g><!-- node0&#45;&gt;node8 --><g class="edge inheritance" id="graph35_0_8"><g id="a_inheritance|graph35_0_8"><a xlink:title="XYLabelGenerators is a subtype of Imports"><path d="M734.483,-69.4205C810.386,-61.477 969.741,-44.2377 1104,-26 1107.08,-25.5811 1110.23,-25.1407 1113.42,-24.6859" stroke="#d4d4d4" fill="none"></path><polygon points="733.955,-67.7161 729.163,-69.9762 734.318,-71.1971 733.955,-67.7161" stroke="#d4d4d4" fill="none"></polygon></a></g></g><!-- node9 --><g class="node trait" id="graph35_9"><g id="a_trait|graph35_9"><a xlink:title="scalax.chart.module.XYToolTipGenerators" xlink:href="XYToolTipGenerators.html#inheritance-diagram"><polygon points="1413.25,-26 1266.75,-26 1266.75,-0 1413.25,-0 1413.25,-26" stroke="#37657d" fill="#498aad"></polygon><image xlink:href="../../../lib/trait_diagram.png" y="-19" x="1279" preserveAspectRatio="xMinYMin meet" height="12px" width="12px"></image><text fill="#ffffff" font-size="10.00" font-family="Arial" y="-10.5" x="1299" text-anchor="start">XYToolTipGenerators</text></a></g></g><!-- node0&#45;&gt;node9 --><g class="edge inheritance" id="graph35_0_9"><g id="a_inheritance|graph35_0_9"><a xlink:title="XYToolTipGenerators is a subtype of Imports"><path d="M734.26,-71.1478C829.859,-64.7908 1062.71,-48.2495 1257,-26 1260.18,-25.6356 1263.43,-25.2452 1266.71,-24.8359" stroke="#d4d4d4" fill="none"></path><polygon points="734.135,-69.4021 729.262,-71.4792 734.367,-72.8945 734.135,-69.4021" stroke="#d4d4d4" fill="none"></polygon></a></g></g><!-- node10 --><g class="node class" id="graph35_10"><g id="a_class|graph35_10"><a xlink:title="scala.AnyRef"><polygon points="729,-150 651,-150 651,-124 729,-124 729,-150" stroke="#115f3b" fill="#0a955b"></polygon><image xlink:href="../../../lib/class_diagram.png" y="-143" x="663" preserveAspectRatio="xMinYMin meet" height="12px" width="12px"></image><text fill="#ffffff" font-size="10.00" font-family="Arial" y="-134.5" x="683" text-anchor="start">AnyRef</text></a></g></g><!-- node10&#45;&gt;node0 --><g class="edge inheritance" id="graph35_10_0"><g id="a_inheritance|graph35_10_0"><a xlink:title="Imports is a subtype of AnyRef"><path d="M690,-118.683C690,-108.896 690,-96.9026 690,-88.1238" stroke="#d4d4d4" fill="none"></path><polygon points="688.25,-118.858 690,-123.858 691.75,-118.858 688.25,-118.858" stroke="#d4d4d4" fill="none"></polygon></a></g></g></g></svg></div>
+              </div></div>
+        
+
+      <div id="mbrsel">
+        <div id="textfilter"><span class="pre"></span><span class="input"><input id="mbrsel-input" type="text" accesskey="/" /></span><span class="post"></span></div>
+        <div id="order">
+              <span class="filtertype">Ordering</span>
+              <ol>
+                
+                <li class="alpha in"><span>Alphabetic</span></li>
+                <li class="inherit out"><span>By inheritance</span></li>
+              </ol>
+            </div>
+        <div id="ancestors">
+                <span class="filtertype">Inherited<br />
+                </span>
+                <ol id="linearization">
+                  <li class="in" name="scalax.chart.module.Imports"><span>Imports</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                </ol>
+              </div><div id="ancestors">
+                <span class="filtertype">Implicitly<br />
+                </span>
+                <ol id="implicits"> <li class="in" name="scala.Predef.any2stringadd" data-hidden="true"><span>by any2stringadd</span></li><li class="in" name="scala.Predef.StringFormat" data-hidden="true"><span>by StringFormat</span></li><li class="in" name="scala.Predef.Ensuring" data-hidden="true"><span>by Ensuring</span></li><li class="in" name="scala.Predef.ArrowAssoc" data-hidden="true"><span>by ArrowAssoc</span></li>
+                </ol>
+              </div><div id="ancestors">
+            <span class="filtertype"></span>
+            <ol>
+              <li class="hideall out"><span>Hide All</span></li>
+              <li class="showall in"><span>Show all</span></li>
+            </ol>
+            <a href="http://docs.scala-lang.org/overviews/scaladoc/usage.html#members" target="_blank">Learn more about member selection</a>
+          </div>
+        <div id="visbl">
+            <span class="filtertype">Visibility</span>
+            <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+          </div>
+      </div>
+
+      <div id="template">
+        <div id="allMembers">
+        
+
+        <div id="types" class="types members">
+              <h3>Type Members</h3>
+              <ol><li name="scalax.chart.module.Imports.BoxAndWhiskerCategoryDataset" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="BoxAndWhiskerCategoryDataset=org.jfree.data.statistics.BoxAndWhiskerCategoryDataset"></a>
+      <a id="BoxAndWhiskerCategoryDataset:BoxAndWhiskerCategoryDataset"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">BoxAndWhiskerCategoryDataset</span><span class="result"> = <span class="extype" name="org.jfree.data.statistics.BoxAndWhiskerCategoryDataset">org.jfree.data.statistics.BoxAndWhiskerCategoryDataset</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scalax.chart.module.Imports.BoxAndWhiskerXYDataset" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="BoxAndWhiskerXYDataset=org.jfree.data.statistics.BoxAndWhiskerXYDataset"></a>
+      <a id="BoxAndWhiskerXYDataset:BoxAndWhiskerXYDataset"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">BoxAndWhiskerXYDataset</span><span class="result"> = <span class="extype" name="org.jfree.data.statistics.BoxAndWhiskerXYDataset">org.jfree.data.statistics.BoxAndWhiskerXYDataset</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scalax.chart.module.Imports.CategoryDataset" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="CategoryDataset=org.jfree.data.category.CategoryDataset"></a>
+      <a id="CategoryDataset:CategoryDataset"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">CategoryDataset</span><span class="result"> = <span class="extype" name="org.jfree.data.category.CategoryDataset">org.jfree.data.category.CategoryDataset</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scalax.chart.module.Imports.CategoryLabelGenerator" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="CategoryLabelGenerator=(Imports.this.CategoryDataset,Comparable[_],Comparable[_])=&gt;String"></a>
+      <a id="CategoryLabelGenerator:CategoryLabelGenerator"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">CategoryLabelGenerator</span><span class="result"> = (<a href="#CategoryDataset=org.jfree.data.category.CategoryDataset" class="extmbr" name="scalax.chart.module.Imports.CategoryDataset">CategoryDataset</a>, <span class="extype" name="java.lang.Comparable">Comparable</span>[_], <span class="extype" name="java.lang.Comparable">Comparable</span>[_]) ⇒ <span class="extype" name="scala.Predef.String">String</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Function alias for creating item labels for category charts.</p>
+    </li><li name="scalax.chart.module.Imports.CategoryMarker" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="CategoryMarker=org.jfree.chart.plot.CategoryMarker"></a>
+      <a id="CategoryMarker:CategoryMarker"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">CategoryMarker</span><span class="result"> = <span class="extype" name="org.jfree.chart.plot.CategoryMarker">org.jfree.chart.plot.CategoryMarker</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scalax.chart.module.Imports.CategoryPlot" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="CategoryPlot=org.jfree.chart.plot.CategoryPlot"></a>
+      <a id="CategoryPlot:CategoryPlot"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">CategoryPlot</span><span class="result"> = <span class="extype" name="org.jfree.chart.plot.CategoryPlot">org.jfree.chart.plot.CategoryPlot</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scalax.chart.module.Imports.CategoryToolTipGenerator" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="CategoryToolTipGenerator=(Imports.this.CategoryDataset,Comparable[_],Comparable[_])=&gt;String"></a>
+      <a id="CategoryToolTipGenerator:CategoryToolTipGenerator"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">CategoryToolTipGenerator</span><span class="result"> = (<a href="#CategoryDataset=org.jfree.data.category.CategoryDataset" class="extmbr" name="scalax.chart.module.Imports.CategoryDataset">CategoryDataset</a>, <span class="extype" name="java.lang.Comparable">Comparable</span>[_], <span class="extype" name="java.lang.Comparable">Comparable</span>[_]) ⇒ <span class="extype" name="scala.Predef.String">String</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Function alias for creating tooltips for category charts.</p>
+    </li><li name="scalax.chart.module.Imports.ChartTheme" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ChartTheme=org.jfree.chart.ChartTheme"></a>
+      <a id="ChartTheme:ChartTheme"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ChartTheme</span><span class="result"> = <span class="extype" name="org.jfree.chart.ChartTheme">org.jfree.chart.ChartTheme</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scalax.chart.module.Imports.Color" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Color=java.awt.Color"></a>
+      <a id="Color:Color"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Color</span><span class="result"> = <span class="extype" name="java.awt.Color">java.awt.Color</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scalax.chart.module.Imports.IntervalMarker" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="IntervalMarker=org.jfree.chart.plot.IntervalMarker"></a>
+      <a id="IntervalMarker:IntervalMarker"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">IntervalMarker</span><span class="result"> = <span class="extype" name="org.jfree.chart.plot.IntervalMarker">org.jfree.chart.plot.IntervalMarker</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scalax.chart.module.Imports.IntervalXYDataset" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="IntervalXYDataset=org.jfree.data.xy.IntervalXYDataset"></a>
+      <a id="IntervalXYDataset:IntervalXYDataset"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">IntervalXYDataset</span><span class="result"> = <span class="extype" name="org.jfree.data.xy.IntervalXYDataset">org.jfree.data.xy.IntervalXYDataset</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scalax.chart.module.Imports.JFreeChart" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="JFreeChart=org.jfree.chart.JFreeChart"></a>
+      <a id="JFreeChart:JFreeChart"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">JFreeChart</span><span class="result"> = <span class="extype" name="org.jfree.chart.JFreeChart">org.jfree.chart.JFreeChart</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scalax.chart.module.Imports.Layer" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Layer=org.jfree.ui.Layer"></a>
+      <a id="Layer:Layer"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Layer</span><span class="result"> = <span class="extype" name="org.jfree.ui.Layer">org.jfree.ui.Layer</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scalax.chart.module.Imports.Marker" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Marker=org.jfree.chart.plot.Marker"></a>
+      <a id="Marker:Marker"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Marker</span><span class="result"> = <span class="extype" name="org.jfree.chart.plot.Marker">org.jfree.chart.plot.Marker</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scalax.chart.module.Imports.MultiplePiePlot" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="MultiplePiePlot=org.jfree.chart.plot.MultiplePiePlot"></a>
+      <a id="MultiplePiePlot:MultiplePiePlot"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">MultiplePiePlot</span><span class="result"> = <span class="extype" name="org.jfree.chart.plot.MultiplePiePlot">org.jfree.chart.plot.MultiplePiePlot</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scalax.chart.module.Imports.Orientation" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Orientation=swing.Orientation.Value"></a>
+      <a id="Orientation:Orientation"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Orientation</span><span class="result"> = <span class="extype" name="scala.Enumeration.Value">scala.swing.Orientation.Value</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scalax.chart.module.Imports.Paint" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Paint=java.awt.Paint"></a>
+      <a id="Paint:Paint"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Paint</span><span class="result"> = <span class="extype" name="java.awt.Paint">java.awt.Paint</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scalax.chart.module.Imports.PieDataset" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="PieDataset=org.jfree.data.general.PieDataset"></a>
+      <a id="PieDataset:PieDataset"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">PieDataset</span><span class="result"> = <span class="extype" name="org.jfree.data.general.PieDataset">org.jfree.data.general.PieDataset</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scalax.chart.module.Imports.PieLabelGenerator" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="PieLabelGenerator=(Imports.this.PieDataset,Comparable[_])=&gt;String"></a>
+      <a id="PieLabelGenerator:PieLabelGenerator"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">PieLabelGenerator</span><span class="result"> = (<a href="#PieDataset=org.jfree.data.general.PieDataset" class="extmbr" name="scalax.chart.module.Imports.PieDataset">PieDataset</a>, <span class="extype" name="java.lang.Comparable">Comparable</span>[_]) ⇒ <span class="extype" name="scala.Predef.String">String</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Function alias for creating item labels for pie charts.</p>
+    </li><li name="scalax.chart.module.Imports.PiePlot" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="PiePlot=org.jfree.chart.plot.PiePlot"></a>
+      <a id="PiePlot:PiePlot"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">PiePlot</span><span class="result"> = <span class="extype" name="org.jfree.chart.plot.PiePlot">org.jfree.chart.plot.PiePlot</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scalax.chart.module.Imports.PiePlot3D" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="PiePlot3D=org.jfree.chart.plot.PiePlot3D"></a>
+      <a id="PiePlot3D:PiePlot3D"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">PiePlot3D</span><span class="result"> = <span class="extype" name="org.jfree.chart.plot.PiePlot3D">org.jfree.chart.plot.PiePlot3D</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scalax.chart.module.Imports.PieToolTipGenerator" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="PieToolTipGenerator=(Imports.this.PieDataset,Comparable[_])=&gt;String"></a>
+      <a id="PieToolTipGenerator:PieToolTipGenerator"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">PieToolTipGenerator</span><span class="result"> = (<a href="#PieDataset=org.jfree.data.general.PieDataset" class="extmbr" name="scalax.chart.module.Imports.PieDataset">PieDataset</a>, <span class="extype" name="java.lang.Comparable">Comparable</span>[_]) ⇒ <span class="extype" name="scala.Predef.String">String</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Function alias for creating tooltips for pie charts.</p>
+    </li><li name="scalax.chart.module.Imports.RingPlot" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="RingPlot=org.jfree.chart.plot.RingPlot"></a>
+      <a id="RingPlot:RingPlot"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">RingPlot</span><span class="result"> = <span class="extype" name="org.jfree.chart.plot.RingPlot">org.jfree.chart.plot.RingPlot</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scalax.chart.module.Imports.TableXYDataset" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="TableXYDataset=org.jfree.data.xy.TableXYDataset"></a>
+      <a id="TableXYDataset:TableXYDataset"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">TableXYDataset</span><span class="result"> = <span class="extype" name="org.jfree.data.xy.TableXYDataset">org.jfree.data.xy.TableXYDataset</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scalax.chart.module.Imports.TimePeriodValues" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="TimePeriodValues=org.jfree.data.time.TimePeriodValues"></a>
+      <a id="TimePeriodValues:TimePeriodValues"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">TimePeriodValues</span><span class="result"> = <span class="extype" name="org.jfree.data.time.TimePeriodValues">org.jfree.data.time.TimePeriodValues</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scalax.chart.module.Imports.TimePeriodValuesCollection" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="TimePeriodValuesCollection=org.jfree.data.time.TimePeriodValuesCollection"></a>
+      <a id="TimePeriodValuesCollection:TimePeriodValuesCollection"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">TimePeriodValuesCollection</span><span class="result"> = <span class="extype" name="org.jfree.data.time.TimePeriodValuesCollection">org.jfree.data.time.TimePeriodValuesCollection</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scalax.chart.module.Imports.TimeSeries" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="TimeSeries=org.jfree.data.time.TimeSeries"></a>
+      <a id="TimeSeries:TimeSeries"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">TimeSeries</span><span class="result"> = <span class="extype" name="org.jfree.data.time.TimeSeries">org.jfree.data.time.TimeSeries</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scalax.chart.module.Imports.TimeSeriesCollection" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="TimeSeriesCollection=org.jfree.data.time.TimeSeriesCollection"></a>
+      <a id="TimeSeriesCollection:TimeSeriesCollection"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">TimeSeriesCollection</span><span class="result"> = <span class="extype" name="org.jfree.data.time.TimeSeriesCollection">org.jfree.data.time.TimeSeriesCollection</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scalax.chart.module.Imports.TimeTableXYDataset" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="TimeTableXYDataset=org.jfree.data.time.TimeTableXYDataset"></a>
+      <a id="TimeTableXYDataset:TimeTableXYDataset"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">TimeTableXYDataset</span><span class="result"> = <span class="extype" name="org.jfree.data.time.TimeTableXYDataset">org.jfree.data.time.TimeTableXYDataset</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scalax.chart.module.Imports.ValueMarker" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ValueMarker=org.jfree.chart.plot.ValueMarker"></a>
+      <a id="ValueMarker:ValueMarker"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ValueMarker</span><span class="result"> = <span class="extype" name="org.jfree.chart.plot.ValueMarker">org.jfree.chart.plot.ValueMarker</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scalax.chart.module.Imports.XYDataset" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="XYDataset=org.jfree.data.xy.XYDataset"></a>
+      <a id="XYDataset:XYDataset"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">XYDataset</span><span class="result"> = <span class="extype" name="org.jfree.data.xy.XYDataset">org.jfree.data.xy.XYDataset</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scalax.chart.module.Imports.XYLabelGenerator" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="XYLabelGenerator=(Imports.this.XYDataset,Comparable[_],Int)=&gt;String"></a>
+      <a id="XYLabelGenerator:XYLabelGenerator"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">XYLabelGenerator</span><span class="result"> = (<a href="#XYDataset=org.jfree.data.xy.XYDataset" class="extmbr" name="scalax.chart.module.Imports.XYDataset">XYDataset</a>, <span class="extype" name="java.lang.Comparable">Comparable</span>[_], <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Int" class="extype" target="_top">Int</a>) ⇒ <span class="extype" name="scala.Predef.String">String</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Function alias for creating item labels for xy charts.</p>
+    </li><li name="scalax.chart.module.Imports.XYPlot" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="XYPlot=org.jfree.chart.plot.XYPlot"></a>
+      <a id="XYPlot:XYPlot"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">XYPlot</span><span class="result"> = <span class="extype" name="org.jfree.chart.plot.XYPlot">org.jfree.chart.plot.XYPlot</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scalax.chart.module.Imports.XYSeries" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="XYSeries=org.jfree.data.xy.XYSeries"></a>
+      <a id="XYSeries:XYSeries"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">XYSeries</span><span class="result"> = <span class="extype" name="org.jfree.data.xy.XYSeries">org.jfree.data.xy.XYSeries</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scalax.chart.module.Imports.XYSeriesCollection" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="XYSeriesCollection=org.jfree.data.xy.XYSeriesCollection"></a>
+      <a id="XYSeriesCollection:XYSeriesCollection"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">XYSeriesCollection</span><span class="result"> = <span class="extype" name="org.jfree.data.xy.XYSeriesCollection">org.jfree.data.xy.XYSeriesCollection</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scalax.chart.module.Imports.XYToolTipGenerator" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="XYToolTipGenerator=(Imports.this.XYDataset,Comparable[_],Int)=&gt;String"></a>
+      <a id="XYToolTipGenerator:XYToolTipGenerator"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">XYToolTipGenerator</span><span class="result"> = (<a href="#XYDataset=org.jfree.data.xy.XYDataset" class="extmbr" name="scalax.chart.module.Imports.XYDataset">XYDataset</a>, <span class="extype" name="java.lang.Comparable">Comparable</span>[_], <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Int" class="extype" target="_top">Int</a>) ⇒ <span class="extype" name="scala.Predef.String">String</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Function alias for creating tooltips for xy charts.</p>
+    </li><li name="scalax.chart.module.Imports.YIntervalSeries" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="YIntervalSeries=org.jfree.data.xy.YIntervalSeries"></a>
+      <a id="YIntervalSeries:YIntervalSeries"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">YIntervalSeries</span><span class="result"> = <span class="extype" name="org.jfree.data.xy.YIntervalSeries">org.jfree.data.xy.YIntervalSeries</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="scalax.chart.module.Imports.YIntervalSeriesCollection" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="YIntervalSeriesCollection=org.jfree.data.xy.YIntervalSeriesCollection"></a>
+      <a id="YIntervalSeriesCollection:YIntervalSeriesCollection"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">YIntervalSeriesCollection</span><span class="result"> = <span class="extype" name="org.jfree.data.xy.YIntervalSeriesCollection">org.jfree.data.xy.YIntervalSeriesCollection</span></span>
+      </span>
+      </h4>
+      
+    </li></ol>
+            </div>
+
+        
+
+        <div id="values" class="values members">
+              <h3>Value Members</h3>
+              <ol><li name="scala.AnyRef#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="!=(x$1:Any):Boolean"></a>
+      <a id="!=(Any):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.AnyRef###" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="##():Int"></a>
+      <a id="##():Int"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $hash$hash" class="name">##</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Int" class="extype" target="_top">Int</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.Predef.any2stringadd#+" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="+(other:String):String"></a>
+      <a id="+(String):String"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $plus" class="implicit">+</span><span class="params">(<span name="other">other: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt class="implicit">Implicit information</dt><dd>
+            This member is added by an implicit conversion from <a href="" class="extype" name="scalax.chart.module.Imports">Imports</a> to
+            <span class="extype" name="scala.Predef.any2stringadd">any2stringadd</span>[<a href="" class="extype" name="scalax.chart.module.Imports">Imports</a>] performed by method any2stringadd in scala.Predef.
+            
+          </dd><dt>Definition Classes</dt><dd>any2stringadd</dd></dl></div>
+    </li><li name="scala.Predef.ArrowAssoc#-&gt;" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="-&gt;[B](y:B):(A,B)"></a>
+      <a id="-&gt;[B](B):(Imports,B)"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $minus$greater" class="implicit">-&gt;</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="y">y: <span class="extype" name="scala.Predef.ArrowAssoc.-&gt;.B">B</span></span>)</span><span class="result">: (<a href="" class="extype" name="scalax.chart.module.Imports">Imports</a>, <span class="extype" name="scala.Predef.ArrowAssoc.-&gt;.B">B</span>)</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt class="implicit">Implicit information</dt><dd>
+            This member is added by an implicit conversion from <a href="" class="extype" name="scalax.chart.module.Imports">Imports</a> to
+            <span class="extype" name="scala.Predef.ArrowAssoc">ArrowAssoc</span>[<a href="" class="extype" name="scalax.chart.module.Imports">Imports</a>] performed by method ArrowAssoc in scala.Predef.
+            
+          </dd><dt>Definition Classes</dt><dd>ArrowAssoc</dd><dt>Annotations</dt><dd>
+                <span class="name">@inline</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.AnyRef#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="==(x$1:Any):Boolean"></a>
+      <a id="==(Any):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scalax.chart.module.Imports.ChartTheme" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ChartTheme"></a>
+      <a id="ChartTheme:ChartTheme"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Imports$ChartTheme$.html"><span class="name">ChartTheme</span></a>
+      </span>
+      </h4>
+      
+    </li><li name="scalax.chart.module.Imports.Layer" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Layer"></a>
+      <a id="Layer:Layer"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="Imports$Layer$.html"><span class="name">Layer</span></a>
+      </span>
+      </h4>
+      
+    </li><li name="scalax.chart.module.Imports#Orientation" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Orientation:swing.Orientation.type"></a>
+      <a id="Orientation:scala.swing.Orientation.type"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Orientation</span><span class="result">: <span class="extype" name="scala.swing.Orientation">scala.swing.Orientation</span>.type</span>
+      </span>
+      </h4>
+      
+    </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="asInstanceOf[T0]:T0"></a>
+      <a id="asInstanceOf[T0]:T0"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">asInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Any.asInstanceOf.T0">T0</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="clone():Object"></a>
+      <a id="clone():AnyRef"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">clone</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.AnyRef">AnyRef</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.CloneNotSupportedException]">...</span>
+    </span>)</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.Predef.Ensuring#ensuring" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ensuring(cond:A=&gt;Boolean,msg:=&gt;Any):A"></a>
+      <a id="ensuring((Imports)⇒Boolean,⇒Any):Imports"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="implicit">ensuring</span><span class="params">(<span name="cond">cond: (<a href="" class="extype" name="scalax.chart.module.Imports">Imports</a>) ⇒ <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>, <span name="msg">msg: ⇒ <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <a href="" class="extype" name="scalax.chart.module.Imports">Imports</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt class="implicit">Implicit information</dt><dd>
+            This member is added by an implicit conversion from <a href="" class="extype" name="scalax.chart.module.Imports">Imports</a> to
+            <span class="extype" name="scala.Predef.Ensuring">Ensuring</span>[<a href="" class="extype" name="scalax.chart.module.Imports">Imports</a>] performed by method Ensuring in scala.Predef.
+            
+          </dd><dt>Definition Classes</dt><dd>Ensuring</dd></dl></div>
+    </li><li name="scala.Predef.Ensuring#ensuring" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ensuring(cond:A=&gt;Boolean):A"></a>
+      <a id="ensuring((Imports)⇒Boolean):Imports"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="implicit">ensuring</span><span class="params">(<span name="cond">cond: (<a href="" class="extype" name="scalax.chart.module.Imports">Imports</a>) ⇒ <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>)</span><span class="result">: <a href="" class="extype" name="scalax.chart.module.Imports">Imports</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt class="implicit">Implicit information</dt><dd>
+            This member is added by an implicit conversion from <a href="" class="extype" name="scalax.chart.module.Imports">Imports</a> to
+            <span class="extype" name="scala.Predef.Ensuring">Ensuring</span>[<a href="" class="extype" name="scalax.chart.module.Imports">Imports</a>] performed by method Ensuring in scala.Predef.
+            
+          </dd><dt>Definition Classes</dt><dd>Ensuring</dd></dl></div>
+    </li><li name="scala.Predef.Ensuring#ensuring" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ensuring(cond:Boolean,msg:=&gt;Any):A"></a>
+      <a id="ensuring(Boolean,⇒Any):Imports"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="implicit">ensuring</span><span class="params">(<span name="cond">cond: <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>, <span name="msg">msg: ⇒ <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <a href="" class="extype" name="scalax.chart.module.Imports">Imports</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt class="implicit">Implicit information</dt><dd>
+            This member is added by an implicit conversion from <a href="" class="extype" name="scalax.chart.module.Imports">Imports</a> to
+            <span class="extype" name="scala.Predef.Ensuring">Ensuring</span>[<a href="" class="extype" name="scalax.chart.module.Imports">Imports</a>] performed by method Ensuring in scala.Predef.
+            
+          </dd><dt>Definition Classes</dt><dd>Ensuring</dd></dl></div>
+    </li><li name="scala.Predef.Ensuring#ensuring" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ensuring(cond:Boolean):A"></a>
+      <a id="ensuring(Boolean):Imports"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="implicit">ensuring</span><span class="params">(<span name="cond">cond: <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>)</span><span class="result">: <a href="" class="extype" name="scalax.chart.module.Imports">Imports</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt class="implicit">Implicit information</dt><dd>
+            This member is added by an implicit conversion from <a href="" class="extype" name="scalax.chart.module.Imports">Imports</a> to
+            <span class="extype" name="scala.Predef.Ensuring">Ensuring</span>[<a href="" class="extype" name="scalax.chart.module.Imports">Imports</a>] performed by method Ensuring in scala.Predef.
+            
+          </dd><dt>Definition Classes</dt><dd>Ensuring</dd></dl></div>
+    </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="eq(x$1:AnyRef):Boolean"></a>
+      <a id="eq(AnyRef):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">eq</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#equals" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="equals(x$1:Any):Boolean"></a>
+      <a id="equals(Any):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="finalize():Unit"></a>
+      <a id="finalize():Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">finalize</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="symbol">classOf[java.lang.Throwable]</span>
+    </span>)</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.Predef.StringFormat#formatted" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="formatted(fmtstr:String):String"></a>
+      <a id="formatted(String):String"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="implicit">formatted</span><span class="params">(<span name="fmtstr">fmtstr: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt class="implicit">Implicit information</dt><dd>
+            This member is added by an implicit conversion from <a href="" class="extype" name="scalax.chart.module.Imports">Imports</a> to
+            <span class="extype" name="scala.Predef.StringFormat">StringFormat</span>[<a href="" class="extype" name="scalax.chart.module.Imports">Imports</a>] performed by method StringFormat in scala.Predef.
+            
+          </dd><dt>Definition Classes</dt><dd>StringFormat</dd><dt>Annotations</dt><dd>
+                <span class="name">@inline</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getClass():Class[_]"></a>
+      <a id="getClass():Class[_]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getClass</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.Class">Class</span>[_]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.AnyRef#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="hashCode():Int"></a>
+      <a id="hashCode():Int"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">hashCode</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Int" class="extype" target="_top">Int</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="isInstanceOf[T0]:Boolean"></a>
+      <a id="isInstanceOf[T0]:Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ne(x$1:AnyRef):Boolean"></a>
+      <a id="ne(AnyRef):Boolean"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ne</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.AnyRef">AnyRef</span></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#notify" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notify():Unit"></a>
+      <a id="notify():Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">notify</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#notifyAll" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notifyAll():Unit"></a>
+      <a id="notifyAll():Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">notifyAll</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
+      <a id="synchronized[T0](⇒T0):T0"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">synchronized</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">(<span name="arg0">arg0: ⇒ <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>)</span><span class="result">: <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#toString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="toString():String"></a>
+      <a id="toString():String"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">toString</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait():Unit"></a>
+      <a id="wait():Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long,x$2:Int):Unit"></a>
+      <a id="wait(Long,Int):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Long" class="extype" target="_top">Long</a></span>, <span name="arg1">arg1: <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Int" class="extype" target="_top">Int</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long):Unit"></a>
+      <a id="wait(Long):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Long" class="extype" target="_top">Long</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.0-RC3/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.Predef.ArrowAssoc#→" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="→[B](y:B):(A,B)"></a>
+      <a id="→[B](B):(Imports,B)"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $u2192" class="implicit">→</span><span class="tparams">[<span name="B">B</span>]</span><span class="params">(<span name="y">y: <span class="extype" name="scala.Predef.ArrowAssoc.→.B">B</span></span>)</span><span class="result">: (<a href="" class="extype" name="scalax.chart.module.Imports">Imports</a>, <span class="extype" name="scala.Predef.ArrowAssoc.→.B">B</span>)</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt class="implicit">Implicit information</dt><dd>
+            This member is added by an implicit conversion from <a href="" class="extype" name="scalax.chart.module.Imports">Imports</a> to
+            <span class="extype" name="scala.Predef.ArrowAssoc">ArrowAssoc</span>[<a href="" class="extype" name="scalax.chart.module.Imports">Imports</a>] performed by method ArrowAssoc in scala.Predef.
+            
+          </dd><dt>Definition Classes</dt><dd>ArrowAssoc</dd></dl></div>
+    </li></ol>
+            </div>
+
+        
+
+        
+        </div>
+
+        <div id="inheritedMembers">
+        <div class="parent" name="scala.AnyRef">
+              <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
+            </div><div class="parent" name="scala.Any">
+              <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>
+            </div>
+        <div class="conversion" name="scala.Predef.any2stringadd">
+              <h3>Inherited by implicit conversion any2stringadd from
+                <a href="" class="extype" name="scalax.chart.module.Imports">Imports</a> to <span class="extype" name="scala.Predef.any2stringadd">any2stringadd</span>[<a href="" class="extype" name="scalax.chart.module.Imports">Imports</a>]
+              </h3>
+            </div><div class="conversion" name="scala.Predef.StringFormat">
+              <h3>Inherited by implicit conversion StringFormat from
+                <a href="" class="extype" name="scalax.chart.module.Imports">Imports</a> to <span class="extype" name="scala.Predef.StringFormat">StringFormat</span>[<a href="" class="extype" name="scalax.chart.module.Imports">Imports</a>]
+              </h3>
+            </div><div class="conversion" name="scala.Predef.Ensuring">
+              <h3>Inherited by implicit conversion Ensuring from
+                <a href="" class="extype" name="scalax.chart.module.Imports">Imports</a> to <span class="extype" name="scala.Predef.Ensuring">Ensuring</span>[<a href="" class="extype" name="scalax.chart.module.Imports">Imports</a>]
+              </h3>
+            </div><div class="conversion" name="scala.Predef.ArrowAssoc">
+              <h3>Inherited by implicit conversion ArrowAssoc from
+                <a href="" class="extype" name="scalax.chart.module.Imports">Imports</a> to <span class="extype" name="scala.Predef.ArrowAssoc">ArrowAssoc</span>[<a href="" class="extype" name="scalax.chart.module.Imports">Imports</a>]
+              </h3>
+            </div>
+        </div>
+
+        <div id="groupedMembers">
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
+              
+            </div>
+        </div>
+
+      </div>
+
+      <div id="tooltip"></div>
+
+      <div id="footer">  </div>
+
+
+    </body>
+      </html>

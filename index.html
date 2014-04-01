@@ -1,66 +1,52 @@
-<h1>Scala Chart Library</h1>
-
-<p><code>scala-chart</code> is a Scala library for creating and working with charts. It wraps <a href="http://jfree.org/jfreechart/">JFreeChart</a>, much
-like <code>scala-swing</code> does with the original <code>javax.swing</code> package. This project is released under the
-same license as <a href="http://jfree.org/jfreechart/">JFreeChart</a> to make them fully license-compatible. Checkout the <a href="http://wookietreiber.github.com/scala-chart/latest/api/index.html">API</a>.</p>
-
-<h2>Usage</h2>
-
-<h3><a href="http://www.scala-sbt.org/">sbt</a></h3>
-
-<pre><code>libraryDependencies += "com.github.wookietreiber" %% "scala-chart" % "latest.integration"
-</code></pre>
-
-<h3><a href="http://maven.apache.org/">maven</a></h3>
-
+<h1 id="scala-chart-library">Scala Chart Library</h1>
+<p><code>scala-chart</code> is a Scala library for creating and working with charts. It wraps <a href="http://jfree.org/jfreechart/">JFreeChart</a>, much like <code>scala-swing</code> does with the original <code>javax.swing</code> package. This project is released under the same license as <a href="http://jfree.org/jfreechart/">JFreeChart</a> to make them fully license-compatible. Checkout the <a href="http://wookietreiber.github.com/scala-chart/latest/api/index.html">API</a>.</p>
+<h2 id="example-usage">Example Usage</h2>
+<h3 id="sbt"><a href="http://www.scala-sbt.org/">sbt</a></h3>
+<pre><code>libraryDependencies += &quot;com.github.wookietreiber&quot; %% &quot;scala-chart&quot; % &quot;0.4.0&quot;</code></pre>
+<h3 id="maven"><a href="http://maven.apache.org/">maven</a></h3>
 <pre><code>&lt;dependency&gt;
    &lt;groupId&gt;com.github.wookietreiber&lt;/groupId&gt;
    &lt;artifactId&gt;scala-chart_${scala.version}&lt;/artifactId&gt;
-   &lt;version&gt;latest.integration&lt;/version&gt;
-&lt;/dependency&gt;
-</code></pre>
-
-<h2>Examples</h2>
-
-<p>You can import nearly all of the <code>scala-chart</code> functionality (except the views, see below) with the
-following lines:</p>
-
-<pre><code>import scalax.chart._
-import scalax.chart.Charting._
-</code></pre>
-
-<p>You can use the conversions to convert from ordinary Scala collections to the datasets used by
-<a href="http://jfree.org/jfreechart/">JFreeChart</a>:</p>
-
-<pre><code>val dataset = Seq((1,2),(2,4),(3,6),(4,8)).toXYSeriesCollection("some points")
-</code></pre>
-
-<p>These datasets can be used by the chart factories, which differ from the <a href="http://jfree.org/jfreechart/">JFreeChart</a> ones in the
-aspect, that they make heavy use of default arguments, so you have to type as less as possible:</p>
-
-<pre><code>val chart = XYLineChart(dataset, title = "My Chart of Some Points")
-</code></pre>
-
-<p>There are also some enrichments for the charts themselves to display them in a window or save them
-to disk:</p>
-
-<pre><code>chart.show
-chart.saveAsPNG(new java.io.File("/tmp/chart.png"), (1024,768))
-chart.saveAsJPEG(new java.io.File("/tmp/chart.jpg"), (1024,768))
-chart.saveAsPDF(new java.io.File("/tmp/chart.pdf"), (1024,768))
-</code></pre>
-
-<p>There are also implicit conversions / views available, but they are not contained by the above
-imports, because of ambiguity issues with implicit conversions. There are different imports
-available for different kinds of datasets, e.g.:</p>
-
-<pre><code>import scalax.chart.views.XYDatasetViews._
-val data = Seq((1,2),(2,4),(3,6),(4,8))
-val chart = XYLineChart(data, title = "My Chart of Some Points")
-</code></pre>
-
-<p>Import these with care, it's most likely better to use the explicit conversions as shown above.</p>
-
+   &lt;version&gt;0.4.0&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+<h3 id="imports">Imports</h3>
+<p>All high-level convenience can be imported with the <em>all you can eat</em> import:</p>
+<pre><code>import scalax.chart.api._</code></pre>
+<p>For more and more <em>a la carte</em> imports, have a look at the <a href="http://wookietreiber.github.io/scala-chart/latest/api/index.html#scalax.chart.module.package">module package</a> for various selfless traits. There is also a module containing everything the <code>api</code> import does which can be used in applications directly:</p>
+<pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">object</span> MyChartApp <span class="kw">extends</span> App <span class="kw">with</span> scalax.<span class="fu">chart</span>.<span class="fu">module</span>.<span class="fu">Charting</span> {
+  <span class="kw">val</span> data = <span class="kw">for</span> (i &lt;- <span class="dv">1</span> to <span class="dv">5</span>) <span class="kw">yield</span> (i,i)
+  <span class="kw">val</span> chart = <span class="fu">XYLineChart</span>(data)
+  chart.<span class="fu">saveAsPNG</span>(<span class="st">&quot;/tmp/chart.png&quot;</span>)
+}</code></pre>
+<h3 id="creating-charts">Creating Charts</h3>
+<p>Creating charts is as simple as using one of the many chart factories, which differ from the <a href="http://jfree.org/jfreechart/">JFreeChart</a> ones in the aspect, that they make heavy use of default arguments, so you have to type as less as possible:</p>
+<pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">val</span> data = <span class="kw">for</span> (i &lt;- <span class="dv">1</span> to <span class="dv">5</span>) <span class="kw">yield</span> (i,i)
+<span class="kw">val</span> chart = <span class="fu">XYLineChart</span>(data)</code></pre>
+<p>The first argument is always the dataset which is the only required argument. For better readability of your own code, you should name the other arguments:</p>
+<pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">val</span> chart = <span class="fu">XYLineChart</span>(data, title = <span class="st">&quot;My Chart of Some Points&quot;</span>)</code></pre>
+<p>There are also some enrichments for the charts themselves to display them in a window or save them to disk:</p>
+<pre class="sourceCode scala"><code class="sourceCode scala">chart.<span class="fu">show</span>()</code></pre>
+<pre class="sourceCode scala"><code class="sourceCode scala">chart.<span class="fu">saveAsPNG</span>(<span class="st">&quot;/tmp/chart.png&quot;</span>)
+chart.<span class="fu">saveAsJPEG</span>(<span class="st">&quot;/tmp/chart.jpg&quot;</span>)
+chart.<span class="fu">saveAsPDF</span>(<span class="st">&quot;/tmp/chart.pdf&quot;</span>)</code></pre>
+<h3 id="animations-live-chart-updates">Animations / Live Chart Updates</h3>
+<p>You can also do some animations, i.e. perform live updates on your datasets:</p>
+<pre class="sourceCode scala"><code class="sourceCode scala"><span class="kw">val</span> series = Seq[(Int,Int)]() toXYSeries <span class="st">&quot;f(x) = sin(x)&quot;</span>
+<span class="kw">val</span> chart = <span class="fu">XYLineChart</span>(series)
+chart.<span class="fu">show</span>()
+<span class="kw">for</span> (x &lt;- -<span class="fl">4.0</span> to <span class="dv">4</span> by <span class="fl">0.1</span>) {
+  swing.<span class="fu">Swing</span> onEDT {
+    series.<span class="fu">add</span>(x,math.<span class="fu">sin</span>(x))
+  }
+  Thread.<span class="fu">sleep</span>(<span class="dv">50</span>)
+}</code></pre>
+<h3 id="projects-using-scala-chart">Projects Using Scala Chart</h3>
+<p>The following list contains some projects where you can see this project in action. This list is included here because it is sometimes more useful to see how a library is used in more than simple examples.</p>
+<ul>
+<li><a href="https://github.com/scalameter/scalameter">scalameter</a></li>
+<li><a href="https://github.com/wookietreiber/ckit">ckit</a></li>
+<li><a href="https://github.com/wookietreiber/eva4s">eva4s</a></li>
+<li><a href="https://github.com/wookietreiber/pretty-accounting">pretty-accounting</a></li>
+</ul>
 <hr />
-
-<p><a href="http://coderwall.com/wookietreiber"><img src="http://api.coderwall.com/wookietreiber/endorsecount.png" alt="endorse" title="" /></a></p>
+<p><a href="http://coderwall.com/wookietreiber"><img src="http://api.coderwall.com/wookietreiber/endorsecount.png" alt="endorse" /></a></p>
