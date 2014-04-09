@@ -74,4 +74,12 @@ abstract class Axis protected () {
   /** Returns the label of this $axis. */
   final val label: Label = new Label()
 
+  /** Returns true if this $axis is visible. */
+  final def visible: Boolean =
+    peer.isVisible
+
+  /** Sets whether this $axis is visible. */
+  final def visible_=(b: Boolean): Unit =
+    peer.setVisible(b)
+
 }
