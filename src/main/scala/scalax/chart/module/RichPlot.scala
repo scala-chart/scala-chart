@@ -16,7 +16,7 @@ object RichPlot extends RichPlot
   * the plot domain, range and marking.
   *
   * {{{
-  * chart.plot.domain.axis.label = "my label"
+  * chart.plot.domain.axis.label.text = "my label"
   * chart.plot.range.markers += ((1,1))
   * }}}
   *
@@ -44,7 +44,10 @@ trait RichPlot extends MarkerConversions {
   /** Enriches a `CategoryPlot`. */
   implicit class RichCategoryPlot(val peer: CategoryPlot) {
     object domain {
+
+      /** Returns the domain axis. */
       object axis extends Axis {
+        type Peer = org.jfree.chart.axis.CategoryAxis
         override final def peer = RichCategoryPlot.this.peer.getDomainAxis
       }
 
@@ -63,7 +66,10 @@ trait RichPlot extends MarkerConversions {
     }
 
     object range {
+
+      /** Returns the range axis. */
       object axis extends Axis {
+        type Peer = org.jfree.chart.axis.ValueAxis
         override final def peer = RichCategoryPlot.this.peer.getRangeAxis
       }
 
@@ -85,13 +91,19 @@ trait RichPlot extends MarkerConversions {
   /** Enriches a `FastScatterPlot`. */
   implicit class RichFastScatterPlot(val peer: FastScatterPlot) {
     object domain {
+
+      /** Returns the domain axis. */
       object axis extends Axis {
+        type Peer = org.jfree.chart.axis.ValueAxis
         override final def peer = RichFastScatterPlot.this.peer.getDomainAxis
       }
     }
 
     object range {
+
+      /** Returns the range axis. */
       object axis extends Axis {
+        type Peer = org.jfree.chart.axis.ValueAxis
         override final def peer = RichFastScatterPlot.this.peer.getRangeAxis
       }
     }
@@ -100,7 +112,10 @@ trait RichPlot extends MarkerConversions {
   /** Enriches a `ThermometerPlot`. */
   implicit class RichThermometerPlot(val peer: ThermometerPlot) {
     object range {
+
+      /** Returns the range axis. */
       object axis extends Axis {
+        type Peer = org.jfree.chart.axis.ValueAxis
         override final def peer = RichThermometerPlot.this.peer.getRangeAxis
       }
     }
@@ -109,7 +124,10 @@ trait RichPlot extends MarkerConversions {
   /** Enriches an `XYPlot`. */
   implicit class RichXYPlot(val peer: XYPlot) {
     object domain {
+
+      /** Returns the domain axis. */
       object axis extends Axis {
+        type Peer = org.jfree.chart.axis.ValueAxis
         override final def peer = RichXYPlot.this.peer.getDomainAxis
       }
 
@@ -128,7 +146,10 @@ trait RichPlot extends MarkerConversions {
     }
 
     object range {
+
+      /** Returns the range axis. */
       object axis extends Axis {
+        type Peer = org.jfree.chart.axis.ValueAxis
         override final def peer = RichXYPlot.this.peer.getRangeAxis
       }
 

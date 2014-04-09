@@ -34,45 +34,45 @@ class PlotSpec extends Specification { def is = s2"""
 
   def cpl1 = {
     val chart = UnlabeledCategoryChart
-    chart.plot.domain.axis.label === None
+    chart.plot.domain.axis.label.text === ""
   }
 
   def cpl2 = {
     val chart = UnlabeledCategoryChart
-    chart.plot.domain.axis.label = Label
+    chart.plot.domain.axis.label.text = Label
     chart.plot.getDomainAxis.getLabel === Label
   }
 
   def cpl3 = {
     val chart = UnlabeledCategoryChart
-    chart.plot.range.axis.label === None
+    chart.plot.range.axis.label.text === ""
   }
 
   def cpl4 = {
     val chart = UnlabeledCategoryChart
-    chart.plot.range.axis.label = Label
+    chart.plot.range.axis.label.text = Label
     chart.plot.getRangeAxis.getLabel === Label
   }
 
   def xypl1 = {
     val chart = UnlabeledXYChart
-    chart.plot.domain.axis.label === None
+    chart.plot.domain.axis.label.text === ""
   }
 
   def xypl2 = {
     val chart = UnlabeledXYChart
-    chart.plot.domain.axis.label = Label
+    chart.plot.domain.axis.label.text = Label
     chart.plot.getDomainAxis.getLabel === Label
   }
 
   def xypl3 = {
     val chart = UnlabeledXYChart
-    chart.plot.range.axis.label === None
+    chart.plot.range.axis.label.text === ""
   }
 
   def xypl4 = {
     val chart = UnlabeledXYChart
-    chart.plot.range.axis.label = Label
+    chart.plot.range.axis.label.text = Label
     chart.plot.getRangeAxis.getLabel === Label
   }
 

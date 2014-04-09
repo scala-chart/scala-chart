@@ -324,7 +324,7 @@ trait ChartFactories
         val category = catdata._1.toString
         val data = catdata._2
         val plot = BarChart(data).plot
-        plot.range.axis.label = category
+        plot.range.axis.label.text = category
         plot
       }
 
