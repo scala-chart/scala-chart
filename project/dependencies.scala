@@ -9,7 +9,7 @@ object Dependencies {
 
   def Specs2(scalaVersion: String) = CrossVersion.partialVersion(scalaVersion) match {
     case Some((2,11)) => List("org.specs2" %% "specs2-core" % "2.3.10")
-    case Some((2,10)) => List("org.specs2" %% "specs2-core" % "2.3.10")
+    case Some((2,10)) => List("org.specs2" %% "specs2-core" % "2.3.11")
     case _            => Nil
   }
 
