@@ -20,6 +20,7 @@ trait Imports {
   type Color = java.awt.Color
   type Font = java.awt.Font
   type Paint = java.awt.Paint
+  type Stroke = java.awt.Stroke
 
   type Orientation = scala.swing.Orientation.Value
   val Orientation = scala.swing.Orientation

@@ -15,10 +15,7 @@ abstract class Axis protected () {
   /** Returns the underlying $axis. */
   def peer: Peer
 
-  /** Represents the label of an $axis.
-    *
-    * @param peer Returns the underlying $axis.
-    */
+  /** Represents the label of an $axis. */
   class Label private[Axis] () {
 
     /** Returns the text of this label. */
@@ -73,6 +70,38 @@ abstract class Axis protected () {
 
   /** Returns the label of this $axis. */
   final val label: Label = new Label()
+
+  /** Represents the line of an $axis. */
+  class Line private[Axis] () {
+
+    /** Returns the paint used to draw this line. */
+    final def paint: Paint =
+      peer.getAxisLinePaint
+
+    /** Sets the paint used to draw this line. */
+    final def paint_=(paint: Paint): Unit =
+      peer.setAxisLinePaint(paint)
+
+    /** Returns the stroke used to draw this line. */
+    final def stroke: Stroke =
+      peer.getAxisLineStroke
+
+    /** Sets the stroke used to draw this line. */
+    final def stroke_=(stroke: Stroke): Unit =
+      peer.setAxisLineStroke(stroke)
+
+    /** Returns true if this $axis line is visible. */
+    final def visible: Boolean =
+      peer.isAxisLineVisible
+
+    /** Sets whether this $axis line is visible. */
+    final def visible_=(b: Boolean): Unit =
+      peer.setAxisLineVisible(b)
+
+  }
+
+  /** Returns the line of this $axis. */
+  final val line: Line = new Line()
 
   /** Returns true if this $axis is visible. */
   final def visible: Boolean =
