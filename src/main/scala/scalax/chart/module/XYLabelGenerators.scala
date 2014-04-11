@@ -77,8 +77,10 @@ trait XYLabelGenerators extends Imports {
 
     /** Returns a new peer. */
     final def toPeer(generator: XYLabelGenerator): JXYLabelGenerator = new JXYLabelGenerator {
-      override final def generateLabel(dataset: XYDataset, series: Int, item: Int): String =
+      override final def generateLabel(dataset: XYDataset, seriesIndex: Int, item: Int): String = {
+        val series = dataset.getSeriesKey(seriesIndex)
         generator(dataset, series, item)
+      }
     }
 
     /** Returns a new xy label generator which simply calls `toString` on values. */
