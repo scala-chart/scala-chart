@@ -65,8 +65,11 @@ trait CategoryToolTipGenerators extends Imports {
 
     /** Returns a new peer. */
     final def toPeer(generator: CategoryToolTipGenerator): JCategoryToolTipGenerator = new JCategoryToolTipGenerator {
-      override final def generateToolTip(dataset: CategoryDataset, series: Int, category: Int): String =
+      override final def generateToolTip(dataset: CategoryDataset, row: Int, col: Int): String = {
+        val series = dataset.getRowKey(row)
+        val category = dataset.getColumnKey(col)
         generator(dataset, series, category)
+      }
     }
 
     /** Returns a new category tool tip generator which simply calls `toString` on values. */
