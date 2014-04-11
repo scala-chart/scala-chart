@@ -14,6 +14,7 @@ class LabelGeneratorSpec extends Specification { def is = s2"""
       using companion to avoid typing                                                     $cat2
       using companion value to String function                                            $cat3
       using companion default                                                             $cat4
+    Label Generation                                                                      $catg
 
   Pie Label Generator
     Creation
@@ -21,6 +22,7 @@ class LabelGeneratorSpec extends Specification { def is = s2"""
       using companion to avoid typing                                                     $pie2
       using companion value to String function                                            $pie3
       using companion default                                                             $pie4
+    Label Generation                                                                      $pieg
 
   XY Label Generator
     Creation
@@ -29,6 +31,7 @@ class LabelGeneratorSpec extends Specification { def is = s2"""
       using companion value to String function                                            $xy3
       using companion (x,y) to String function                                            $xy4
       using companion default                                                             $xy5
+    Label Generation                                                                      $xyg
                                                                                                  """
   // -----------------------------------------------------------------------------------------------
   // tests
@@ -61,6 +64,13 @@ class LabelGeneratorSpec extends Specification { def is = s2"""
     chart.labelGenerator must beSome
   }
 
+  def catg = {
+    val chart = catchart
+    val dataset = chart.plot.getDataset
+    chart.labelGenerator = CategoryLabelGenerator.Default
+    chart.labelGenerator.map(_.apply(dataset, "Series 1", "3")) must beSome("3.0")
+  }
+
   def pie1 = {
     val chart = piechart
     chart.labelGenerator = (dataset: PieDataset, key: Comparable[_]) => {
@@ -86,6 +96,13 @@ class LabelGeneratorSpec extends Specification { def is = s2"""
     val chart = piechart
     chart.labelGenerator = PieLabelGenerator.Default
     chart.labelGenerator must beSome
+  }
+
+  def pieg = {
+    val chart = piechart
+    val dataset = chart.plot.getDataset
+    chart.labelGenerator = PieLabelGenerator.Default
+    chart.labelGenerator.map(_.apply(dataset, "4")) must beSome("4.0")
   }
 
   def xy1 = {
@@ -126,22 +143,35 @@ class LabelGeneratorSpec extends Specification { def is = s2"""
     chart.labelGenerator must beSome
   }
 
+  def xyg = {
+    val chart = xychart
+    val dataset = chart.plot.getDataset
+    chart.labelGenerator = XYLabelGenerator.Default
+    chart.labelGenerator.map(_.apply(dataset, "Series 1", 3)) must beSome("(4.0,4.0)")
+  }
+
   // -----------------------------------------------------------------------------------------------
   // util
   // -----------------------------------------------------------------------------------------------
 
   def catchart = {
-    val data = for (i <- 1 to 5) yield (i,i)
+    val data = for {
+      series <- List("Series 1", "Series 2")
+      catvals = for (i <- 1 to 5) yield (i.toString,i)
+    } yield series -> catvals
     BarChart(data)
   }
 
   def piechart = {
-    val data = for (i <- 1 to 5) yield (i,i)
+    val data = for (i <- 1 to 5) yield (i.toString,i)
     PieChart(data)
   }
 
   def xychart = {
-    val data = for (i <- 1 to 5) yield (i,i)
+    val data = for {
+      series <- List("Series 1", "Series 2")
+      xys = for (i <- 1 to 5) yield (i,i)
+    } yield series -> xys
     XYLineChart(data)
   }
 
