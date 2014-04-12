@@ -14,7 +14,7 @@ class ToolTipGeneratorSpec extends Specification { def is = s2"""
       using companion to avoid typing                                                     $cat2
       using companion value to String function                                            $cat3
       using companion default                                                             $cat4
-    Label Generation                                                                      $catg
+    Tool Tip Generation                                                                   $catg
 
   Pie Tool Tip Generator
     Creation
@@ -22,7 +22,7 @@ class ToolTipGeneratorSpec extends Specification { def is = s2"""
       using companion to avoid typing                                                     $pie2
       using companion value to String function                                            $pie3
       using companion default                                                             $pie4
-    Label Generation                                                                      $pieg
+    Tool Tip Generation                                                                   $pieg
 
   XY Tool Tip Generator
     Creation
@@ -31,7 +31,7 @@ class ToolTipGeneratorSpec extends Specification { def is = s2"""
       using companion value to String function                                            $xy3
       using companion (x,y) to String function                                            $xy4
       using companion default                                                             $xy5
-    Label Generation                                                                      $pieg
+    Tool Tip Generation                                                                   $xyg
                                                                                                  """
   // -----------------------------------------------------------------------------------------------
   // tests
