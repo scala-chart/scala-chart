@@ -77,8 +77,10 @@ trait XYToolTipGenerators extends Imports {
 
     /** Returns a new peer. */
     final def toPeer(generator: XYToolTipGenerator): JXYToolTipGenerator = new JXYToolTipGenerator {
-      override final def generateToolTip(dataset: XYDataset, series: Int, item: Int): String =
+      override final def generateToolTip(dataset: XYDataset, seriesIndex: Int, item: Int): String = {
+        val series = dataset.getSeriesKey(seriesIndex)
         generator(dataset, series, item)
+      }
     }
 
     /** Returns a new xy tool tip generator which simply calls `toString` on values. */
