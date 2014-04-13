@@ -5,6 +5,7 @@ import java.util.Collection
 
 import scala.collection.JavaConverters.asScalaIteratorConverter
 
+import org.jfree.chart.axis.{ CategoryAxis, ValueAxis }
 import org.jfree.chart.plot._
 
 /** $RichPlotInfo */
@@ -47,8 +48,8 @@ trait RichPlot extends MarkerConversions {
 
       /** Returns the domain axis. */
       object axis extends Axis {
-        type Peer = org.jfree.chart.axis.CategoryAxis
-        override final def peer = RichCategoryPlot.this.peer.getDomainAxis
+        type Peer = CategoryAxis
+        override final def peer: CategoryAxis = RichCategoryPlot.this.peer.getDomainAxis
       }
 
       object markers {
@@ -69,8 +70,8 @@ trait RichPlot extends MarkerConversions {
 
       /** Returns the range axis. */
       object axis extends Axis {
-        type Peer = org.jfree.chart.axis.ValueAxis
-        override final def peer = RichCategoryPlot.this.peer.getRangeAxis
+        type Peer = ValueAxis
+        override final def peer: ValueAxis = RichCategoryPlot.this.peer.getRangeAxis
       }
 
       object markers {
@@ -94,8 +95,8 @@ trait RichPlot extends MarkerConversions {
 
       /** Returns the domain axis. */
       object axis extends Axis {
-        type Peer = org.jfree.chart.axis.ValueAxis
-        override final def peer = RichFastScatterPlot.this.peer.getDomainAxis
+        type Peer = ValueAxis
+        override final def peer: ValueAxis = RichFastScatterPlot.this.peer.getDomainAxis
       }
     }
 
@@ -103,8 +104,8 @@ trait RichPlot extends MarkerConversions {
 
       /** Returns the range axis. */
       object axis extends Axis {
-        type Peer = org.jfree.chart.axis.ValueAxis
-        override final def peer = RichFastScatterPlot.this.peer.getRangeAxis
+        type Peer = ValueAxis
+        override final def peer: ValueAxis = RichFastScatterPlot.this.peer.getRangeAxis
       }
     }
   }
@@ -115,8 +116,8 @@ trait RichPlot extends MarkerConversions {
 
       /** Returns the range axis. */
       object axis extends Axis {
-        type Peer = org.jfree.chart.axis.ValueAxis
-        override final def peer = RichThermometerPlot.this.peer.getRangeAxis
+        type Peer = ValueAxis
+        override final def peer: ValueAxis = RichThermometerPlot.this.peer.getRangeAxis
       }
     }
   }
@@ -127,8 +128,8 @@ trait RichPlot extends MarkerConversions {
 
       /** Returns the domain axis. */
       object axis extends Axis {
-        type Peer = org.jfree.chart.axis.ValueAxis
-        override final def peer = RichXYPlot.this.peer.getDomainAxis
+        type Peer = ValueAxis
+        override final def peer: ValueAxis = RichXYPlot.this.peer.getDomainAxis
       }
 
       object markers {
@@ -149,8 +150,8 @@ trait RichPlot extends MarkerConversions {
 
       /** Returns the range axis. */
       object axis extends Axis {
-        type Peer = org.jfree.chart.axis.ValueAxis
-        override final def peer = RichXYPlot.this.peer.getRangeAxis
+        type Peer = ValueAxis
+        override final def peer: ValueAxis = RichXYPlot.this.peer.getRangeAxis
       }
 
       object markers {
