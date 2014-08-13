@@ -10,21 +10,27 @@ Example Usage
 
 ### [sbt][]
 
-    libraryDependencies += "com.github.wookietreiber" %% "scala-chart" % "latest.integration"
+```scala
+libraryDependencies += "com.github.wookietreiber" %% "scala-chart" % "latest.integration"
+```
 
 ### [maven][]
 
-    <dependency>
-       <groupId>com.github.wookietreiber</groupId>
-       <artifactId>scala-chart_${scala.version}</artifactId>
-       <version>0.4.0</version>
-    </dependency>
+```xml
+<dependency>
+  <groupId>com.github.wookietreiber</groupId>
+  <artifactId>scala-chart_${scala.version}</artifactId>
+  <version>0.4.0</version>
+</dependency>
+```
 
 ### Imports
 
 All high-level convenience can be imported with the *all you can eat* import:
 
-    import scalax.chart.api._
+```scala
+import scalax.chart.api._
+```
 
 For more and more *a la carte* imports, have a look at the [module package][modules] for various
 selfless traits. There is also a module containing everything the `api` import does which can be
