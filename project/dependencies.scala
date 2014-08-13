@@ -4,12 +4,12 @@ package build
 import sbt._
 
 object Dependencies {
-  val jfreechart = "org.jfree"   % "jfreechart" % "1.0.17"
+  val jfreechart = "org.jfree"   % "jfreechart" % "1.0.19"
   val itext      = "com.lowagie" % "itext"      % "4.2.1"
 
   def Specs2(scalaVersion: String) = CrossVersion.partialVersion(scalaVersion) match {
-    case Some((2,11)) => List("org.specs2" %% "specs2-core" % "2.3.12")
-    case Some((2,10)) => List("org.specs2" %% "specs2-core" % "2.3.12")
+    case Some((2,11)) => List("org.specs2" %% "specs2-core" % "2.4")
+    case Some((2,10)) => List("org.specs2" %% "specs2-core" % "2.4")
     case _            => Nil
   }
 
