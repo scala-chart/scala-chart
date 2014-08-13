@@ -5,23 +5,19 @@ Scala Chart Library
 like `scala-swing` does with the original `javax.swing` package. This project is released under the
 same license as [JFreeChart][] to make them fully license-compatible. Checkout the [API][].
 
-Example Usage
--------------
+Usage
+-----
 
-### [sbt][]
+Add the following to your [sbt][] build:
 
 ```scala
 libraryDependencies += "com.github.wookietreiber" %% "scala-chart" % "latest.integration"
 ```
 
-### [maven][]
+In case exporting to PDF is required, also add [iText][] to your dependencies:
 
-```xml
-<dependency>
-  <groupId>com.github.wookietreiber</groupId>
-  <artifactId>scala-chart_${scala.version}</artifactId>
-  <version>0.4.0</version>
-</dependency>
+```scala
+libraryDependencies += "com.lowagie" % "itext" % "4.2.1"
 ```
 
 ### Imports
@@ -108,6 +104,7 @@ examples.
 [sbt]: http://www.scala-sbt.org/
 [maven]: http://maven.apache.org/
 [modules]: http://wookietreiber.github.io/scala-chart/latest/api/index.html#scalax.chart.module.package
+[iText]: http://itextpdf.com/
 
 
 ---
