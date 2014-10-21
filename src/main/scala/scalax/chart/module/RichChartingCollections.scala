@@ -79,6 +79,12 @@ trait RichChartingCollections extends Imports {
 
     /** Converts this collection to a `PieDataset`.
       *
+      * {{{
+      * # Scala REPL style
+      * scala> 20 * 2
+      * res0: Int = 40
+      * }}}
+      *
       * @param name $seriesname
       *
       * @usecase def toPieDataset: PieDataset

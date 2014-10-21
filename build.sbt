@@ -4,6 +4,7 @@ import Dependencies._
 
 lazy val chart = (
   ChartProject("scala-chart", ".")
+  settings(doctestSettings: _*)
   settings (
     autoAPIMappings := true,
     apiURL := Some(url(s"""http://wookietreiber.github.io/scala-chart/${version.value}/api/""")),
