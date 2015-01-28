@@ -58,6 +58,7 @@ object ChartFactories extends ChartFactories
 trait ChartFactories
     extends BoxAndWhiskerChartFactories
     with PieChartFactories
+    with SpiderWebChartFactory
     with DatasetConversions
     with DocMacros {
 
