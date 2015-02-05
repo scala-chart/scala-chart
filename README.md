@@ -92,17 +92,6 @@ for (x <- -4.0 to 4 by 0.1) {
 }
 ```
 
-### Projects Using Scala Chart
-
-The following list contains some projects where you can see this project in action. This list is
-included here because it is sometimes more useful to see how a library is used in more than simple
-examples.
-
-- [scalameter](https://github.com/scalameter/scalameter)
-- [ckit](https://github.com/wookietreiber/ckit)
-- [eva4s](https://github.com/wookietreiber/eva4s)
-- [pretty-accounting](https://github.com/wookietreiber/pretty-accounting)
-
 
 [JFreeChart]: http://jfree.org/jfreechart/
 [API]: http://wookietreiber.github.com/scala-chart/latest/api/index.html
@@ -110,9 +99,3 @@ examples.
 [maven]: http://maven.apache.org/
 [modules]: http://wookietreiber.github.io/scala-chart/latest/api/index.html#scalax.chart.module.package
 [iText]: http://itextpdf.com/
-
-
----
-
-[![endorse](http://api.coderwall.com/wookietreiber/endorsecount.png)](http://coderwall.com/wookietreiber)
-
