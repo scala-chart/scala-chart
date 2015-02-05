@@ -1,7 +1,7 @@
 Scala Chart Library
 ===================
 
-[![Build Status](https://travis-ci.org/wookietreiber/scala-chart.svg)](https://travis-ci.org/wookietreiber/scala-chart)
+[![Build Status](https://travis-ci.org/wookietreiber/scala-chart.svg?branch=develop)](https://travis-ci.org/wookietreiber/scala-chart)
 
 `scala-chart` is a Scala library for creating and working with charts. It wraps [JFreeChart][], much
 like `scala-swing` does with the original `javax.swing` package. This project is released under the
