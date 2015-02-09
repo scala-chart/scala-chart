@@ -6,11 +6,11 @@ object SpiderWebChartFactory extends SpiderWebChartFactory
 
 /** $SpiderWebChartFactoryInfo
   *
-  * @define SpiderWebChartFactoryInfo Contains factories to create pie charts and other pie-like chart.
+  * @define SpiderWebChartFactoryInfo Contains factories to create spider web charts aka radar charts.
   */
 trait SpiderWebChartFactory {
 
-  /** Factory for pie charts. */
+  /** Factory for spider web charts. */
   val SpiderWebChart = scalax.chart.SpiderWebChart
 
 }

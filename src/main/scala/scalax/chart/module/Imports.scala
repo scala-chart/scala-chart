@@ -47,8 +47,8 @@ trait Imports {
   type PiePlot = org.jfree.chart.plot.PiePlot
   type PiePlot3D = org.jfree.chart.plot.PiePlot3D
   type RingPlot = org.jfree.chart.plot.RingPlot
-  type XYPlot = org.jfree.chart.plot.XYPlot
   type SpiderWebPlot = org.jfree.chart.plot.SpiderWebPlot
+  type XYPlot = org.jfree.chart.plot.XYPlot
 
   type Marker = org.jfree.chart.plot.Marker
   type CategoryMarker = org.jfree.chart.plot.CategoryMarker
