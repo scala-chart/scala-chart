@@ -71,7 +71,7 @@ private[chart] trait DisplayableChart extends DocMacros {
     * @param useBuffer whether or not to use an off-screen buffer
     */
   def toComponent(useBuffer: Boolean = Chart.Default.BufferUsed): Component = {
-    val peer = new jchart.ChartPanel(chart.peer)
+    val peer = new jchart.ChartPanel(chart.peer, useBuffer)
     val wrapped = Component.wrap(peer)
     applyScalaSwingListenerTo(peer, publisher = wrapped)
     wrapped
