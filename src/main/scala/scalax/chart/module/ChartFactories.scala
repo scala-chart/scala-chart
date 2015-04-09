@@ -376,6 +376,36 @@ trait ChartFactories
       CategoryChart(plot, title, legend, theme)
     }
 
+    /** Creates a new chart that represents categorized numeric values with shapes instead of lines.
+      *
+      * @param data        $data
+      * @param title       $title
+      * @param orientation $orientation
+      * @param legend      $legend
+      * @param theme       $theme
+      *
+      * @usecase def shapes(data: CategoryDataset): CategoryChart = ???
+      *   @inheritdoc
+      */
+    def shapes[A: ToCategoryDataset](data: A,
+               title: String = "",
+               orientation: Orientation = Orientation.Vertical,
+               legend: Boolean = true)
+              (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
+
+      val dataset = ToCategoryDataset[A].convert(data)
+
+      val domainAxis = new CategoryAxis()
+      val rangeAxis = new NumberAxis()
+
+      val renderer = new LineAndShapeRenderer(false, true)
+
+      val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
+      plot.setOrientation(orientation)
+
+      CategoryChart(plot, title, legend, theme)
+    }
+
     /** Creates a new chart that represents categorized numeric values with three dimensional a
       * line.
       *
@@ -678,6 +708,42 @@ trait ChartFactories
       val rangeAxis = new NumberAxis()
 
       val renderer = new XYLineAndShapeRenderer(true, false)
+
+      val plot = new XYPlot(dataset, domainAxis, rangeAxis, renderer)
+      plot.setOrientation(orientation)
+
+      XYChart(plot, title, legend, theme)
+    }
+
+    /** Creates a new chart that represents numeric `x` and `y` values with shapes instead of lines.
+      *
+      * If the input dataset is an instance of a `TimePeriodValuesCollection`,
+      * `TimeSeriesCollection` or `TimeTableXYDataset` the domain axis will correctly be set to a
+      * `DateAxis`.
+      *
+      * @param data        $data
+      * @param title       $title
+      * @param orientation $orientation
+      * @param legend      $legend
+      * @param theme       $theme
+      *
+      * @usecase def shapes(data: XYDataset): XYChart = ???
+      *   @inheritdoc
+      */
+    def shapes[A: ToXYDataset](data: A,
+               title: String = "",
+               orientation: Orientation = Orientation.Vertical,
+               legend: Boolean = true)
+              (implicit theme: ChartTheme = ChartTheme.Default): XYChart = {
+
+      val dataset = ToXYDataset[A].convert(data)
+
+      val dateAxis = needsDateAxis(dataset)
+
+      val domainAxis = XYDomainAxis(dateAxis)
+      val rangeAxis = new NumberAxis()
+
+      val renderer = new XYLineAndShapeRenderer(false, true)
 
       val plot = new XYPlot(dataset, domainAxis, rangeAxis, renderer)
       plot.setOrientation(orientation)
