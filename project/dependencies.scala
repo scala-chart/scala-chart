@@ -5,6 +5,7 @@ import sbt._
 
 object Dependencies {
   val jfreechart = "org.jfree"   % "jfreechart" % "1.0.19"
+  val jfreesvg   = "org.jfree"   % "jfreesvg"   % "2.1"
   val itext      = "com.lowagie" % "itext"      % "4.2.1"
 
   def Specs2(scalaVersion: String) = CrossVersion.partialVersion(scalaVersion) match {

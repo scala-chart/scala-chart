@@ -74,6 +74,7 @@ chart.show()
 chart.saveAsPNG("/tmp/chart.png")
 chart.saveAsJPEG("/tmp/chart.jpg")
 chart.saveAsPDF("/tmp/chart.pdf")
+chart.saveAsSVG("/tmp/chart.svg")
 ```
 
 ### Animations / Live Chart Updates

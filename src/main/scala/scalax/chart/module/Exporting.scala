@@ -26,6 +26,7 @@ object Exporting extends Exporting
   *  - JPEG
   *  - PNG
   *  - PDF, needs the optional dependency `com.lowagie.itext` on your class path
+  *  - SVG, needs the optional dependency `org.jfree.jfreesvg` on your class path
   *
   * == Export Stages ==
   *
@@ -50,5 +51,8 @@ trait Exporting {
 
   implicit def ChartPNGExporter(chart: Chart): PNGExporter =
     new PNGExporter(chart)
+
+  implicit def ChartSVGExporter(chart: Chart): SVGExporter =
+    new SVGExporter(chart)
 
 }

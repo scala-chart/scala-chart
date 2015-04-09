@@ -12,6 +12,7 @@ lazy val chart = (
     libraryDependencies ++= Seq(jfreechart, Swing(scalaVersion.value)),
     libraryDependencies ++= Specs2(scalaVersion.value).map(_ % "test"),
     libraryDependencies += itext % Optional,
+    libraryDependencies += jfreesvg % Optional,
     initialCommands in (Compile, consoleQuick) <<= initialCommands in Compile,
     initialCommands in Compile in console += """
       import scalax.chart._
