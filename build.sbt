@@ -7,6 +7,8 @@ lazy val chart = (
   settings (
     autoAPIMappings := true,
     apiURL := Some(url(s"""http://wookietreiber.github.io/scala-chart/${version.value}/api/""")),
+    resolvers += "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases",
+    scalacOptions in Test ++= Seq("-Yrangepos"),
     libraryDependencies ++= Seq(jfreechart, Swing(scalaVersion.value)),
     libraryDependencies ++= Specs2(scalaVersion.value).map(_ % "test"),
     libraryDependencies += itext % Optional,
