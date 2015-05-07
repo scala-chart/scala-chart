@@ -1,8 +1,6 @@
 package scalax.chart
 package event
 
-import language.existentials
-
 import scala.swing.event.Event
 
 import org.jfree.chart.plot.Plot
