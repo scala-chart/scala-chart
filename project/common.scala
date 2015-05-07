@@ -8,7 +8,7 @@ package object build {
 
   def ChartProject(name: String, path: String) = {
     Project(name, file(path)) settings (
-      (ProjectDescription.projectDescription ++ Publishing.publishing): _*
+      (ProjectDescription.projectDescription ++ Publishing.publishing)
     )
   }
 }
