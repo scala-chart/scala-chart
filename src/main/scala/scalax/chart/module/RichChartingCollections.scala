@@ -124,7 +124,7 @@ trait RichChartingCollections extends Imports {
       */
     def toTimeSeries(name: Comparable[_] = "")(implicit eva: A => RegularTimePeriod, numb: Numeric[B]): TimeSeries = {
       trav.foldLeft(new TimeSeries(name)) { case (series,(time,value)) =>
-        series.add(time,value.toDouble)
+        series.add(time, value.toDouble, false)
         series
       }
     }
@@ -151,7 +151,7 @@ trait RichChartingCollections extends Imports {
     def toXYSeries(name: Comparable[_] = "", autoSort: Boolean = true, allowDuplicateXValues: Boolean = true)
       (implicit numa: Numeric[A], numb: Numeric[B]): XYSeries = {
       trav.foldLeft(new XYSeries(name, autoSort, allowDuplicateXValues)) { case (series, (x,y)) =>
-        series.add(x.toDouble,y.toDouble)
+        series.add(x.toDouble, y.toDouble, false)
         series
       }
     }
@@ -297,7 +297,7 @@ trait RichChartingCollections extends Imports {
       trav.foldLeft(new TimeTableXYDataset) { case (dataset,(category,timevals)) =>
 
         timevals.foldLeft(dataset) { case (dataset,(time,value)) =>
-          dataset.add(time,value.toDouble,category,false)
+          dataset.add(time, value.toDouble, category, false)
           dataset
         }
 
