@@ -7,8 +7,9 @@ import org.jfree.chart.encoders.EncoderUtil
 
 import org.jfree.graphics2d.svg._
 
-import com.lowagie.text.{ Document, Rectangle }
-import com.lowagie.text.pdf.{ DefaultFontMapper, FontMapper, PdfWriter }
+import com.itextpdf.awt.{ DefaultFontMapper, FontMapper, PdfGraphics2D }
+import com.itextpdf.text.{ Document, Rectangle }
+import com.itextpdf.text.pdf.PdfWriter
 
 /**
   * @define os stream to where will be written
@@ -106,7 +107,7 @@ class PDFExporter(val chart: Chart) extends AnyVal with Exporter {
 
       val cb = writer.getDirectContent
       val tp = cb.createTemplate(width, height)
-      val g2 = tp.createGraphics(width, height, fontMapper)
+      val g2 = new PdfGraphics2D(tp, width, height, fontMapper)
       val r2D = new java.awt.geom.Rectangle2D.Double(0, 0, width, height)
 
       chart.peer.draw(g2, r2D)

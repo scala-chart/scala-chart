@@ -8,7 +8,8 @@ Scala Chart Library
 
 `scala-chart` is a Scala library for creating and working with charts. It wraps [JFreeChart][], much
 like `scala-swing` does with the original `javax.swing` package. This project is released under the
-same license as [JFreeChart][] to make them fully license-compatible. Checkout the [API][].
+same license as [JFreeChart][] to make them fully license-compatible. Checkout the API by clicking
+on the *scaladoc* badge above.
 
 Usage
 -----
@@ -22,7 +23,13 @@ libraryDependencies += "com.github.wookietreiber" %% "scala-chart" % "latest.int
 In case exporting to PDF is required, also add [iText][] to your dependencies:
 
 ```scala
-libraryDependencies += "com.lowagie" % "itext" % "4.2.1"
+libraryDependencies += "com.itextpdf" % "itextpdf" % "5.5.6"
+```
+
+In case exporting to SVG is required, also add [JFreeSVG][] to your dependencies:
+
+```scala
+libraryDependencies += "org.jfree" % "jfreesvg" % "3.0"
 ```
 
 ### Imports
@@ -95,7 +102,7 @@ for (x <- -4.0 to 4 by 0.1) {
 
 
 [JFreeChart]: http://jfree.org/jfreechart/
-[API]: http://wookietreiber.github.com/scala-chart/latest/api/index.html
+[JFreeSVG]: http://www.jfree.org/jfreesvg/
 [sbt]: http://www.scala-sbt.org/
 [maven]: http://maven.apache.org/
 [modules]: http://wookietreiber.github.io/scala-chart/latest/api/index.html#scalax.chart.module.package
