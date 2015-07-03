@@ -89,7 +89,7 @@ chart.saveAsSVG("/tmp/chart.svg")
 You can also do some animations, i.e. perform live updates on your datasets:
 
 ```scala
-val series = Seq[(Int,Int)]() toXYSeries "f(x) = sin(x)"
+val series = new XYSeries("f(x) = sin(x)")
 val chart = XYLineChart(series)
 chart.show()
 for (x <- -4.0 to 4 by 0.1) {
