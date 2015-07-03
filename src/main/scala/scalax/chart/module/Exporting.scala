@@ -25,8 +25,8 @@ object Exporting extends Exporting
   *
   *  - JPEG
   *  - PNG
-  *  - PDF, needs the optional dependency `com.lowagie.itext` on your class path
-  *  - SVG, needs the optional dependency `org.jfree.jfreesvg` on your class path
+  *  - PDF, needs the optional dependency `"com.itextpdf" % "itextpdf"` on your class path
+  *  - SVG, needs the optional dependency `"org.jfree" % "jfreesvg"` on your class path
   *
   * == Export Stages ==
   *
