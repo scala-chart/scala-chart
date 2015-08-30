@@ -5,8 +5,11 @@ import java.io._
 
 import org.jfree.chart.encoders.EncoderUtil
 
-import com.lowagie.text.{ Document, Rectangle }
-import com.lowagie.text.pdf.{ DefaultFontMapper, FontMapper, PdfWriter }
+import org.jfree.graphics2d.svg._
+
+import com.itextpdf.awt.{ DefaultFontMapper, FontMapper, PdfGraphics2D }
+import com.itextpdf.text.{ Document, Rectangle }
+import com.itextpdf.text.pdf.PdfWriter
 
 /**
   * @define os stream to where will be written
@@ -104,7 +107,7 @@ class PDFExporter(val chart: Chart) extends AnyVal with Exporter {
 
       val cb = writer.getDirectContent
       val tp = cb.createTemplate(width, height)
-      val g2 = tp.createGraphics(width, height, fontMapper)
+      val g2 = new PdfGraphics2D(tp, width, height, fontMapper)
       val r2D = new java.awt.geom.Rectangle2D.Double(0, 0, width, height)
 
       chart.peer.draw(g2, r2D)
@@ -156,6 +159,31 @@ class PNGExporter(val chart: Chart) extends AnyVal with Exporter {
     val (width, height) = resolution
     val image = chart.peer.createBufferedImage(width, height)
     EncoderUtil.encode(image, "png")
+  }
+
+}
+
+/** Exports charts to SVG images.
+  *
+  * @see [[module.Exporting]]
+  */
+class SVGExporter(val chart: Chart) extends AnyVal with Exporter {
+
+  /** Saves the chart as a SVG image.
+    *
+    * @param file $file
+    * @param resolution $resolution
+    *
+    * @usecase def saveAsSVG(file: String): Unit
+    *   @inheritdoc
+    */
+  def saveAsSVG(file: String, resolution: (Int,Int) = Chart.Default.Resolution): Unit = {
+    val (width, height) = resolution
+    val g2 = new SVGGraphics2D(width, height)
+    chart.peer.draw(g2, new java.awt.Rectangle(new java.awt.Dimension(width, height)))
+    val svg = g2.getSVGElement
+    g2.dispose()
+    SVGUtils.writeToSVG(new File(file), svg)
   }
 
 }

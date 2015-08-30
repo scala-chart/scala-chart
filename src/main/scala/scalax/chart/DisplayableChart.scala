@@ -63,8 +63,15 @@ private[chart] trait DisplayableChart extends DocMacros {
   }
 
   /** Wraps this chart in a swing component. */
-  def toComponent: Component = {
-    val peer = new jchart.ChartPanel(chart.peer)
+  def toComponent: Component =
+    toComponent()
+
+  /** Wraps this chart in a swing component.
+    *
+    * @param useBuffer whether or not to use an off-screen buffer
+    */
+  def toComponent(useBuffer: Boolean = Chart.Default.BufferUsed): Component = {
+    val peer = new jchart.ChartPanel(chart.peer, useBuffer)
     val wrapped = Component.wrap(peer)
     applyScalaSwingListenerTo(peer, publisher = wrapped)
     wrapped

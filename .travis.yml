@@ -1,0 +1,16 @@
+language: scala
+
+branches:
+  only:
+    - develop
+
+scala:
+  - "2.11.7"
+  - "2.10.5"
+
+jdk:
+  - oraclejdk7
+  - openjdk7
+  - openjdk6
+
+sudo: false

@@ -1,30 +1,44 @@
 Scala Chart Library
 ===================
 
+[![Build Status](https://travis-ci.org/wookietreiber/scala-chart.svg?branch=develop)](https://travis-ci.org/wookietreiber/scala-chart)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.wookietreiber/scala-chart_2.11/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.wookietreiber/scala-chart_2.11)
+[![Scaladoc](http://javadoc-badge.appspot.com/com.github.wookietreiber/scala-chart_2.11.svg?label=scaladoc)](http://javadoc-badge.appspot.com/com.github.wookietreiber/scala-chart_2.11)
+[![Reference Status](https://www.versioneye.com/java/com.github.wookietreiber:scala-chart_2.11/reference_badge.svg?style=flat)](https://www.versioneye.com/java/com.github.wookietreiber:scala-chart_2.11/references)
+
 `scala-chart` is a Scala library for creating and working with charts. It wraps [JFreeChart][], much
 like `scala-swing` does with the original `javax.swing` package. This project is released under the
-same license as [JFreeChart][] to make them fully license-compatible. Checkout the [API][].
+same license as [JFreeChart][] to make them fully license-compatible. Checkout the API by clicking
+on the *scaladoc* badge above.
 
-Example Usage
--------------
+Usage
+-----
 
-### [sbt][]
+Add the following to your [sbt][] build:
 
-    libraryDependencies += "com.github.wookietreiber" %% "scala-chart" % "0.4.0"
+```scala
+libraryDependencies += "com.github.wookietreiber" %% "scala-chart" % "0.5.0"
+```
 
-### [maven][]
+In case exporting to PDF is required, also add [iText][] to your dependencies:
 
-    <dependency>
-       <groupId>com.github.wookietreiber</groupId>
-       <artifactId>scala-chart_${scala.version}</artifactId>
-       <version>0.4.0</version>
-    </dependency>
+```scala
+libraryDependencies += "com.itextpdf" % "itextpdf" % "5.5.6"
+```
+
+In case exporting to SVG is required, also add [JFreeSVG][] to your dependencies:
+
+```scala
+libraryDependencies += "org.jfree" % "jfreesvg" % "3.0"
+```
 
 ### Imports
 
 All high-level convenience can be imported with the *all you can eat* import:
 
-    import scalax.chart.api._
+```scala
+import scalax.chart.api._
+```
 
 For more and more *a la carte* imports, have a look at the [module package][modules] for various
 selfless traits. There is also a module containing everything the `api` import does which can be
@@ -67,6 +81,7 @@ chart.show()
 chart.saveAsPNG("/tmp/chart.png")
 chart.saveAsJPEG("/tmp/chart.jpg")
 chart.saveAsPDF("/tmp/chart.pdf")
+chart.saveAsSVG("/tmp/chart.svg")
 ```
 
 ### Animations / Live Chart Updates
@@ -74,7 +89,7 @@ chart.saveAsPDF("/tmp/chart.pdf")
 You can also do some animations, i.e. perform live updates on your datasets:
 
 ```scala
-val series = Seq[(Int,Int)]() toXYSeries "f(x) = sin(x)"
+val series = new XYSeries("f(x) = sin(x)")
 val chart = XYLineChart(series)
 chart.show()
 for (x <- -4.0 to 4 by 0.1) {
@@ -85,26 +100,10 @@ for (x <- -4.0 to 4 by 0.1) {
 }
 ```
 
-### Projects Using Scala Chart
-
-The following list contains some projects where you can see this project in action. This list is
-included here because it is sometimes more useful to see how a library is used in more than simple
-examples.
-
-- [scalameter](https://github.com/scalameter/scalameter)
-- [ckit](https://github.com/wookietreiber/ckit)
-- [eva4s](https://github.com/wookietreiber/eva4s)
-- [pretty-accounting](https://github.com/wookietreiber/pretty-accounting)
-
 
 [JFreeChart]: http://jfree.org/jfreechart/
-[API]: http://wookietreiber.github.com/scala-chart/latest/api/index.html
+[JFreeSVG]: http://www.jfree.org/jfreesvg/
 [sbt]: http://www.scala-sbt.org/
 [maven]: http://maven.apache.org/
 [modules]: http://wookietreiber.github.io/scala-chart/latest/api/index.html#scalax.chart.module.package
-
-
----
-
-[![endorse](http://api.coderwall.com/wookietreiber/endorsecount.png)](http://coderwall.com/wookietreiber)
-
+[iText]: http://itextpdf.com/

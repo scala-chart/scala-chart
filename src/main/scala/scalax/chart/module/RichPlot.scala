@@ -5,6 +5,7 @@ import java.util.Collection
 
 import scala.collection.JavaConverters.asScalaIteratorConverter
 
+import org.jfree.chart.axis.{ CategoryAxis, ValueAxis }
 import org.jfree.chart.plot._
 
 /** $RichPlotInfo */
@@ -16,7 +17,7 @@ object RichPlot extends RichPlot
   * the plot domain, range and marking.
   *
   * {{{
-  * chart.plot.domain.axis.label = "my label"
+  * chart.plot.domain.axis.label.text = "my label"
   * chart.plot.range.markers += ((1,1))
   * }}}
   *
@@ -44,8 +45,11 @@ trait RichPlot extends MarkerConversions {
   /** Enriches a `CategoryPlot`. */
   implicit class RichCategoryPlot(val peer: CategoryPlot) {
     object domain {
+
+      /** Returns the domain axis. */
       object axis extends Axis {
-        override final def peer = RichCategoryPlot.this.peer.getDomainAxis
+        type Peer = CategoryAxis
+        override final def peer: CategoryAxis = RichCategoryPlot.this.peer.getDomainAxis
       }
 
       object markers {
@@ -63,8 +67,11 @@ trait RichPlot extends MarkerConversions {
     }
 
     object range {
+
+      /** Returns the range axis. */
       object axis extends Axis {
-        override final def peer = RichCategoryPlot.this.peer.getRangeAxis
+        type Peer = ValueAxis
+        override final def peer: ValueAxis = RichCategoryPlot.this.peer.getRangeAxis
       }
 
       object markers {
@@ -85,14 +92,20 @@ trait RichPlot extends MarkerConversions {
   /** Enriches a `FastScatterPlot`. */
   implicit class RichFastScatterPlot(val peer: FastScatterPlot) {
     object domain {
+
+      /** Returns the domain axis. */
       object axis extends Axis {
-        override final def peer = RichFastScatterPlot.this.peer.getDomainAxis
+        type Peer = ValueAxis
+        override final def peer: ValueAxis = RichFastScatterPlot.this.peer.getDomainAxis
       }
     }
 
     object range {
+
+      /** Returns the range axis. */
       object axis extends Axis {
-        override final def peer = RichFastScatterPlot.this.peer.getRangeAxis
+        type Peer = ValueAxis
+        override final def peer: ValueAxis = RichFastScatterPlot.this.peer.getRangeAxis
       }
     }
   }
@@ -100,8 +113,11 @@ trait RichPlot extends MarkerConversions {
   /** Enriches a `ThermometerPlot`. */
   implicit class RichThermometerPlot(val peer: ThermometerPlot) {
     object range {
+
+      /** Returns the range axis. */
       object axis extends Axis {
-        override final def peer = RichThermometerPlot.this.peer.getRangeAxis
+        type Peer = ValueAxis
+        override final def peer: ValueAxis = RichThermometerPlot.this.peer.getRangeAxis
       }
     }
   }
@@ -109,8 +125,11 @@ trait RichPlot extends MarkerConversions {
   /** Enriches an `XYPlot`. */
   implicit class RichXYPlot(val peer: XYPlot) {
     object domain {
+
+      /** Returns the domain axis. */
       object axis extends Axis {
-        override final def peer = RichXYPlot.this.peer.getDomainAxis
+        type Peer = ValueAxis
+        override final def peer: ValueAxis = RichXYPlot.this.peer.getDomainAxis
       }
 
       object markers {
@@ -128,8 +147,11 @@ trait RichPlot extends MarkerConversions {
     }
 
     object range {
+
+      /** Returns the range axis. */
       object axis extends Axis {
-        override final def peer = RichXYPlot.this.peer.getRangeAxis
+        type Peer = ValueAxis
+        override final def peer: ValueAxis = RichXYPlot.this.peer.getRangeAxis
       }
 
       object markers {

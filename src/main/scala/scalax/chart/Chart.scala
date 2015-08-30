@@ -139,6 +139,9 @@ object Chart extends ChartCompanion[Chart] {
     /** Returns the default chart width. */
     def Width: Int = org.jfree.chart.ChartPanel.DEFAULT_WIDTH
 
+    /** Returns the default of whether or not to use an off-screen buffer to draw the chart. */
+    def BufferUsed: Boolean = org.jfree.chart.ChartPanel.DEFAULT_BUFFER_USED
+
     /** Returns the default chart resolution. */
     def Resolution: (Int,Int) = (Width,Height)
 
