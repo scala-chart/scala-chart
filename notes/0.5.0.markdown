@@ -1,0 +1,21 @@
+`scala-chart` version 0.5.0 includes the following changes:
+
+-   cross published: 2.10.5, 2.11.7 and 2.12.0-M2
+
+-   depends on jfreechart 1.0.19
+
+-   optional dependency itext updated to:
+
+        "com.itextpdf" % "itextpdf" % "5.5.6"
+
+-   new optional dependency to export to SVG:
+
+        "org.jfree" % "jfreesvg" % "3.0"
+
+-   additions to the `Axis` API, see `Axis.scala` and the corresponding scaladoc
+
+-   new option to `toComponent` if off-screen buffer should be used to draw the chart
+
+-   new chart factory for spider web charts: `SpiderWebChart`
+
+-   new factories: `(XY)LineChart.shapes` using `(XY)LineAndShapeRenderer`
