@@ -17,7 +17,7 @@ Usage
 Add the following to your [sbt][] build:
 
 ```scala
-libraryDependencies += "com.github.wookietreiber" %% "scala-chart" % "0.5.0"
+libraryDependencies += "com.github.wookietreiber" %% "scala-chart" % "latest.integration"
 ```
 
 In case exporting to PDF is required, also add [iText][] to your dependencies:
