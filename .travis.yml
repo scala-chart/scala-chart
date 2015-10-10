@@ -6,7 +6,7 @@ branches:
 
 scala:
   - "2.11.7"
-  - "2.10.5"
+  - "2.10.6"
 
 jdk:
   - oraclejdk7
