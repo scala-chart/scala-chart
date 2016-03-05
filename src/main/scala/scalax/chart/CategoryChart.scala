@@ -31,7 +31,7 @@ abstract class CategoryChart protected () extends Chart with Orientable
   }
 
   override def orientation: Orientation = plot.getOrientation
-  override def orientation_=(orientation: Orientation) {
+  override def orientation_=(orientation: Orientation): Unit = {
     plot.setOrientation(orientation)
   }
 
