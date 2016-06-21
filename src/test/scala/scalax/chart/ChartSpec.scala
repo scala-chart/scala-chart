@@ -84,7 +84,7 @@ class ChartSpec extends Specification { def is = s2"""
   // -----------------------------------------------------------------------------------------------
 
   def caa1 = {
-    val chart = AreaChart(categorydataset, title = "foo")
+    val chart = AreaChart(categorydataset)
     val t = "bar"
     chart.title = t
     chart.title === t
