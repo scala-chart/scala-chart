@@ -28,39 +28,37 @@ object PieChart extends ChartCompanion[PieChart] {
   /** Creates a new $chart.
     *
     * @param data   $data
-    * @param title  $title
     * @param theme  $theme
     *
     * @usecase def apply(data: PieDataset): PieChart = ???
     *   @inheritdoc
     */
-  def apply[A: ToPieDataset](data: A, title: String = "")
+  def apply[A: ToPieDataset](data: A)
     (implicit theme: ChartTheme = ChartTheme.Default): PieChart = {
     val dataset = ToPieDataset[A].convert(data)
 
     val plot = new PiePlot(dataset)
     plot.setInsets(new RectangleInsets(0.0, 5.0, 5.0, 5.0))
 
-    PieChart(plot, title, legend = true, theme)
+    PieChart(plot, title = "", legend = true, theme)
   }
 
   /** Creates a new $chart with a three dimensional visualization.
     *
     * @param data   $data
-    * @param title  $title
     * @param theme  $theme
     *
     * @usecase def threeDimensional(data: PieDataset): PieChart = ???
     *   @inheritdoc
     */
-  def threeDimensional[A: ToPieDataset](data: A, title: String = "")
+  def threeDimensional[A: ToPieDataset](data: A)
     (implicit theme: ChartTheme = ChartTheme.Default): PieChart = {
     val dataset = ToPieDataset[A].convert(data)
 
     val plot = new PiePlot3D(dataset)
     plot.setInsets(new RectangleInsets(0.0, 5.0, 5.0, 5.0))
 
-    PieChart(plot, title, legend = true, theme)
+    PieChart(plot, title = "", legend = true, theme)
   }
 
 }

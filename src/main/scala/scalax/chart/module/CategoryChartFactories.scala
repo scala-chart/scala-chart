@@ -23,15 +23,13 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
     /** Creates a new chart that represents categorized numeric data with an area.
       *
       * @param data        $data
-      * @param title       $title
       * @param theme       $theme
       *
       * @usecase def apply(data: CategoryDataset): CategoryChart = ???
       *   @inheritdoc
       */
-    def apply[A: ToCategoryDataset](data: A,
-              title: String = "")
-             (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
+    def apply[A: ToCategoryDataset](data: A)
+      (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
 
       val dataset = ToCategoryDataset[A].convert(data)
 
@@ -44,21 +42,19 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
 
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
 
-      CategoryChart(plot, title, legend = true, theme)
+      CategoryChart(plot, title = "", legend = true, theme)
     }
 
     /** Creates a new chart that represents categorized numeric data with stacked areas.
       *
       * @param data        $data
-      * @param title       $title
       * @param theme       $theme
       *
       * @usecase def stacked(data: CategoryDataset): CategoryChart = ???
       *   @inheritdoc
       */
-    def stacked[A: ToCategoryDataset](data: A,
-                title: String = "")
-               (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
+    def stacked[A: ToCategoryDataset](data: A)
+      (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
 
       val dataset = ToCategoryDataset[A].convert(data)
 
@@ -71,7 +67,7 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
 
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
 
-      CategoryChart(plot, title, legend = true, theme)
+      CategoryChart(plot, title = "", legend = true, theme)
     }
 
   }
@@ -82,15 +78,13 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
     /** Creates a new chart that represents categorized numeric data with bars.
       *
       * @param data        $data
-      * @param title       $title
       * @param theme       $theme
       *
       * @usecase def apply(data: CategoryDataset): CategoryChart = ???
       *   @inheritdoc
       */
-    def apply[A: ToCategoryDataset](data: A,
-              title: String = "")
-             (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
+    def apply[A: ToCategoryDataset](data: A)
+      (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
 
       val dataset = ToCategoryDataset[A].convert(data)
 
@@ -109,21 +103,19 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
 
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
 
-      CategoryChart(plot, title, legend = true, theme)
+      CategoryChart(plot, title = "", legend = true, theme)
     }
 
     /** Creates a new chart that represents categorized numeric data with stacked bars.
       *
       * @param data        $data
-      * @param title       $title
       * @param theme       $theme
       *
       * @usecase def stacked(data: CategoryDataset): CategoryChart = ???
       *   @inheritdoc
       */
-    def stacked[A: ToCategoryDataset](data: A,
-                title: String = "")
-               (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
+    def stacked[A: ToCategoryDataset](data: A)
+      (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
 
       val dataset = ToCategoryDataset[A].convert(data)
 
@@ -134,21 +126,19 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
 
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
 
-      CategoryChart(plot, title, legend = true, theme)
+      CategoryChart(plot, title = "", legend = true, theme)
     }
 
     /** Creates a new chart that represents categorized numeric data with three dimensional bars.
       *
       * @param data        $data
-      * @param title       $title
       * @param theme       $theme
       *
       * @usecase def threeDimensional(data: CategoryDataset): CategoryChart = ???
       *   @inheritdoc
       */
-    def threeDimensional[A: ToCategoryDataset](data: A,
-                         title: String = "")
-                        (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
+    def threeDimensional[A: ToCategoryDataset](data: A)
+      (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
 
       val dataset = ToCategoryDataset[A].convert(data)
 
@@ -160,21 +150,19 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
       plot.setForegroundAlpha(0.75f)
 
-      CategoryChart(plot, title, legend = true, theme)
+      CategoryChart(plot, title = "", legend = true, theme)
     }
 
     /** Creates a new chart that represents categorized numeric data with three dimensional bars.
       *
       * @param data        $data
-      * @param title       $title
       * @param theme       $theme
       *
       * @usecase def threeDimensionalStacked(data: CategoryDataset): CategoryChart = ???
       *   @inheritdoc
       */
-    def threeDimensionalStacked[A: ToCategoryDataset](data: A,
-                                title: String = "")
-                               (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
+    def threeDimensionalStacked[A: ToCategoryDataset](data: A)
+      (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
 
       val dataset = ToCategoryDataset[A].convert(data)
 
@@ -185,7 +173,7 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
 
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
 
-      CategoryChart(plot, title, legend = true, theme)
+      CategoryChart(plot, title = "", legend = true, theme)
     }
 
     /** Creates a new chart that represents categorized numeric data with bars. The keys of the
@@ -199,15 +187,13 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
       * }}}
       *
       * @param data $data
-      * @param title $title
       * @param theme $theme
       *
       * @usecase def combinedDomain(data: Map[String,CategoryDataset]): CategoryChart = ???
       *   @inheritdoc
       */
-    def combinedDomain[A: ToCategoryDataset](data: GenTraversableOnce[(Comparable[_],A)],
-              title: String = "")
-             (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
+    def combinedDomain[A: ToCategoryDataset](data: GenTraversableOnce[(Comparable[_],A)])
+      (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
 
       import RichPlot.{ CategoryPlot => _, _ }
 
@@ -228,7 +214,7 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
         combined
       }
 
-      CategoryChart(combinedPlot, title, legend = true, theme)
+      CategoryChart(combinedPlot, title = "", legend = true, theme)
     }
 
   }
@@ -239,15 +225,13 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
     /** Creates a new chart that represents categorized numeric values with a line.
       *
       * @param data        $data
-      * @param title       $title
       * @param theme       $theme
       *
       * @usecase def apply(data: CategoryDataset): CategoryChart = ???
       *   @inheritdoc
       */
-    def apply[A: ToCategoryDataset](data: A,
-              title: String = "")
-             (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
+    def apply[A: ToCategoryDataset](data: A)
+      (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
 
       val dataset = ToCategoryDataset[A].convert(data)
 
@@ -258,21 +242,19 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
 
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
 
-      CategoryChart(plot, title, legend = true, theme)
+      CategoryChart(plot, title = "", legend = true, theme)
     }
 
     /** Creates a new chart that represents categorized numeric values with shapes instead of lines.
       *
       * @param data        $data
-      * @param title       $title
       * @param theme       $theme
       *
       * @usecase def shapes(data: CategoryDataset): CategoryChart = ???
       *   @inheritdoc
       */
-    def shapes[A: ToCategoryDataset](data: A,
-               title: String = "")
-              (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
+    def shapes[A: ToCategoryDataset](data: A)
+      (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
 
       val dataset = ToCategoryDataset[A].convert(data)
 
@@ -283,22 +265,20 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
 
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
 
-      CategoryChart(plot, title, legend = true, theme)
+      CategoryChart(plot, title = "", legend = true, theme)
     }
 
     /** Creates a new chart that represents categorized numeric values with three dimensional a
       * line.
       *
       * @param data        $data
-      * @param title       $title
       * @param theme       $theme
       *
       * @usecase def threeDimensional(data: CategoryDataset): CategoryChart = ???
       *   @inheritdoc
       */
-    def threeDimensional[A: ToCategoryDataset](data: A,
-                         title: String = "")
-                        (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
+    def threeDimensional[A: ToCategoryDataset](data: A)
+      (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
 
       val dataset = ToCategoryDataset[A].convert(data)
 
@@ -309,7 +289,7 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
 
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
 
-      CategoryChart(plot, title, legend = true, theme)
+      CategoryChart(plot, title = "", legend = true, theme)
     }
 
   }
