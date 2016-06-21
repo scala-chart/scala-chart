@@ -12,7 +12,7 @@ abstract class SpiderWebChart protected () extends Chart {
 
 /** Factory for ${chart}s.
   *
-  * @define chart SpideWeb chart
+  * @define chart SpiderWeb chart
   * @define Chart SpiderWebChart
   */
 object SpiderWebChart extends ChartCompanion[SpiderWebChart] {
