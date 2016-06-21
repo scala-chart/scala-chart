@@ -9,9 +9,9 @@ object Dependencies {
   val itext      = "com.itextpdf" % "itextpdf"   % "5.5.9"
 
   def Specs2(scalaVersion: String) = CrossVersion.partialVersion(scalaVersion) match {
-    case Some((2,12)) => List("org.specs2" %% "specs2-core" % "3.8.3")
-    case Some((2,11)) => List("org.specs2" %% "specs2-core" % "3.8.3")
-    case Some((2,10)) => List("org.specs2" %% "specs2-core" % "3.8.3")
+    case Some((2,12)) => List("org.specs2" %% "specs2-core" % "3.8.4")
+    case Some((2,11)) => List("org.specs2" %% "specs2-core" % "3.8.4")
+    case Some((2,10)) => List("org.specs2" %% "specs2-core" % "3.8.4")
     case _            => Nil
   }
 
