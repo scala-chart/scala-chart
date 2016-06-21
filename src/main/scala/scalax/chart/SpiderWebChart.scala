@@ -29,18 +29,17 @@ object SpiderWebChart extends ChartCompanion[SpiderWebChart] {
     *
     * @param data   $data
     * @param title  $title
-    * @param legend $legend
     * @param theme  $theme
     *
     * @usecase def apply(data: CategoryDataset): SpiderWebChart = ???
     */
-  def apply[A: ToCategoryDataset](data: A, title: String = "", legend: Boolean = true)
+  def apply[A: ToCategoryDataset](data: A, title: String = "")
     (implicit theme: ChartTheme = ChartTheme.Default): SpiderWebChart = {
     val dataset = ToCategoryDataset[A].convert(data)
 
     val plot = new SpiderWebPlot(dataset)
     plot.setInsets(new RectangleInsets(0.0, 5.0, 5.0, 5.0))
 
-    SpiderWebChart(plot, title, legend, theme)
+    SpiderWebChart(plot, title, legend = true, theme)
   }
 }

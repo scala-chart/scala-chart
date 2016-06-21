@@ -48,15 +48,13 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
       *
       * @param data        $data
       * @param title       $title
-      * @param legend      $legend
       * @param theme       $theme
       *
       * @usecase def apply(data: XYDataset): XYChart = ???
       *   @inheritdoc
       */
     def apply[A: ToXYDataset](data: A,
-              title: String = "",
-              legend: Boolean = true)
+              title: String = "")
              (implicit theme: ChartTheme = ChartTheme.Default): XYChart = {
 
       val dataset = ToXYDataset[A].convert(data)
@@ -69,7 +67,7 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
       val plot = new XYPlot(dataset, domainAxis, rangeAxis, renderer)
       plot.setForegroundAlpha(0.5f)
 
-      XYChart(plot, title, legend, theme)
+      XYChart(plot, title, legend = true, theme)
     }
 
     /** Creates a new chart that represents multiple numeric `x` and `y` values with stacked areas.
@@ -79,15 +77,13 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
       *
       * @param data        $data
       * @param title       $title
-      * @param legend      $legend
       * @param theme       $theme
       *
       * @usecase def stacked(data: TableXYDataset): XYChart = ???
       *   @inheritdoc
       */
     def stacked[A: ToTableXYDataset](data: A,
-                title: String = "",
-                legend: Boolean = true)
+                title: String = "")
                (implicit theme: ChartTheme = ChartTheme.Default): XYChart = {
 
       val dataset = ToTableXYDataset[A].convert(data)
@@ -104,7 +100,7 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
       val plot = new XYPlot(dataset, domainAxis, rangeAxis, renderer)
       plot.setRangeAxis(rangeAxis)
 
-      XYChart(plot, title, legend, theme)
+      XYChart(plot, title, legend = true, theme)
     }
 
     /** Creates a new chart that represents multiple numeric `x` and `y` values with a stepped area.
@@ -115,15 +111,13 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
       *
       * @param data        $data
       * @param title       $title
-      * @param legend      $legend
       * @param theme       $theme
       *
       * @usecase def stepped(data: XYDataset): XYChart = ???
       *   @inheritdoc
       */
     def stepped[A: ToXYDataset](data: A,
-                title: String = "",
-                legend: Boolean = true)
+                title: String = "")
                (implicit theme: ChartTheme = ChartTheme.Default): XYChart = {
 
       val dataset = ToXYDataset[A].convert(data)
@@ -137,7 +131,7 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
       plot.setDomainCrosshairVisible(false)
       plot.setRangeCrosshairVisible(false)
 
-      XYChart(plot, title, legend, theme)
+      XYChart(plot, title, legend = true, theme)
     }
 
   }
@@ -153,15 +147,13 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
       *
       * @param data        $data
       * @param title       $title
-      * @param legend      $legend
       * @param theme       $theme
       *
       * @usecase def apply(data: IntervalXYDataset): XYChart = ???
       *   @inheritdoc
       */
     def apply[A: ToIntervalXYDataset](data: A,
-              title: String = "",
-              legend: Boolean = true)
+              title: String = "")
              (implicit theme: ChartTheme = ChartTheme.Default): XYChart = {
 
       val dataset = ToIntervalXYDataset[A].convert(data)
@@ -173,7 +165,7 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
 
       val plot = new XYPlot(dataset, domainAxis, rangeAxis, renderer)
 
-      XYChart(plot, title, legend, theme)
+      XYChart(plot, title, legend = true, theme)
     }
 
     /** Creates a new chart that represents numeric `x` (intervals) and `y` values with a line.
@@ -183,15 +175,13 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
       *
       * @param data        $data
       * @param title       $title
-      * @param legend      $legend
       * @param theme       $theme
       *
       * @usecase def stacked(data: TableXYDataset): XYChart = ???
       *   @inheritdoc
       */
     def stacked[A: ToTableXYDataset](data: A,
-                title: String = "",
-                legend: Boolean = true)
+                title: String = "")
                (implicit theme: ChartTheme = ChartTheme.Default): XYChart = {
 
       val dataset = ToTableXYDataset[A].convert(data)
@@ -203,7 +193,7 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
 
       val plot = new XYPlot(dataset, domainAxis, rangeAxis, renderer)
 
-      XYChart(plot, title, legend, theme)
+      XYChart(plot, title, legend = true, theme)
     }
 
   }
@@ -219,15 +209,13 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
       *
       * @param data        $data
       * @param title       $title
-      * @param legend      $legend
       * @param theme       $theme
       *
       * @usecase def apply(data: IntervalXYDataset): XYChart = ???
       *   @inheritdoc
       */
     def apply[A: ToIntervalXYDataset](data: A,
-              title: String = "",
-              legend: Boolean = true)
+              title: String = "")
              (implicit theme: ChartTheme = ChartTheme.Default): XYChart = {
 
       val dataset = ToIntervalXYDataset[A].convert(data)
@@ -239,7 +227,7 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
 
       val plot = new XYPlot(dataset, domainAxis, rangeAxis, renderer)
 
-      XYChart(plot, title, legend, theme)
+      XYChart(plot, title, legend = true, theme)
     }
 
   }
@@ -255,15 +243,13 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
       *
       * @param data        $data
       * @param title       $title
-      * @param legend      $legend
       * @param theme       $theme
       *
       * @usecase def apply(data: XYDataset): XYChart = ???
       *   @inheritdoc
       */
     def apply[A: ToXYDataset](data: A,
-              title: String = "",
-              legend: Boolean = true)
+              title: String = "")
              (implicit theme: ChartTheme = ChartTheme.Default): XYChart = {
 
       val dataset = ToXYDataset[A].convert(data)
@@ -275,7 +261,7 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
 
       val plot = new XYPlot(dataset, domainAxis, rangeAxis, renderer)
 
-      XYChart(plot, title, legend, theme)
+      XYChart(plot, title, legend = true, theme)
     }
 
     /** Creates a new chart that represents numeric `x` and `y` values with shapes instead of lines.
@@ -286,15 +272,13 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
       *
       * @param data        $data
       * @param title       $title
-      * @param legend      $legend
       * @param theme       $theme
       *
       * @usecase def shapes(data: XYDataset): XYChart = ???
       *   @inheritdoc
       */
     def shapes[A: ToXYDataset](data: A,
-               title: String = "",
-               legend: Boolean = true)
+               title: String = "")
               (implicit theme: ChartTheme = ChartTheme.Default): XYChart = {
 
       val dataset = ToXYDataset[A].convert(data)
@@ -306,7 +290,7 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
 
       val plot = new XYPlot(dataset, domainAxis, rangeAxis, renderer)
 
-      XYChart(plot, title, legend, theme)
+      XYChart(plot, title, legend = true, theme)
     }
 
   }

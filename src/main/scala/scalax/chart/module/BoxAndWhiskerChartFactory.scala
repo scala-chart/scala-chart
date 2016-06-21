@@ -22,13 +22,12 @@ trait BoxAndWhiskerChartFactories extends BoxAndWhiskerDatasetConversions with D
       *
       * @param data $data
       * @param title $title
-      * @param legend $legend
       * @param theme $theme
       *
       * @usecase def apply(data: BoxAndWhiskerCategoryDataset): CategoryChart = ???
       *   @inheritdoc
       */
-    def apply[A: ToBoxAndWhiskerCategoryDataset](data: A, title: String = "", legend: Boolean = true)
+    def apply[A: ToBoxAndWhiskerCategoryDataset](data: A, title: String = "")
       (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
 
       val dataset = ToBoxAndWhiskerCategoryDataset[A].convert(data)
@@ -42,7 +41,7 @@ trait BoxAndWhiskerChartFactories extends BoxAndWhiskerDatasetConversions with D
 
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
 
-      CategoryChart(plot, title, legend, theme)
+      CategoryChart(plot, title, legend = true, theme)
     }
 
   }
@@ -54,13 +53,12 @@ trait BoxAndWhiskerChartFactories extends BoxAndWhiskerDatasetConversions with D
       *
       * @param data $data
       * @param title $title
-      * @param legend $legend
       * @param theme $theme
       *
       * @usecase def apply(data: BoxAndWhiskerXYDataset): XYChart = ???
       *   @inheritdoc
       */
-    def apply[A: ToBoxAndWhiskerXYDataset](data: A, title: String = "", legend: Boolean = false)
+    def apply[A: ToBoxAndWhiskerXYDataset](data: A, title: String = "")
       (implicit theme: ChartTheme = ChartTheme.Default): XYChart = {
 
       val dataset = ToBoxAndWhiskerXYDataset[A].convert(data)
@@ -73,7 +71,7 @@ trait BoxAndWhiskerChartFactories extends BoxAndWhiskerDatasetConversions with D
 
       val plot = new XYPlot(dataset, domainAxis, rangeAxis, renderer)
 
-      XYChart(plot, title, legend, theme)
+      XYChart(plot, title, legend = true, theme)
     }
 
   }

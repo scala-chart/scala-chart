@@ -23,18 +23,7 @@ object ChartFactories extends ChartFactories
   * {{{
   * val data = for (i <- 1 to 5) yield (i,i)
   * val dataset = data.toXYSeriesCollection("some data")
-  * }}}
-  *
-  * The factories make heavy use of default arguments, so you have to type as less as possible:
-  *
-  * {{{
   * val chart = XYLineChart(dataset)
-  * }}}
-  *
-  * For better readability of your own code, you should name all other arguments:
-  *
-  * {{{
-  * val chart = XYLineChart(dataset, legend = false)
   * }}}
   *
   * == Creating Charts with Themes ==
