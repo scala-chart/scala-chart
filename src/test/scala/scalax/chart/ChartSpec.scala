@@ -205,7 +205,7 @@ class ChartSpec extends Specification { def is = s2"""
   }
 
   def ac3 = {
-    val chart = AreaChart(categorydataset, orientation = Orientation.Vertical)
+    val chart = AreaChart(categorydataset)
     chart.orientation = Orientation.Horizontal
     chart.orientation === Orientation.Horizontal
   }
@@ -231,7 +231,7 @@ class ChartSpec extends Specification { def is = s2"""
   }
 
   def bc5 = {
-    val chart = BarChart(categorydataset, orientation = Orientation.Vertical)
+    val chart = BarChart(categorydataset)
     chart.orientation = Orientation.Horizontal
     chart.orientation === Orientation.Horizontal
   }
@@ -258,7 +258,7 @@ class ChartSpec extends Specification { def is = s2"""
   }
 
   def lc3 = {
-    val chart = LineChart(categorydataset, orientation = Orientation.Vertical)
+    val chart = LineChart(categorydataset)
     chart.orientation = Orientation.Horizontal
     chart.orientation === Orientation.Horizontal
   }
@@ -304,7 +304,7 @@ class ChartSpec extends Specification { def is = s2"""
   }
 
   def xyac4 = {
-    val chart = XYAreaChart(xydataset, orientation = Orientation.Vertical)
+    val chart = XYAreaChart(xydataset)
     chart.orientation = Orientation.Horizontal
     chart.orientation === Orientation.Horizontal
   }
@@ -320,7 +320,7 @@ class ChartSpec extends Specification { def is = s2"""
   }
 
   def xybc3 = {
-    val chart = XYBarChart(xydataset, orientation = Orientation.Vertical)
+    val chart = XYBarChart(xydataset)
     chart.orientation = Orientation.Horizontal
     chart.orientation === Orientation.Horizontal
   }
@@ -342,7 +342,7 @@ class ChartSpec extends Specification { def is = s2"""
   }
 
   def xydc2 = {
-    val chart = XYDeviationChart(xydataset, orientation = Orientation.Vertical)
+    val chart = XYDeviationChart(xydataset)
     chart.orientation = Orientation.Horizontal
     chart.orientation === Orientation.Horizontal
   }
@@ -353,7 +353,7 @@ class ChartSpec extends Specification { def is = s2"""
   }
 
   def xylc2 = {
-    val chart = XYLineChart(xydataset, orientation = Orientation.Vertical)
+    val chart = XYLineChart(xydataset)
     chart.orientation = Orientation.Horizontal
     chart.orientation === Orientation.Horizontal
   }

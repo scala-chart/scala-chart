@@ -48,7 +48,6 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
       *
       * @param data        $data
       * @param title       $title
-      * @param orientation $orientation
       * @param legend      $legend
       * @param theme       $theme
       *
@@ -57,7 +56,6 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
       */
     def apply[A: ToXYDataset](data: A,
               title: String = "",
-              orientation: Orientation = Orientation.Vertical,
               legend: Boolean = true)
              (implicit theme: ChartTheme = ChartTheme.Default): XYChart = {
 
@@ -69,7 +67,6 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
       val renderer = new XYAreaRenderer()
 
       val plot = new XYPlot(dataset, domainAxis, rangeAxis, renderer)
-      plot.setOrientation(orientation)
       plot.setForegroundAlpha(0.5f)
 
       XYChart(plot, title, legend, theme)
@@ -82,7 +79,6 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
       *
       * @param data        $data
       * @param title       $title
-      * @param orientation $orientation
       * @param legend      $legend
       * @param theme       $theme
       *
@@ -91,7 +87,6 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
       */
     def stacked[A: ToTableXYDataset](data: A,
                 title: String = "",
-                orientation: Orientation = Orientation.Vertical,
                 legend: Boolean = true)
                (implicit theme: ChartTheme = ChartTheme.Default): XYChart = {
 
@@ -107,7 +102,6 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
       renderer.setOutline(true)
 
       val plot = new XYPlot(dataset, domainAxis, rangeAxis, renderer)
-      plot.setOrientation(orientation)
       plot.setRangeAxis(rangeAxis)
 
       XYChart(plot, title, legend, theme)
@@ -121,7 +115,6 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
       *
       * @param data        $data
       * @param title       $title
-      * @param orientation $orientation
       * @param legend      $legend
       * @param theme       $theme
       *
@@ -130,7 +123,6 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
       */
     def stepped[A: ToXYDataset](data: A,
                 title: String = "",
-                orientation: Orientation = Orientation.Vertical,
                 legend: Boolean = true)
                (implicit theme: ChartTheme = ChartTheme.Default): XYChart = {
 
@@ -142,7 +134,6 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
       val renderer = new XYStepAreaRenderer()
 
       val plot = new XYPlot(dataset, domainAxis, rangeAxis, renderer)
-      plot.setOrientation(orientation)
       plot.setDomainCrosshairVisible(false)
       plot.setRangeCrosshairVisible(false)
 
@@ -162,7 +153,6 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
       *
       * @param data        $data
       * @param title       $title
-      * @param orientation $orientation
       * @param legend      $legend
       * @param theme       $theme
       *
@@ -171,7 +161,6 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
       */
     def apply[A: ToIntervalXYDataset](data: A,
               title: String = "",
-              orientation: Orientation = Orientation.Vertical,
               legend: Boolean = true)
              (implicit theme: ChartTheme = ChartTheme.Default): XYChart = {
 
@@ -183,7 +172,6 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
       val renderer = new XYBarRenderer()
 
       val plot = new XYPlot(dataset, domainAxis, rangeAxis, renderer)
-      plot.setOrientation(orientation)
 
       XYChart(plot, title, legend, theme)
     }
@@ -195,7 +183,6 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
       *
       * @param data        $data
       * @param title       $title
-      * @param orientation $orientation
       * @param legend      $legend
       * @param theme       $theme
       *
@@ -204,7 +191,6 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
       */
     def stacked[A: ToTableXYDataset](data: A,
                 title: String = "",
-                orientation: Orientation = Orientation.Vertical,
                 legend: Boolean = true)
                (implicit theme: ChartTheme = ChartTheme.Default): XYChart = {
 
@@ -216,7 +202,6 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
       val renderer = new StackedXYBarRenderer()
 
       val plot = new XYPlot(dataset, domainAxis, rangeAxis, renderer)
-      plot.setOrientation(orientation)
 
       XYChart(plot, title, legend, theme)
     }
@@ -234,7 +219,6 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
       *
       * @param data        $data
       * @param title       $title
-      * @param orientation $orientation
       * @param legend      $legend
       * @param theme       $theme
       *
@@ -243,7 +227,6 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
       */
     def apply[A: ToIntervalXYDataset](data: A,
               title: String = "",
-              orientation: Orientation = Orientation.Vertical,
               legend: Boolean = true)
              (implicit theme: ChartTheme = ChartTheme.Default): XYChart = {
 
@@ -255,7 +238,6 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
       val renderer = new DeviationRenderer()
 
       val plot = new XYPlot(dataset, domainAxis, rangeAxis, renderer)
-      plot.setOrientation(orientation)
 
       XYChart(plot, title, legend, theme)
     }
@@ -273,7 +255,6 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
       *
       * @param data        $data
       * @param title       $title
-      * @param orientation $orientation
       * @param legend      $legend
       * @param theme       $theme
       *
@@ -282,7 +263,6 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
       */
     def apply[A: ToXYDataset](data: A,
               title: String = "",
-              orientation: Orientation = Orientation.Vertical,
               legend: Boolean = true)
              (implicit theme: ChartTheme = ChartTheme.Default): XYChart = {
 
@@ -294,7 +274,6 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
       val renderer = new XYLineAndShapeRenderer(true, false)
 
       val plot = new XYPlot(dataset, domainAxis, rangeAxis, renderer)
-      plot.setOrientation(orientation)
 
       XYChart(plot, title, legend, theme)
     }
@@ -307,7 +286,6 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
       *
       * @param data        $data
       * @param title       $title
-      * @param orientation $orientation
       * @param legend      $legend
       * @param theme       $theme
       *
@@ -316,7 +294,6 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
       */
     def shapes[A: ToXYDataset](data: A,
                title: String = "",
-               orientation: Orientation = Orientation.Vertical,
                legend: Boolean = true)
               (implicit theme: ChartTheme = ChartTheme.Default): XYChart = {
 
@@ -328,7 +305,6 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
       val renderer = new XYLineAndShapeRenderer(false, true)
 
       val plot = new XYPlot(dataset, domainAxis, rangeAxis, renderer)
-      plot.setOrientation(orientation)
 
       XYChart(plot, title, legend, theme)
     }

@@ -6,7 +6,6 @@ import scala.collection.GenTraversableOnce
 import org.jfree.chart.axis._
 import org.jfree.chart.plot._
 import org.jfree.chart.renderer.category._
-import org.jfree.util.SortOrder
 
 /** $CategoryChartFactoriesInfo */
 object CategoryChartFactories extends CategoryChartFactories
@@ -25,7 +24,6 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
       *
       * @param data        $data
       * @param title       $title
-      * @param orientation $orientation
       * @param legend      $legend
       * @param theme       $theme
       *
@@ -34,7 +32,6 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
       */
     def apply[A: ToCategoryDataset](data: A,
               title: String = "",
-              orientation: Orientation = Orientation.Vertical,
               legend: Boolean = true)
              (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
 
@@ -48,7 +45,6 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
       val renderer = new AreaRenderer()
 
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
-      plot.setOrientation(orientation)
 
       CategoryChart(plot, title, legend, theme)
     }
@@ -57,7 +53,6 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
       *
       * @param data        $data
       * @param title       $title
-      * @param orientation $orientation
       * @param legend      $legend
       * @param theme       $theme
       *
@@ -66,7 +61,6 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
       */
     def stacked[A: ToCategoryDataset](data: A,
                 title: String = "",
-                orientation: Orientation = Orientation.Vertical,
                 legend: Boolean = true)
                (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
 
@@ -80,7 +74,6 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
       val renderer = new StackedAreaRenderer()
 
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
-      plot.setOrientation(orientation)
 
       CategoryChart(plot, title, legend, theme)
     }
@@ -94,7 +87,6 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
       *
       * @param data        $data
       * @param title       $title
-      * @param orientation $orientation
       * @param legend      $legend
       * @param theme       $theme
       *
@@ -103,7 +95,6 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
       */
     def apply[A: ToCategoryDataset](data: A,
               title: String = "",
-              orientation: Orientation = Orientation.Vertical,
               legend: Boolean = true)
              (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
 
@@ -117,18 +108,12 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
       import org.jfree.chart.labels.{ ItemLabelAnchor, ItemLabelPosition }
       import org.jfree.ui.TextAnchor
 
-      val (p1,p2) = if (orientation == Orientation.Horizontal) {
-        (new ItemLabelPosition(ItemLabelAnchor.OUTSIDE3, TextAnchor.CENTER_LEFT),
-         new ItemLabelPosition(ItemLabelAnchor.OUTSIDE9, TextAnchor.CENTER_RIGHT))
-      } else {
-        (new ItemLabelPosition(ItemLabelAnchor.OUTSIDE12, TextAnchor.BOTTOM_CENTER),
-         new ItemLabelPosition(ItemLabelAnchor.OUTSIDE6, TextAnchor.TOP_CENTER))
-      }
-      renderer.setBasePositiveItemLabelPosition(p1)
-      renderer.setBaseNegativeItemLabelPosition(p2)
+      renderer.setBasePositiveItemLabelPosition(
+        new ItemLabelPosition(ItemLabelAnchor.OUTSIDE12, TextAnchor.BOTTOM_CENTER))
+      renderer.setBaseNegativeItemLabelPosition(
+        new ItemLabelPosition(ItemLabelAnchor.OUTSIDE6, TextAnchor.TOP_CENTER))
 
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
-      plot.setOrientation(orientation)
 
       CategoryChart(plot, title, legend, theme)
     }
@@ -137,7 +122,6 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
       *
       * @param data        $data
       * @param title       $title
-      * @param orientation $orientation
       * @param legend      $legend
       * @param theme       $theme
       *
@@ -146,7 +130,6 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
       */
     def stacked[A: ToCategoryDataset](data: A,
                 title: String = "",
-                orientation: Orientation = Orientation.Vertical,
                 legend: Boolean = true)
                (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
 
@@ -158,7 +141,6 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
       val renderer = new StackedBarRenderer()
 
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
-      plot.setOrientation(orientation)
 
       CategoryChart(plot, title, legend, theme)
     }
@@ -167,7 +149,6 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
       *
       * @param data        $data
       * @param title       $title
-      * @param orientation $orientation
       * @param legend      $legend
       * @param theme       $theme
       *
@@ -176,7 +157,6 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
       */
     def threeDimensional[A: ToCategoryDataset](data: A,
                          title: String = "",
-                         orientation: Orientation = Orientation.Vertical,
                          legend: Boolean = true)
                         (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
 
@@ -188,11 +168,6 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
       val renderer = new BarRenderer3D()
 
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
-      plot.setOrientation(orientation)
-      if (orientation == Orientation.Horizontal) {
-        plot.setRowRenderingOrder(SortOrder.DESCENDING)
-        plot.setColumnRenderingOrder(SortOrder.DESCENDING)
-      }
       plot.setForegroundAlpha(0.75f)
 
       CategoryChart(plot, title, legend, theme)
@@ -202,7 +177,6 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
       *
       * @param data        $data
       * @param title       $title
-      * @param orientation $orientation
       * @param legend      $legend
       * @param theme       $theme
       *
@@ -211,7 +185,6 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
       */
     def threeDimensionalStacked[A: ToCategoryDataset](data: A,
                                 title: String = "",
-                                orientation: Orientation = Orientation.Vertical,
                                 legend: Boolean = true)
                                (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
 
@@ -223,8 +196,6 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
       val renderer = new StackedBarRenderer3D()
 
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
-      plot.setOrientation(orientation)
-      if (orientation == Orientation.Horizontal) plot.setColumnRenderingOrder(SortOrder.DESCENDING)
 
       CategoryChart(plot, title, legend, theme)
     }
@@ -283,7 +254,6 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
       *
       * @param data        $data
       * @param title       $title
-      * @param orientation $orientation
       * @param legend      $legend
       * @param theme       $theme
       *
@@ -292,7 +262,6 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
       */
     def apply[A: ToCategoryDataset](data: A,
               title: String = "",
-              orientation: Orientation = Orientation.Vertical,
               legend: Boolean = true)
              (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
 
@@ -304,7 +273,6 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
       val renderer = new LineAndShapeRenderer(true, false)
 
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
-      plot.setOrientation(orientation)
 
       CategoryChart(plot, title, legend, theme)
     }
@@ -313,7 +281,6 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
       *
       * @param data        $data
       * @param title       $title
-      * @param orientation $orientation
       * @param legend      $legend
       * @param theme       $theme
       *
@@ -322,7 +289,6 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
       */
     def shapes[A: ToCategoryDataset](data: A,
                title: String = "",
-               orientation: Orientation = Orientation.Vertical,
                legend: Boolean = true)
               (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
 
@@ -334,7 +300,6 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
       val renderer = new LineAndShapeRenderer(false, true)
 
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
-      plot.setOrientation(orientation)
 
       CategoryChart(plot, title, legend, theme)
     }
@@ -344,7 +309,6 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
       *
       * @param data        $data
       * @param title       $title
-      * @param orientation $orientation
       * @param legend      $legend
       * @param theme       $theme
       *
@@ -353,7 +317,6 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
       */
     def threeDimensional[A: ToCategoryDataset](data: A,
                          title: String = "",
-                         orientation: Orientation = Orientation.Vertical,
                          legend: Boolean = true)
                         (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
 
@@ -365,7 +328,6 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
       val renderer = new LineRenderer3D()
 
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
-      plot.setOrientation(orientation)
 
       CategoryChart(plot, title, legend, theme)
     }
