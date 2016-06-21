@@ -1,7 +1,5 @@
 package org.example
 
-import language.existentials
-
 import scalax.chart.api._
 
 import org.jfree.chart.plot._
