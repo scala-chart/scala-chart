@@ -46,8 +46,8 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
       * `TimeSeriesCollection` or `TimeTableXYDataset` the domain axis will correctly be set to a
       * `DateAxis`.
       *
-      * @param data        $data
-      * @param theme       $theme
+      * @param data  $data
+      * @param theme $theme
       *
       * @usecase def apply(data: XYDataset): XYChart = ???
       *   @inheritdoc
@@ -73,8 +73,8 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
       * If the input dataset is an instance of a `TimeTableXYDataset` the domain axis will correctly
       * be set to a `DateAxis`.
       *
-      * @param data        $data
-      * @param theme       $theme
+      * @param data  $data
+      * @param theme $theme
       *
       * @usecase def stacked(data: TableXYDataset): XYChart = ???
       *   @inheritdoc
@@ -105,8 +105,8 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
       * `TimeSeriesCollection` or `TimeTableXYDataset` the domain axis will correctly be set to a
       * `DateAxis`.
       *
-      * @param data        $data
-      * @param theme       $theme
+      * @param data  $data
+      * @param theme $theme
       *
       * @usecase def stepped(data: XYDataset): XYChart = ???
       *   @inheritdoc
@@ -139,8 +139,8 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
       * `TimeSeriesCollection` or `TimeTableXYDataset` the domain axis will correctly be set to a
       * `DateAxis`.
       *
-      * @param data        $data
-      * @param theme       $theme
+      * @param data  $data
+      * @param theme $theme
       *
       * @usecase def apply(data: IntervalXYDataset): XYChart = ???
       *   @inheritdoc
@@ -165,8 +165,8 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
       * If the input dataset is an instance of a `TimeTableXYDataset` the domain axis will correctly
       * be set to a `DateAxis`.
       *
-      * @param data        $data
-      * @param theme       $theme
+      * @param data  $data
+      * @param theme $theme
       *
       * @usecase def stacked(data: TableXYDataset): XYChart = ???
       *   @inheritdoc
@@ -197,8 +197,8 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
       * `TimeSeriesCollection` or `TimeTableXYDataset` the domain axis will correctly be set to a
       * `DateAxis`.
       *
-      * @param data        $data
-      * @param theme       $theme
+      * @param data  $data
+      * @param theme $theme
       *
       * @usecase def apply(data: IntervalXYDataset): XYChart = ???
       *   @inheritdoc
@@ -229,8 +229,8 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
       * `TimeSeriesCollection` or `TimeTableXYDataset` the domain axis will correctly be set to a
       * `DateAxis`.
       *
-      * @param data        $data
-      * @param theme       $theme
+      * @param data  $data
+      * @param theme $theme
       *
       * @usecase def apply(data: XYDataset): XYChart = ???
       *   @inheritdoc
@@ -256,8 +256,8 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
       * `TimeSeriesCollection` or `TimeTableXYDataset` the domain axis will correctly be set to a
       * `DateAxis`.
       *
-      * @param data        $data
-      * @param theme       $theme
+      * @param data  $data
+      * @param theme $theme
       *
       * @usecase def shapes(data: XYDataset): XYChart = ???
       *   @inheritdoc

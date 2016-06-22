@@ -22,8 +22,8 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
 
     /** Creates a new chart that represents categorized numeric data with an area.
       *
-      * @param data        $data
-      * @param theme       $theme
+      * @param data  $data
+      * @param theme $theme
       *
       * @usecase def apply(data: CategoryDataset): CategoryChart = ???
       *   @inheritdoc
@@ -47,8 +47,8 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
 
     /** Creates a new chart that represents categorized numeric data with stacked areas.
       *
-      * @param data        $data
-      * @param theme       $theme
+      * @param data  $data
+      * @param theme $theme
       *
       * @usecase def stacked(data: CategoryDataset): CategoryChart = ???
       *   @inheritdoc
@@ -77,8 +77,8 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
 
     /** Creates a new chart that represents categorized numeric data with bars.
       *
-      * @param data        $data
-      * @param theme       $theme
+      * @param data  $data
+      * @param theme $theme
       *
       * @usecase def apply(data: CategoryDataset): CategoryChart = ???
       *   @inheritdoc
@@ -108,8 +108,8 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
 
     /** Creates a new chart that represents categorized numeric data with stacked bars.
       *
-      * @param data        $data
-      * @param theme       $theme
+      * @param data  $data
+      * @param theme $theme
       *
       * @usecase def stacked(data: CategoryDataset): CategoryChart = ???
       *   @inheritdoc
@@ -131,8 +131,8 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
 
     /** Creates a new chart that represents categorized numeric data with three dimensional bars.
       *
-      * @param data        $data
-      * @param theme       $theme
+      * @param data  $data
+      * @param theme $theme
       *
       * @usecase def threeDimensional(data: CategoryDataset): CategoryChart = ???
       *   @inheritdoc
@@ -155,8 +155,8 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
 
     /** Creates a new chart that represents categorized numeric data with three dimensional bars.
       *
-      * @param data        $data
-      * @param theme       $theme
+      * @param data  $data
+      * @param theme $theme
       *
       * @usecase def threeDimensionalStacked(data: CategoryDataset): CategoryChart = ???
       *   @inheritdoc
@@ -186,7 +186,7 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
       * val chart = BarChart.combinedDomain(data)
       * }}}
       *
-      * @param data $data
+      * @param data  $data
       * @param theme $theme
       *
       * @usecase def combinedDomain(data: Map[String,CategoryDataset]): CategoryChart = ???
@@ -224,8 +224,8 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
 
     /** Creates a new chart that represents categorized numeric values with a line.
       *
-      * @param data        $data
-      * @param theme       $theme
+      * @param data  $data
+      * @param theme $theme
       *
       * @usecase def apply(data: CategoryDataset): CategoryChart = ???
       *   @inheritdoc
@@ -247,8 +247,8 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
 
     /** Creates a new chart that represents categorized numeric values with shapes instead of lines.
       *
-      * @param data        $data
-      * @param theme       $theme
+      * @param data  $data
+      * @param theme $theme
       *
       * @usecase def shapes(data: CategoryDataset): CategoryChart = ???
       *   @inheritdoc
@@ -271,8 +271,8 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
     /** Creates a new chart that represents categorized numeric values with three dimensional a
       * line.
       *
-      * @param data        $data
-      * @param theme       $theme
+      * @param data  $data
+      * @param theme $theme
       *
       * @usecase def threeDimensional(data: CategoryDataset): CategoryChart = ???
       *   @inheritdoc

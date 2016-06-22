@@ -45,8 +45,8 @@ object MultiplePieChart extends ChartCompanion[MultiplePieChart] {
 
   /** Creates a new $chart.
     *
-    * @param data   $data
-    * @param theme  $theme
+    * @param data  $data
+    * @param theme $theme
     *
     * @usecase def apply(data: CategoryDataset): MultiplePieChart = ???
     *   @inheritdoc
@@ -65,8 +65,8 @@ object MultiplePieChart extends ChartCompanion[MultiplePieChart] {
 
   /** Creates a new $chart with three dimensional visualization.
     *
-    * @param data   $data
-    * @param theme  $theme
+    * @param data  $data
+    * @param theme $theme
     *
     * @usecase def threeDimensional(data: CategoryDataset): MultiplePieChart = ???
     *   @inheritdoc

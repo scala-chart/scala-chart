@@ -27,8 +27,8 @@ object RingChart extends ChartCompanion[RingChart] {
 
   /** Creates a new $chart.
     *
-    * @param data   $data
-    * @param theme  $theme
+    * @param data  $data
+    * @param theme $theme
     *
     * @usecase def apply(data: PieDataset): RingChart = ???
     *   @inheritdoc

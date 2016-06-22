@@ -27,8 +27,8 @@ object PieChart extends ChartCompanion[PieChart] {
 
   /** Creates a new $chart.
     *
-    * @param data   $data
-    * @param theme  $theme
+    * @param data  $data
+    * @param theme $theme
     *
     * @usecase def apply(data: PieDataset): PieChart = ???
     *   @inheritdoc
@@ -45,8 +45,8 @@ object PieChart extends ChartCompanion[PieChart] {
 
   /** Creates a new $chart with a three dimensional visualization.
     *
-    * @param data   $data
-    * @param theme  $theme
+    * @param data  $data
+    * @param theme $theme
     *
     * @usecase def threeDimensional(data: PieDataset): PieChart = ???
     *   @inheritdoc

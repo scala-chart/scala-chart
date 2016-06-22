@@ -20,7 +20,7 @@ trait BoxAndWhiskerChartFactories extends BoxAndWhiskerDatasetConversions with D
 
     /** Creates a new box and whisker chart.
       *
-      * @param data $data
+      * @param data  $data
       * @param theme $theme
       *
       * @usecase def apply(data: BoxAndWhiskerCategoryDataset): CategoryChart = ???
@@ -50,7 +50,7 @@ trait BoxAndWhiskerChartFactories extends BoxAndWhiskerDatasetConversions with D
 
     /** Creates a new box and whisker chart.
       *
-      * @param data $data
+      * @param data  $data
       * @param theme $theme
       *
       * @usecase def apply(data: BoxAndWhiskerXYDataset): XYChart = ???

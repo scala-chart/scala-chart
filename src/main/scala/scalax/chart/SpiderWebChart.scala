@@ -27,8 +27,8 @@ object SpiderWebChart extends ChartCompanion[SpiderWebChart] {
 
   /** Creates a new $chart.
     *
-    * @param data   $data
-    * @param theme  $theme
+    * @param data  $data
+    * @param theme $theme
     *
     * @usecase def apply(data: CategoryDataset): SpiderWebChart = ???
     */
