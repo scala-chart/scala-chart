@@ -39,6 +39,6 @@ object SpiderWebChart extends ChartCompanion[SpiderWebChart] {
     val plot = new SpiderWebPlot(dataset)
     plot.setInsets(new RectangleInsets(0.0, 5.0, 5.0, 5.0))
 
-    SpiderWebChart(plot, title = "", legend = true, theme)
+    SpiderWebChart(plot, title = "", legend = true)
   }
 }

@@ -40,7 +40,7 @@ object RingChart extends ChartCompanion[RingChart] {
     val plot = new RingPlot(dataset)
     plot.setInsets(new RectangleInsets(0.0, 5.0, 5.0, 5.0))
 
-    RingChart(plot, title = "", legend = true, theme)
+    RingChart(plot, title = "", legend = true)
   }
 
 }

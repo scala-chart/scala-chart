@@ -40,7 +40,7 @@ object PieChart extends ChartCompanion[PieChart] {
     val plot = new PiePlot(dataset)
     plot.setInsets(new RectangleInsets(0.0, 5.0, 5.0, 5.0))
 
-    PieChart(plot, title = "", legend = true, theme)
+    PieChart(plot, title = "", legend = true)
   }
 
   /** Creates a new $chart with a three dimensional visualization.
@@ -58,7 +58,7 @@ object PieChart extends ChartCompanion[PieChart] {
     val plot = new PiePlot3D(dataset)
     plot.setInsets(new RectangleInsets(0.0, 5.0, 5.0, 5.0))
 
-    PieChart(plot, title = "", legend = true, theme)
+    PieChart(plot, title = "", legend = true)
   }
 
 }

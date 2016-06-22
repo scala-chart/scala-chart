@@ -60,7 +60,7 @@ object MultiplePieChart extends ChartCompanion[MultiplePieChart] {
     plot.setBackgroundPaint(null)
     plot.setOutlineStroke(null)
 
-    MultiplePieChart(plot, title = "", legend = true, theme)
+    MultiplePieChart(plot, title = "", legend = true)
   }
 
   /** Creates a new $chart with three dimensional visualization.
@@ -88,7 +88,7 @@ object MultiplePieChart extends ChartCompanion[MultiplePieChart] {
     pieChart.removeLegend()
     plot.setPieChart(pieChart)
 
-    MultiplePieChart(plot, title = "", legend = true, theme)
+    MultiplePieChart(plot, title = "", legend = true)
   }
 
 }

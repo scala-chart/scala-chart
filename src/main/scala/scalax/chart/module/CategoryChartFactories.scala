@@ -42,7 +42,7 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
 
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
 
-      CategoryChart(plot, title = "", legend = true, theme)
+      CategoryChart(plot, title = "", legend = true)
     }
 
     /** Creates a new chart that represents categorized numeric data with stacked areas.
@@ -67,7 +67,7 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
 
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
 
-      CategoryChart(plot, title = "", legend = true, theme)
+      CategoryChart(plot, title = "", legend = true)
     }
 
   }
@@ -103,7 +103,7 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
 
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
 
-      CategoryChart(plot, title = "", legend = true, theme)
+      CategoryChart(plot, title = "", legend = true)
     }
 
     /** Creates a new chart that represents categorized numeric data with stacked bars.
@@ -126,7 +126,7 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
 
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
 
-      CategoryChart(plot, title = "", legend = true, theme)
+      CategoryChart(plot, title = "", legend = true)
     }
 
     /** Creates a new chart that represents categorized numeric data with three dimensional bars.
@@ -150,7 +150,7 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
       plot.setForegroundAlpha(0.75f)
 
-      CategoryChart(plot, title = "", legend = true, theme)
+      CategoryChart(plot, title = "", legend = true)
     }
 
     /** Creates a new chart that represents categorized numeric data with three dimensional bars.
@@ -173,7 +173,7 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
 
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
 
-      CategoryChart(plot, title = "", legend = true, theme)
+      CategoryChart(plot, title = "", legend = true)
     }
 
     /** Creates a new chart that represents categorized numeric data with bars. The keys of the
@@ -214,7 +214,7 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
         combined
       }
 
-      CategoryChart(combinedPlot, title = "", legend = true, theme)
+      CategoryChart(combinedPlot, title = "", legend = true)
     }
 
   }
@@ -242,7 +242,7 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
 
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
 
-      CategoryChart(plot, title = "", legend = true, theme)
+      CategoryChart(plot, title = "", legend = true)
     }
 
     /** Creates a new chart that represents categorized numeric values with shapes instead of lines.
@@ -265,7 +265,7 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
 
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
 
-      CategoryChart(plot, title = "", legend = true, theme)
+      CategoryChart(plot, title = "", legend = true)
     }
 
     /** Creates a new chart that represents categorized numeric values with three dimensional a
@@ -289,7 +289,7 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
 
       val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
 
-      CategoryChart(plot, title = "", legend = true, theme)
+      CategoryChart(plot, title = "", legend = true)
     }
 
   }

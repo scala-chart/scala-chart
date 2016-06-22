@@ -65,7 +65,7 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
       val plot = new XYPlot(dataset, domainAxis, rangeAxis, renderer)
       plot.setForegroundAlpha(0.5f)
 
-      XYChart(plot, title = "", legend = true, theme)
+      XYChart(plot, title = "", legend = true)
     }
 
     /** Creates a new chart that represents multiple numeric `x` and `y` values with stacked areas.
@@ -96,7 +96,7 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
       val plot = new XYPlot(dataset, domainAxis, rangeAxis, renderer)
       plot.setRangeAxis(rangeAxis)
 
-      XYChart(plot, title = "", legend = true, theme)
+      XYChart(plot, title = "", legend = true)
     }
 
     /** Creates a new chart that represents multiple numeric `x` and `y` values with a stepped area.
@@ -125,7 +125,7 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
       plot.setDomainCrosshairVisible(false)
       plot.setRangeCrosshairVisible(false)
 
-      XYChart(plot, title = "", legend = true, theme)
+      XYChart(plot, title = "", legend = true)
     }
 
   }
@@ -157,7 +157,7 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
 
       val plot = new XYPlot(dataset, domainAxis, rangeAxis, renderer)
 
-      XYChart(plot, title = "", legend = true, theme)
+      XYChart(plot, title = "", legend = true)
     }
 
     /** Creates a new chart that represents numeric `x` (intervals) and `y` values with a line.
@@ -183,7 +183,7 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
 
       val plot = new XYPlot(dataset, domainAxis, rangeAxis, renderer)
 
-      XYChart(plot, title = "", legend = true, theme)
+      XYChart(plot, title = "", legend = true)
     }
 
   }
@@ -215,7 +215,7 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
 
       val plot = new XYPlot(dataset, domainAxis, rangeAxis, renderer)
 
-      XYChart(plot, title = "", legend = true, theme)
+      XYChart(plot, title = "", legend = true)
     }
 
   }
@@ -247,7 +247,7 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
 
       val plot = new XYPlot(dataset, domainAxis, rangeAxis, renderer)
 
-      XYChart(plot, title = "", legend = true, theme)
+      XYChart(plot, title = "", legend = true)
     }
 
     /** Creates a new chart that represents numeric `x` and `y` values with shapes instead of lines.
@@ -274,7 +274,7 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
 
       val plot = new XYPlot(dataset, domainAxis, rangeAxis, renderer)
 
-      XYChart(plot, title = "", legend = true, theme)
+      XYChart(plot, title = "", legend = true)
     }
 
   }
