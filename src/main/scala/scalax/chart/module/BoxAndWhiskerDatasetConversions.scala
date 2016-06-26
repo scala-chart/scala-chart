@@ -26,7 +26,7 @@ trait BoxAndWhiskerDatasetConversions extends Converting with RichChartingCollec
       def convert(a: A): X = f(a)
     }
 
-    implicit def FromCategorizedTuple2s[A <% Comparable[A], B: Numeric, BB <: Seq[B], CC[X] <: Coll[X]]: ToBoxAndWhiskerCategoryDataset[CC[(A,BB)]] =
+    implicit def FromCategorizedTuple2s[A, B: Numeric, BB <: Seq[B], CC[X] <: Coll[X]](implicit evA: A => Comparable[A]): ToBoxAndWhiskerCategoryDataset[CC[(A,BB)]] =
       apply(_.toBoxAndWhiskerCategoryDataset())
   }
 
@@ -40,7 +40,7 @@ trait BoxAndWhiskerDatasetConversions extends Converting with RichChartingCollec
       def convert(a: A): X = f(a)
     }
 
-    implicit def FromCategorizedTuple2s[A <% Date, B: Numeric, BB <: Seq[B], CC[X] <: Coll[X]]: ToBoxAndWhiskerXYDataset[CC[(A,BB)]] =
+    implicit def FromCategorizedTuple2s[A, B: Numeric, BB <: Seq[B], CC[X] <: Coll[X]](implicit evA: A => Date): ToBoxAndWhiskerXYDataset[CC[(A,BB)]] =
       apply(_.toBoxAndWhiskerXYDataset())
   }
 

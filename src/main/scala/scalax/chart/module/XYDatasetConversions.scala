@@ -33,7 +33,7 @@ trait XYDatasetConversions extends Converting with RichChartingCollections {
     implicit def FromTuple2s[A: Numeric, B: Numeric, CC[X] <: Coll[X]]: ToXYDataset[CC[(A,B)]] =
       ToIntervalXYDataset.FromTuple2s
 
-    implicit def FromCategorizedTuple2s[A <% Comparable[A], B: Numeric, C: Numeric, CC[X] <: Coll[X], DD[X] <: Coll[X]]: ToXYDataset[CC[(A,DD[(B,C)])]] =
+    implicit def FromCategorizedTuple2s[A, B: Numeric, C: Numeric, CC[X] <: Coll[X], DD[X] <: Coll[X]](implicit evA: A => Comparable[A]): ToXYDataset[CC[(A,DD[(B,C)])]] =
       ToIntervalXYDataset.FromCategorizedTuple2s
 
     implicit val FromTimePeriodValues: ToXYDataset[TimePeriodValues] =
@@ -57,7 +57,7 @@ trait XYDatasetConversions extends Converting with RichChartingCollections {
     implicit def FromTuple4s[A: Numeric, B: Numeric, C: Numeric, D: Numeric, CC[X] <: Coll[X]]: ToXYDataset[CC[(A,B,C,D)]] =
       ToIntervalXYDataset.FromTuple4s
 
-    implicit def FromCategorizedTuple4s[A <% Comparable[A], B: Numeric, C: Numeric, D: Numeric, E: Numeric, CC[X] <: Coll[X], DD[X] <: Coll[X]]: ToXYDataset[CC[(A,DD[(B,C,D,E)])]] =
+    implicit def FromCategorizedTuple4s[A, B: Numeric, C: Numeric, D: Numeric, E: Numeric, CC[X] <: Coll[X], DD[X] <: Coll[X]](implicit evA: A => Comparable[A]): ToXYDataset[CC[(A,DD[(B,C,D,E)])]] =
       ToIntervalXYDataset.FromCategorizedTuple4s
   }
 
@@ -83,7 +83,7 @@ trait XYDatasetConversions extends Converting with RichChartingCollections {
     implicit def FromTuple2s[A: Numeric, B: Numeric, CC[X] <: Coll[X]]: ToIntervalXYDataset[CC[(A,B)]] =
       apply(_.toXYSeriesCollection())
 
-    implicit def FromCategorizedTuple2s[A <% Comparable[A], B: Numeric, C: Numeric, CC[X] <: Coll[X], DD[X] <: Coll[X]]: ToIntervalXYDataset[CC[(A,DD[(B,C)])]] =
+    implicit def FromCategorizedTuple2s[A, B: Numeric, C: Numeric, CC[X] <: Coll[X], DD[X] <: Coll[X]](implicit evA: A => Comparable[A]): ToIntervalXYDataset[CC[(A,DD[(B,C)])]] =
       apply(_.toXYSeriesCollection())
 
     implicit val FromTimePeriodValues: ToIntervalXYDataset[TimePeriodValues] =
@@ -120,7 +120,7 @@ trait XYDatasetConversions extends Converting with RichChartingCollections {
     implicit def FromTuple4s[A: Numeric, B: Numeric, C: Numeric, D: Numeric, CC[X] <: Coll[X]]: ToIntervalXYDataset[CC[(A,B,C,D)]] =
       apply(_.toYIntervalSeriesCollection())
 
-    implicit def FromCategorizedTuple4s[A <% Comparable[A], B: Numeric, C: Numeric, D: Numeric, E: Numeric, CC[X] <: Coll[X], DD[X] <: Coll[X]]: ToIntervalXYDataset[CC[(A,DD[(B,C,D,E)])]] =
+    implicit def FromCategorizedTuple4s[A, B: Numeric, C: Numeric, D: Numeric, E: Numeric, CC[X] <: Coll[X], DD[X] <: Coll[X]](implicit evA: A => Comparable[A]): ToIntervalXYDataset[CC[(A,DD[(B,C,D,E)])]] =
       apply(_.toYIntervalSeriesCollection())
   }
 

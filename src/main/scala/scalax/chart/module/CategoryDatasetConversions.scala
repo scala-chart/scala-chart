@@ -25,10 +25,10 @@ trait CategoryDatasetConversions extends Converting with RichChartingCollections
       def convert(a: A): X = f(a)
     }
 
-    implicit def FromTuple2s[A <% Comparable[A],B: Numeric,CC[X] <: Coll[X]]: ToCategoryDataset[CC[(A,B)]] =
+    implicit def FromTuple2s[A,B: Numeric,CC[X] <: Coll[X]](implicit evA: A => Comparable[A]): ToCategoryDataset[CC[(A,B)]] =
       apply(_.toCategoryDataset())
 
-    implicit def FromCategorizedTuple2s[A <% Comparable[A],B <% Comparable[B], C: Numeric, CC[X] <: Coll[X], DD[X] <: Coll[X]]: ToCategoryDataset[CC[(A,DD[(B,C)])]] =
+    implicit def FromCategorizedTuple2s[A, B, C: Numeric, CC[X] <: Coll[X], DD[X] <: Coll[X]](implicit evA: A => Comparable[A], evB: B => Comparable[B]): ToCategoryDataset[CC[(A,DD[(B,C)])]] =
       apply(_.toCategoryDataset)
   }
 
