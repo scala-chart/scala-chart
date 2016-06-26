@@ -15,59 +15,102 @@ object CategoryChartFactories extends CategoryChartFactories
   * @define CategoryChartFactoriesInfo [[CategoryChartFactories]] contains all high-level
   * factories to conveniently create charts based on category datasets.
   */
-trait CategoryChartFactories extends DatasetConversions with DocMacros {
+trait CategoryChartFactories extends DatasetConversions with RichPlot with DocMacros {
 
   /** Factory for area charts. */
   object AreaChart {
 
-    /** Creates a new chart that represents categorized numeric data with an area.
+    // category axes for area charts need zero margin or else the area would be visually split
+    private def DomainAxis() = {
+      val axis = new CategoryAxis()
+      axis.setCategoryMargin(0.0)
+      axis
+    }
+
+    private def Renderer(stacked: Boolean) =
+      if (stacked)
+        new StackedAreaRenderer()
+      else
+        new AreaRenderer()
+
+    /** Creates a new chart that represents categorized numeric data with areas.
       *
-      * @param data  $data
-      * @param theme $theme
+      * @param data    $data
+      * @param stacked $stacked
+      * @param theme   $theme
       *
       * @usecase def apply(data: CategoryDataset): CategoryChart = ???
       *   @inheritdoc
       */
-    def apply[A: ToCategoryDataset](data: A)
-      (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
+    def apply[A: ToCategoryDataset](data: A, stacked: Boolean = false)
+             (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
 
       val dataset = ToCategoryDataset[A].convert(data)
-
-      val domainAxis = new CategoryAxis()
-      domainAxis.setCategoryMargin(0.0)
-
+      val renderer = Renderer(stacked)
       val rangeAxis = new NumberAxis()
-
-      val renderer = new AreaRenderer()
-
-      val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
+      val plot = new CategoryPlot(dataset, DomainAxis(), rangeAxis, renderer)
 
       CategoryChart(plot, title = "", legend = true)
     }
 
-    /** Creates a new chart that represents categorized numeric data with stacked areas.
-      *
-      * @param data  $data
-      * @param theme $theme
-      *
-      * @usecase def stacked(data: CategoryDataset): CategoryChart = ???
-      *   @inheritdoc
-      */
-    def stacked[A: ToCategoryDataset](data: A)
-      (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
+    /** Factories for combined area charts. */
+    object combined {
 
-      val dataset = ToCategoryDataset[A].convert(data)
+      /** Creates a new chart that represents categorized numeric data with areas.
+        *
+        * @param data    $data
+        * @param stacked $stacked
+        * @param theme   $theme
+        *
+        * @usecase def domain(data: Map[String,CategoryDataset]): CategoryChart = ???
+        *   @inheritdoc
+        */
+      def domain[A: ToCategoryDataset](data: Traversable[(String,A)], stacked: Boolean = false)
+                (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
 
-      val domainAxis = new CategoryAxis()
-      domainAxis.setCategoryMargin(0.0)
+        val subplots = data map { case (category, data) =>
+          val dataset = ToCategoryDataset[A].convert(data)
+          val renderer = Renderer(stacked)
+          val rangeAxis = new NumberAxis()
+          val plot = new CategoryPlot(dataset, null, rangeAxis, renderer)
+          plot.range.axis.label.text = category
+          plot
+        }
 
-      val rangeAxis = new NumberAxis()
+        val plot = new CombinedDomainCategoryPlot(DomainAxis())
 
-      val renderer = new StackedAreaRenderer()
+        subplots foreach plot.add
 
-      val plot = new CategoryPlot(dataset, domainAxis, rangeAxis, renderer)
+        CategoryChart(plot, title = "", legend = true)
+      }
 
-      CategoryChart(plot, title = "", legend = true)
+      /** Creates a new chart that represents categorized numeric data with areas.
+        *
+        * @param data    $data
+        * @param stacked $stacked
+        * @param theme   $theme
+        *
+        * @usecase def range(data: Map[String,CategoryDataset]): CategoryChart = ???
+        *   @inheritdoc
+        */
+      def range[A: ToCategoryDataset](data: Traversable[(String,A)], stacked: Boolean = false)
+               (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
+
+        val subplots = data map { case (category, data) =>
+          val dataset = ToCategoryDataset[A].convert(data)
+          val renderer = Renderer(stacked)
+          val plot = new CategoryPlot(dataset, DomainAxis(), null, renderer)
+          plot.domain.axis.label.text = category
+          plot
+        }
+
+        val rangeAxis = new NumberAxis()
+        val plot = new CombinedRangeCategoryPlot(rangeAxis)
+
+        subplots foreach plot.add
+
+        CategoryChart(plot, title = "", legend = true)
+      }
     }
 
   }
@@ -194,8 +237,6 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
       */
     def combinedDomain[A: ToCategoryDataset](data: GenTraversableOnce[(Comparable[_],A)])
       (implicit theme: ChartTheme = ChartTheme.Default): CategoryChart = {
-
-      import RichPlot.{ CategoryPlot => _, _ }
 
       def CategoryPlotOf(catdata: (Comparable[_],A)): CategoryPlot = {
         val category = catdata._1.toString

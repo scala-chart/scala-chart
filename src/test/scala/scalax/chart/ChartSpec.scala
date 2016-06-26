@@ -200,7 +200,7 @@ class ChartSpec extends Specification { def is = s2"""
   }
 
   def ac2 = {
-    val chart = AreaChart.stacked(categorydataset)
+    val chart = AreaChart(categorydataset, stacked = true)
     (chart.plot must not (throwA[ClassCastException])) and (chart.plot must beAnInstanceOf[CategoryPlot])
   }
 
