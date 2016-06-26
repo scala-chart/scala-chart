@@ -25,7 +25,7 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
     case _                             => false
   }
 
-  private def XYDomainAxis(dateAxis: Boolean) = if (dateAxis) {
+  private def XYDomainAxis(dataset: XYDataset) = if (needsDateAxis(dataset)) {
     new DateAxis()
   } else {
     val axis = new NumberAxis()
@@ -57,7 +57,7 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
 
       val dataset = ToXYDataset[A].convert(data)
 
-      val domainAxis = XYDomainAxis(needsDateAxis(dataset))
+      val domainAxis = XYDomainAxis(dataset)
       val rangeAxis = new NumberAxis()
 
       val renderer = new XYAreaRenderer()
@@ -84,7 +84,7 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
 
       val dataset = ToTableXYDataset[A].convert(data)
 
-      val domainAxis = XYDomainAxis(needsDateAxis(dataset))
+      val domainAxis = XYDomainAxis(dataset)
       domainAxis.setLowerMargin(0.0)
       domainAxis.setUpperMargin(0.0)
 
@@ -116,7 +116,7 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
 
       val dataset = ToXYDataset[A].convert(data)
 
-      val domainAxis = XYDomainAxis(needsDateAxis(dataset))
+      val domainAxis = XYDomainAxis(dataset)
       val rangeAxis = new NumberAxis()
 
       val renderer = new XYStepAreaRenderer()
@@ -150,7 +150,7 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
 
       val dataset = ToIntervalXYDataset[A].convert(data)
 
-      val domainAxis = XYDomainAxis(needsDateAxis(dataset))
+      val domainAxis = XYDomainAxis(dataset)
       val rangeAxis = new NumberAxis()
 
       val renderer = new XYBarRenderer()
@@ -176,7 +176,7 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
 
       val dataset = ToTableXYDataset[A].convert(data)
 
-      val domainAxis = XYDomainAxis(needsDateAxis(dataset))
+      val domainAxis = XYDomainAxis(dataset)
       val rangeAxis = new NumberAxis()
 
       val renderer = new StackedXYBarRenderer()
@@ -208,7 +208,7 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
 
       val dataset = ToIntervalXYDataset[A].convert(data)
 
-      val domainAxis = XYDomainAxis(needsDateAxis(dataset))
+      val domainAxis = XYDomainAxis(dataset)
       val rangeAxis = new NumberAxis()
 
       val renderer = new DeviationRenderer()
@@ -240,7 +240,7 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
 
       val dataset = ToXYDataset[A].convert(data)
 
-      val domainAxis = XYDomainAxis(needsDateAxis(dataset))
+      val domainAxis = XYDomainAxis(dataset)
       val rangeAxis = new NumberAxis()
 
       val renderer = new XYLineAndShapeRenderer(true, false)
@@ -267,7 +267,7 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
 
       val dataset = ToXYDataset[A].convert(data)
 
-      val domainAxis = XYDomainAxis(needsDateAxis(dataset))
+      val domainAxis = XYDomainAxis(dataset)
       val rangeAxis = new NumberAxis()
 
       val renderer = new XYLineAndShapeRenderer(false, true)

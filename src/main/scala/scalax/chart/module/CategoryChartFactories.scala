@@ -205,16 +205,15 @@ trait CategoryChartFactories extends DatasetConversions with DocMacros {
         plot
       }
 
-      val plots = data.aggregate(Vector[CategoryPlot]())(_ :+ CategoryPlotOf(_), _ ++ _)
+      val subplots = data.aggregate(Vector[CategoryPlot]())(_ :+ CategoryPlotOf(_), _ ++ _)
 
       val domainAxis = new CategoryAxis()
 
-      val combinedPlot = plots.foldLeft(new CombinedDomainCategoryPlot(domainAxis)) { (combined,single) =>
-        combined add single
-        combined
-      }
+      val plot = new CombinedDomainCategoryPlot(domainAxis)
 
-      CategoryChart(combinedPlot, title = "", legend = true)
+      subplots foreach plot.add
+
+      CategoryChart(plot, title = "", legend = true)
     }
 
   }
