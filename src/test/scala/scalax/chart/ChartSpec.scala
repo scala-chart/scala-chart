@@ -216,17 +216,17 @@ class ChartSpec extends Specification { def is = s2"""
   }
 
   def bc2 = {
-    val chart = BarChart.stacked(categorydataset)
+    val chart = BarChart(categorydataset, stacked = true)
     (chart.plot must not (throwA[ClassCastException])) and (chart.plot must beAnInstanceOf[CategoryPlot])
   }
 
   def bc3 = {
-    val chart = BarChart.threeDimensional(categorydataset)
+    val chart = BarChart(categorydataset, threeDimensional = true)
     (chart.plot must not (throwA[ClassCastException])) and (chart.plot must beAnInstanceOf[CategoryPlot])
   }
 
   def bc4 = {
-    val chart = BarChart.threeDimensionalStacked(categorydataset)
+    val chart = BarChart(categorydataset, stacked = true, threeDimensional = true)
     (chart.plot must not (throwA[ClassCastException])) and (chart.plot must beAnInstanceOf[CategoryPlot])
   }
 
@@ -253,7 +253,7 @@ class ChartSpec extends Specification { def is = s2"""
   }
 
   def lc2 = {
-    val chart = LineChart.threeDimensional(categorydataset)
+    val chart = LineChart(categorydataset, threeDimensional = true)
     (chart.plot must not (throwA[ClassCastException])) and (chart.plot must beAnInstanceOf[CategoryPlot])
   }
 
