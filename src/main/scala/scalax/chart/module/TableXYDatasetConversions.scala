@@ -26,10 +26,10 @@ trait TableXYDatasetConversions extends Converting with RichChartingCollections 
       override final def convert(a: A): X = f(a)
     }
 
-    implicit def FromCategorizedTuple2s[A <% String, B: Numeric, C: Numeric, BB[X] <: Coll[X], CC[X] <: Coll[X]]: ToTableXYDataset[CC[(A,BB[(B,C)])]] =
+    implicit def FromCategorizedTuple2s[A, B: Numeric, C: Numeric, BB[X] <: Coll[X], CC[X] <: Coll[X]](implicit evA: A => String): ToTableXYDataset[CC[(A,BB[(B,C)])]] =
       apply(_.toCategoryTableXYDataset)
 
-    implicit def FromCategorizedTimeTuple2s[A <% Comparable[A], B <% TimePeriod, C: Numeric, BB[X] <: Coll[X], CC[X] <: Coll[X]]: ToTableXYDataset[CC[(A,BB[(B,C)])]] =
+    implicit def FromCategorizedTimeTuple2s[A, B, C: Numeric, BB[X] <: Coll[X], CC[X] <: Coll[X]](implicit evA: A => Comparable[A], evB: B => TimePeriod): ToTableXYDataset[CC[(A,BB[(B,C)])]] =
       apply(_.toTimeTable)
   }
 

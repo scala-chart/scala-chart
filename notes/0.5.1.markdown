@@ -1,0 +1,41 @@
+`scala-chart` version 0.5.1 includes the following changes:
+
+-   cross published for Scala versions 2.10.6, 2.11.8 and 2.12.0
+
+-   still depends on jfreechart 1.0.19
+
+-   optional dependency itext updated to:
+
+        "com.itextpdf" % "itextpdf" % "5.5.10"
+
+-   optional dependency JFreeSVG updated to:
+
+        "org.jfree" % "jfreesvg" % "3.2"
+
+-   removed arguments from factories
+
+    - removed **orientation**, *vertical* is default; if horizontal is needed, which should be rare, it can be set via `chart.orientation = Orientation.Horizontal`
+    - removed **legend** from all factories, having a legend is default; can be removed via `chart.subtitles.clear()`
+    - removed **title** from all factories, empty title is default; can be changed via `chart.title = "..."`
+
+-   **theme** in generic chart companion is now implicit
+
+-   all implicit views have been migrated to implicit evidence parameters, i.e.:
+
+        def foo[A <% Comparable[A]](a: A): Foo = ???
+
+    is now:
+
+        def foo[A](a: A)(implicit evA: A => Comparable[A]): Foo = ???
+
+    you shouldn't see this using these functions, but it's there
+
+-   **combined area charts** have been added, example:
+
+        def xydata1 = for (j <- 1 to 3) yield j.toString -> (for (i <- 0 to 20) yield i -> util.Random.nextDouble())
+        def xydata2 = for (j <- 4 to 6) yield j.toString -> (for (i <- 0 to 20) yield i -> util.Random.nextDouble())
+        
+        val data = Map("plot a" -> xydata1, "plot b" -> xydata2)
+        
+        AreaChart.combined.domain(data).show()
+        AreaChart.combined.range(data).show()

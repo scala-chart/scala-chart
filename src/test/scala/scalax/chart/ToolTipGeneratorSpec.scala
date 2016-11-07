@@ -157,8 +157,10 @@ class ToolTipGeneratorSpec extends Specification { def is = s2"""
   def catchart = {
     val data = for {
       series <- List("Series 1", "Series 2")
-      catvals = for (i <- 1 to 5) yield (i.toString,i)
-    } yield series -> catvals
+    } yield {
+      val catvals = for (i <- 1 to 5) yield (i.toString,i)
+      series -> catvals
+    }
     BarChart(data)
   }
 
@@ -170,8 +172,10 @@ class ToolTipGeneratorSpec extends Specification { def is = s2"""
   def xychart = {
     val data = for {
       series <- List("Series 1", "Series 2")
-      xys = for (i <- 1 to 5) yield (i,i)
-    } yield series -> xys
+    } yield {
+      val xys = for (i <- 1 to 5) yield (i,i)
+      series -> xys
+    }
     XYLineChart(data)
   }
 

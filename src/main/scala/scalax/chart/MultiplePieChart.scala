@@ -45,15 +45,13 @@ object MultiplePieChart extends ChartCompanion[MultiplePieChart] {
 
   /** Creates a new $chart.
     *
-    * @param data   $data
-    * @param title  $title
-    * @param legend $legend
-    * @param theme  $theme
+    * @param data  $data
+    * @param theme $theme
     *
     * @usecase def apply(data: CategoryDataset): MultiplePieChart = ???
     *   @inheritdoc
     */
-  def apply[A: ToCategoryDataset](data: A, title: String = "", legend: Boolean = true)
+  def apply[A: ToCategoryDataset](data: A)
     (implicit theme: ChartTheme = ChartTheme.Default): MultiplePieChart = {
     val dataset = ToCategoryDataset[A].convert(data)
 
@@ -62,20 +60,18 @@ object MultiplePieChart extends ChartCompanion[MultiplePieChart] {
     plot.setBackgroundPaint(null)
     plot.setOutlineStroke(null)
 
-    MultiplePieChart(plot, title, legend, theme)
+    MultiplePieChart(plot, title = "", legend = true)
   }
 
   /** Creates a new $chart with three dimensional visualization.
     *
-    * @param data   $data
-    * @param title  $title
-    * @param legend $legend
-    * @param theme  $theme
+    * @param data  $data
+    * @param theme $theme
     *
     * @usecase def threeDimensional(data: CategoryDataset): MultiplePieChart = ???
     *   @inheritdoc
     */
-  def threeDimensional[A: ToCategoryDataset](data: A, title: String = "", legend: Boolean = true)
+  def threeDimensional[A: ToCategoryDataset](data: A)
     (implicit theme: ChartTheme = ChartTheme.Default): MultiplePieChart = {
     val dataset = ToCategoryDataset[A].convert(data)
 
@@ -92,7 +88,7 @@ object MultiplePieChart extends ChartCompanion[MultiplePieChart] {
     pieChart.removeLegend()
     plot.setPieChart(pieChart)
 
-    MultiplePieChart(plot, title, legend, theme)
+    MultiplePieChart(plot, title = "", legend = true)
   }
 
 }

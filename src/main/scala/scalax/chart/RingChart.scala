@@ -27,22 +27,20 @@ object RingChart extends ChartCompanion[RingChart] {
 
   /** Creates a new $chart.
     *
-    * @param data   $data
-    * @param title  $title
-    * @param legend $legend
-    * @param theme  $theme
+    * @param data  $data
+    * @param theme $theme
     *
     * @usecase def apply(data: PieDataset): RingChart = ???
     *   @inheritdoc
     */
-  def apply[A: ToPieDataset](data: A, title: String = "", legend: Boolean = true)
+  def apply[A: ToPieDataset](data: A)
     (implicit theme: ChartTheme = ChartTheme.Default): RingChart = {
     val dataset = ToPieDataset[A].convert(data)
 
     val plot = new RingPlot(dataset)
     plot.setInsets(new RectangleInsets(0.0, 5.0, 5.0, 5.0))
 
-    RingChart(plot, title, legend, theme)
+    RingChart(plot, title = "", legend = true)
   }
 
 }

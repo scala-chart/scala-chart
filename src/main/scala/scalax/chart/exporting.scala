@@ -98,7 +98,7 @@ class PDFExporter(val chart: Chart) extends AnyVal with Exporter {
   def writeAsPDF(os: OutputStream, resolution: (Int,Int) = Chart.Default.Resolution, fontMapper: FontMapper = DefaultFontMapper): Unit = {
     val (width,height) = resolution
 
-    val pagesize = new Rectangle(width, height)
+    val pagesize = new Rectangle(width.toFloat, height.toFloat)
     val document = new Document(pagesize)
 
     try {
@@ -106,9 +106,9 @@ class PDFExporter(val chart: Chart) extends AnyVal with Exporter {
       document.open()
 
       val cb = writer.getDirectContent
-      val tp = cb.createTemplate(width, height)
-      val g2 = new PdfGraphics2D(tp, width, height, fontMapper)
-      val r2D = new java.awt.geom.Rectangle2D.Double(0, 0, width, height)
+      val tp = cb.createTemplate(width.toFloat, height.toFloat)
+      val g2 = new PdfGraphics2D(tp, width.toFloat, height.toFloat, fontMapper)
+      val r2D = new java.awt.geom.Rectangle2D.Double(0, 0, width.toDouble, height.toDouble)
 
       chart.peer.draw(g2, r2D)
       g2.dispose()

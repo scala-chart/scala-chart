@@ -12,7 +12,7 @@ abstract class SpiderWebChart protected () extends Chart {
 
 /** Factory for ${chart}s.
   *
-  * @define chart SpideWeb chart
+  * @define chart SpiderWeb chart
   * @define Chart SpiderWebChart
   */
 object SpiderWebChart extends ChartCompanion[SpiderWebChart] {
@@ -27,20 +27,18 @@ object SpiderWebChart extends ChartCompanion[SpiderWebChart] {
 
   /** Creates a new $chart.
     *
-    * @param data   $data
-    * @param title  $title
-    * @param legend $legend
-    * @param theme  $theme
+    * @param data  $data
+    * @param theme $theme
     *
     * @usecase def apply(data: CategoryDataset): SpiderWebChart = ???
     */
-  def apply[A: ToCategoryDataset](data: A, title: String = "", legend: Boolean = true)
+  def apply[A: ToCategoryDataset](data: A)
     (implicit theme: ChartTheme = ChartTheme.Default): SpiderWebChart = {
     val dataset = ToCategoryDataset[A].convert(data)
 
     val plot = new SpiderWebPlot(dataset)
     plot.setInsets(new RectangleInsets(0.0, 5.0, 5.0, 5.0))
 
-    SpiderWebChart(plot, title, legend, theme)
+    SpiderWebChart(plot, title = "", legend = true)
   }
 }

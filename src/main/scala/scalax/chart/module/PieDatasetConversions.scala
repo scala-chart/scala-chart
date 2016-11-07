@@ -25,7 +25,7 @@ trait PieDatasetConversions extends Converting with RichChartingCollections {
       override final def convert(a: A): X = f(a)
     }
 
-    implicit def FromTuple2s[A <% Comparable[A], B: Numeric, CC[X] <: Coll[X]]: ToPieDataset[CC[(A,B)]] =
+    implicit def FromTuple2s[A, B: Numeric, CC[X] <: Coll[X]](implicit ev: A => Comparable[A]): ToPieDataset[CC[(A,B)]] =
       apply(_.toPieDataset)
   }
 

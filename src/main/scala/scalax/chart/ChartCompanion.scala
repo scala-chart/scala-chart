@@ -31,7 +31,7 @@ abstract class ChartCompanion[C <: Chart] protected () extends DocMacros {
     * @param legend $legend
     * @param theme $theme
     */
-  final def apply(plot: Plot, title: String, legend: Boolean, theme: ChartTheme): C = {
+  final def apply(plot: Plot, title: String, legend: Boolean)(implicit theme: ChartTheme): C = {
     val peer = new JFreeChart(title, org.jfree.chart.JFreeChart.DEFAULT_TITLE_FONT, plot, legend)
     fromPeer(peer, theme)
   }

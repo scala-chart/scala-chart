@@ -1,7 +1,5 @@
 package org.example
 
-import language.existentials
-
 import scalax.chart.api._
 
 import org.jfree.chart.plot._
@@ -86,7 +84,7 @@ class ChartSpec extends Specification { def is = s2"""
   // -----------------------------------------------------------------------------------------------
 
   def caa1 = {
-    val chart = AreaChart(categorydataset, title = "foo")
+    val chart = AreaChart(categorydataset)
     val t = "bar"
     chart.title = t
     chart.title === t
@@ -202,12 +200,12 @@ class ChartSpec extends Specification { def is = s2"""
   }
 
   def ac2 = {
-    val chart = AreaChart.stacked(categorydataset)
+    val chart = AreaChart(categorydataset, stacked = true)
     (chart.plot must not (throwA[ClassCastException])) and (chart.plot must beAnInstanceOf[CategoryPlot])
   }
 
   def ac3 = {
-    val chart = AreaChart(categorydataset, orientation = Orientation.Vertical)
+    val chart = AreaChart(categorydataset)
     chart.orientation = Orientation.Horizontal
     chart.orientation === Orientation.Horizontal
   }
@@ -218,22 +216,22 @@ class ChartSpec extends Specification { def is = s2"""
   }
 
   def bc2 = {
-    val chart = BarChart.stacked(categorydataset)
+    val chart = BarChart(categorydataset, stacked = true)
     (chart.plot must not (throwA[ClassCastException])) and (chart.plot must beAnInstanceOf[CategoryPlot])
   }
 
   def bc3 = {
-    val chart = BarChart.threeDimensional(categorydataset)
+    val chart = BarChart(categorydataset, threeDimensional = true)
     (chart.plot must not (throwA[ClassCastException])) and (chart.plot must beAnInstanceOf[CategoryPlot])
   }
 
   def bc4 = {
-    val chart = BarChart.threeDimensionalStacked(categorydataset)
+    val chart = BarChart(categorydataset, stacked = true, threeDimensional = true)
     (chart.plot must not (throwA[ClassCastException])) and (chart.plot must beAnInstanceOf[CategoryPlot])
   }
 
   def bc5 = {
-    val chart = BarChart(categorydataset, orientation = Orientation.Vertical)
+    val chart = BarChart(categorydataset)
     chart.orientation = Orientation.Horizontal
     chart.orientation === Orientation.Horizontal
   }
@@ -255,12 +253,12 @@ class ChartSpec extends Specification { def is = s2"""
   }
 
   def lc2 = {
-    val chart = LineChart.threeDimensional(categorydataset)
+    val chart = LineChart(categorydataset, threeDimensional = true)
     (chart.plot must not (throwA[ClassCastException])) and (chart.plot must beAnInstanceOf[CategoryPlot])
   }
 
   def lc3 = {
-    val chart = LineChart(categorydataset, orientation = Orientation.Vertical)
+    val chart = LineChart(categorydataset)
     chart.orientation = Orientation.Horizontal
     chart.orientation === Orientation.Horizontal
   }
@@ -306,7 +304,7 @@ class ChartSpec extends Specification { def is = s2"""
   }
 
   def xyac4 = {
-    val chart = XYAreaChart(xydataset, orientation = Orientation.Vertical)
+    val chart = XYAreaChart(xydataset)
     chart.orientation = Orientation.Horizontal
     chart.orientation === Orientation.Horizontal
   }
@@ -322,7 +320,7 @@ class ChartSpec extends Specification { def is = s2"""
   }
 
   def xybc3 = {
-    val chart = XYBarChart(xydataset, orientation = Orientation.Vertical)
+    val chart = XYBarChart(xydataset)
     chart.orientation = Orientation.Horizontal
     chart.orientation === Orientation.Horizontal
   }
@@ -344,7 +342,7 @@ class ChartSpec extends Specification { def is = s2"""
   }
 
   def xydc2 = {
-    val chart = XYDeviationChart(xydataset, orientation = Orientation.Vertical)
+    val chart = XYDeviationChart(xydataset)
     chart.orientation = Orientation.Horizontal
     chart.orientation === Orientation.Horizontal
   }
@@ -355,7 +353,7 @@ class ChartSpec extends Specification { def is = s2"""
   }
 
   def xylc2 = {
-    val chart = XYLineChart(xydataset, orientation = Orientation.Vertical)
+    val chart = XYLineChart(xydataset)
     chart.orientation = Orientation.Horizontal
     chart.orientation === Orientation.Horizontal
   }

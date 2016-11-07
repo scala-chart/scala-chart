@@ -88,7 +88,7 @@ trait MarkerConversions extends Imports {
       def toMarker(a: A): X = a
     }
 
-    implicit def ComparableToCategoryMarker[A <% Comparable[A]]: ToCategoryMarker[A] = new ToCategoryMarker[A] {
+    implicit def ComparableToCategoryMarker[A](implicit evA: A => Comparable[A]): ToCategoryMarker[A] = new ToCategoryMarker[A] {
       type X = CategoryMarker
       def toMarker(a: A): X = new CategoryMarker(a)
     }
