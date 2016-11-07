@@ -7,9 +7,9 @@ import Keys._
 object Publishing {
   val publishing = Seq (
     publishMavenStyle := true,
-    publishTo <<= version { (version: String) ⇒
+    publishTo := {
       val nexus = "https://oss.sonatype.org/"
-      if (version.trim.endsWith("-SNAPSHOT"))
+      if (isSnapshot.value)
         Some("snapshots" at nexus + "content/repositories/snapshots")
       else
         Some("releases"  at nexus + "service/local/staging/deploy/maven2")
