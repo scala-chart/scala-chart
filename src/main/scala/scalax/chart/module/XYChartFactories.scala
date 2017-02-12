@@ -250,7 +250,12 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
       XYChart(plot, title = "", legend = true)
     }
 
-    /** Creates a new chart that represents numeric `x` and `y` values with shapes instead of lines.
+  }
+
+  /** Factory for numeric scatter charts. */
+  object XYScatterChart {
+
+    /** Creates a new chart that represents numeric `x` and `y` values with shapes.
       *
       * If the input dataset is an instance of a `TimePeriodValuesCollection`,
       * `TimeSeriesCollection` or `TimeTableXYDataset` the domain axis will correctly be set to a
@@ -259,11 +264,11 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
       * @param data  $data
       * @param theme $theme
       *
-      * @usecase def shapes(data: XYDataset): XYChart = ???
+      * @usecase def apply(data: XYDataset): XYChart = ???
       *   @inheritdoc
       */
-    def shapes[A: ToXYDataset](data: A)
-              (implicit theme: ChartTheme = ChartTheme.Default): XYChart = {
+    def apply[A: ToXYDataset](data: A)
+             (implicit theme: ChartTheme = ChartTheme.Default): XYChart = {
 
       val dataset = ToXYDataset[A].convert(data)
 
@@ -276,7 +281,6 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
 
       XYChart(plot, title = "", legend = true)
     }
-
-  }
-
+  } 
+ 
 }
