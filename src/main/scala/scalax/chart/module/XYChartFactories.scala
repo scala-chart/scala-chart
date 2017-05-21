@@ -281,7 +281,6 @@ trait XYChartFactories extends DatasetConversions with DocMacros {
 
       XYChart(plot, title = "", legend = true)
     }
-
-  }
-
+  } 
+ 
 }
