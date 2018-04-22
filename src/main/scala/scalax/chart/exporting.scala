@@ -2,6 +2,7 @@ package scalax.chart
 package exporting
 
 import java.io._
+import javax.xml.bind.DatatypeConverter
 
 import org.jfree.chart.encoders.EncoderUtil
 
@@ -46,6 +47,20 @@ class JPEGExporter(val chart: Chart) extends AnyVal with Exporter {
     */
   def writeAsJPEG(os: OutputStream, resolution: (Int,Int) = Chart.Default.Resolution): Unit =
     os.write(encodeAsJPEG(resolution))
+
+  /** Writes the chart to iTerm2 window
+    *
+    * @param resolution
+    *
+    * @usecase def writeToTerm(resolution:(Int,Int) = Chart.Default.Resolution):Unit
+    *   @inheritdoc
+    */
+  def writeToTerm(resolution:(Int,Int) = Chart.Default.Resolution): Unit = {
+    val base64Jpg = DatatypeConverter.printBase64Binary(encodeAsJPEG(resolution))
+    print(s"\033]1337;File=name=foo.jpg;size=${base64Jpg.length};inline=1:")
+    print(base64Jpg)
+    println("\07")
+  }
 
   /** Returns the chart as a byte encoded JPEG image.
     *
